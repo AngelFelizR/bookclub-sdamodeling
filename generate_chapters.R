@@ -8,7 +8,7 @@ standard_parts <- list(
   "index.qmd", 
   list(
     file = "slides/00.qmd", 
-    target = "deeppy_club-slides"
+    target = "sdamodeling_club-slides"
   )
 )
 

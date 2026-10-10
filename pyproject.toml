@@ -1,6 +1,19 @@
 [project]
-name = "bookclub-deeppy"
+name = "bookclub-sdamodeling"
 version = "0.1.0"
-description = "Deep Learning with Python Book Club"
+description = "Slides for the Sequential Decision Analytics and Modeling (2e) book club"
 readme = "README.md"
 requires-python = ">=3.11"
+dependencies = [
+  # Add Python packages used by the slides here, one per line, e.g.:
+  # "numpy",
+  # "pandas",
+  # "matplotlib",
+]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = []

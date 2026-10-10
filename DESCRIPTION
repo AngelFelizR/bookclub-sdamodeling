@@ -1,10 +1,10 @@
 Type: Book
-Package: bookclub-deeppy
-Title: Deep Learning with Python (3e) Book Club
+Package: bookclub-sdamodeling
+Title: Sequential Decision Analytics and Modeling (2e) Book Club
 Version: 0.0.1
 Authors@R: 
     person("Data Science Learning Community", , , "rfordatasci@gmail.com", role = c("aut", "cre", "cph"))
-URL: https://dslc.io/deeppy, https://r4ds.github.io/bookclub-deeppy
+URL: https://AngelFelizR.github.io/bookclub-sdamodeling
 Depends:
     R (>= 3.1.0)
 Imports: 

@@ -16,15 +16,15 @@ format:
 execute:
   freeze: auto
 website:
-  title: Deep Learning with Python (3e) Book Club
+  title: Sequential Decision Analytics and Modeling (2e) Book Club
   sidebar:
     style: docked
     search: true
     tools:
     - icon: github
-      href: https://github.com/r4ds/bookclub-deeppy
+      href: https://github.com/AngelFelizR/bookclub-sdamodeling
     - icon: youtube
-      href: https://dslc.video/deeppy
+      href: https://www.youtube.com/playlist?list=PLLQZd6pMgcUA
     - icon: mastodon
       href: https://fosstodon.org/@DSLC
     - icon: linkedin
@@ -32,5 +32,5 @@ website:
     contents:
     - index.qmd
     - file: slides/00.qmd
-      target: deeppy_club-slides
+      target: sdamodeling_club-slides
     - 01.qmd
