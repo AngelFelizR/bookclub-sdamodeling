@@ -22,6 +22,19 @@ jobs:
       - name: Set up DESCRIPTION dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: pyproject.toml
+
+      - name: Install Python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install jupyter ipykernel
+          pip install .
+
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2
         with:

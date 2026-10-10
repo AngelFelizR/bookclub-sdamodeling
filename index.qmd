@@ -4,7 +4,7 @@ date: now
 date-format: "YYYY-MM-DD HH:mm"
 ---
 
-This is a companion for [_Deep Learning with Python (3e)_](https://deeplearningwithpython.io) by François Chollet and Matthew Watson (copyright 2025).
+This is a companion for [_Sequential Decision Analytics and Modeling (2e)_](https://castle.princeton.edu/sdamodeling/) by Warren B. Powell (copyright 2026).
 
 Each chapter title to the left is a link to a slide deck.
 

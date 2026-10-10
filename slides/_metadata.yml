@@ -1,7 +1,7 @@
 format:
   revealjs:
     theme: [dark, custom.scss]
-    footer: <a href="/" target="deeppy_club-index">DSLC.io/deeppy</a> | <a href="https://DSLC.io" target="_blank">DSLC.io</a>
+    footer: <a href="https://AngelFelizR.github.io/bookclub-sdamodeling" target="sdamodeling_club-index">AngelFelizR.github.io/bookclub-sdamodeling</a> | <a href="https://DSLC.io" target="_blank">DSLC.io</a>
     link-external-newwindow: true
     transition: slide
     incremental: false
