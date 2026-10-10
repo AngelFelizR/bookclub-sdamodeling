@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "This is a companion for Sequential Decision Analytics and Modeling (2e) by Warren B. Powell (copyright 2026).\nEach chapter title to the left is a link to a slide deck.\n\nThese slides are being developed by this club.\nEach deck will open in its own tab.\nYou may want to type “s” at the start of each deck to open the speaker notes.\nJoin the Data Science Learning Community to participate in the discussion!\n\nWe follow the Data Science Learning Community Code of Conduct.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "slides/01.html#learning-objectives",
+    "href": "slides/01.html#learning-objectives",
+    "title": "Modeling sequential decision problems",
+    "section": "Learning objectives",
+    "text": "Learning objectives\n\nPLACE LOS HERE"
+  },
+  {
+    "objectID": "slides/01.html#assertion-about-what-this-slide-shows",
+    "href": "slides/01.html#assertion-about-what-this-slide-shows",
+    "title": "Modeling sequential decision problems",
+    "section": "ASSERTION ABOUT WHAT THIS SLIDE SHOWS",
+    "text": "ASSERTION ABOUT WHAT THIS SLIDE SHOWS\nEVIDENCE BACKING UP THE ASSERTION\n\n\nYou can add notes on each slide with blocks like this!\nLoad a deck in the browser and type “s” to see these notes."
+  },
+  {
+    "objectID": "slides/00.html#book-club-meetings",
+    "href": "slides/00.html#book-club-meetings",
+    "title": "Club meetings",
+    "section": "Book club meetings",
+    "text": "Book club meetings\n\nVolunteer leads discussion of a chapter\n\nThis is the best way to learn the material.\n\nPresentations:\n\nReview of material\nQuestions you have\nMaybe live demo",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#how-to-edit-the-slides",
+    "href": "slides/00.html#how-to-edit-the-slides",
+    "title": "Club meetings",
+    "section": "How to edit the slides:",
+    "text": "How to edit the slides:\n\nMore info about editing: this github repo\nRecorded, available on the Data Science Learning Community YouTube Channel (DSLC.video)",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#pace",
+    "href": "slides/00.html#pace",
+    "title": "Club meetings",
+    "section": "Pace",
+    "text": "Pace\n\nGoal: 1 chapter/week\nOk to split overwhelming chapters\nOk to combine short chapters\nMeet every week except holidays, etc\n\nWe will meet even if scheduled presenter unavailable\n\nSlack is good place for offline discussion/troubleshooting",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#learning-objectives-los",
+    "href": "slides/00.html#learning-objectives-los",
+    "title": "Club meetings",
+    "section": "Learning objectives (LOs)",
+    "text": "Learning objectives (LOs)\n\nStudents who study with LOs in mind retain more\nTips:\n\nThink “After today’s session, you will be able to {LO}”\nVery roughly 1 per heading",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#group-introductions",
+    "href": "slides/00.html#group-introductions",
+    "title": "Club meetings",
+    "section": "Group introductions",
+    "text": "Group introductions\n\nIf you feel comfortable sharing:\n\nWho are you?\nWhere you calling in from? (If you’re not comfortable sharing, skip)\nHow long have you been using Python?\nWhat was your introduction to Python?\nWhat are you most looking forward to during the club?",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "01.html",
+    "href": "01.html",
+    "title": "1. Modeling sequential decision problems",
+    "section": "",
+    "text": "Modeling sequential decision problems\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "1. Modeling sequential decision problems"
+    ]
+  }
+]
