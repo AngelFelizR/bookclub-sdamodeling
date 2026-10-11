@@ -24,31 +24,201 @@
     "text": "ASSERTION ABOUT WHAT THIS SLIDE SHOWS\nEVIDENCE BACKING UP THE ASSERTION\n\n\nYou can add notes on each slide with blocks like this!\nLoad a deck in the browser and type “s” to see these notes."
   },
   {
-    "objectID": "slides/00.html#book-club-meetings",
-    "href": "slides/00.html#book-club-meetings",
+    "objectID": "slides/00.html#welcome-1",
+    "href": "slides/00.html#welcome-1",
     "title": "Club meetings",
-    "section": "Book club meetings",
-    "text": "Book club meetings\n\nVolunteer leads discussion of a chapter\n\nThis is the best way to learn the material.\n\nPresentations:\n\nReview of material\nQuestions you have\nMaybe live demo",
+    "section": "Welcome",
+    "text": "Welcome\n\nWelcome to the Sequential Decision Analytics and Modeling (2e) book club!\nBook: castle.princeton.edu/sdamodeling\nThese slides: AngelFelizR.github.io/bookclub-sdamodeling\nWe follow the Data Science Learning Community Code of Conduct\n\n\n\nYou can add notes on each slide with blocks like this!\nLoad a deck in the browser and type “s” to see these notes.",
     "crumbs": [
       "Club meetings"
     ]
   },
   {
-    "objectID": "slides/00.html#how-to-edit-the-slides",
-    "href": "slides/00.html#how-to-edit-the-slides",
+    "objectID": "slides/00.html#about-the-data-science-learning-community-dslc",
+    "href": "slides/00.html#about-the-data-science-learning-community-dslc",
     "title": "Club meetings",
-    "section": "How to edit the slides:",
-    "text": "How to edit the slides:\n\nMore info about editing: this github repo\nRecorded, available on the Data Science Learning Community YouTube Channel (DSLC.video)",
+    "section": "About the Data Science Learning Community (DSLC)",
+    "text": "About the Data Science Learning Community (DSLC)\n\nAn online community that learns data science together, one book at a time\nMembers volunteer to present chapters\nEveryone is welcome: all backgrounds, all levels\nJoin the DSLC Slack, then the channel #book_club-sdamodeling\nSupport the infrastructure behind the clubs: patreon.com/dslc\n\n\nAdd here how you personally present DSLC (history, other clubs, number of members).",
     "crumbs": [
       "Club meetings"
     ]
   },
   {
-    "objectID": "slides/00.html#pace",
-    "href": "slides/00.html#pace",
+    "objectID": "slides/00.html#schedule",
+    "href": "slides/00.html#schedule",
     "title": "Club meetings",
-    "section": "Pace",
-    "text": "Pace\n\nGoal: 1 chapter/week\nOk to split overwhelming chapters\nOk to combine short chapters\nMeet every week except holidays, etc\n\nWe will meet even if scheduled presenter unavailable\n\nSlack is good place for offline discussion/troubleshooting",
+    "section": "Schedule",
+    "text": "Schedule\n\nCohort 1: Mondays, 7:00 AM AST (11:00 UTC), one hour (convert to your time zone)\nFirst meeting: 2026-10-12. Facilitator: Ángel Féliz\n1 introduction session + 14 chapters, each with one session for the chapter and one for its exercises\nPlanned to finish in April 2027\nFull calendar: sign-up sheet",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#what-a-meeting-looks-like",
+    "href": "slides/00.html#what-a-meeting-looks-like",
+    "title": "Club meetings",
+    "section": "What a meeting looks like",
+    "text": "What a meeting looks like\n\nA volunteer leads the discussion of a chapter in one hour\n\nThis is the best way to learn the material.\n\nThe presentation covers:\n\nThe main ideas of the chapter\nQuestions you have\nMaybe a live demo\n\nYou don’t need to be an expert. If something wasn’t clear, bring it up and we figure it out together\nChapter too long for one hour? We split it and continue the following week",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#exercises",
+    "href": "slides/00.html#exercises",
+    "title": "Club meetings",
+    "section": "Exercises",
+    "text": "Exercises\n\nEach chapter ends with review, problem-solving and programming questions\nPick what suits you:\n\nSolve the exercises in the book\nApply the concepts in code, with the book’s Python modules or an external dataset\n\nThe book text has no code listings, so implementing things takes some extra research. With coding experience and an LLM for guidance you can get far\nDepending on the group’s interest, a chapter can get up to two weeks of exercises and coding",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#cant-attend-live",
+    "href": "slides/00.html#cant-attend-live",
+    "title": "Club meetings",
+    "section": "Can’t attend live?",
+    "text": "Can’t attend live?\n\nEvery meeting is recorded: DSLC YouTube channel (DSLC.video)\nAll slide decks: GitHub Pages\nAsk questions, share materials and post your thoughts in Slack at any time\nYou can learn with us asynchronously. Missing sessions is fine",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#the-book-at-a-glance",
+    "href": "slides/00.html#the-book-at-a-glance",
+    "title": "Club meetings",
+    "section": "The book at a glance",
+    "text": "The book at a glance\n\nSequential Decision Analytics and Modeling (2e), Warren B. Powell (February 2026), subtitle: Modeling with Python\nSequential decision problems always look like this:\ndecision, information, decision, information, decision, …\nEach decision brings a cost or reward, and decisions are made with a method called a policy\nCentral goal: design policies that work well over time, under uncertainty about information that has not arrived yet\nExamples are “the mathematics of everyday life”: selling an asset, inventories, routes, drug testing, ads, supply chains\nGoal: learn how to think about these problems, even if you never write a line of code",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#who-is-it-for",
+    "href": "slides/00.html#who-is-it-for",
+    "title": "Club meetings",
+    "section": "Who is it for?",
+    "text": "Who is it for?\n\nAimed at undergraduate or master’s students who have taken a course in probability and statistics\nNo linear programming needed (one example, blood management, uses it)\nTeach-by-example style: every chapter is built around a specific problem\nChapters 2-6 and 8-14 follow the same outline, so they can be read in any order\nOptional reference for more depth: Powell’s graduate text Reinforcement Learning and Stochastic Optimization (tinyurl.com/RLandSO)",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#how-the-book-is-organized",
+    "href": "slides/00.html#how-the-book-is-organized",
+    "title": "Club meetings",
+    "section": "How the book is organized",
+    "text": "How the book is organized\n\n\n\n\n\n\n\n\nPart\nChapters\nWhat happens\n\n\n\n\nUniversal Modeling Framework\n1\nLight overview of the framework using two inventory problems\n\n\nSimple examples\n2-6\nOne problem per chapter, chosen to bring out the four classes of policies\n\n\nUniversal Modeling Framework\n7\nReturns to the framework in more depth, using chapters 2-6 as context\n\n\nComplex examples\n8-14\nRicher settings: uncertainty modeling, multiple agents, more advanced policies\n\n\n\nOur Chapter 0 is the club’s own introduction (this deck).",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#the-two-big-ideas-chapter-1",
+    "href": "slides/00.html#the-two-big-ideas-chapter-1",
+    "title": "Club meetings",
+    "section": "The two big ideas (Chapter 1)",
+    "text": "The two big ideas (Chapter 1)\nFive elements of every sequential decision model\n\nState variables \\(S_t\\) (physical, information and belief state)\nDecision variables \\(x_t\\)\nExogenous information \\(W_{t+1}\\)\nTransition function \\(S^M(S_t, x_t, W_{t+1})\\)\nObjective function\n\nFour classes of policies (they cover any method for making decisions)\n\nPolicy search: PFA (policy function approximations), CFA (cost function approximations)\nLookahead: VFA (value function approximations), DLA (direct lookahead approximations)",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#chapters-2-6-simple-examples",
+    "href": "slides/00.html#chapters-2-6-simple-examples",
+    "title": "Club meetings",
+    "section": "Chapters 2-6: simple examples",
+    "text": "Chapters 2-6: simple examples\n\n\n\n\n\n\n\n\nCh\nProblem\nMain idea\n\n\n\n\n2\nAsset selling\nOptimal stopping; simple tunable policies\n\n\n3\nAdaptive market planning\nNewsvendor; stochastic gradient, where the stepsize is the decision\n\n\n4\nLearning the best diabetes medication\nLearning with beliefs; bandit problems\n\n\n5\nStochastic shortest path (static)\nBellman’s equation and approximate dynamic programming\n\n\n6\nStochastic shortest path (dynamic)\nDeterministic lookahead made better with tunable parameters",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#chapters-7-14-going-further",
+    "href": "slides/00.html#chapters-7-14-going-further",
+    "title": "Club meetings",
+    "section": "Chapters 7-14: going further",
+    "text": "Chapters 7-14: going further\n\n\n\n\n\n\n\n\nCh\nProblem\nMain idea\n\n\n\n\n7\nApplications, revisited\nFour policy classes in depth, types of state variables, online vs. offline objectives\n\n\n8\nEnergy storage I\nModels for electricity prices; buy-low-sell-high and approximate DP\n\n\n9\nEnergy storage II\nChanging wind forecasts; Gaussian processes and hidden-state models\n\n\n10\nSupply chain I: two-agent newsvendor\nIntroduction to multiagent problems\n\n\n11\nSupply chain II: the beer game\nMultiple agents, anchor-and-adjustment heuristic\n\n\n12\nAd-click optimization\nBidding under three kinds of uncertainty; knowledge gradient\n\n\n13\nBlood management\nMultidimensional resource allocation; linear programming and VFAs\n\n\n14\nOptimizing clinical trials\nThree direct lookahead policies of growing sophistication",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#exercises-and-companion-python-code",
+    "href": "slides/00.html#exercises-and-companion-python-code",
+    "title": "Club meetings",
+    "section": "Exercises and companion Python code",
+    "text": "Exercises and companion Python code\n\nEach chapter closes with three kinds of exercises:\n\nReview questions: reinforce the basics\nProblem-solving questions: modeling challenges\nProgramming questions: use the book’s Python modules, sometimes modifying the code\n\nThe library (rewritten for Python 3 by Prof. Dennis Djanka, including Jupyter notebooks for some problems) is at tinyurl.com/sdagithub\nModules named in the exercises: AssetSelling (ch. 2), AdaptiveMarketPlanning (ch. 3), StochasticShortestPath Static and Dynamic (ch. 5-6), EnergyStorage I (ch. 8), TwoNewsvendor (ch. 10), BloodManagement (ch. 13), ClinicalTrials (ch. 14)\nAlso useful: supplementary material and Powell’s undergraduate course slides for this book\n\n\nChapters 1, 7, 9, 11 and 12 do not name a Python module in their exercises. Chapter 4’s programming exercises name AdaptiveMarketPlanning in the text, which looks like a copy-paste slip (the preface lists a diabetes module). Check the repository for exact file names.",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#what-is-new-in-the-2nd-edition",
+    "href": "slides/00.html#what-is-new-in-the-2nd-edition",
+    "title": "Club meetings",
+    "section": "What is new in the 2nd edition",
+    "text": "What is new in the 2nd edition\n\nChapter 1 now discusses different types of decisions\nEvery application chapter starts with a Chapter overview\nNew Framing the problem section after each narrative: performance metrics, decisions and sources of uncertainty, described in plain English before any math\nProofreading throughout; same set of application chapters\nPublished through Kindle Direct Publishing (Kindle and hardbound editions)",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#want-to-present-a-chapter",
+    "href": "slides/00.html#want-to-present-a-chapter",
+    "title": "Club meetings",
+    "section": "Want to present a chapter?",
+    "text": "Want to present a chapter?\n\nOpen the Cohort 1 sign-up sheet (also pinned in Slack)\nPut your name next to a chapter and date\nPrepare your slides (next slides explain how)\n\nPresenting is how you learn. Ángel is happy to help you through the process.",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#overview-slides-are-code",
+    "href": "slides/00.html#overview-slides-are-code",
+    "title": "Club meetings",
+    "section": "Overview: slides are code",
+    "text": "Overview: slides are code\n\nEvery deck is a .qmd file in slides/ (slides/03.qmd = chapter 3)\nThe site is a Quarto website, hosted on GitHub\nYour slides reach the site through a pull request (PR)\nOnce the PR is merged, the site rebuilds automatically\n\nFull instructions: the GitHub repo README",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#one-time-setup",
+    "href": "slides/00.html#one-time-setup",
+    "title": "Club meetings",
+    "section": "One-time setup",
+    "text": "One-time setup\n\nInstall git and an editor (RStudio/Positron for R, VS Code for Python)\nFork and clone the repo\n\nR: usethis::create_from_github(\"AngelFelizR/bookclub-sdamodeling\")\ngit: click Fork on GitHub, then git clone\n\nInstall R packages with pak::pak()\n\nRequired even for Python slides: Quarto runs an R script before every render\n\nPython slides only: install Python 3.11+, then pip install jupyter ipykernel and pip install .",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#each-time-you-present",
+    "href": "slides/00.html#each-time-you-present",
+    "title": "Club meetings",
+    "section": "Each time you present",
+    "text": "Each time you present\n\nCreate a branch (usethis::pr_init(\"chapter-3\") or git switch -c chapter-3)\nEdit slides/NN.qmd (# = section, ## = slide)\nAdd the packages you used\nPreview: Ctrl/Cmd-Shift-K or quarto preview slides/NN.qmd\nCommit your changes\nPush and open a PR (usethis::pr_push() or git push -u origin chapter-3)\nAfter merge, clean up (usethis::pr_finish() or delete the branch)",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#r-or-python",
+    "href": "slides/00.html#r-or-python",
+    "title": "Club meetings",
+    "section": "R or Python?",
+    "text": "R or Python?\n\nR: no special header; add packages with usethis::use_package(\"pkg\")\nPython: start the file with engine: jupyter; list packages in pyproject.toml\nYou can mix: the engine is chosen per file\nThe book’s own code is in Python, but your slides can use either language",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#ground-rules",
+    "href": "slides/00.html#ground-rules",
+    "title": "Club meetings",
+    "section": "Ground rules",
+    "text": "Ground rules\n\nmain is protected: nobody pushes directly, everything goes through a PR\nA PR must pass its automated checks before merging\nStuck? Ask in Slack",
     "crumbs": [
       "Club meetings"
     ]
@@ -64,11 +234,31 @@
     ]
   },
   {
+    "objectID": "slides/00.html#pace",
+    "href": "slides/00.html#pace",
+    "title": "Club meetings",
+    "section": "Pace",
+    "text": "Pace\n\nGoal: 1 chapter / 2 weeks (chapter session + exercises session)\nOK to split overwhelming chapters\nOK to combine short chapters\nMeet every week except holidays, etc.\nSlack is a good place for offline discussion and troubleshooting",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
     "objectID": "slides/00.html#group-introductions",
     "href": "slides/00.html#group-introductions",
     "title": "Club meetings",
     "section": "Group introductions",
-    "text": "Group introductions\n\nIf you feel comfortable sharing:\n\nWho are you?\nWhere you calling in from? (If you’re not comfortable sharing, skip)\nHow long have you been using Python?\nWhat was your introduction to Python?\nWhat are you most looking forward to during the club?",
+    "text": "Group introductions\n\nIf you feel comfortable sharing:\n\nWho are you?\nWhat do you do?\nWhat is your background?\nHow long have you been using R/Python?\nWhat are you most looking forward to during the club?\nWhat do you expect to get from this book?",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#quick-links",
+    "href": "slides/00.html#quick-links",
+    "title": "Club meetings",
+    "section": "Quick links",
+    "text": "Quick links\n\nSlack: #book_club-sdamodeling (join DSLC)\nSign-up sheet\nSlides and GitHub repo\nRecordings\nBook companion code",
     "crumbs": [
       "Club meetings"
     ]
