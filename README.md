@@ -4,20 +4,40 @@ Welcome to the DSLC Sequential Decision Analytics and Modeling (2e) Book Club!
 
 We are working together to read [_Sequential Decision Analytics and Modeling (2e)_](https://castle.princeton.edu/sdamodeling/) by Warren B. Powell (copyright 2026).
 
-Join the [#book_club-sdamodeling](https://app.slack.com/client/T6UC1DKJQ/C0BM0PAP3E3) channel on the [DSLC Slack](https://dslc.io/join) to participate.
+Join the [#book_club-sdamodeling](https://dslcio.slack.com/archives/C0BM0PAP3E3) channel on the [DSLC Slack](https://dslc.io/join) to participate.
 As we read, we are producing [slides about the book](https://AngelFelizR.github.io/bookclub-sdamodeling).
+
+## About the book
+
+_Sequential Decision Analytics and Modeling_ (subtitle: _Modeling with Python_) teaches how to approach, model and solve problems where we make a decision, receive new information, and decide again, under uncertainty. The goal is to learn **how to think** about these problems, even if you never write a line of code.
+
+- **Audience:** undergraduate or master's level; a first course in probability and statistics is enough.
+- **Structure:** 14 chapters. Chapter 1 gives an overview of the modeling framework, chapters 2-6 are simple examples, chapter 7 revisits the framework in more depth, and chapters 8-14 are more complex examples.
+- **Exercises:** each chapter closes with review, problem-solving and programming questions. The programming questions use Python modules, available at [tinyurl.com/sdagithub](https://tinyurl.com/sdagithub/). The book text itself has no code listings.
+- **More material:** [supplements](https://tinyurl.com/sdamodelingsupplements/) and the author's [course slides](https://tinyurl.com/RLSOcourses/).
 
 ## Meeting Schedule
 
-If you would like to present, please see the sign-up sheet for your cohort (linked below, and pinned in the [#book_club-sdamodeling](https://dslcio.slack.com/archives/C09PYM1R332) channel on Slack)!
+If you would like to present, please see the sign-up sheet for your cohort (linked below, and pinned in the [#book_club-sdamodeling](https://dslcio.slack.com/archives/C0BM0PAP3E3) channel on Slack)!
 
-- [Cohort 1](https://docs.google.com/spreadsheets/d/1u7XiaM3OyQe-EkYdBJ0WO8-E9Iv8goq-pvy9ouWJ4Sk/edit?usp=sharing) (started 2026-10-12, facilitated by Ángel Féliz): [Mondays, 7:00 AM AST](https://www.timeanddate.com/worldclock/converter.html?iso=20261012T110000&p1=230&p2=179&p3=248) | [meeting videos](https://www.youtube.com/playlist?list=PLLQZd6pMgcUA)
+- [Cohort 1](https://docs.google.com/spreadsheets/d/1u7XiaM3OyQe-EkYdBJ0WO8-E9Iv8goq-pvy9ouWJ4Sk/edit?usp=sharing) (first meeting 2026-10-12, facilitated by Ángel Féliz): [Mondays, 7:00 AM AST (11:00 UTC)](https://www.timeanddate.com/worldclock/converter.html?iso=20261012T110000&p1=230&p2=179&p3=248) | [meeting videos](https://www.youtube.com/playlist?list=PLLQZd6pMgcUA)
+
+### What to expect
+
+- **Meetings** last one hour. Session 0 is the club introduction; each chapter from 1 to 14 then has one session for the chapter and one for its exercises (about two weeks per chapter).
+- **A volunteer leads each chapter**, covering the main ideas, their questions, and maybe a live demo. You do not need to be an expert: bring your doubts and we figure them out together. If a chapter is too long for one hour, we split it.
+- **Exercises:** solve the ones in the book, or apply the concepts in code (the book's Python modules or an external dataset). Depending on the group's interest, a chapter can get up to two weeks of exercises.
+- **Can't attend live?** Meetings are recorded, slides are on the website, and you can ask questions in Slack at any time. Learning asynchronously is welcome.
 
 <hr>
 
 ## How to Present
 
 This repository is a Quarto website: every slide deck is a `.qmd` file in `slides/`. The steps below are the same for everyone, whether you write your slides in R or in Python — each step shows how to do it **from R** (with [`usethis`](https://usethis.r-lib.org/) / RStudio's Git tab) and **from git** (a terminal, VS Code, or any other tool; this is the usual path if you work with Python).
+
+### Pick your chapter
+
+Open the [Cohort 1 sign-up sheet](https://docs.google.com/spreadsheets/d/1u7XiaM3OyQe-EkYdBJ0WO8-E9Iv8goq-pvy9ouWJ4Sk/edit?usp=sharing), write your name in the *Presenter* column next to the chapter and date you want, and ask in Slack if you have any doubt. Your chapter number is the `NN` used below (`slides/NN.qmd`).
 
 ### One-time setup
 
@@ -57,6 +77,7 @@ This repository is a Quarto website: every slide deck is a `.qmd` file in `slide
 - Use `#` for a new section and `##` for a new slide.
 - If the file doesn't exist yet, copy another one and rename it — and don't forget to update the title at the top!
 - You do *not* need to edit `_quarto.yml`; it picks up the slide files automatically.
+- Tip: write one learning objective per section, thinking "After today's session, you will be able to ...".
 
 **3. Add the packages you used** (see [Writing slides with R](#writing-slides-with-r) or [Writing slides with Python](#writing-slides-with-python) below).
 

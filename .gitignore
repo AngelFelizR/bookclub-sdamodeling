@@ -14,3 +14,14 @@ figure-revealjs
 /[0-9][0-9]*.qmd
 
 **/*.quarto_ipynb
+
+# Private development container (Ángel's local environment -- not part of
+# the book club repository; see dev-container.md in the same private dir).
+/Dockerfile
+/.dockerignore
+/docker-compose.yml
+/default.nix
+/nix/
+/entrypoint.sh
+/setup.sh
+/dev-container.md

@@ -5,38 +5,210 @@ title: Club meetings
 
 # Welcome
 
-- Welcome to the Sequential Decision Analytics and Modeling (2e) book club! 
-- book: [castle.princeton.edu/sdamodeling](https://castle.princeton.edu/sdamodeling/)
-- These slides are available at [AngelFelizR.github.io/bookclub-sdamodeling](https://AngelFelizR.github.io/bookclub-sdamodeling).
-- We follow the [Data Science Learning Community Code of Conduct](https://dslc.io/code_of_conduct.html).
+## Welcome
+
+- Welcome to the Sequential Decision Analytics and Modeling (2e) book club!
+- Book: [castle.princeton.edu/sdamodeling](https://castle.princeton.edu/sdamodeling/)
+- These slides: [AngelFelizR.github.io/bookclub-sdamodeling](https://AngelFelizR.github.io/bookclub-sdamodeling)
+- We follow the [Data Science Learning Community Code of Conduct](https://dslc.io/code_of_conduct.html)
 
 ::: notes
 - You can add notes on each slide with blocks like this!
 - Load a deck in the browser and type "s" to see these notes.
 :::
 
-## Book club meetings
+## About the Data Science Learning Community (DSLC)
 
--   Volunteer leads discussion of a chapter
+- An online community that learns data science together, one book at a time
+- Members volunteer to present chapters
+- Everyone is welcome: all backgrounds, all levels
+- Join the [DSLC Slack](https://dslc.io/join), then the channel [#book_club-sdamodeling](https://dslcio.slack.com/archives/C0BM0PAP3E3)
+- Support the infrastructure behind the clubs: [patreon.com/dslc](https://patreon.com/dslc)
+
+::: notes
+Add here how you personally present DSLC (history, other clubs, number of members).
+:::
+
+## Schedule
+
+- **Cohort 1:** Mondays, 7:00 AM AST (11:00 UTC), one hour
+  ([convert to your time zone](https://www.timeanddate.com/worldclock/converter.html?iso=20261012T110000&p1=230&p2=179&p3=248))
+- First meeting: 2026-10-12. Facilitator: Ángel Féliz
+- 1 introduction session + 14 chapters, each with **one session for the chapter and one for its exercises**
+- Planned to finish in April 2027
+- Full calendar: [sign-up sheet](https://docs.google.com/spreadsheets/d/1u7XiaM3OyQe-EkYdBJ0WO8-E9Iv8goq-pvy9ouWJ4Sk/edit?usp=sharing)
+
+## What a meeting looks like
+
+-   A volunteer leads the discussion of a chapter in one hour
     -   **This is the best way to learn the material.**
--   Presentations: 
-    -   Review of material
+-   The presentation covers:
+    -   The main ideas of the chapter
     -   Questions you have
-    -   Maybe live demo
+    -   Maybe a live demo
+-   **You don't need to be an expert.** If something wasn't clear, bring it up and we figure it out together
+-   Chapter too long for one hour? We split it and continue the following week
 
-## How to edit the slides: 
+## Exercises
 
--   More info about editing: [this github repo](https://github.com/AngelFelizR/bookclub-sdamodeling)
--   Recorded, available on the [Data Science Learning Community YouTube Channel (DSLC.video)](http://dslc.video)
+- Each chapter ends with review, problem-solving and programming questions
+- Pick what suits you:
+  - Solve the exercises in the book
+  - Apply the concepts in code, with the book's Python modules or an external dataset
+- The book text has no code listings, so implementing things takes some extra research. With coding experience and an LLM for guidance you can get far
+- Depending on the group's interest, a chapter can get up to **two weeks** of exercises and coding
 
-## Pace
+## Can't attend live?
 
--   **Goal:** 1 chapter/week
--   Ok to split overwhelming chapters
--   Ok to combine short chapters
--   Meet ***every*** week except holidays, etc
-    -   We will meet even if scheduled presenter unavailable
--   Slack is good place for offline discussion/troubleshooting  
+- Every meeting is recorded: [DSLC YouTube channel (DSLC.video)](https://www.youtube.com/playlist?list=PLLQZd6pMgcUA)
+- All slide decks: [GitHub Pages](https://AngelFelizR.github.io/bookclub-sdamodeling)
+- Ask questions, share materials and post your thoughts in Slack at any time
+- **You can learn with us asynchronously.** Missing sessions is fine
+
+# About the book
+
+## The book at a glance {.smaller}
+
+- *Sequential Decision Analytics and Modeling (2e)*, Warren B. Powell (February 2026), subtitle: *Modeling with Python*
+- Sequential decision problems always look like this:
+
+  *decision, information, decision, information, decision, ...*
+
+- Each decision brings a cost or reward, and decisions are made with a method called a **policy**
+- Central goal: design policies that work well over time, under uncertainty about information that has not arrived yet
+- Examples are "the mathematics of everyday life": selling an asset, inventories, routes, drug testing, ads, supply chains
+- Goal: learn **how to think** about these problems, even if you never write a line of code
+
+## Who is it for? {.smaller}
+
+- Aimed at undergraduate or master's students who have taken **a course in probability and statistics**
+- No linear programming needed (one example, blood management, uses it)
+- Teach-by-example style: every chapter is built around a specific problem
+- Chapters 2-6 and 8-14 follow the same outline, so they can be read in any order
+- Optional reference for more depth: Powell's graduate text *Reinforcement Learning and Stochastic Optimization* ([tinyurl.com/RLandSO](https://tinyurl.com/RLandSO/))
+
+## How the book is organized {.smaller}
+
+| Part | Chapters | What happens |
+|------|----------|--------------|
+| Universal Modeling Framework | 1 | Light overview of the framework using two inventory problems |
+| Simple examples | 2-6 | One problem per chapter, chosen to bring out the four classes of policies |
+| Universal Modeling Framework | 7 | Returns to the framework in more depth, using chapters 2-6 as context |
+| Complex examples | 8-14 | Richer settings: uncertainty modeling, multiple agents, more advanced policies |
+
+Our **Chapter 0** is the club's own introduction (this deck).
+
+## The two big ideas (Chapter 1) {.smaller}
+
+**Five elements of every sequential decision model**
+
+1. State variables $S_t$ (physical, information and belief state)
+2. Decision variables $x_t$
+3. Exogenous information $W_{t+1}$
+4. Transition function $S^M(S_t, x_t, W_{t+1})$
+5. Objective function
+
+**Four classes of policies** (they cover any method for making decisions)
+
+- *Policy search:* **PFA** (policy function approximations), **CFA** (cost function approximations)
+- *Lookahead:* **VFA** (value function approximations), **DLA** (direct lookahead approximations)
+
+## Chapters 2-6: simple examples {.smaller}
+
+| Ch | Problem | Main idea |
+|----|---------|-----------|
+| 2 | Asset selling | Optimal stopping; simple tunable policies |
+| 3 | Adaptive market planning | Newsvendor; stochastic gradient, where the stepsize is the decision |
+| 4 | Learning the best diabetes medication | Learning with beliefs; bandit problems |
+| 5 | Stochastic shortest path (static) | Bellman's equation and approximate dynamic programming |
+| 6 | Stochastic shortest path (dynamic) | Deterministic lookahead made better with tunable parameters |
+
+## Chapters 7-14: going further {.smaller}
+
+| Ch | Problem | Main idea |
+|----|---------|-----------|
+| 7 | Applications, revisited | Four policy classes in depth, types of state variables, online vs. offline objectives |
+| 8 | Energy storage I | Models for electricity prices; buy-low-sell-high and approximate DP |
+| 9 | Energy storage II | Changing wind forecasts; Gaussian processes and hidden-state models |
+| 10 | Supply chain I: two-agent newsvendor | Introduction to multiagent problems |
+| 11 | Supply chain II: the beer game | Multiple agents, anchor-and-adjustment heuristic |
+| 12 | Ad-click optimization | Bidding under three kinds of uncertainty; knowledge gradient |
+| 13 | Blood management | Multidimensional resource allocation; linear programming and VFAs |
+| 14 | Optimizing clinical trials | Three direct lookahead policies of growing sophistication |
+
+## Exercises and companion Python code {.smaller}
+
+- Each chapter closes with three kinds of exercises:
+  - **Review questions:** reinforce the basics
+  - **Problem-solving questions:** modeling challenges
+  - **Programming questions:** use the book's Python modules, sometimes modifying the code
+- The library (rewritten for Python 3 by Prof. Dennis Djanka, including Jupyter notebooks for some problems) is at [tinyurl.com/sdagithub](https://tinyurl.com/sdagithub/)
+- Modules named in the exercises: AssetSelling (ch. 2), AdaptiveMarketPlanning (ch. 3), StochasticShortestPath Static and Dynamic (ch. 5-6), EnergyStorage I (ch. 8), TwoNewsvendor (ch. 10), BloodManagement (ch. 13), ClinicalTrials (ch. 14)
+- Also useful: [supplementary material](https://tinyurl.com/sdamodelingsupplements/) and Powell's [undergraduate course slides](https://tinyurl.com/RLSOcourses/) for this book
+
+::: notes
+Chapters 1, 7, 9, 11 and 12 do not name a Python module in their exercises. Chapter 4's programming exercises name AdaptiveMarketPlanning in the text, which looks like a copy-paste slip (the preface lists a diabetes module). Check the repository for exact file names.
+:::
+
+## What is new in the 2nd edition
+
+- Chapter 1 now discusses different **types of decisions**
+- Every application chapter starts with a **Chapter overview**
+- New **Framing the problem** section after each narrative: performance metrics, decisions and sources of uncertainty, described in plain English before any math
+- Proofreading throughout; same set of application chapters
+- Published through Kindle Direct Publishing (Kindle and hardbound editions)
+
+# How to present
+
+## Want to present a chapter?
+
+1. Open the [Cohort 1 sign-up sheet](https://docs.google.com/spreadsheets/d/1u7XiaM3OyQe-EkYdBJ0WO8-E9Iv8goq-pvy9ouWJ4Sk/edit?usp=sharing) (also pinned in Slack)
+2. Put your name next to a chapter and date
+3. Prepare your slides (next slides explain how)
+
+*Presenting is how you learn. Ángel is happy to help you through the process.*
+
+## Overview: slides are code
+
+- Every deck is a `.qmd` file in `slides/` (`slides/03.qmd` = chapter 3)
+- The site is a Quarto website, hosted on GitHub
+- Your slides reach the site through a **pull request (PR)**
+- Once the PR is merged, the site rebuilds automatically
+
+Full instructions: [the GitHub repo README](https://github.com/AngelFelizR/bookclub-sdamodeling)
+
+## One-time setup
+
+1. Install git and an editor (RStudio/Positron for R, VS Code for Python)
+2. Fork and clone the repo
+    - R: `usethis::create_from_github("AngelFelizR/bookclub-sdamodeling")`
+    - git: click **Fork** on GitHub, then `git clone`
+3. Install R packages with `pak::pak()`
+    - **Required even for Python slides**: Quarto runs an R script before every render
+4. Python slides only: install Python 3.11+, then `pip install jupyter ipykernel` and `pip install .`
+
+## Each time you present
+
+1. **Create a branch** (`usethis::pr_init("chapter-3")` or `git switch -c chapter-3`)
+2. **Edit** `slides/NN.qmd` (`#` = section, `##` = slide)
+3. **Add the packages** you used
+4. **Preview**: `Ctrl/Cmd-Shift-K` or `quarto preview slides/NN.qmd`
+5. **Commit** your changes
+6. **Push and open a PR** (`usethis::pr_push()` or `git push -u origin chapter-3`)
+7. **After merge**, clean up (`usethis::pr_finish()` or delete the branch)
+
+## R or Python?
+
+- **R:** no special header; add packages with `usethis::use_package("pkg")`
+- **Python:** start the file with `engine: jupyter`; list packages in `pyproject.toml`
+- You can mix: the engine is chosen per file
+- The book's own code is in Python, but your slides can use either language
+
+## Ground rules
+
+- `main` is protected: **nobody pushes directly**, everything goes through a PR
+- A PR must pass its automated checks before merging
+- Stuck? Ask in Slack
 
 ## Learning objectives (LOs)
 
@@ -45,11 +217,30 @@ title: Club meetings
     -   Think "After today's session, you will be able to {LO}"
     -   *Very* roughly **1 per heading**
 
+# Club logistics
+
+## Pace
+
+-   **Goal:** 1 chapter / 2 weeks (chapter session + exercises session)
+-   OK to split overwhelming chapters
+-   OK to combine short chapters
+-   Meet ***every*** week except holidays, etc.
+-   Slack is a good place for offline discussion and troubleshooting
+
 ## Group introductions
 
 - If you feel comfortable sharing:
   - Who are you?
-  - Where you calling in from? (If you're not comfortable sharing, skip)
-  - How long have you been using Python?
-  - What was your introduction to Python?
+  - What do you do?
+  - What is your background?
+  - How long have you been using R/Python?
   - What are you most looking forward to during the club?
+  - What do you expect to get from this book?
+
+## Quick links
+
+- Slack: [#book_club-sdamodeling](https://dslcio.slack.com/archives/C0BM0PAP3E3) ([join DSLC](https://dslc.io/join))
+- [Sign-up sheet](https://docs.google.com/spreadsheets/d/1u7XiaM3OyQe-EkYdBJ0WO8-E9Iv8goq-pvy9ouWJ4Sk/edit?usp=sharing)
+- [Slides](https://AngelFelizR.github.io/bookclub-sdamodeling) and [GitHub repo](https://github.com/AngelFelizR/bookclub-sdamodeling)
+- [Recordings](https://www.youtube.com/playlist?list=PLLQZd6pMgcUA)
+- [Book companion code](https://tinyurl.com/sdagithub/)
