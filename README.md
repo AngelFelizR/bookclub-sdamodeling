@@ -11,7 +11,7 @@ As we read, we are producing [slides about the book](https://AngelFelizR.github.
 
 If you would like to present, please see the sign-up sheet for your cohort (linked below, and pinned in the [#book_club-sdamodeling](https://dslcio.slack.com/archives/C09PYM1R332) channel on Slack)!
 
-- [Cohort 1](https://docs.google.com/spreadsheets/d/1u7XiaM3OyQe-EkYdBJ0WO8-E9Iv8goq-pvy9ouWJ4Sk/edit?usp=sharing) (started 2026-10-12, facilitated by Ángel Féliz): [Mondays, 3:00 PM CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20261012T110000&p1=230&p2=179&p3=248) | [meeting videos](https://www.youtube.com/playlist?list=PLLQZd6pMgcUA)
+- [Cohort 1](https://docs.google.com/spreadsheets/d/1u7XiaM3OyQe-EkYdBJ0WO8-E9Iv8goq-pvy9ouWJ4Sk/edit?usp=sharing) (started 2026-10-12, facilitated by Ángel Féliz): [Mondays, 7:00 AM AST](https://www.timeanddate.com/worldclock/converter.html?iso=20261012T110000&p1=230&p2=179&p3=248) | [meeting videos](https://www.youtube.com/playlist?list=PLLQZd6pMgcUA)
 
 <hr>
 
