@@ -14,18 +14,88 @@
     "href": "slides/01.html#learning-objectives",
     "title": "Modeling sequential decision problems",
     "section": "Learning objectives",
-    "text": "Learning objectives\n\nPLACE LOS HERE"
+    "text": "Learning objectives\n\nExplain why classical modeling (linear programming, supervised ML) is insufficient for sequential decision problems.\nDefine what a decision is and identify the three framing questions.\nDescribe the five elements of the Universal Modeling Framework.\nRecognize the four classes of policies and give an example of each. (pending)"
   },
   {
-    "objectID": "slides/01.html#assertion-about-what-this-slide-shows",
-    "href": "slides/01.html#assertion-about-what-this-slide-shows",
+    "objectID": "slides/01.html#solving-real-life-problems",
+    "href": "slides/01.html#solving-real-life-problems",
     "title": "Modeling sequential decision problems",
-    "section": "ASSERTION ABOUT WHAT THIS SLIDE SHOWS",
-    "text": "ASSERTION ABOUT WHAT THIS SLIDE SHOWS\nEVIDENCE BACKING UP THE ASSERTION\n\n\nYou can add notes on each slide with blocks like this!\nLoad a deck in the browser and type “s” to see these notes."
+    "section": "Solving real-life problems",
+    "text": "Solving real-life problems\nTo solve problems with computers we need to create a mathematical model"
   },
   {
-    "objectID": "slides/00.html#welcome-1",
-    "href": "slides/00.html#welcome-1",
+    "objectID": "slides/01.html#solving-real-life-problems-1",
+    "href": "slides/01.html#solving-real-life-problems-1",
+    "title": "Modeling sequential decision problems",
+    "section": "Solving real-life problems",
+    "text": "Solving real-life problems\nTo solve problems with computers we need to create a mathematical model"
+  },
+  {
+    "objectID": "slides/01.html#problem-with-classical-modeling-framework",
+    "href": "slides/01.html#problem-with-classical-modeling-framework",
+    "title": "Modeling sequential decision problems",
+    "section": "Problem with classical modeling framework",
+    "text": "Problem with classical modeling framework\nLinear program / Supervised machine learning\n\nAssumes that all data is known\nDoesn’t take into consideration that decisions are repeatedly taken over time\nDoesn’t take into consideration the flow of information"
+  },
+  {
+    "objectID": "slides/01.html#problem-with-classical-modeling-framework-1",
+    "href": "slides/01.html#problem-with-classical-modeling-framework-1",
+    "title": "Modeling sequential decision problems",
+    "section": "Problem with classical modeling framework",
+    "text": "Problem with classical modeling framework\nLinear program / Supervised machine learning\n\nDoesn’t anticipate external events that can affect the performance of a decision\nDoesn’t provide a way to represent risk\nAssumes a single decision-maker"
+  },
+  {
+    "objectID": "slides/01.html#types-of-decisions",
+    "href": "slides/01.html#types-of-decisions",
+    "title": "Modeling sequential decision problems",
+    "section": "Types of decisions",
+    "text": "Types of decisions\nA decision is information we control that affects the system.\n\nPhysical/financial\nDiscrete actions\nInformation acquisition/observation\nInformation communication/sharing\nChoosing functions\nSetting parameters\nEstimation/identification"
+  },
+  {
+    "objectID": "slides/01.html#framing-the-problem",
+    "href": "slides/01.html#framing-the-problem",
+    "title": "Modeling sequential decision problems",
+    "section": "Framing the problem",
+    "text": "Framing the problem\nBefore building a model, answer three questions:\n\nWhat are the performance metrics?\n\nCosts, revenues, profits, health outcomes, risk, …\n\nWhat types of decisions are being made (and who makes them)?\n\nPhysical/financial, discrete actions, information acquisition, …\nSingle decision-maker or multiple agents?\n\nWhat are the uncertainties that affect performance?\n\nInitial beliefs (unknown parameters)\nExogenous information arriving over time"
+  },
+  {
+    "objectID": "slides/01.html#why-we-need-prioritization",
+    "href": "slides/01.html#why-we-need-prioritization",
+    "title": "Modeling sequential decision problems",
+    "section": "Why we need prioritization",
+    "text": "Why we need prioritization\nEven a simple inventory problem can be described with:\n\nover 20 performance metrics\n30 types of decisions\nover 30 types of uncertainties\n\nThe full list is in Powell’s spreadsheet.\nWe cannot model all of this. We need to prioritize."
+  },
+  {
+    "objectID": "slides/01.html#interaction-matrix",
+    "href": "slides/01.html#interaction-matrix",
+    "title": "Modeling sequential decision problems",
+    "section": "Interaction matrix",
+    "text": "Interaction matrix\nHow to prioritize: build a matrix of metrics × decisions × uncertainties.\n\nASQ source\nAnalogy from quality engineering: the House of Quality."
+  },
+  {
+    "objectID": "slides/01.html#notations-for-modeling-sequential-decision-problems",
+    "href": "slides/01.html#notations-for-modeling-sequential-decision-problems",
+    "title": "Modeling sequential decision problems",
+    "section": "Notations for modeling sequential decision problems",
+    "text": "Notations for modeling sequential decision problems\n\n15 communities\n8 notational styles"
+  },
+  {
+    "objectID": "slides/01.html#universal-modeling-framework",
+    "href": "slides/01.html#universal-modeling-framework",
+    "title": "Modeling sequential decision problems",
+    "section": "Universal Modeling Framework",
+    "text": "Universal Modeling Framework\n\nRepresents any aspect of a controllable system.\nTakes into consideration that the system evolves over time with new information."
+  },
+  {
+    "objectID": "slides/01.html#modeling-process",
+    "href": "slides/01.html#modeling-process",
+    "title": "Modeling sequential decision problems",
+    "section": "Modeling process",
+    "text": "Modeling process\n\n\n\n\n\nflowchart LR\n  A[Ambiguous Problem] --&gt; B(\"Precise Definition &lt;br&gt; (Broken Down into Pieces)\")\n  B --&gt; C[Computer Software]"
+  },
+  {
+    "objectID": "slides/00.html#welcome",
+    "href": "slides/00.html#welcome",
     "title": "Club meetings",
     "section": "Welcome",
     "text": "Welcome\n\nWelcome to the Sequential Decision Analytics and Modeling (2e) book club!\nBook: castle.princeton.edu/sdamodeling\nThese slides: AngelFelizR.github.io/bookclub-sdamodeling\nWe follow the Data Science Learning Community Code of Conduct\n\n\n\nYou can add notes on each slide with blocks like this!\nLoad a deck in the browser and type “s” to see these notes.",
@@ -34,11 +104,11 @@
     ]
   },
   {
-    "objectID": "slides/00.html#about-the-data-science-learning-community-dslc",
-    "href": "slides/00.html#about-the-data-science-learning-community-dslc",
+    "objectID": "slides/00.html#data-science-learning-community-dslc",
+    "href": "slides/00.html#data-science-learning-community-dslc",
     "title": "Club meetings",
-    "section": "About the Data Science Learning Community (DSLC)",
-    "text": "About the Data Science Learning Community (DSLC)\n\nAn online community that learns data science together, one book at a time\nMembers volunteer to present chapters\nEveryone is welcome: all backgrounds, all levels\nJoin the DSLC Slack, then the channel #book_club-sdamodeling\nSupport the infrastructure behind the clubs: patreon.com/dslc\n\n\nAdd here how you personally present DSLC (history, other clubs, number of members).",
+    "section": "Data Science Learning Community (DSLC)",
+    "text": "Data Science Learning Community (DSLC)\n\nAn online community that learns data science together, one book at a time\nMembers volunteer to present chapters\nEveryone is welcome: all backgrounds, all levels\nJoin the DSLC Slack, then the channel #book_club-sdamodeling\nSupport the infrastructure behind the clubs: patreon.com/dslc\n\n\nAdd here how you personally present DSLC (history, other clubs, number of members).",
     "crumbs": [
       "Club meetings"
     ]
@@ -58,7 +128,7 @@
     "href": "slides/00.html#what-a-meeting-looks-like",
     "title": "Club meetings",
     "section": "What a meeting looks like",
-    "text": "What a meeting looks like\n\nA volunteer leads the discussion of a chapter in one hour\n\nThis is the best way to learn the material.\n\nThe presentation covers:\n\nThe main ideas of the chapter\nQuestions you have\nMaybe a live demo\n\nYou don’t need to be an expert. If something wasn’t clear, bring it up and we figure it out together\nChapter too long for one hour? We split it and continue the following week",
+    "text": "What a meeting looks like\n\nA volunteer leads the discussion (best way to learn the material)\nThe presentation covers:\n\nThe main ideas of the chapter\nQuestions you have\nMaybe a live demo\n\nYou don’t need to be an expert.\nIf something wasn’t clear, bring it up and we figure it out together\nChapter too long for one hour? We split it and continue the following week",
     "crumbs": [
       "Club meetings"
     ]
@@ -78,7 +148,7 @@
     "href": "slides/00.html#cant-attend-live",
     "title": "Club meetings",
     "section": "Can’t attend live?",
-    "text": "Can’t attend live?\n\nEvery meeting is recorded: DSLC YouTube channel (DSLC.video)\nAll slide decks: GitHub Pages\nAsk questions, share materials and post your thoughts in Slack at any time\nYou can learn with us asynchronously. Missing sessions is fine",
+    "text": "Can’t attend live?\n\nEvery meeting is recorded: DSLC YouTube channel (DSLC.video)\nAll slide decks: GitHub Pages\nAsk questions, share materials and post your thoughts in Slack at any time\nYou can learn with us asynchronously. Missing sessions are fine",
     "crumbs": [
       "Club meetings"
     ]
@@ -88,7 +158,7 @@
     "href": "slides/00.html#the-book-at-a-glance",
     "title": "Club meetings",
     "section": "The book at a glance",
-    "text": "The book at a glance\n\nSequential Decision Analytics and Modeling (2e), Warren B. Powell (February 2026), subtitle: Modeling with Python\nSequential decision problems always look like this:\ndecision, information, decision, information, decision, …\nEach decision brings a cost or reward, and decisions are made with a method called a policy\nCentral goal: design policies that work well over time, under uncertainty about information that has not arrived yet\nExamples are “the mathematics of everyday life”: selling an asset, inventories, routes, drug testing, ads, supply chains\nGoal: learn how to think about these problems, even if you never write a line of code",
+    "text": "The book at a glance\n\nSequential Decision Analytics and Modeling (2e): Modeling with Python\nSequential decision problems always look like this:\n\n\n\n\n\n\nflowchart LR\n  A{Decision} --&gt; B(Information)\n  B --&gt; C{Decision}\n  C --&gt; D[Information]\n  D --&gt; E{Decision}\n\n\n\n\n\n\n\nEach decision brings a cost or reward\nDecisions are made with a method called a policy\nCentral goal: design policies that work well:\n\nOver time\nUnder uncertainty about information that has not arrived yet\n\nGoal: learn how to think about these problems, even if you never write a line of code",
     "crumbs": [
       "Club meetings"
     ]
@@ -108,37 +178,7 @@
     "href": "slides/00.html#how-the-book-is-organized",
     "title": "Club meetings",
     "section": "How the book is organized",
-    "text": "How the book is organized\n\n\n\n\n\n\n\n\nPart\nChapters\nWhat happens\n\n\n\n\nUniversal Modeling Framework\n1\nLight overview of the framework using two inventory problems\n\n\nSimple examples\n2-6\nOne problem per chapter, chosen to bring out the four classes of policies\n\n\nUniversal Modeling Framework\n7\nReturns to the framework in more depth, using chapters 2-6 as context\n\n\nComplex examples\n8-14\nRicher settings: uncertainty modeling, multiple agents, more advanced policies\n\n\n\nOur Chapter 0 is the club’s own introduction (this deck).",
-    "crumbs": [
-      "Club meetings"
-    ]
-  },
-  {
-    "objectID": "slides/00.html#the-two-big-ideas-chapter-1",
-    "href": "slides/00.html#the-two-big-ideas-chapter-1",
-    "title": "Club meetings",
-    "section": "The two big ideas (Chapter 1)",
-    "text": "The two big ideas (Chapter 1)\nFive elements of every sequential decision model\n\nState variables \\(S_t\\) (physical, information and belief state)\nDecision variables \\(x_t\\)\nExogenous information \\(W_{t+1}\\)\nTransition function \\(S^M(S_t, x_t, W_{t+1})\\)\nObjective function\n\nFour classes of policies (they cover any method for making decisions)\n\nPolicy search: PFA (policy function approximations), CFA (cost function approximations)\nLookahead: VFA (value function approximations), DLA (direct lookahead approximations)",
-    "crumbs": [
-      "Club meetings"
-    ]
-  },
-  {
-    "objectID": "slides/00.html#chapters-2-6-simple-examples",
-    "href": "slides/00.html#chapters-2-6-simple-examples",
-    "title": "Club meetings",
-    "section": "Chapters 2-6: simple examples",
-    "text": "Chapters 2-6: simple examples\n\n\n\n\n\n\n\n\nCh\nProblem\nMain idea\n\n\n\n\n2\nAsset selling\nOptimal stopping; simple tunable policies\n\n\n3\nAdaptive market planning\nNewsvendor; stochastic gradient, where the stepsize is the decision\n\n\n4\nLearning the best diabetes medication\nLearning with beliefs; bandit problems\n\n\n5\nStochastic shortest path (static)\nBellman’s equation and approximate dynamic programming\n\n\n6\nStochastic shortest path (dynamic)\nDeterministic lookahead made better with tunable parameters",
-    "crumbs": [
-      "Club meetings"
-    ]
-  },
-  {
-    "objectID": "slides/00.html#chapters-7-14-going-further",
-    "href": "slides/00.html#chapters-7-14-going-further",
-    "title": "Club meetings",
-    "section": "Chapters 7-14: going further",
-    "text": "Chapters 7-14: going further\n\n\n\n\n\n\n\n\nCh\nProblem\nMain idea\n\n\n\n\n7\nApplications, revisited\nFour policy classes in depth, types of state variables, online vs. offline objectives\n\n\n8\nEnergy storage I\nModels for electricity prices; buy-low-sell-high and approximate DP\n\n\n9\nEnergy storage II\nChanging wind forecasts; Gaussian processes and hidden-state models\n\n\n10\nSupply chain I: two-agent newsvendor\nIntroduction to multiagent problems\n\n\n11\nSupply chain II: the beer game\nMultiple agents, anchor-and-adjustment heuristic\n\n\n12\nAd-click optimization\nBidding under three kinds of uncertainty; knowledge gradient\n\n\n13\nBlood management\nMultidimensional resource allocation; linear programming and VFAs\n\n\n14\nOptimizing clinical trials\nThree direct lookahead policies of growing sophistication",
+    "text": "How the book is organized\n\n\n\n\n\n\n\n\nPart\nChapters\nWhat happens\n\n\n\n\nUniversal Modeling Framework\n1\nLight overview of the framework using two inventory problems\n\n\nSimple examples\n2-6\nOne problem per chapter, chosen to bring out the four classes of policies\n\n\nUniversal Modeling Framework\n7\nReturns to the framework in more depth, using chapters 2-6 as context\n\n\nComplex examples\n8-14\nRicher settings: uncertainty modeling, multiple agents, more advanced policies",
     "crumbs": [
       "Club meetings"
     ]
@@ -149,16 +189,6 @@
     "title": "Club meetings",
     "section": "Exercises and companion Python code",
     "text": "Exercises and companion Python code\n\nEach chapter closes with three kinds of exercises:\n\nReview questions: reinforce the basics\nProblem-solving questions: modeling challenges\nProgramming questions: use the book’s Python modules, sometimes modifying the code\n\nThe library (rewritten for Python 3 by Prof. Dennis Djanka, including Jupyter notebooks for some problems) is at tinyurl.com/sdagithub\nModules named in the exercises: AssetSelling (ch. 2), AdaptiveMarketPlanning (ch. 3), StochasticShortestPath Static and Dynamic (ch. 5-6), EnergyStorage I (ch. 8), TwoNewsvendor (ch. 10), BloodManagement (ch. 13), ClinicalTrials (ch. 14)\nAlso useful: supplementary material and Powell’s undergraduate course slides for this book\n\n\nChapters 1, 7, 9, 11 and 12 do not name a Python module in their exercises. Chapter 4’s programming exercises name AdaptiveMarketPlanning in the text, which looks like a copy-paste slip (the preface lists a diabetes module). Check the repository for exact file names.",
-    "crumbs": [
-      "Club meetings"
-    ]
-  },
-  {
-    "objectID": "slides/00.html#what-is-new-in-the-2nd-edition",
-    "href": "slides/00.html#what-is-new-in-the-2nd-edition",
-    "title": "Club meetings",
-    "section": "What is new in the 2nd edition",
-    "text": "What is new in the 2nd edition\n\nChapter 1 now discusses different types of decisions\nEvery application chapter starts with a Chapter overview\nNew Framing the problem section after each narrative: performance metrics, decisions and sources of uncertainty, described in plain English before any math\nProofreading throughout; same set of application chapters\nPublished through Kindle Direct Publishing (Kindle and hardbound editions)",
     "crumbs": [
       "Club meetings"
     ]
@@ -188,7 +218,17 @@
     "href": "slides/00.html#one-time-setup",
     "title": "Club meetings",
     "section": "One-time setup",
-    "text": "One-time setup\n\nInstall git and an editor (RStudio/Positron for R, VS Code for Python)\nFork and clone the repo\n\nR: usethis::create_from_github(\"AngelFelizR/bookclub-sdamodeling\")\ngit: click Fork on GitHub, then git clone\n\nInstall R packages with pak::pak()\n\nRequired even for Python slides: Quarto runs an R script before every render\n\nPython slides only: install Python 3.11+, then pip install jupyter ipykernel and pip install .",
+    "text": "One-time setup\n\nInstall git and an editor (RStudio/Positron for R, VS Code for Python)\nFork and clone the repo\n\nR: usethis::create_from_github(\"AngelFelizR/bookclub-sdamodeling\")\ngit: click Fork on GitHub, then git clone",
+    "crumbs": [
+      "Club meetings"
+    ]
+  },
+  {
+    "objectID": "slides/00.html#one-time-setup-1",
+    "href": "slides/00.html#one-time-setup-1",
+    "title": "Club meetings",
+    "section": "One-time setup",
+    "text": "One-time setup\n\nInstall R packages with pak::pak()\n\nRequired even for Python slides: Quarto runs an R script before every render\n\nPython slides only: install Python 3.11+, then pip install jupyter ipykernel and pip install .",
     "crumbs": [
       "Club meetings"
     ]

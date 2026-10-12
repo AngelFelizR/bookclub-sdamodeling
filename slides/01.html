@@ -126,6 +126,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -141,31 +144,128 @@
 <section id="learning-objectives" class="slide level2">
 <h2>Learning objectives</h2>
 <ul>
-<li>PLACE LOS HERE</li>
+<li>Explain why classical modeling (linear programming, supervised ML) is insufficient for sequential decision problems.</li>
+<li>Define what a decision is and identify the three framing questions.</li>
+<li>Describe the five elements of the Universal Modeling Framework.</li>
+<li>Recognize the four classes of policies and give an example of each. <em>(pending)</em></li>
 </ul>
 </section>
-<section id="assertion-about-what-this-slide-shows" class="slide level2">
-<h2>ASSERTION ABOUT WHAT THIS SLIDE SHOWS</h2>
-<p>EVIDENCE BACKING UP THE ASSERTION</p>
-<aside class="notes">
+<section id="solving-real-life-problems" class="slide level2 small">
+<h2>Solving real-life problems</h2>
+<p><strong>To solve problems with computers we need to create a mathematical model</strong></p>
+
+<img data-src="images/01-mathematical-model.jpg" class="r-stretch"></section>
+<section id="solving-real-life-problems-1" class="slide level2 small">
+<h2>Solving real-life problems</h2>
+<p><strong>To solve problems with computers we need to create a mathematical model</strong></p>
+
+<img data-src="images/02-supervised-learning.png" class="r-stretch"></section>
+<section id="problem-with-classical-modeling-framework" class="slide level2 small">
+<h2>Problem with classical modeling framework</h2>
+<p>Linear program / Supervised machine learning</p>
 <ul>
-<li>You can add notes on each slide with blocks like this!</li>
-<li>Load a deck in the browser and type “s” to see these notes.</li>
+<li>Assumes that all data is <strong>known</strong></li>
+<li>Doesn’t take into consideration that decisions are <strong>repeatedly</strong> taken <strong>over time</strong></li>
+<li>Doesn’t take into consideration the flow of <strong>information</strong></li>
 </ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-
-
 </section>
+<section id="problem-with-classical-modeling-framework-1" class="slide level2 small">
+<h2>Problem with classical modeling framework</h2>
+<p>Linear program / Supervised machine learning</p>
+<ul>
+<li>Doesn’t anticipate <strong>external events</strong> that can affect the performance of a decision</li>
+<li>Doesn’t provide a way to <strong>represent risk</strong></li>
+<li>Assumes a single decision-maker</li>
+</ul>
+</section>
+<section id="types-of-decisions" class="slide level2 small">
+<h2>Types of decisions</h2>
+<p>A <strong>decision</strong> is information we control that <strong>affects</strong> the system.</p>
+<ol type="1">
+<li>Physical/financial</li>
+<li>Discrete actions</li>
+<li>Information acquisition/observation</li>
+<li>Information communication/sharing</li>
+<li>Choosing functions</li>
+<li>Setting parameters</li>
+<li>Estimation/identification</li>
+</ol>
+</section>
+<section id="framing-the-problem" class="slide level2 small">
+<h2>Framing the problem</h2>
+<p>Before building a model, answer three questions:</p>
+<ol type="1">
+<li>What are the <strong>performance metrics</strong>?
+<ul>
+<li>Costs, revenues, profits, health outcomes, risk, …</li>
+</ul></li>
+<li>What <strong>types of decisions</strong> are being made (and who makes them)?
+<ul>
+<li>Physical/financial, discrete actions, information acquisition, …</li>
+<li>Single decision-maker or multiple agents?</li>
+</ul></li>
+<li>What are the <strong>uncertainties</strong> that affect performance?
+<ul>
+<li>Initial beliefs (unknown parameters)</li>
+<li>Exogenous information arriving over time</li>
+</ul></li>
+</ol>
+</section>
+<section id="why-we-need-prioritization" class="slide level2 small">
+<h2>Why we need prioritization</h2>
+<p>Even a <strong>simple inventory problem</strong> can be described with:</p>
+<ul>
+<li><strong>over 20</strong> performance metrics</li>
+<li><strong>30</strong> types of decisions</li>
+<li><strong>over 30</strong> types of uncertainties</li>
+</ul>
+<p>The full list is in Powell’s <a href="https://tinyurl.com/PowellInventoryDecisions">spreadsheet</a>.</p>
+<p>We cannot model all of this. We need to <strong>prioritize</strong>.</p>
+</section>
+<section id="interaction-matrix" class="slide level2 small">
+<h2>Interaction matrix</h2>
+<p>How to prioritize: build a matrix of <strong>metrics × decisions × uncertainties</strong>.</p>
+
+<img data-src="images/06-House_Of_Quality_Figure.png" class="r-stretch"><p><a href="https://asq.org/quality-resources/house-of-quality">ASQ source</a></p>
+<p><em>Analogy from quality engineering: the House of Quality.</em></p>
+</section>
+<section id="notations-for-modeling-sequential-decision-problems" class="slide level2 small">
+<h2>Notations for modeling sequential decision problems</h2>
+<ul>
+<li><strong>15</strong> communities</li>
+<li><strong>8</strong> notational styles</li>
+</ul>
+<p><br></p>
+
+<img data-src="images/03-8-notations.jpg" class="r-stretch"></section>
+<section id="universal-modeling-framework" class="slide level2 small">
+<h2>Universal Modeling Framework</h2>
+<ul>
+<li>Represents <strong>any</strong> aspect of a controllable system.</li>
+<li>Takes into consideration that the <strong>system evolves</strong> over time with new information.</li>
+</ul>
+
+<img data-src="images/04-UMF.jpg" class="r-stretch"></section>
+<section id="modeling-process" class="slide level2">
+<h2>Modeling process</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Ambiguous Problem] --&gt; B("Precise Definition &lt;br&gt; (Broken Down into Pieces)")
+  B --&gt; C[Computer Software]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+
+
+
+<img data-src="images/05-Sequential-Decision-Modeling-Framework.png" class="r-stretch"></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

@@ -126,6 +126,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -138,12 +141,7 @@
 </div>
 
 </section>
-<section>
-<section id="welcome" class="title-slide slide level1 center">
-<h1>Welcome</h1>
-
-</section>
-<section id="welcome-1" class="slide level2">
+<section id="welcome" class="slide level2">
 <h2>Welcome</h2>
 <ul>
 <li>Welcome to the Sequential Decision Analytics and Modeling (2e) book club!</li>
@@ -168,8 +166,8 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="about-the-data-science-learning-community-dslc" class="slide level2">
-<h2>About the Data Science Learning Community (DSLC)</h2>
+<section id="data-science-learning-community-dslc" class="slide level2">
+<h2>Data Science Learning Community (DSLC)</h2>
 <ul>
 <li>An online community that learns data science together, one book at a time</li>
 <li>Members volunteer to present chapters</li>
@@ -204,18 +202,16 @@
 <section id="what-a-meeting-looks-like" class="slide level2">
 <h2>What a meeting looks like</h2>
 <ul>
-<li>A volunteer leads the discussion of a chapter in one hour
-<ul>
-<li><strong>This is the best way to learn the material.</strong></li>
-</ul></li>
-<li>The presentation covers:
+<li><p>A volunteer leads the discussion (<strong>best way to learn the material</strong>)</p></li>
+<li><p>The presentation covers:</p>
 <ul>
 <li>The main ideas of the chapter</li>
 <li>Questions you have</li>
 <li>Maybe a live demo</li>
 </ul></li>
-<li><strong>You don’t need to be an expert.</strong> If something wasn’t clear, bring it up and we figure it out together</li>
-<li>Chapter too long for one hour? We split it and continue the following week</li>
+<li><p><strong>You don’t need to be an expert.</strong></p></li>
+<li><p>If something wasn’t clear, bring it up and <strong>we figure it out together</strong></p></li>
+<li><p>Chapter too long for one hour? We split it and <strong>continue the following week</strong></p></li>
 </ul>
 </section>
 <section id="exercises" class="slide level2">
@@ -237,9 +233,9 @@
 <li>Every meeting is recorded: <a href="https://www.youtube.com/playlist?list=PLLQZd6pMgcUA">DSLC YouTube channel (DSLC.video)</a></li>
 <li>All slide decks: <a href="https://AngelFelizR.github.io/bookclub-sdamodeling">GitHub Pages</a></li>
 <li>Ask questions, share materials and post your thoughts in Slack at any time</li>
-<li><strong>You can learn with us asynchronously.</strong> Missing sessions is fine</li>
+<li><strong>You can learn with us asynchronously.</strong> Missing sessions are fine</li>
 </ul>
-</section></section>
+</section>
 <section>
 <section id="about-the-book" class="title-slide slide level1 center">
 <h1>About the book</h1>
@@ -248,23 +244,44 @@
 <section id="the-book-at-a-glance" class="slide level2 smaller">
 <h2>The book at a glance</h2>
 <ul>
-<li><p><em>Sequential Decision Analytics and Modeling (2e)</em>, Warren B. Powell (February 2026), subtitle: <em>Modeling with Python</em></p></li>
-<li><p>Sequential decision problems always look like this:</p>
-<p><em>decision, information, decision, information, decision, …</em></p></li>
-<li><p>Each decision brings a cost or reward, and decisions are made with a method called a <strong>policy</strong></p></li>
-<li><p>Central goal: design policies that work well over time, under uncertainty about information that has not arrived yet</p></li>
-<li><p>Examples are “the mathematics of everyday life”: selling an asset, inventories, routes, drug testing, ads, supply chains</p></li>
-<li><p>Goal: learn <strong>how to think</strong> about these problems, even if you never write a line of code</p></li>
+<li><p><em>Sequential Decision Analytics and Modeling (2e): Modeling with Python</em></p></li>
+<li><p>Sequential decision problems always look like this:</p></li>
+</ul>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A{Decision} --&gt; B(Information)
+  B --&gt; C{Decision}
+  C --&gt; D[Information]
+  D --&gt; E{Decision}
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ul>
+<li>Each decision brings a <strong>cost</strong> or <strong>reward</strong></li>
+<li>Decisions are made with a <strong>method</strong> called a <strong>policy</strong></li>
+<li>Central goal: design policies that work well:
+<ul>
+<li>Over time</li>
+<li>Under uncertainty about information that has not arrived yet</li>
+</ul></li>
+<li>Goal: learn <strong>how to think</strong> about these problems, even if you never write a line of code</li>
 </ul>
 </section>
 <section id="who-is-it-for" class="slide level2 smaller">
 <h2>Who is it for?</h2>
 <ul>
-<li>Aimed at undergraduate or master’s students who have taken <strong>a course in probability and statistics</strong></li>
-<li>No linear programming needed (one example, blood management, uses it)</li>
-<li>Teach-by-example style: every chapter is built around a specific problem</li>
-<li>Chapters 2-6 and 8-14 follow the same outline, so they can be read in any order</li>
-<li>Optional reference for more depth: Powell’s graduate text <em>Reinforcement Learning and Stochastic Optimization</em> (<a href="https://tinyurl.com/RLandSO/">tinyurl.com/RLandSO</a>)</li>
+<li><p>Aimed at undergraduate or master’s students who have taken <strong>a course in probability and statistics</strong></p></li>
+<li><p><strong>No linear programming</strong> needed (one example, blood management, uses it)</p></li>
+<li><p>Teach-by-example style: every chapter is built around a specific problem</p></li>
+<li><p>Chapters 2-6 and 8-14 follow the same outline, so they can be read in any order</p></li>
+<li><p>Optional reference for more depth: Powell’s graduate text <em>Reinforcement Learning and Stochastic Optimization</em> (<a href="https://tinyurl.com/RLandSO/">tinyurl.com/RLandSO</a>)</p></li>
 </ul>
 </section>
 <section id="how-the-book-is-organized" class="slide level2 smaller">
@@ -305,126 +322,6 @@
 </tr>
 </tbody>
 </table>
-<p>Our <strong>Chapter 0</strong> is the club’s own introduction (this deck).</p>
-</section>
-<section id="the-two-big-ideas-chapter-1" class="slide level2 smaller">
-<h2>The two big ideas (Chapter 1)</h2>
-<p><strong>Five elements of every sequential decision model</strong></p>
-<ol type="1">
-<li>State variables <span class="math inline">\(S_t\)</span> (physical, information and belief state)</li>
-<li>Decision variables <span class="math inline">\(x_t\)</span></li>
-<li>Exogenous information <span class="math inline">\(W_{t+1}\)</span></li>
-<li>Transition function <span class="math inline">\(S^M(S_t, x_t, W_{t+1})\)</span></li>
-<li>Objective function</li>
-</ol>
-<p><strong>Four classes of policies</strong> (they cover any method for making decisions)</p>
-<ul>
-<li><em>Policy search:</em> <strong>PFA</strong> (policy function approximations), <strong>CFA</strong> (cost function approximations)</li>
-<li><em>Lookahead:</em> <strong>VFA</strong> (value function approximations), <strong>DLA</strong> (direct lookahead approximations)</li>
-</ul>
-</section>
-<section id="chapters-2-6-simple-examples" class="slide level2 smaller">
-<h2>Chapters 2-6: simple examples</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 37%">
-<col style="width: 45%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Ch</th>
-<th>Problem</th>
-<th>Main idea</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>2</td>
-<td>Asset selling</td>
-<td>Optimal stopping; simple tunable policies</td>
-</tr>
-<tr class="even">
-<td>3</td>
-<td>Adaptive market planning</td>
-<td>Newsvendor; stochastic gradient, where the stepsize is the decision</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>Learning the best diabetes medication</td>
-<td>Learning with beliefs; bandit problems</td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td>Stochastic shortest path (static)</td>
-<td>Bellman’s equation and approximate dynamic programming</td>
-</tr>
-<tr class="odd">
-<td>6</td>
-<td>Stochastic shortest path (dynamic)</td>
-<td>Deterministic lookahead made better with tunable parameters</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="chapters-7-14-going-further" class="slide level2 smaller">
-<h2>Chapters 7-14: going further</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 37%">
-<col style="width: 45%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Ch</th>
-<th>Problem</th>
-<th>Main idea</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>7</td>
-<td>Applications, revisited</td>
-<td>Four policy classes in depth, types of state variables, online vs.&nbsp;offline objectives</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td>Energy storage I</td>
-<td>Models for electricity prices; buy-low-sell-high and approximate DP</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>Energy storage II</td>
-<td>Changing wind forecasts; Gaussian processes and hidden-state models</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>Supply chain I: two-agent newsvendor</td>
-<td>Introduction to multiagent problems</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td>Supply chain II: the beer game</td>
-<td>Multiple agents, anchor-and-adjustment heuristic</td>
-</tr>
-<tr class="even">
-<td>12</td>
-<td>Ad-click optimization</td>
-<td>Bidding under three kinds of uncertainty; knowledge gradient</td>
-</tr>
-<tr class="odd">
-<td>13</td>
-<td>Blood management</td>
-<td>Multidimensional resource allocation; linear programming and VFAs</td>
-</tr>
-<tr class="even">
-<td>14</td>
-<td>Optimizing clinical trials</td>
-<td>Three direct lookahead policies of growing sophistication</td>
-</tr>
-</tbody>
-</table>
 </section>
 <section id="exercises-and-companion-python-code" class="slide level2 smaller">
 <h2>Exercises and companion Python code</h2>
@@ -452,16 +349,6 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="what-is-new-in-the-2nd-edition" class="slide level2">
-<h2>What is new in the 2nd edition</h2>
-<ul>
-<li>Chapter 1 now discusses different <strong>types of decisions</strong></li>
-<li>Every application chapter starts with a <strong>Chapter overview</strong></li>
-<li>New <strong>Framing the problem</strong> section after each narrative: performance metrics, decisions and sources of uncertainty, described in plain English before any math</li>
-<li>Proofreading throughout; same set of application chapters</li>
-<li>Published through Kindle Direct Publishing (Kindle and hardbound editions)</li>
-</ul>
 </section></section>
 <section>
 <section id="how-to-present" class="title-slide slide level1 center">
@@ -496,6 +383,11 @@
 <li>R: <code>usethis::create_from_github("AngelFelizR/bookclub-sdamodeling")</code></li>
 <li>git: click <strong>Fork</strong> on GitHub, then <code>git clone</code></li>
 </ul></li>
+</ol>
+</section>
+<section id="one-time-setup-1" class="slide level2">
+<h2>One-time setup</h2>
+<ol start="3" type="1">
 <li>Install R packages with <code>pak::pak()</code>
 <ul>
 <li><strong>Required even for Python slides</strong>: Quarto runs an R script before every render</li>
