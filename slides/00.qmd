@@ -15,7 +15,9 @@ title: Club meetings
 - Load a deck in the browser and type "s" to see these notes.
 :::
 
+
 ## Data Science Learning Community (DSLC)
+
 
 - An online community that learns data science together, one book at a time
 - Members volunteer to present chapters
@@ -39,6 +41,7 @@ Add here how you personally present DSLC (history, other clubs, number of member
 ## What a meeting looks like
 
 -   A volunteer leads the discussion (**best way to learn the material**)
+
 -   The presentation covers:
     -   The main ideas of the chapter
     -   Questions you have
@@ -46,6 +49,7 @@ Add here how you personally present DSLC (history, other clubs, number of member
 -   **You don't need to be an expert.** 
 -   If something wasn't clear, bring it up and **we figure it out together**
 -   Chapter too long for one hour? We split it and **continue the following week**
+
 
 ## Exercises
 
@@ -62,6 +66,8 @@ Add here how you personally present DSLC (history, other clubs, number of member
 - All slide decks: [GitHub Pages](https://AngelFelizR.github.io/bookclub-sdamodeling)
 - Ask questions, share materials and post your thoughts in Slack at any time
 - **You can learn with us asynchronously.** Missing sessions are fine
+
+
 
 # About the book
 
@@ -89,6 +95,7 @@ flowchart LR
 ## Who is it for? {.smaller}
 
 - Aimed at undergraduate or master's students who have taken **a course in probability and statistics**
+
 - **No linear programming** needed (one example, blood management, uses it)
 - Teach-by-example style: every chapter is built around a specific problem
 - Chapters 2-6 and 8-14 follow the same outline, so they can be read in any order
@@ -144,6 +151,7 @@ Full instructions: [the GitHub repo README](https://github.com/AngelFelizR/bookc
     - git: click **Fork** on GitHub, then `git clone`
 
 ## One-time setup
+
 
 3. Install R packages with `pak::pak()`
     - **Required even for Python slides**: Quarto runs an R script before every render
