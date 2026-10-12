@@ -3,8 +3,6 @@ engine: knitr
 title: Club meetings
 ---
 
-# Welcome
-
 ## Welcome
 
 - Welcome to the Sequential Decision Analytics and Modeling (2e) book club!
@@ -17,7 +15,7 @@ title: Club meetings
 - Load a deck in the browser and type "s" to see these notes.
 :::
 
-## About the Data Science Learning Community (DSLC)
+## Data Science Learning Community (DSLC)
 
 - An online community that learns data science together, one book at a time
 - Members volunteer to present chapters
@@ -40,14 +38,14 @@ Add here how you personally present DSLC (history, other clubs, number of member
 
 ## What a meeting looks like
 
--   A volunteer leads the discussion of a chapter in one hour
-    -   **This is the best way to learn the material.**
+-   A volunteer leads the discussion (**best way to learn the material**)
 -   The presentation covers:
     -   The main ideas of the chapter
     -   Questions you have
     -   Maybe a live demo
--   **You don't need to be an expert.** If something wasn't clear, bring it up and we figure it out together
--   Chapter too long for one hour? We split it and continue the following week
+-   **You don't need to be an expert.** 
+-   If something wasn't clear, bring it up and **we figure it out together**
+-   Chapter too long for one hour? We split it and **continue the following week**
 
 ## Exercises
 
@@ -63,26 +61,35 @@ Add here how you personally present DSLC (history, other clubs, number of member
 - Every meeting is recorded: [DSLC YouTube channel (DSLC.video)](https://www.youtube.com/playlist?list=PLLQZd6pMgcUA)
 - All slide decks: [GitHub Pages](https://AngelFelizR.github.io/bookclub-sdamodeling)
 - Ask questions, share materials and post your thoughts in Slack at any time
-- **You can learn with us asynchronously.** Missing sessions is fine
+- **You can learn with us asynchronously.** Missing sessions are fine
 
 # About the book
 
 ## The book at a glance {.smaller}
 
-- *Sequential Decision Analytics and Modeling (2e)*, Warren B. Powell (February 2026), subtitle: *Modeling with Python*
+- *Sequential Decision Analytics and Modeling (2e): Modeling with Python*
+
 - Sequential decision problems always look like this:
 
-  *decision, information, decision, information, decision, ...*
+```{mermaid}
+flowchart LR
+  A{Decision} --> B(Information)
+  B --> C{Decision}
+  C --> D[Information]
+  D --> E{Decision}
+```
 
-- Each decision brings a cost or reward, and decisions are made with a method called a **policy**
-- Central goal: design policies that work well over time, under uncertainty about information that has not arrived yet
-- Examples are "the mathematics of everyday life": selling an asset, inventories, routes, drug testing, ads, supply chains
+- Each decision brings a **cost** or **reward**
+- Decisions are made with a **method** called a **policy**
+- Central goal: design policies that work well:
+  - Over time
+  - Under uncertainty about information that has not arrived yet
 - Goal: learn **how to think** about these problems, even if you never write a line of code
 
 ## Who is it for? {.smaller}
 
 - Aimed at undergraduate or master's students who have taken **a course in probability and statistics**
-- No linear programming needed (one example, blood management, uses it)
+- **No linear programming** needed (one example, blood management, uses it)
 - Teach-by-example style: every chapter is built around a specific problem
 - Chapters 2-6 and 8-14 follow the same outline, so they can be read in any order
 - Optional reference for more depth: Powell's graduate text *Reinforcement Learning and Stochastic Optimization* ([tinyurl.com/RLandSO](https://tinyurl.com/RLandSO/))
@@ -95,46 +102,6 @@ Add here how you personally present DSLC (history, other clubs, number of member
 | Simple examples | 2-6 | One problem per chapter, chosen to bring out the four classes of policies |
 | Universal Modeling Framework | 7 | Returns to the framework in more depth, using chapters 2-6 as context |
 | Complex examples | 8-14 | Richer settings: uncertainty modeling, multiple agents, more advanced policies |
-
-Our **Chapter 0** is the club's own introduction (this deck).
-
-## The two big ideas (Chapter 1) {.smaller}
-
-**Five elements of every sequential decision model**
-
-1. State variables $S_t$ (physical, information and belief state)
-2. Decision variables $x_t$
-3. Exogenous information $W_{t+1}$
-4. Transition function $S^M(S_t, x_t, W_{t+1})$
-5. Objective function
-
-**Four classes of policies** (they cover any method for making decisions)
-
-- *Policy search:* **PFA** (policy function approximations), **CFA** (cost function approximations)
-- *Lookahead:* **VFA** (value function approximations), **DLA** (direct lookahead approximations)
-
-## Chapters 2-6: simple examples {.smaller}
-
-| Ch | Problem | Main idea |
-|----|---------|-----------|
-| 2 | Asset selling | Optimal stopping; simple tunable policies |
-| 3 | Adaptive market planning | Newsvendor; stochastic gradient, where the stepsize is the decision |
-| 4 | Learning the best diabetes medication | Learning with beliefs; bandit problems |
-| 5 | Stochastic shortest path (static) | Bellman's equation and approximate dynamic programming |
-| 6 | Stochastic shortest path (dynamic) | Deterministic lookahead made better with tunable parameters |
-
-## Chapters 7-14: going further {.smaller}
-
-| Ch | Problem | Main idea |
-|----|---------|-----------|
-| 7 | Applications, revisited | Four policy classes in depth, types of state variables, online vs. offline objectives |
-| 8 | Energy storage I | Models for electricity prices; buy-low-sell-high and approximate DP |
-| 9 | Energy storage II | Changing wind forecasts; Gaussian processes and hidden-state models |
-| 10 | Supply chain I: two-agent newsvendor | Introduction to multiagent problems |
-| 11 | Supply chain II: the beer game | Multiple agents, anchor-and-adjustment heuristic |
-| 12 | Ad-click optimization | Bidding under three kinds of uncertainty; knowledge gradient |
-| 13 | Blood management | Multidimensional resource allocation; linear programming and VFAs |
-| 14 | Optimizing clinical trials | Three direct lookahead policies of growing sophistication |
 
 ## Exercises and companion Python code {.smaller}
 
@@ -149,14 +116,6 @@ Our **Chapter 0** is the club's own introduction (this deck).
 ::: notes
 Chapters 1, 7, 9, 11 and 12 do not name a Python module in their exercises. Chapter 4's programming exercises name AdaptiveMarketPlanning in the text, which looks like a copy-paste slip (the preface lists a diabetes module). Check the repository for exact file names.
 :::
-
-## What is new in the 2nd edition
-
-- Chapter 1 now discusses different **types of decisions**
-- Every application chapter starts with a **Chapter overview**
-- New **Framing the problem** section after each narrative: performance metrics, decisions and sources of uncertainty, described in plain English before any math
-- Proofreading throughout; same set of application chapters
-- Published through Kindle Direct Publishing (Kindle and hardbound editions)
 
 # How to present
 
@@ -183,6 +142,9 @@ Full instructions: [the GitHub repo README](https://github.com/AngelFelizR/bookc
 2. Fork and clone the repo
     - R: `usethis::create_from_github("AngelFelizR/bookclub-sdamodeling")`
     - git: click **Fork** on GitHub, then `git clone`
+
+## One-time setup
+
 3. Install R packages with `pak::pak()`
     - **Required even for Python slides**: Quarto runs an R script before every render
 4. Python slides only: install Python 3.11+, then `pip install jupyter ipykernel` and `pip install .`
