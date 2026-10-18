@@ -20,8 +20,6 @@ figure-revealjs
 # the book club repository; see dev-container.md in the same private dir).
 /Dockerfile
 /.dockerignore
-/.envrc
-/.direnv/
 /docker-compose.yml
 /default.nix
 /nix/
