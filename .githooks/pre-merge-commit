@@ -1,0 +1,12 @@
+#!/bin/sh
+# pre-merge-commit: `git merge` does NOT run the pre-commit hook, so without
+# this a local `git merge --no-ff other` (or `git merge main`'s inverse) could
+# still put a new commit on main. This hook is the one git-merge consults;
+# refusing here leaves the merge incomplete ("use 'git commit to complete"),
+# and that commit path is in turn blocked by pre-commit -- run
+# `git merge --abort` to get back to a clean tree.
+#
+# Same check as pre-commit: only a merge whose TARGET is main is refused
+# (merging main INTO your feature branch keeps HEAD on the feature and
+# passes).
+exec "$(dirname "$0")/pre-commit" "$@"
