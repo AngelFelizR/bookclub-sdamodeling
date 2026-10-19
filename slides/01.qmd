@@ -1,5 +1,5 @@
 ---
-title: Modeling sequential decision problems
+title: "Modeling sequential decision problems"
 ---
 
 ## Learning objectives
@@ -9,19 +9,23 @@ title: Modeling sequential decision problems
 - Describe the five elements of the Universal Modeling Framework.
 - Recognize the four classes of policies and give an example of each. *(pending)*
 
-## Solving real-life problems {.small}
+## Solving real-life problems {.smaller}
 
 **To solve problems with computers we need to create a mathematical model**
 
-![](images/01_chapter/01-mathematical-model.jpg)
+::: {layout-align="center"}
+![](images/01_chapter/01-mathematical-model.jpg){width="80%"}
+:::
 
-## Solving real-life problems {.small}
+## Solving real-life problems {.smaller}
 
 **To solve problems with computers we need to create a mathematical model**
 
-![](images/01_chapter/02-supervised-learning.png)
+::: {layout-align="center"}
+![](images/01_chapter/02-supervised-learning.png){width="80%"}
+:::
 
-## Problem with classical modeling framework {.small}
+## Problem with classical modeling framework {.smaller}
 
 Linear program / Supervised machine learning
 
@@ -29,7 +33,7 @@ Linear program / Supervised machine learning
 - Doesn't take into consideration that decisions are **repeatedly** taken **over time**
 - Doesn't take into consideration the flow of **information**
 
-## Problem with classical modeling framework {.small}
+## Problem with classical modeling framework {.smaller}
 
 Linear program / Supervised machine learning
 
@@ -37,7 +41,7 @@ Linear program / Supervised machine learning
 - Doesn't provide a way to **represent risk**
 - Assumes a single decision-maker
 
-## Types of decisions {.small}
+## Types of decisions {.smaller}
 
 A **decision** is information we control that **affects** the system.
 
@@ -49,7 +53,7 @@ A **decision** is information we control that **affects** the system.
 6. Setting parameters
 7. Estimation/identification
 
-## Framing the problem {.small}
+## Framing the problem {.smaller}
 
 Before building a model, answer three questions:
 
@@ -64,7 +68,7 @@ Before building a model, answer three questions:
    - Initial beliefs (unknown parameters)
    - Exogenous information arriving over time
 
-## Why we need prioritization {.small}
+## Why we need prioritization {.smaller}
 
 Even a **simple inventory problem** can be described with:
 
@@ -76,167 +80,76 @@ The full list is in Powell's [spreadsheet](https://tinyurl.com/PowellInventoryDe
 
 We cannot model all of this. We need to **prioritize**.
 
-
-## Interaction matrix {.small}
-
-How to prioritize: build a matrix of **metrics × decisions × uncertainties**.
-
-![](images/01_chapter/06-House_Of_Quality_Figure.png)
-
-[ASQ source](https://asq.org/quality-resources/house-of-quality)
-
-*Analogy from quality engineering: the House of Quality.*
-
-## Notations for modeling sequential decision problems {.small}
+## Notations for modeling sequential decision problems {.smaller}
 
 - **15** communities
 - **8** notational styles
 
-<br>
-
-![](images/01_chapter/03-8-notations.jpg)
+::: {layout-align="center"}
+![](images/01_chapter/03-8-notations.jpg){width="75%"}
+:::
 
 # Universal Modeling Framework
 
-## General View {.small}
+## General View {.smaller}
 
 - Represents **any** aspect of a controllable system.
 - Takes into consideration that the **system evolves** over time with new information.
 
-![](images/01_chapter/04-UMF.jpg)
+::: {layout-align="center"}
+![](images/01_chapter/04-UMF.jpg){width="75%"}
+:::
 
 More info: [video](https://www.youtube.com/watch?v=Vl5hipcYtyo), [article](https://warrenpowell.org/modeling-uncertainty/#categories)
 
-## Using Continues Time {.small}
+## Using Continuous Time {.smaller}
 
-- The information arrives continuosly over time
+- The information arrives continuously over time
 - Functions, states, and decisions are measured at a point in time
 - At time $t$ any variable indexed by:
    - $t' \leq t$ is **known**
    - $t' > t$ is **unknown**
 
-![](images/01_chapter/05-UMF-Modeling-Time.jpg)
+::: {layout-align="center"}
+![](images/01_chapter/05-UMF-Modeling-Time.jpg){width="75%"}
+:::
 
-## State Variables {.small}
+## State Variables {.smaller}
 
-![](images/01_chapter/06-UMF-State-Variables.jpg)
+::: {layout-align="center"}
+![](images/01_chapter/06-UMF-State-Variables.jpg){width="75%"}
+:::
 
-## Decision $x_t$ {.small}
+## Decision $x_t$ {.smaller}
 
-![](images/01_chapter/07-UMF-Decision-Variable.jpg)
+<br>
 
+<br>
 
-## Decision $x_t$ {.small}
+::: {layout-align="center"}
+![](images/01_chapter/07-UMF-Decision-Variable.jpg){width="75%"}
+:::
 
-![](images/01_chapter/08-UMF-Decision-Variable-Type.jpg)
+## Decision $x_t$ (Types) {.smaller}
 
-## Exogenous Information [link]() {.small}
+::: {layout-align="center"}
+![](images/01_chapter/08-UMF-Decision-Variable-Type.jpg){width="75%"}
+:::
+
+## Exogenous Information {.smaller}
 
 - We use `hat` to identify variables.
 
-![](images/01_chapter/09-UMF-Exogenous-Info.jpg)
-
-## Exogenous Information: Observational Uncertainty (1) {.small}
-
-**Not knowing the true current state:**
-
-- GPS/telematics places a truck several blocks from its actual position
-- Warehouse system shows 40 units on hand, but the real count differs (mis-scans, misplaced pallets)
-- Reefer container condition (e.g., inside temperature) can't be verified until opened
-
-## Exogenous Information: Exogenous Uncertainty (2) {.small}
-
-**External inputs we don't control:**
-
-- Customer orders arrive in random volumes and at random times
-- Truck breakdowns, or storms delaying vessels at a port
-- Drivers calling in sick, causing sudden labor shortages
-
-## Exogenous Information: Prognostic Uncertainty (3) {.small}
-
-**Errors in forecasts:**
-
-- Holiday-season demand forecast is off by 25%
-- Predicted arrival of an ocean vessel is days off
-- Forecasted fuel prices for next quarter miss actual prices
-
-## Exogenous Information: Inferential Uncertainty (4) {.small}
-
-**Errors in estimated parameters:**
-
-- Estimating how a price change or faster delivery promise shifts demand
-- Estimating true average transit time on a lane from limited shipment data
-- Estimating remaining life of a truck component from sensor readings
-
-## Exogenous Information: Experimental Variability (5) {.small}
-
-**Noise in test results:**
-
-- Pilot of a new delivery-route design gives different results week to week
-- Warehouse layout simulation produces varying throughput across runs
-- New packaging test shows different damage rates across trial shipments
-
-## Exogenous Information: Model Uncertainty (6) {.small}
-
-**Not knowing how the system works:**
-
-- How do customers respond to a late delivery: cancel, reorder, or switch supplier?
-- How does congestion at a distribution center build as volume grows?
-- How do competitors' pricing and capacity changes affect our freight demand?
-
-## Exogenous Information: Transitional Uncertainty (7) {.small}
-
-**Random effects on how the system evolves:**
-
-- Inventory shrinkage from theft, damage, or spoilage between periods
-- Random loading/unloading times at docks change when vehicles become available
-- Fluctuating traffic changes route time while a vehicle is en route
-
-## Exogenous Information: Implementation Errors (8) {.small}
-
-**Decisions not carried out as planned:**
-
-- A driver ignores the recommended route (local knowledge) or skips a stop
-- A picker pulls the wrong item or loads a pallet onto the wrong trailer
-- A reefer unit fails, so the planned temperature isn't maintained
-
-## Exogenous Information: Communication Errors (9) {.small}
-
-**Instructions lost or misunderstood:**
-
-- Dispatcher's verbal instruction is misheard, or an address is misread
-- Language barriers with international partners cause wrong handling or customs paperwork
-- A last-minute schedule change never reaches the receiving dock
-
-## Exogenous Information: Algorithmic Instability (10) {.small}
-
-**Different runs give different answers:**
-
-- Vehicle routing solver returns different routes on the same data (random seeds, time limits)
-- Heuristic load-planning software changes trailer assignments after a trivial change in input order
-- Retraining an ML demand model on the same data gives noticeably different forecasts
-
-## Exogenous Information: Goal Uncertainty (11) {.small}
-
-**People disagree on the objective:**
-
-- Finance wants lowest cost, sales wants fastest delivery, sustainability wants minimal emissions
-- Planners differ on prioritizing on-time delivery vs. truck utilization
-- Managers disagree on penalizing lateness vs. paying for expedited shipping
-
-## Exogenous Information: Environmental Uncertainty (12) {.small}
-
-**Broad conditions around the system:**
-
-- New tariffs, trade restrictions, or customs rules change which lanes are viable
-- Economic downturns or booms shift freight volumes and carrier capacity
-- New regulations (hours-of-service, emissions standards) change what is allowed or profitable
+::: {layout-align="center"}
+![](images/01_chapter/09-UMF-Exogenous-Info.jpg){width="75%"}
+:::
 
 # Modeling process
 
-## Process Overview {.small}
+## Process Overview {.smaller}
 
 ```{mermaid}
+%%| fig-width: 10
 flowchart LR
   A[Ambiguous Problem] --> B("Precise Definition <br> (Broken Down into Pieces)")
   B --> C[Computer Software]
@@ -246,118 +159,18 @@ flowchart LR
   
   class A,C nodeStyle;
   class B highlight;
+
 ```
 
-![](images/01_chapter/10-Sequential-Decision-Modeling-Framework.png)
+::: {layout-align="center"}
+![](images/01_chapter/10-Sequential-Decision-Modeling-Framework.png){width="40%"}
+:::
 
-## The Narrative (step 1) {.small}
-
-<br>
-
-<br>
-
-<br>
+## The Narrative (step 1) {.smaller}
 
 ```{mermaid}
-flowchart LR
-    A["⚠️ Problem Definition<br/>Describe the problem in plain English"]
-    B["📉 Consequences of Inaction<br/>What happens if the problem remains unsolved?"]
-    D["🔍 Project Scope<br/>What will the solution address, and what is explicitly excluded?"]
-    E["💡 Solution Overview<br/>Describe the solution to be developed and its main deliverables"]
-
-    A --> B --> D --> E
-
-    classDef danger fill:#2c0f14,stroke:#f87171,stroke-width:2px,color:#fef2f2,width:240px,white-space:normal,text-align:center;
-    classDef warning fill:#2a1b0c,stroke:#fbbf24,stroke-width:2px,color:#fffbeb,width:240px,white-space:normal,text-align:center;
-    classDef info fill:#0c2136,stroke:#38bdf8,stroke-width:2px,color:#f0f9ff,width:240px,white-space:normal,text-align:center;
-    classDef success fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5,width:240px,white-space:normal,text-align:center;
-
-    class A danger;
-    class B warning;
-    class D info;
-    class E success;
-```
-
-
-## Framing The Problem (step 2) {.small}
-
-```{mermaid}
-
+%%| fig-width: 10
 flowchart TD
-    A["Step 2: Frame the Problem"]
-
-    A --> B["1. Performance Metrics"]
-    A --> C["2. Decision Structure"]
-    A --> D["3. Sources of Uncertainty"]
-
-    B --> B1["Define KPIs, units, baselines<br/>and target values"]
-    B1 --> B2["Classify and prioritize metrics:<br/>objectives, targets and constraints"]
-
-    C --> C1["Identify decision-makers,<br/>alternatives and constraints"]
-    C1 --> C2["Determine when decisions occur,<br/>their frequency and available information"]
-    C2 --> C3["Understand the process using<br/>appropriate industrial engineering tools"]
-
-    C3 --> T{"What must be understood?"}
-    T -->|Boundaries and interfaces| T1["SIPOC"]
-    T -->|Operations and inspections| T2["Operations Process Chart"]
-    T -->|Roles, handoffs and decisions| T3["Cross-Functional Flowchart"]
-    T -->|Physical movement and distance| T4["Flow Diagram / String Diagram"]
-
-    T1 --> E["Document the process<br/>and decision structure"]
-    T2 --> E
-    T3 --> E
-    T4 --> E
-
-    D --> D1["Identify uncertain inputs,<br/>events and outcomes"]
-    D1 --> D2["Assess variability, frequency,<br/>magnitude, dependencies and extreme events"]
-    D2 --> D3["Evaluate potential effects<br/>on performance metrics"]
-
-    B2 --> F["Validate data availability,<br/>quality, granularity and measurement"]
-    E --> F
-    D3 --> F
-
-    F --> G["Build a relationship matrix:<br/>metrics, decisions and uncertainties"]
-    G --> H{"Is the problem sufficiently framed?"}
-
-    H -->|No| I["Identify information gaps<br/>and collect additional evidence"]
-    I --> B
-    I --> C
-    I --> D
-
-    H -->|Yes| J["Framed Decision Problem"]
-    J --> K["Prioritized performance metrics<br/>+ Decision structure<br/>+ Uncertainty sources<br/>+ Data limitations<br/>+ Testable impact hypotheses"]
-```
-
-
-
-# Modeling process
-
-## Process Overview {.small}
-
-```{mermaid}
-flowchart LR
-    A[Ambiguous Problem] --> B("Precise Definition<br/>(Broken Down into Pieces)")
-    B --> C[Computer Software]
-
-    classDef nodeStyle fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
-    classDef highlight fill:#0f172a,stroke:#60a5fa,stroke-width:2.5px,color:#ffffff;
-    class A,C nodeStyle;
-    class B highlight;
-```
-
-![](images/01_chapter/10-Sequential-Decision-Modeling-Framework.png)
-
-
-## The Narrative (step 1) {.small}
-
-<br>
-
-<br>
-
-<br>
-
-```{mermaid}
-flowchart LR
     A["⚠️ Problem Definition<br/>Describe the problem in plain English"]
     B["📉 Consequences of Inaction<br/>What happens if the problem remains unsolved?"]
     D["🔍 Project Scope<br/>What will the solution address, and what is explicitly excluded?"]
@@ -365,191 +178,167 @@ flowchart LR
 
     A --> B --> D --> E
 
-    classDef danger fill:#2c0f14,stroke:#f87171,stroke-width:2px,color:#fef2f2,width:240px,white-space:normal,text-align:center;
-    classDef warning fill:#2a1b0c,stroke:#fbbf24,stroke-width:2px,color:#fffbeb,width:240px,white-space:normal,text-align:center;
-    classDef info fill:#0c2136,stroke:#38bdf8,stroke-width:2px,color:#f0f9ff,width:240px,white-space:normal,text-align:center;
-    classDef success fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5,width:240px,white-space:normal,text-align:center;
+    classDef danger fill:#2c0f14,stroke:#f87171,stroke-width:2px,color:#fef2f2,width:260px,white-space:normal,text-align:center;
+    classDef warning fill:#2a1b0c,stroke:#fbbf24,stroke-width:2px,color:#fffbeb,width:260px,white-space:normal,text-align:center;
+    classDef info fill:#0c2136,stroke:#38bdf8,stroke-width:2px,color:#f0f9ff,width:260px,white-space:normal,text-align:center;
+    classDef success fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5,width:260px,white-space:normal,text-align:center;
 
     class A danger;
     class B warning;
     class D info;
     class E success;
+
 ```
 
 # Framing the Problem
 
-## Performance Metrics (step 2A) {.small}
+## Roadmap: Four Questions, Four Tools {.smaller}
 
-```{mermaid}
-flowchart LR
-    A["Step 2A: Define Performance Metrics"]
+| Question | Step | Tool that answers it |
+|:--|:-:|:--|
+| Who decides, and where are the boundaries? | Scope | Context questions, SIPOC |
+| What do we want to achieve? | 2A | KPI list → **Metrics pyramid** |
+| What can we control? | 2B | Process maps → **Decision impact matrix** |
+| What can we *not* control? | 2C | Uncertainty inventory → **Uncertainty impact matrix** |
+| Do we have the evidence to model it? | Check | Relationship matrix |
 
-    A --> B["Identify Relevant KPIs"]
-    B --> C["Define Units, Baselines<br/>and Target Values"]
-    C --> D["Classify Performance Metrics"]
+: Each step produces the input for the next one {.striped}
 
-    D --> E["Objectives<br/>What should be optimized?"]
-    D --> F["Targets<br/>What values should be achieved?"]
-    D --> G["Constraints<br/>What limits must be respected?"]
+## Where do we start? Scope {.smaller}
 
-    E --> H["Prioritize Performance Metrics"]
-    F --> H
-    G --> H
+**Question:** Who is deciding, and what is inside the problem?
 
-    H --> I["Prioritized Performance Metrics"]
+* **Who** makes the decision, in what **setting**, with what **history**, and to achieve what?
+* Define what enters the system, what leaves it, and who receives it.
 
-    classDef main fill:#0f172a,stroke:#60a5fa,stroke-width:2px,color:#ffffff;
-    classDef process fill:#0c2136,stroke:#38bdf8,stroke-width:1.5px,color:#f0f9ff;
-    classDef output fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5;
+::: {.callout-tip}
+### Tool: SIPOC (Supplier, Input, Process, Output, Customer)
+Best for **defining system boundaries** and external interfaces *before* choosing metrics.
+:::
 
-    class A main;
-    class B,C,D,E,F,G,H process;
-    class I output;
-```
+![](images/01_chapter/12-sipoc-diagram.jpg)
 
+## What do we want to achieve? (step 2A) {.smaller}
 
-## Decision Structure (step 2B) {.small}
+**Question:** Which metrics define a "good" outcome?
 
-```{mermaid}
-flowchart LR
-    A["Step 2B: Understand the Decision Structure"]
+1. **Identify relevant KPIs:** costs, delivery times, customer satisfaction, emissions.
+2. **Define units, baselines and targets** for each one.
+3. **Classify each metric:**
+    * **Objective:** optimize it (minimize cost, maximize profit).
+    * **Target:** a numerical threshold to hit.
+    * **Constraint:** a non-negotiable limit (legal, budget, capacity).
 
-    A --> B["Identify Decision-Makers"]
-    B --> C["Identify Available Alternatives<br/>and Decision Constraints"]
-    C --> D["Determine When Decisions Occur"]
-    D --> E["Determine Decision Frequency<br/>and Available Information"]
-    E --> F["Understand the Operational Process"]
+## From a List of KPIs to a Priority (step 2A) {.smaller}
 
-    F --> G["Document the Process<br/>and Decision Structure"]
+**Question:** Which metrics matter most?
 
-    classDef main fill:#0f172a,stroke:#60a5fa,stroke-width:2px,color:#ffffff;
-    classDef process fill:#0c2136,stroke:#38bdf8,stroke-width:1.5px,color:#f0f9ff;
-    classDef output fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5;
+* Rank metrics in tiers; the **top metric must be an objective**.
+* Tag each as *Max, Min, Target, Floor* or *Ceiling*.
 
-    class A main;
-    class B,C,D,E,F process;
-    class G output;
-```
+::: {.callout-tip}
+### Tool: Metrics pyramid
+Tier 1 (one metric) → Tier 4. Forces a single top priority and exposes conflicts between metrics.
+:::
 
+**Output:** prioritized metrics with units, baselines and targets.
 
-## Process Analysis Tools (step 2B, continued) {.small}
+![](images/01_chapter/11-pyramid-of-measurements.png)
 
-```{mermaid}
-flowchart TD
-    A["What Must Be Understood?"]
+## What can we control? (step 2B) {.smaller}
 
-    A --> B["Boundaries and Interfaces"]
-    A --> C["Operations and Inspections"]
-    A --> D["Roles, Handoffs and Decisions"]
-    A --> E["Physical Movement and Distance"]
+**Question:** Who decides what, when, and with what information?
 
-    B --> F["SIPOC"]
-    C --> G["Operations Process Chart"]
-    D --> H["Cross-Functional Flowchart"]
-    E --> I["Flow Diagram / String Diagram"]
+* **Decision-makers:** single manager, multiple agents, algorithms.
+* **Alternatives & constraints** at each decision point.
+* **Timing & frequency:** what information is available at that exact moment?
 
-    F --> J["Document the Process<br/>and Decision Structure"]
-    G --> J
-    H --> J
-    I --> J
+| If you need to know... | Use |
+|:--|:--|
+| Who hands off to whom, and who owns each decision | **Cross-functional flowchart** |
+| The order of steps, operations and inspection points | **Operations process chart** |
+| How things physically move, and over what distances | **Flow / string diagram** |
 
-    classDef question fill:#0f172a,stroke:#60a5fa,stroke-width:2px,color:#ffffff;
-    classDef focus fill:#0c2136,stroke:#38bdf8,stroke-width:1.5px,color:#f0f9ff;
-    classDef output fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5;
+Pick the tool by the question, not by habit; one problem may need only one of them.
 
-    class A question;
-    class B,C,D,E,F,G,H,I focus;
-    class J output;
-```
+## Which Decisions Really Matter? (step 2B) {.smaller}
 
+**Question:** Which decisions have the most impact on my top metrics?
 
-## Sources of Uncertainty (step 2C) {.small}
+1. **List decisions**, from general ("assign drivers to loads") to specific ("assign driver X to load Y").
+2. **Check the 10 decision types** to avoid blind spots (physical/financial, information acquisition, parameter setting, ...).
+3. **Score impact** on each tiered metric: **H → M → L → N**.
+4. **Rank** rows by impact on the highest-tier metrics.
 
-```{mermaid}
-flowchart LR
-    A["Step 2C: Identify Sources of Uncertainty"]
+::: {.callout-tip}
+### Tool: Decision impact matrix
+Decisions × Metrics. Sub-decisions can be nested as the analysis gets deeper.
+:::
 
-    A --> B["Identify Uncertain Inputs,<br/>Events and Outcomes"]
-    B --> C["Characterize Uncertainty"]
+![](images/01_chapter/13-decision-matrix.jpg)
 
-    C --> D["Variability and Frequency"]
-    C --> E["Magnitude and Dependencies"]
-    C --> F["Extreme Events"]
+## What can we *not* control? (step 2C) {.smaller}
 
-    D --> G["Evaluate Potential Effects<br/>on Performance Metrics"]
-    E --> G
-    F --> G
+**Question:** What could make performance differ from what we expect?
 
-    G --> H["Structured Uncertainty Inventory"]
+1. **Identify** uncertain inputs and events: demand shifts, delays, equipment failures.
+2. **Characterize** each one:
+    * **Variability & frequency:** how often?
+    * **Magnitude & dependencies:** how large, and correlated with what?
+    * **Extreme events:** severe weather, port closures.
+3. **Check the 12 categories of uncertainty** (observational, exogenous, model, implementation, ...) to avoid blind spots.
 
-    classDef main fill:#0f172a,stroke:#60a5fa,stroke-width:2px,color:#ffffff;
-    classDef process fill:#0c2136,stroke:#38bdf8,stroke-width:1.5px,color:#f0f9ff;
-    classDef output fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5;
+## Exogenous Information: Types {.smaller}
 
-    class A main;
-    class B,C,D,E,F,G process;
-    class H output;
-```
+- **1. Observational Uncertainty:** GPS errors, inaccurate warehouse counts, hidden reefer container conditions.
+- **2. Exogenous Uncertainty:** Random customer order volumes/times, truck breakdowns, storm delays.
+- **3. Prognostic Uncertainty:** Errors in holiday demand forecasts, vessel arrivals, or fuel prices.
+- **4. Inferential Uncertainty:** Estimating price-demand elasticity or component remaining life.
+- **5. Experimental Variability:** Noise in test results (route design, warehouse layout simulation).
+- **6. Model Uncertainty:** Not knowing how customers or market competitors react to changes.
 
+## Exogenous Information: Types {.smaller}
 
-## Data Validation and Evidence Integration {.small}
+- **7. Transitional Uncertainty:** Inventory shrinkage, random dock loading times, traffic fluctuations.
+- **8. Implementation Errors:** Drivers ignoring routes, pickers pulling wrong items, equipment failures.
+- **9. Communication Errors:** Misheard verbal instructions, language barriers, missed schedule updates.
+- **10. Algorithmic Instability:** Vehicle routing solvers or ML models yielding different outputs on same data.
+- **11. Goal Uncertainty:** Disagreements between finance, sales, and sustainability departments.
+- **12. Environmental Uncertainty:** New tariffs, economic shifts, or changing emissions regulations.
 
-```{mermaid}
-flowchart LR
-    A["Evidence from Step 2A<br/>Performance Metrics"]
-    B["Evidence from Step 2B<br/>Decision Structure and Process"]
-    C["Evidence from Step 2C<br/>Sources of Uncertainty"]
+## Which Uncertainties Really Matter? (step 2C) {.smaller}
 
-    A --> D["Validate Data Availability,<br/>Quality, Granularity and Measurement"]
-    B --> D
-    C --> D
+**Question:** Which uncertainties affect my metrics the most?
 
-    D --> E["Build a Relationship Matrix"]
-    E --> F["Connect Performance Metrics,<br/>Decisions and Uncertainties"]
+* Score each uncertainty against the same tiered metrics (**H / M / L / N**).
+* Keep a **structured inventory** of the quantified risks.
 
-    F --> G["Identify Data Limitations<br/>and Testable Impact Hypotheses"]
+::: {.callout-tip}
+### Tool: Uncertainty impact matrix
+Uncertainties × Metrics. Uncertainties are not nested: they live at the top level of the frame.
+:::
 
-    G --> H["Evidence-Backed Problem Representation"]
+![](images/01_chapter/13-decision-matrix.jpg)
 
-    classDef input fill:#0c2136,stroke:#38bdf8,stroke-width:1.5px,color:#f0f9ff;
-    classDef process fill:#1e293b,stroke:#60a5fa,stroke-width:2px,color:#f8fafc;
-    classDef output fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5;
+## Do We Have the Evidence? Data Validation {.smaller}
 
-    class A,B,C input;
-    class D,E,F,G process;
-    class H output;
-```
+**Question:** Can we connect data to each element of the model?
 
+* **Validate** availability, quality, granularity and accuracy for metrics, decisions and uncertainties.
+* **Combine** the two impact matrices into a single view:
 
-## Validation and Iteration {.small}
+$$\text{Metrics} \times \text{Decisions} \times \text{Uncertainties}$$
 
-```{mermaid}
-flowchart TD
-    A["Evidence-Backed Problem Representation"]
-    A --> B{"Is the Problem<br/>Sufficiently Framed?"}
+* **Document** data gaps and missing variables, and write testable hypotheses.
 
-    B -->|No| C["Identify Information Gaps<br/>and Missing Evidence"]
-    C --> D["Collect Additional Evidence"]
-    D --> E["Revisit Performance Metrics,<br/>Decision Structure or Uncertainty"]
-    E --> A
+![](images/01_chapter/14-what-is-data-and-information-availability.png)
 
-    B -->|Yes| F["Framed Decision Problem"]
+## Is the Problem Sufficiently Framed? {.smaller}
 
-    F --> G["Prioritized Performance Metrics"]
-    F --> H["Documented Decision Structure"]
-    F --> I["Characterized Sources of Uncertainty"]
-    F --> J["Validated Data and Known Limitations"]
-    F --> K["Testable Impact Hypotheses"]
+::: {.callout-note}
+### Final check
+Do we have clear metrics, the decisions that influence them, and the uncertainties that affect them, backed by data?
+:::
 
-    classDef input fill:#1e293b,stroke:#60a5fa,stroke-width:2px,color:#f8fafc;
-    classDef decision fill:#2a1b0c,stroke:#fbbf24,stroke-width:2px,color:#fffbeb;
-    classDef iteration fill:#2c0f14,stroke:#f87171,stroke-width:2px,color:#fef2f2;
-    classDef output fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5;
-
-    class A input;
-    class B decision;
-    class C,D,E iteration;
-    class F,G,H,I,J,K output;
-```
-
-
+* **If NO:** identify the missing evidence, collect more data, and **revisit 2A, 2B or 2C**.
+* **If YES, deliverables:** prioritized metrics + documented decision structure + characterized uncertainties + validated data and testable hypotheses.
