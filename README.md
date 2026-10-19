@@ -59,6 +59,12 @@ Open the [Cohort 1 sign-up sheet](https://docs.google.com/spreadsheets/d/1u7XiaM
    pip install .                   # installs the packages listed in pyproject.toml
    ```
 
+5. **Turn on the git hooks** — they refuse commits made directly on `main` (every change must land through a branch + PR):
+
+   ```sh
+   git config core.hooksPath .githooks
+   ```
+
 ### The steps each time you present
 
 **1. Create a branch with the latest changes**

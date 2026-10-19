@@ -1,0 +1,23 @@
+#!/bin/sh
+# pre-commit: refuse commits made directly on `main` -- every change lands
+# through a feature branch and its PR ("The steps each time you present"
+# in README.md).
+#
+# Enables for this clone with:   git config core.hooksPath .githooks
+#
+# During rebase/merge git runs with a detached HEAD; symbolic-ref fails
+# there and the hook exits 0, so internal commits (e.g. rebasing your
+# branch onto latest main) are never blocked -- only a plain `git commit`
+# while main is checked out is.
+
+branch=$(git symbolic-ref --quiet --short HEAD) || exit 0
+
+if [ "$branch" = "main" ]; then
+    printf '%s\n' \
+        "pre-commit: refusing to commit on branch 'main'." \
+        "Create a feature branch first, e.g.:" \
+        "  git switch -c chapter-NN" >&2
+    exit 1
+fi
+
+exit 0
