@@ -66,13 +66,6 @@
     "text": "Why we need prioritization\nEven a simple inventory problem can be described with:\n\nover 20 performance metrics\n30 types of decisions\nover 30 types of uncertainties\n\nThe full list is in Powell’s spreadsheet.\nWe cannot model all of this. We need to prioritize."
   },
   {
-    "objectID": "slides/01.html#interaction-matrix",
-    "href": "slides/01.html#interaction-matrix",
-    "title": "Modeling sequential decision problems",
-    "section": "Interaction matrix",
-    "text": "Interaction matrix\nHow to prioritize: build a matrix of metrics × decisions × uncertainties.\n\nASQ source\nAnalogy from quality engineering: the House of Quality."
-  },
-  {
     "objectID": "slides/01.html#notations-for-modeling-sequential-decision-problems",
     "href": "slides/01.html#notations-for-modeling-sequential-decision-problems",
     "title": "Modeling sequential decision problems",
@@ -80,18 +73,144 @@
     "text": "Notations for modeling sequential decision problems\n\n15 communities\n8 notational styles"
   },
   {
-    "objectID": "slides/01.html#universal-modeling-framework",
-    "href": "slides/01.html#universal-modeling-framework",
+    "objectID": "slides/01.html#general-view",
+    "href": "slides/01.html#general-view",
     "title": "Modeling sequential decision problems",
-    "section": "Universal Modeling Framework",
-    "text": "Universal Modeling Framework\n\nRepresents any aspect of a controllable system.\nTakes into consideration that the system evolves over time with new information."
+    "section": "General View",
+    "text": "General View\n\nRepresents any aspect of a controllable system.\nTakes into consideration that the system evolves over time with new information.\n\n\n\n\nMore info: video, article"
   },
   {
-    "objectID": "slides/01.html#modeling-process",
-    "href": "slides/01.html#modeling-process",
+    "objectID": "slides/01.html#using-continuous-time",
+    "href": "slides/01.html#using-continuous-time",
     "title": "Modeling sequential decision problems",
-    "section": "Modeling process",
-    "text": "Modeling process\n\n\n\n\n\nflowchart LR\n  A[Ambiguous Problem] --&gt; B(\"Precise Definition &lt;br&gt; (Broken Down into Pieces)\")\n  B --&gt; C[Computer Software]"
+    "section": "Using Continuous Time",
+    "text": "Using Continuous Time\n\nThe information arrives continuously over time\nFunctions, states, and decisions are measured at a point in time\nAt time \\(t\\) any variable indexed by:\n\n\\(t' \\leq t\\) is known\n\\(t' &gt; t\\) is unknown"
+  },
+  {
+    "objectID": "slides/01.html#state-variables",
+    "href": "slides/01.html#state-variables",
+    "title": "Modeling sequential decision problems",
+    "section": "State Variables",
+    "text": "State Variables"
+  },
+  {
+    "objectID": "slides/01.html#decision-x_t",
+    "href": "slides/01.html#decision-x_t",
+    "title": "Modeling sequential decision problems",
+    "section": "Decision \\(x_t\\)",
+    "text": "Decision \\(x_t\\)"
+  },
+  {
+    "objectID": "slides/01.html#decision-x_t-types",
+    "href": "slides/01.html#decision-x_t-types",
+    "title": "Modeling sequential decision problems",
+    "section": "Decision \\(x_t\\) (Types)",
+    "text": "Decision \\(x_t\\) (Types)"
+  },
+  {
+    "objectID": "slides/01.html#exogenous-information",
+    "href": "slides/01.html#exogenous-information",
+    "title": "Modeling sequential decision problems",
+    "section": "Exogenous Information",
+    "text": "Exogenous Information\n\nWe use hat to identify variables."
+  },
+  {
+    "objectID": "slides/01.html#process-overview",
+    "href": "slides/01.html#process-overview",
+    "title": "Modeling sequential decision problems",
+    "section": "Process Overview",
+    "text": "Process Overview\n\n\n\n\n\nflowchart LR\n  A[Ambiguous Problem] --&gt; B(\"Precise Definition &lt;br&gt; (Broken Down into Pieces)\")\n  B --&gt; C[Computer Software]\n\n  classDef nodeStyle fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;\n  classDef highlight fill:#0f172a,stroke:#60a5fa,stroke-width:2.5px,color:#ffffff;\n  \n  class A,C nodeStyle;\n  class B highlight;"
+  },
+  {
+    "objectID": "slides/01.html#the-narrative-step-1",
+    "href": "slides/01.html#the-narrative-step-1",
+    "title": "Modeling sequential decision problems",
+    "section": "The Narrative (step 1)",
+    "text": "The Narrative (step 1)\n\n\n\n\n\nflowchart TD\n    A[\"⚠️ Problem Definition&lt;br/&gt;Describe the problem in plain English\"]\n    B[\"📉 Consequences of Inaction&lt;br/&gt;What happens if the problem remains unsolved?\"]\n    D[\"🔍 Project Scope&lt;br/&gt;What will the solution address, and what is explicitly excluded?\"]\n    E[\"💡 Solution Overview&lt;br/&gt;Describe the solution to be developed and its main deliverables\"]\n\n    A --&gt; B --&gt; D --&gt; E\n\n    classDef danger fill:#2c0f14,stroke:#f87171,stroke-width:2px,color:#fef2f2,width:260px,white-space:normal,text-align:center;\n    classDef warning fill:#2a1b0c,stroke:#fbbf24,stroke-width:2px,color:#fffbeb,width:260px,white-space:normal,text-align:center;\n    classDef info fill:#0c2136,stroke:#38bdf8,stroke-width:2px,color:#f0f9ff,width:260px,white-space:normal,text-align:center;\n    classDef success fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5,width:260px,white-space:normal,text-align:center;\n\n    class A danger;\n    class B warning;\n    class D info;\n    class E success;"
+  },
+  {
+    "objectID": "slides/01.html#roadmap-four-questions-four-tools",
+    "href": "slides/01.html#roadmap-four-questions-four-tools",
+    "title": "Modeling sequential decision problems",
+    "section": "Roadmap: Four Questions, Four Tools",
+    "text": "Roadmap: Four Questions, Four Tools\n\nEach step produces the input for the next one\n\n\n\n\n\n\n\nQuestion\nStep\nTool that answers it\n\n\n\n\nWho decides, and where are the boundaries?\nScope\nContext questions, SIPOC\n\n\nWhat do we want to achieve?\n2A\nKPI list → Metrics pyramid\n\n\nWhat can we control?\n2B\nProcess maps → Decision impact matrix\n\n\nWhat can we not control?\n2C\nUncertainty inventory → Uncertainty impact matrix\n\n\nDo we have the evidence to model it?\nCheck\nRelationship matrix"
+  },
+  {
+    "objectID": "slides/01.html#where-do-we-start-scope",
+    "href": "slides/01.html#where-do-we-start-scope",
+    "title": "Modeling sequential decision problems",
+    "section": "Where do we start? Scope",
+    "text": "Where do we start? Scope\nQuestion: Who is deciding, and what is inside the problem?\n\nWho makes the decision, in what setting, with what history, and to achieve what?\nDefine what enters the system, what leaves it, and who receives it.\n\n\n\n\n\n\n\nTool: SIPOC (Supplier, Input, Process, Output, Customer)\n\n\nBest for defining system boundaries and external interfaces before choosing metrics."
+  },
+  {
+    "objectID": "slides/01.html#what-do-we-want-to-achieve-step-2a",
+    "href": "slides/01.html#what-do-we-want-to-achieve-step-2a",
+    "title": "Modeling sequential decision problems",
+    "section": "What do we want to achieve? (step 2A)",
+    "text": "What do we want to achieve? (step 2A)\nQuestion: Which metrics define a “good” outcome?\n\nIdentify relevant KPIs: costs, delivery times, customer satisfaction, emissions.\nDefine units, baselines and targets for each one.\nClassify each metric:\n\nObjective: optimize it (minimize cost, maximize profit).\nTarget: a numerical threshold to hit.\nConstraint: a non-negotiable limit (legal, budget, capacity)."
+  },
+  {
+    "objectID": "slides/01.html#from-a-list-of-kpis-to-a-priority-step-2a",
+    "href": "slides/01.html#from-a-list-of-kpis-to-a-priority-step-2a",
+    "title": "Modeling sequential decision problems",
+    "section": "From a List of KPIs to a Priority (step 2A)",
+    "text": "From a List of KPIs to a Priority (step 2A)\nQuestion: Which metrics matter most?\n\nRank metrics in tiers; the top metric must be an objective.\nTag each as Max, Min, Target, Floor or Ceiling.\n\n\n\n\n\n\n\nTool: Metrics pyramid\n\n\nTier 1 (one metric) → Tier 4. Forces a single top priority and exposes conflicts between metrics.\n\n\n\nOutput: prioritized metrics with units, baselines and targets."
+  },
+  {
+    "objectID": "slides/01.html#what-can-we-control-step-2b",
+    "href": "slides/01.html#what-can-we-control-step-2b",
+    "title": "Modeling sequential decision problems",
+    "section": "What can we control? (step 2B)",
+    "text": "What can we control? (step 2B)\nQuestion: Who decides what, when, and with what information?\n\nDecision-makers: single manager, multiple agents, algorithms.\nAlternatives & constraints at each decision point.\nTiming & frequency: what information is available at that exact moment?\n\n\n\n\n\n\n\n\nIf you need to know…\nUse\n\n\n\n\nWho hands off to whom, and who owns each decision\nCross-functional flowchart\n\n\nThe order of steps, operations and inspection points\nOperations process chart\n\n\nHow things physically move, and over what distances\nFlow / string diagram\n\n\n\nPick the tool by the question, not by habit; one problem may need only one of them."
+  },
+  {
+    "objectID": "slides/01.html#which-decisions-really-matter-step-2b",
+    "href": "slides/01.html#which-decisions-really-matter-step-2b",
+    "title": "Modeling sequential decision problems",
+    "section": "Which Decisions Really Matter? (step 2B)",
+    "text": "Which Decisions Really Matter? (step 2B)\nQuestion: Which decisions have the most impact on my top metrics?\n\nList decisions, from general (“assign drivers to loads”) to specific (“assign driver X to load Y”).\nCheck the 10 decision types to avoid blind spots (physical/financial, information acquisition, parameter setting, …).\nScore impact on each tiered metric: H → M → L → N.\nRank rows by impact on the highest-tier metrics.\n\n\n\n\n\n\n\nTool: Decision impact matrix\n\n\nDecisions × Metrics. Sub-decisions can be nested as the analysis gets deeper."
+  },
+  {
+    "objectID": "slides/01.html#what-can-we-not-control-step-2c",
+    "href": "slides/01.html#what-can-we-not-control-step-2c",
+    "title": "Modeling sequential decision problems",
+    "section": "What can we not control? (step 2C)",
+    "text": "What can we not control? (step 2C)\nQuestion: What could make performance differ from what we expect?\n\nIdentify uncertain inputs and events: demand shifts, delays, equipment failures.\nCharacterize each one:\n\nVariability & frequency: how often?\nMagnitude & dependencies: how large, and correlated with what?\nExtreme events: severe weather, port closures.\n\nCheck the 12 categories of uncertainty (observational, exogenous, model, implementation, …) to avoid blind spots."
+  },
+  {
+    "objectID": "slides/01.html#exogenous-information-types",
+    "href": "slides/01.html#exogenous-information-types",
+    "title": "Modeling sequential decision problems",
+    "section": "Exogenous Information: Types",
+    "text": "Exogenous Information: Types\n\n1. Observational Uncertainty: GPS errors, inaccurate warehouse counts, hidden reefer container conditions.\n2. Exogenous Uncertainty: Random customer order volumes/times, truck breakdowns, storm delays.\n3. Prognostic Uncertainty: Errors in holiday demand forecasts, vessel arrivals, or fuel prices.\n4. Inferential Uncertainty: Estimating price-demand elasticity or component remaining life.\n5. Experimental Variability: Noise in test results (route design, warehouse layout simulation).\n6. Model Uncertainty: Not knowing how customers or market competitors react to changes."
+  },
+  {
+    "objectID": "slides/01.html#exogenous-information-types-1",
+    "href": "slides/01.html#exogenous-information-types-1",
+    "title": "Modeling sequential decision problems",
+    "section": "Exogenous Information: Types",
+    "text": "Exogenous Information: Types\n\n7. Transitional Uncertainty: Inventory shrinkage, random dock loading times, traffic fluctuations.\n8. Implementation Errors: Drivers ignoring routes, pickers pulling wrong items, equipment failures.\n9. Communication Errors: Misheard verbal instructions, language barriers, missed schedule updates.\n10. Algorithmic Instability: Vehicle routing solvers or ML models yielding different outputs on same data.\n11. Goal Uncertainty: Disagreements between finance, sales, and sustainability departments.\n12. Environmental Uncertainty: New tariffs, economic shifts, or changing emissions regulations."
+  },
+  {
+    "objectID": "slides/01.html#which-uncertainties-really-matter-step-2c",
+    "href": "slides/01.html#which-uncertainties-really-matter-step-2c",
+    "title": "Modeling sequential decision problems",
+    "section": "Which Uncertainties Really Matter? (step 2C)",
+    "text": "Which Uncertainties Really Matter? (step 2C)\nQuestion: Which uncertainties affect my metrics the most?\n\nScore each uncertainty against the same tiered metrics (H / M / L / N).\nKeep a structured inventory of the quantified risks.\n\n\n\n\n\n\n\nTool: Uncertainty impact matrix\n\n\nUncertainties × Metrics. Uncertainties are not nested: they live at the top level of the frame."
+  },
+  {
+    "objectID": "slides/01.html#do-we-have-the-evidence-data-validation",
+    "href": "slides/01.html#do-we-have-the-evidence-data-validation",
+    "title": "Modeling sequential decision problems",
+    "section": "Do We Have the Evidence? Data Validation",
+    "text": "Do We Have the Evidence? Data Validation\nQuestion: Can we connect data to each element of the model?\n\nValidate availability, quality, granularity and accuracy for metrics, decisions and uncertainties.\nCombine the two impact matrices into a single view:\n\n\\[\\text{Metrics} \\times \\text{Decisions} \\times \\text{Uncertainties}\\]\n\nDocument data gaps and missing variables, and write testable hypotheses."
+  },
+  {
+    "objectID": "slides/01.html#is-the-problem-sufficiently-framed",
+    "href": "slides/01.html#is-the-problem-sufficiently-framed",
+    "title": "Modeling sequential decision problems",
+    "section": "Is the Problem Sufficiently Framed?",
+    "text": "Is the Problem Sufficiently Framed?\n\n\n\n\n\n\nFinal check\n\n\nDo we have clear metrics, the decisions that influence them, and the uncertainties that affect them, backed by data?\n\n\n\n\nIf NO: identify the missing evidence, collect more data, and revisit 2A, 2B or 2C.\nIf YES, deliverables: prioritized metrics + documented decision structure + characterized uncertainties + validated data and testable hypotheses."
   },
   {
     "objectID": "slides/00.html#welcome",

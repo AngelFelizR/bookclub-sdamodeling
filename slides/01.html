@@ -150,17 +150,21 @@
 <li>Recognize the four classes of policies and give an example of each. <em>(pending)</em></li>
 </ul>
 </section>
-<section id="solving-real-life-problems" class="slide level2 small">
+<section id="solving-real-life-problems" class="slide level2 smaller">
 <h2>Solving real-life problems</h2>
 <p><strong>To solve problems with computers we need to create a mathematical model</strong></p>
-
-<img data-src="images/01-mathematical-model.jpg" class="r-stretch"></section>
-<section id="solving-real-life-problems-1" class="slide level2 small">
+<div data-layout-align="center">
+<p><img data-src="images/01_chapter/01-mathematical-model.jpg" style="width:80.0%"></p>
+</div>
+</section>
+<section id="solving-real-life-problems-1" class="slide level2 smaller">
 <h2>Solving real-life problems</h2>
 <p><strong>To solve problems with computers we need to create a mathematical model</strong></p>
-
-<img data-src="images/02-supervised-learning.png" class="r-stretch"></section>
-<section id="problem-with-classical-modeling-framework" class="slide level2 small">
+<div data-layout-align="center">
+<p><img data-src="images/01_chapter/02-supervised-learning.png" style="width:80.0%"></p>
+</div>
+</section>
+<section id="problem-with-classical-modeling-framework" class="slide level2 smaller">
 <h2>Problem with classical modeling framework</h2>
 <p>Linear program / Supervised machine learning</p>
 <ul>
@@ -169,7 +173,7 @@
 <li>Doesn’t take into consideration the flow of <strong>information</strong></li>
 </ul>
 </section>
-<section id="problem-with-classical-modeling-framework-1" class="slide level2 small">
+<section id="problem-with-classical-modeling-framework-1" class="slide level2 smaller">
 <h2>Problem with classical modeling framework</h2>
 <p>Linear program / Supervised machine learning</p>
 <ul>
@@ -178,7 +182,7 @@
 <li>Assumes a single decision-maker</li>
 </ul>
 </section>
-<section id="types-of-decisions" class="slide level2 small">
+<section id="types-of-decisions" class="slide level2 smaller">
 <h2>Types of decisions</h2>
 <p>A <strong>decision</strong> is information we control that <strong>affects</strong> the system.</p>
 <ol type="1">
@@ -191,7 +195,7 @@
 <li>Estimation/identification</li>
 </ol>
 </section>
-<section id="framing-the-problem" class="slide level2 small">
+<section id="framing-the-problem" class="slide level2 smaller">
 <h2>Framing the problem</h2>
 <p>Before building a model, answer three questions:</p>
 <ol type="1">
@@ -211,7 +215,7 @@
 </ul></li>
 </ol>
 </section>
-<section id="why-we-need-prioritization" class="slide level2 small">
+<section id="why-we-need-prioritization" class="slide level2 smaller">
 <h2>Why we need prioritization</h2>
 <p>Even a <strong>simple inventory problem</strong> can be described with:</p>
 <ul>
@@ -222,33 +226,84 @@
 <p>The full list is in Powell’s <a href="https://tinyurl.com/PowellInventoryDecisions">spreadsheet</a>.</p>
 <p>We cannot model all of this. We need to <strong>prioritize</strong>.</p>
 </section>
-<section id="interaction-matrix" class="slide level2 small">
-<h2>Interaction matrix</h2>
-<p>How to prioritize: build a matrix of <strong>metrics × decisions × uncertainties</strong>.</p>
-
-<img data-src="images/06-House_Of_Quality_Figure.png" class="r-stretch"><p><a href="https://asq.org/quality-resources/house-of-quality">ASQ source</a></p>
-<p><em>Analogy from quality engineering: the House of Quality.</em></p>
-</section>
-<section id="notations-for-modeling-sequential-decision-problems" class="slide level2 small">
+<section id="notations-for-modeling-sequential-decision-problems" class="slide level2 smaller">
 <h2>Notations for modeling sequential decision problems</h2>
 <ul>
 <li><strong>15</strong> communities</li>
 <li><strong>8</strong> notational styles</li>
 </ul>
-<p><br></p>
+<div data-layout-align="center">
+<p><img data-src="images/01_chapter/03-8-notations.jpg" style="width:75.0%"></p>
+</div>
+</section>
+<section>
+<section id="universal-modeling-framework" class="title-slide slide level1 center">
+<h1>Universal Modeling Framework</h1>
 
-<img data-src="images/03-8-notations.jpg" class="r-stretch"></section>
-<section id="universal-modeling-framework" class="slide level2 small">
-<h2>Universal Modeling Framework</h2>
+</section>
+<section id="general-view" class="slide level2 smaller">
+<h2>General View</h2>
 <ul>
 <li>Represents <strong>any</strong> aspect of a controllable system.</li>
 <li>Takes into consideration that the <strong>system evolves</strong> over time with new information.</li>
 </ul>
+<div data-layout-align="center">
+<p><img data-src="images/01_chapter/04-UMF.jpg" style="width:75.0%"></p>
+</div>
+<p>More info: <a href="https://www.youtube.com/watch?v=Vl5hipcYtyo">video</a>, <a href="https://warrenpowell.org/modeling-uncertainty/#categories">article</a></p>
+</section>
+<section id="using-continuous-time" class="slide level2 smaller">
+<h2>Using Continuous Time</h2>
+<ul>
+<li>The information arrives continuously over time</li>
+<li>Functions, states, and decisions are measured at a point in time</li>
+<li>At time <span class="math inline">\(t\)</span> any variable indexed by:
+<ul>
+<li><span class="math inline">\(t' \leq t\)</span> is <strong>known</strong></li>
+<li><span class="math inline">\(t' &gt; t\)</span> is <strong>unknown</strong></li>
+</ul></li>
+</ul>
+<div data-layout-align="center">
+<p><img data-src="images/01_chapter/05-UMF-Modeling-Time.jpg" style="width:75.0%"></p>
+</div>
+</section>
+<section id="state-variables" class="slide level2 smaller">
+<h2>State Variables</h2>
+<div data-layout-align="center">
+<p><img data-src="images/01_chapter/06-UMF-State-Variables.jpg" style="width:75.0%"></p>
+</div>
+</section>
+<section id="decision-x_t" class="slide level2 smaller">
+<h2>Decision <span class="math inline">\(x_t\)</span></h2>
+<p><br></p>
+<p><br></p>
+<div data-layout-align="center">
+<p><img data-src="images/01_chapter/07-UMF-Decision-Variable.jpg" style="width:75.0%"></p>
+</div>
+</section>
+<section id="decision-x_t-types" class="slide level2 smaller">
+<h2>Decision <span class="math inline">\(x_t\)</span> (Types)</h2>
+<div data-layout-align="center">
+<p><img data-src="images/01_chapter/08-UMF-Decision-Variable-Type.jpg" style="width:75.0%"></p>
+</div>
+</section>
+<section id="exogenous-information" class="slide level2 smaller">
+<h2>Exogenous Information</h2>
+<ul>
+<li>We use <code>hat</code> to identify variables.</li>
+</ul>
+<div data-layout-align="center">
+<p><img data-src="images/01_chapter/09-UMF-Exogenous-Info.jpg" style="width:75.0%"></p>
+</div>
+</section></section>
+<section>
+<section id="modeling-process" class="title-slide slide level1 center">
+<h1>Modeling process</h1>
 
-<img data-src="images/04-UMF.jpg" class="r-stretch"></section>
-<section id="modeling-process" class="slide level2">
-<h2>Modeling process</h2>
-<div class="cell" data-reveal="true" data-layout-align="default">
+</section>
+<section id="process-overview" class="slide level2 smaller">
+<h2>Process Overview</h2>
+<div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
@@ -256,16 +311,317 @@
 <pre class="mermaid mermaid-js">flowchart LR
   A[Ambiguous Problem] --&gt; B("Precise Definition &lt;br&gt; (Broken Down into Pieces)")
   B --&gt; C[Computer Software]
+
+  classDef nodeStyle fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+  classDef highlight fill:#0f172a,stroke:#60a5fa,stroke-width:2.5px,color:#ffffff;
+  
+  class A,C nodeStyle;
+  class B highlight;
+
 </pre>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
 </div>
+<div data-layout-align="center">
+<p><img data-src="images/01_chapter/10-Sequential-Decision-Modeling-Framework.png" style="width:40.0%"></p>
+</div>
+</section>
+<section id="the-narrative-step-1" class="slide level2 smaller">
+<h2>The Narrative (step 1)</h2>
+<div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A["⚠️ Problem Definition&lt;br/&gt;Describe the problem in plain English"]
+    B["📉 Consequences of Inaction&lt;br/&gt;What happens if the problem remains unsolved?"]
+    D["🔍 Project Scope&lt;br/&gt;What will the solution address, and what is explicitly excluded?"]
+    E["💡 Solution Overview&lt;br/&gt;Describe the solution to be developed and its main deliverables"]
+
+    A --&gt; B --&gt; D --&gt; E
+
+    classDef danger fill:#2c0f14,stroke:#f87171,stroke-width:2px,color:#fef2f2,width:260px,white-space:normal,text-align:center;
+    classDef warning fill:#2a1b0c,stroke:#fbbf24,stroke-width:2px,color:#fffbeb,width:260px,white-space:normal,text-align:center;
+    classDef info fill:#0c2136,stroke:#38bdf8,stroke-width:2px,color:#f0f9ff,width:260px,white-space:normal,text-align:center;
+    classDef success fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5,width:260px,white-space:normal,text-align:center;
+
+    class A danger;
+    class B warning;
+    class D info;
+    class E success;
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="framing-the-problem-1" class="title-slide slide level1 center">
+<h1>Framing the Problem</h1>
+
+</section>
+<section id="roadmap-four-questions-four-tools" class="slide level2 smaller">
+<h2>Roadmap: Four Questions, Four Tools</h2>
+<table class="table-striped caption-top">
+<caption>Each step produces the input for the next one</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Question</th>
+<th style="text-align: center;">Step</th>
+<th style="text-align: left;">Tool that answers it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Who decides, and where are the boundaries?</td>
+<td style="text-align: center;">Scope</td>
+<td style="text-align: left;">Context questions, SIPOC</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">What do we want to achieve?</td>
+<td style="text-align: center;">2A</td>
+<td style="text-align: left;">KPI list → <strong>Metrics pyramid</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">What can we control?</td>
+<td style="text-align: center;">2B</td>
+<td style="text-align: left;">Process maps → <strong>Decision impact matrix</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">What can we <em>not</em> control?</td>
+<td style="text-align: center;">2C</td>
+<td style="text-align: left;">Uncertainty inventory → <strong>Uncertainty impact matrix</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Do we have the evidence to model it?</td>
+<td style="text-align: center;">Check</td>
+<td style="text-align: left;">Relationship matrix</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="where-do-we-start-scope" class="slide level2 smaller">
+<h2>Where do we start? Scope</h2>
+<p><strong>Question:</strong> Who is deciding, and what is inside the problem?</p>
+<ul>
+<li><strong>Who</strong> makes the decision, in what <strong>setting</strong>, with what <strong>history</strong>, and to achieve what?</li>
+<li>Define what enters the system, what leaves it, and who receives it.</li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tool: SIPOC (Supplier, Input, Process, Output, Customer)</strong></p>
+</div>
+<div class="callout-content">
+<p>Best for <strong>defining system boundaries</strong> and external interfaces <em>before</em> choosing metrics.</p>
+</div>
+</div>
+</div>
+
+<img data-src="images/01_chapter/12-sipoc-diagram.jpg" class="r-stretch"></section>
+<section id="what-do-we-want-to-achieve-step-2a" class="slide level2 smaller">
+<h2>What do we want to achieve? (step 2A)</h2>
+<p><strong>Question:</strong> Which metrics define a “good” outcome?</p>
+<ol type="1">
+<li><strong>Identify relevant KPIs:</strong> costs, delivery times, customer satisfaction, emissions.</li>
+<li><strong>Define units, baselines and targets</strong> for each one.</li>
+<li><strong>Classify each metric:</strong>
+<ul>
+<li><strong>Objective:</strong> optimize it (minimize cost, maximize profit).</li>
+<li><strong>Target:</strong> a numerical threshold to hit.</li>
+<li><strong>Constraint:</strong> a non-negotiable limit (legal, budget, capacity).</li>
+</ul></li>
+</ol>
+</section>
+<section id="from-a-list-of-kpis-to-a-priority-step-2a" class="slide level2 smaller">
+<h2>From a List of KPIs to a Priority (step 2A)</h2>
+<p><strong>Question:</strong> Which metrics matter most?</p>
+<ul>
+<li>Rank metrics in tiers; the <strong>top metric must be an objective</strong>.</li>
+<li>Tag each as <em>Max, Min, Target, Floor</em> or <em>Ceiling</em>.</li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tool: Metrics pyramid</strong></p>
+</div>
+<div class="callout-content">
+<p>Tier 1 (one metric) → Tier 4. Forces a single top priority and exposes conflicts between metrics.</p>
+</div>
+</div>
+</div>
+<p><strong>Output:</strong> prioritized metrics with units, baselines and targets.</p>
+
+<img data-src="images/01_chapter/11-pyramid-of-measurements.png" class="r-stretch"></section>
+<section id="what-can-we-control-step-2b" class="slide level2 smaller">
+<h2>What can we control? (step 2B)</h2>
+<p><strong>Question:</strong> Who decides what, when, and with what information?</p>
+<ul>
+<li><strong>Decision-makers:</strong> single manager, multiple agents, algorithms.</li>
+<li><strong>Alternatives &amp; constraints</strong> at each decision point.</li>
+<li><strong>Timing &amp; frequency:</strong> what information is available at that exact moment?</li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">If you need to know…</th>
+<th style="text-align: left;">Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Who hands off to whom, and who owns each decision</td>
+<td style="text-align: left;"><strong>Cross-functional flowchart</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The order of steps, operations and inspection points</td>
+<td style="text-align: left;"><strong>Operations process chart</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">How things physically move, and over what distances</td>
+<td style="text-align: left;"><strong>Flow / string diagram</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Pick the tool by the question, not by habit; one problem may need only one of them.</p>
+</section>
+<section id="which-decisions-really-matter-step-2b" class="slide level2 smaller">
+<h2>Which Decisions Really Matter? (step 2B)</h2>
+<p><strong>Question:</strong> Which decisions have the most impact on my top metrics?</p>
+<ol type="1">
+<li><strong>List decisions</strong>, from general (“assign drivers to loads”) to specific (“assign driver X to load Y”).</li>
+<li><strong>Check the 10 decision types</strong> to avoid blind spots (physical/financial, information acquisition, parameter setting, …).</li>
+<li><strong>Score impact</strong> on each tiered metric: <strong>H → M → L → N</strong>.</li>
+<li><strong>Rank</strong> rows by impact on the highest-tier metrics.</li>
+</ol>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tool: Decision impact matrix</strong></p>
+</div>
+<div class="callout-content">
+<p>Decisions × Metrics. Sub-decisions can be nested as the analysis gets deeper.</p>
+</div>
+</div>
+</div>
+
+<img data-src="images/01_chapter/13-decision-matrix.jpg" class="r-stretch"></section>
+<section id="what-can-we-not-control-step-2c" class="slide level2 smaller">
+<h2>What can we <em>not</em> control? (step 2C)</h2>
+<p><strong>Question:</strong> What could make performance differ from what we expect?</p>
+<ol type="1">
+<li><strong>Identify</strong> uncertain inputs and events: demand shifts, delays, equipment failures.</li>
+<li><strong>Characterize</strong> each one:
+<ul>
+<li><strong>Variability &amp; frequency:</strong> how often?</li>
+<li><strong>Magnitude &amp; dependencies:</strong> how large, and correlated with what?</li>
+<li><strong>Extreme events:</strong> severe weather, port closures.</li>
+</ul></li>
+<li><strong>Check the 12 categories of uncertainty</strong> (observational, exogenous, model, implementation, …) to avoid blind spots.</li>
+</ol>
+</section>
+<section id="exogenous-information-types" class="slide level2 smaller">
+<h2>Exogenous Information: Types</h2>
+<ul>
+<li><strong>1. Observational Uncertainty:</strong> GPS errors, inaccurate warehouse counts, hidden reefer container conditions.</li>
+<li><strong>2. Exogenous Uncertainty:</strong> Random customer order volumes/times, truck breakdowns, storm delays.</li>
+<li><strong>3. Prognostic Uncertainty:</strong> Errors in holiday demand forecasts, vessel arrivals, or fuel prices.</li>
+<li><strong>4. Inferential Uncertainty:</strong> Estimating price-demand elasticity or component remaining life.</li>
+<li><strong>5. Experimental Variability:</strong> Noise in test results (route design, warehouse layout simulation).</li>
+<li><strong>6. Model Uncertainty:</strong> Not knowing how customers or market competitors react to changes.</li>
+</ul>
+</section>
+<section id="exogenous-information-types-1" class="slide level2 smaller">
+<h2>Exogenous Information: Types</h2>
+<ul>
+<li><strong>7. Transitional Uncertainty:</strong> Inventory shrinkage, random dock loading times, traffic fluctuations.</li>
+<li><strong>8. Implementation Errors:</strong> Drivers ignoring routes, pickers pulling wrong items, equipment failures.</li>
+<li><strong>9. Communication Errors:</strong> Misheard verbal instructions, language barriers, missed schedule updates.</li>
+<li><strong>10. Algorithmic Instability:</strong> Vehicle routing solvers or ML models yielding different outputs on same data.</li>
+<li><strong>11. Goal Uncertainty:</strong> Disagreements between finance, sales, and sustainability departments.</li>
+<li><strong>12. Environmental Uncertainty:</strong> New tariffs, economic shifts, or changing emissions regulations.</li>
+</ul>
+</section>
+<section id="which-uncertainties-really-matter-step-2c" class="slide level2 smaller">
+<h2>Which Uncertainties Really Matter? (step 2C)</h2>
+<p><strong>Question:</strong> Which uncertainties affect my metrics the most?</p>
+<ul>
+<li>Score each uncertainty against the same tiered metrics (<strong>H / M / L / N</strong>).</li>
+<li>Keep a <strong>structured inventory</strong> of the quantified risks.</li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tool: Uncertainty impact matrix</strong></p>
+</div>
+<div class="callout-content">
+<p>Uncertainties × Metrics. Uncertainties are not nested: they live at the top level of the frame.</p>
+</div>
+</div>
+</div>
+
+<img data-src="images/01_chapter/13-decision-matrix.jpg" class="r-stretch"></section>
+<section id="do-we-have-the-evidence-data-validation" class="slide level2 smaller">
+<h2>Do We Have the Evidence? Data Validation</h2>
+<p><strong>Question:</strong> Can we connect data to each element of the model?</p>
+<ul>
+<li><strong>Validate</strong> availability, quality, granularity and accuracy for metrics, decisions and uncertainties.</li>
+<li><strong>Combine</strong> the two impact matrices into a single view:</li>
+</ul>
+<p><span class="math display">\[\text{Metrics} \times \text{Decisions} \times \text{Uncertainties}\]</span></p>
+<ul>
+<li><strong>Document</strong> data gaps and missing variables, and write testable hypotheses.</li>
+</ul>
+
+<img data-src="images/01_chapter/14-what-is-data-and-information-availability.png" class="r-stretch"></section>
+<section id="is-the-problem-sufficiently-framed" class="slide level2 smaller">
+<h2>Is the Problem Sufficiently Framed?</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Final check</strong></p>
+</div>
+<div class="callout-content">
+<p>Do we have clear metrics, the decisions that influence them, and the uncertainties that affect them, backed by data?</p>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>If NO:</strong> identify the missing evidence, collect more data, and <strong>revisit 2A, 2B or 2C</strong>.</li>
+<li><strong>If YES, deliverables:</strong> prioritized metrics + documented decision structure + characterized uncertainties + validated data and testable hypotheses.</li>
+</ul>
 
 
-
-<img data-src="images/05-Sequential-Decision-Modeling-Framework.png" class="r-stretch"></section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

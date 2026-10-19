@@ -106,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
     }
   })
   </script>
-<script src="listing_new_window.js" defer=""></script>
+<script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -391,7 +391,7 @@ window.Quarto = {
 
 <div id="listing-slides" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1791786112291" data-listing-reading-time-sort="2" data-listing-word-count-sort="365">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1792382657604" data-listing-reading-time-sort="8" data-listing-word-count-sort="1436">
 <a href="./slides/01.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
@@ -837,6 +837,65 @@ Modeling sequential decision problems
   });
   </script>
 </div> <!-- /content -->
+// listing_new_window.js
+document.addEventListener("DOMContentLoaded", function() {
+  // --- Abrir listing en nueva ventana ---
+  const links = document.querySelectorAll('#listing-slides a, #listing-videos a');
+  
+  links.forEach(link =&gt; {
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+  });
+
+  // --- Inicializar Panzoom en diagramas Mermaid ---
+  initMermaidPanzoom();
+});
+
+// También reinicializar cuando se cambia de slide (Reveal.js)
+if (typeof Reveal !== "undefined") {
+  Reveal.on("slidechanged", function() {
+    setTimeout(initMermaidPanzoom, 300);
+  });
+}
+
+function initMermaidPanzoom() {
+  document.querySelectorAll('.mermaid svg').forEach(svg =&gt; {
+    // Evitar inicializar dos veces
+    if (svg.dataset.panzoomInitialized) return;
+    svg.dataset.panzoomInitialized = "true";
+
+    // Mejorar el contenedor
+    const parent = svg.parentElement;
+    parent.style.overflow = "hidden";
+    parent.style.cursor = "grab";
+    parent.style.position = "relative";
+
+    // Quitar restricciones de tamaño que a veces pone Mermaid
+    svg.style.maxWidth = "none";
+    svg.style.width = "100%";
+    svg.style.height = "100%";
+
+    // Inicializar Panzoom
+    const panzoom = Panzoom(svg, {
+      maxScale: 6,
+      minScale: 0.35,
+      step: 0.15,
+      contain: "outside",
+      cursor: "grab"
+    });
+
+    // Zoom con la rueda del ratón
+    parent.addEventListener("wheel", panzoom.zoomWithWheel);
+
+    // Cursor de agarre
+    parent.addEventListener("pointerdown", () =&gt; {
+      parent.style.cursor = "grabbing";
+    });
+    parent.addEventListener("pointerup", () =&gt; {
+      parent.style.cursor = "grab";
+    });
+  });
+}
 
 
 
