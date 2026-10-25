@@ -100,7 +100,7 @@ We cannot model all of this. We need to **prioritize**.
 ![](images/01_chapter/04-UMF.jpg){width="75%"}
 :::
 
-More info: [video](https://www.youtube.com/watch?v=Vl5hipcYtyo), [article](https://warrenpowell.org/modeling-uncertainty/#categories)
+More info: [video](https://www.youtube.com/watch?v=Vl5hipcYtyo), [article](https://warrenpowell.com/modeling-uncertainty/#categories)
 
 ## Using Continuous Time {.smaller}
 
@@ -116,42 +116,50 @@ More info: [video](https://www.youtube.com/watch?v=Vl5hipcYtyo), [article](https
 
 ## 1. State Variables {.smaller}
 
-::: {layout-align="center"}
-![](images/01_chapter/06-UMF-State-Variables.jpg){width="75%"}
-:::
+$$S_{t} = (R_{t},I_{t},B_{t}) = \text{System state, where:}$$
+
+- $R_{t} =$ **Resource/physical state** (quantities). Inventories; location/status of truck/train/plane; Energy in storage, water, money.
+- $I_{t} =$ **Information state** (parameters/values, functions). Prices/weather/tariffs; Policies/forecasting methods/transition functions.
+- $B_{t} =$ **Belief state** (frequentist or Bayesian). Estimates of traffic delays; Belief about the status of equipment.
 
 ## 2. Decision $x_t$ {.smaller}
 
-<br>
+**Constraints:** $x_t \in \mathcal{X}(S_t)$
 
-<br>
-
-::: {layout-align="center"}
-![](images/01_chapter/07-UMF-Decision-Variable.jpg){width="75%"}
-:::
+We do not specify how to make a decision. Instead, we define the function (the "policy") $X^{\pi}(s)$, where $\pi = (f, \theta)$ carries information about the type of function $f$, and any tunable parameters $\theta \in \Theta^f$.
 
 ## 2. Decision $x_t$ (Types) {.smaller}
 
-::: {layout-align="center"}
-![](images/01_chapter/08-UMF-Decision-Variable-Type.jpg){width="75%"}
-:::
+*   **Binary**: $x \in X = \{0,1\}$
+*   **Finite**: $x \in X = \{1, 2, \dots, M\}$
+*   **Continuous scalar**: $x \in X = [a, b]$
+*   **Continuous vector**: $x = (x_1, \dots, x_k), \quad x_k \in \mathbb{R}$
+*   **Discrete vector**: $x = (x_1, \dots, x_k), \quad x_k \in \mathbb{Z}$
+*   **Categorical**: $x = (a_1, \dots, a_l), \quad a_i \text{ is a category (e.g. red/green/blue)}$
 
 ## 3. Exogenous Information {.smaller}
 
 - We use `hat` to identify variables.
 
-::: {layout-align="center"}
-![](images/01_chapter/09-UMF-Exogenous-Info.jpg){width="75%"}
-:::
+$$W_{t + 1} = \text{New information that first became known at time } t$$
+$$= (\hat{R}_{t + 1},\hat{D}_{t + 1},\hat{p}_{t + 1},\hat{E}_{t + 1})$$
 
+- $\hat{R}_{t + 1} =$ Equipment failures, theft, exogenous deliveries
+- $\hat{D}_{t + 1} =$ New customer demands
+- $\hat{p}_{t + 1} =$ Changes in prices
+- $\hat{E}_{t + 1} =$ Information about the environment (temperature, ...)
+
+**More general notation:**
+
+$$W_{t + 1,i}(S_t,x_t) \text{ information in class } i\in \mathcal{I}^{\inf} \text{ that may depend on state } S_{t} \text{ and/or decision } x_{t}$$
 
 ## 4. Transition function {.smaller}
 
-It's the function o group of functions that capture any of the following types of updates:
+It's the function or group of functions that capture any of the following types of updates:
 
 - Changes in **physical** resources such as adding inventory, moving people, or modifying equipment.
-- Updates to **information** such as changes in prices and weather.
-- Updates to our **beliefs** about uncertain quantities or parameters.
+- Updates to **information** such as changes in prices and weather.
+- Updates to our **beliefs** about uncertain quantities or parameters.
 
 $$
 S_{t+1} = S^M(S_t, x_t, W_{t+1})
@@ -159,22 +167,30 @@ $$
 
 ## 5. Objective functions {.smaller}
 
-![](images/01_chapter/15-UMF-Objective-functions.jpg)
+Maximizes total expected contributions over some horizon $t = 0, \ldots, T$
 
-## 5. Objective functions {.smaller}
+$$
+ \max_{\pi=(f,\theta)} F^\pi(S_0) = \mathbb{E} \left\{ \sum_{t=0}^T C_t(S_t, X_t^\pi(S_t|\theta))|S_0 \right\}, \quad (1.17) 
+$$
+
+where 
+
+$$
+ S_{t+1} = S^M(S_t, X_t^\pi(S_t), W_{t+1}). \quad (1.18) 
+$$
 
 As compute all possible outcomes of $W_1, \dots, W_T$ is **not possible**.
 
-Let $\omega$ represent a **single outcome of the sequence** $W_1(\omega), \dots, W_T(\omega)$ and we can have $N$ posible outcomes of each sequence $\omega^n$
+Let $\omega$ represent a **single outcome of the sequence** $W_1(\omega), \dots, W_T(\omega)$ and we can have $N$ possible outcomes of each sequence $\omega^n$
 
 $$
 \omega^n = (W_1^n, \dots, W_t^n, \dots, W_T^n)
 $$
-## 5. Objective functions {.smaller}
 
 $$
-\max_{\pi=(f,\theta)} \bar{F}^\pi(S_0) = \frac{1}{N} \sum_{n=1}^N \sum_{n=0}^T C_t(S_t(\omega^n), X^\pi_t(S_t(\omega^n)))
+\max_{\pi=(f,\theta)} \bar{F}^\pi(S_0) = \frac{1}{N} \sum_{n=1}^N \sum_{t=0}^T C_t(S_t(\omega^n), X^\pi_t(S_t(\omega^n)))
 $$
+
 Where:
 
 $$
@@ -196,7 +212,6 @@ flowchart LR
   
   class A,C nodeStyle;
   class B highlight;
-
 ```
 
 ::: {layout-align="center"}
@@ -224,7 +239,6 @@ flowchart TD
     class B warning;
     class D info;
     class E success;
-
 ```
 
 # Framing the Problem
@@ -387,14 +401,14 @@ $$\text{Metrics} \times \text{Decisions} \times \text{Uncertainties}$$
 - **Metrics**
 
 $$
-\max \text{pofit} = \text{Sales of Sausage} - \text{Cost of Purchasing}
+\max \text{profit} = \text{Sales of Sausage} - \text{Cost of Purchasing}
 $$
 
 - **Decisions**
 
    - How much to order at the end of one day?
 
-- **Sources of uncertaint**
+- **Sources of uncertainty**
 
     - The demand for sausage the next day.
 
@@ -429,8 +443,9 @@ $$
 
 ## 5. Designing policies {.smaller}
 
-![](images/01_chapter/17-inventary-policy.jpg)
-
+$$
+X^\pi(S_t|\theta) = \begin{cases} \theta^{\text{max}} - R_t & \text{if } R_t < \theta^{\text{min}}, \\ 0 & \text{otherwise}, \end{cases}
+$$
 
 ## 6. Evaluating policies {.smaller}
 
@@ -438,4 +453,6 @@ $$
 2. Simulate each one to find $\bar{F}^\pi(\theta_k|S_0)$ for each $k$
 3. Pick the value of $\theta_k$ that works the best.
 
-![](images/01_chapter/18-inventary-evaluation.jpg)
+$$
+\overline{F}^{\pi}(\theta |S_{0}) = \frac{1}{N}\sum_{n = 1}^{N}\sum_{t = 0}^{T}C(S_{t},X^{\pi}(S_{t}|\theta),\hat{D}_{t + 1}^{n}).
+$$
