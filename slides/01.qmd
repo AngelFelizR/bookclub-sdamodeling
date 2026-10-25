@@ -114,13 +114,13 @@ More info: [video](https://www.youtube.com/watch?v=Vl5hipcYtyo), [article](https
 ![](images/01_chapter/05-UMF-Modeling-Time.jpg){width="75%"}
 :::
 
-## State Variables {.smaller}
+## 1. State Variables {.smaller}
 
 ::: {layout-align="center"}
 ![](images/01_chapter/06-UMF-State-Variables.jpg){width="75%"}
 :::
 
-## Decision $x_t$ {.smaller}
+## 2. Decision $x_t$ {.smaller}
 
 <br>
 
@@ -130,19 +130,56 @@ More info: [video](https://www.youtube.com/watch?v=Vl5hipcYtyo), [article](https
 ![](images/01_chapter/07-UMF-Decision-Variable.jpg){width="75%"}
 :::
 
-## Decision $x_t$ (Types) {.smaller}
+## 2. Decision $x_t$ (Types) {.smaller}
 
 ::: {layout-align="center"}
 ![](images/01_chapter/08-UMF-Decision-Variable-Type.jpg){width="75%"}
 :::
 
-## Exogenous Information {.smaller}
+## 3. Exogenous Information {.smaller}
 
 - We use `hat` to identify variables.
 
 ::: {layout-align="center"}
 ![](images/01_chapter/09-UMF-Exogenous-Info.jpg){width="75%"}
 :::
+
+
+## 4. Transition function {.smaller}
+
+It's the function o group of functions that capture any of the following types of updates:
+
+- Changes in **physical** resources such as adding inventory, moving people, or modifying equipment.
+- Updates to **information** such as changes in prices and weather.
+- Updates to our **beliefs** about uncertain quantities or parameters.
+
+$$
+S_{t+1} = S^M(S_t, x_t, W_{t+1})
+$$
+
+## 5. Objective functions {.smaller}
+
+![](images/01_chapter/15-UMF-Objective-functions.jpg)
+
+## 5. Objective functions {.smaller}
+
+As compute all possible outcomes of $W_1, \dots, W_T$ is **not possible**.
+
+Let $\omega$ represent a **single outcome of the sequence** $W_1(\omega), \dots, W_T(\omega)$ and we can have $N$ posible outcomes of each sequence $\omega^n$
+
+$$
+\omega^n = (W_1^n, \dots, W_t^n, \dots, W_T^n)
+$$
+## 5. Objective functions {.smaller}
+
+$$
+\max_{\pi=(f,\theta)} \bar{F}^\pi(S_0) = \frac{1}{N} \sum_{n=1}^N \sum_{n=0}^T C_t(S_t(\omega^n), X^\pi_t(S_t(\omega^n)))
+$$
+Where:
+
+$$
+S_{t+1}(\omega) = S^M(S_t(\omega), X^\pi_t(S_t(\omega)), W_{t+1}(\omega))
+$$
 
 # Modeling process
 
@@ -333,12 +370,72 @@ $$\text{Metrics} \times \text{Decisions} \times \text{Uncertainties}$$
 
 ![](images/01_chapter/14-what-is-data-and-information-availability.png)
 
-## Is the Problem Sufficiently Framed? {.smaller}
+# Pizza Resturant (Inventary Problem)
 
-::: {.callout-note}
-### Final check
-Do we have clear metrics, the decisions that influence them, and the uncertainties that affect them, backed by data?
-:::
+## 1. Narrative {.smaller}
 
-* **If NO:** identify the missing evidence, collect more data, and **revisit 2A, 2B or 2C**.
-* **If YES, deliverables:** prioritized metrics + documented decision structure + characterized uncertainties + validated data and testable hypotheses.
+- How many **pounds of sausage** to order from its food distributor?
+- The decision **is taken** at the end of each day (time $t$) where
+   - Sausage's cost is **known**
+   - Pizza's price is **known**
+   - Demand is **unknown**
+- If there is sausage left over, it can be held to the following day
+- The order **arrives** the following morning
+
+## 2. Core elements of the problem {.smaller}
+
+- **Metrics**
+
+$$
+\max \text{pofit} = \text{Sales of Sausage} - \text{Cost of Purchasing}
+$$
+
+- **Decisions**
+
+   - How much to order at the end of one day?
+
+- **Sources of uncertaint**
+
+    - The demand for sausage the next day.
+
+## 3. Universal Modeling Framework {.smaller}
+
+**1. State Variables:** $S_0 = (R_0^{inv}, (p, c), (\bar{D}, \bar{\sigma}^D))$
+
+**2. Decision $x_t$:** $x_t = X^\pi(S_t)$
+
+**3. Exogenous Information:** $W_{t+1} = \hat{D}_{t+1}$
+
+**4. Transition function:** $R_{t+1}^{inv} = \max\{0, R_{t}^{inv} + x_t - \hat{D}_{t+1} \}$
+
+**5. Objective functions:**
+
+$$
+C(S_t, x_t, \hat{D}_{t+1}) = -cx_t + p \min \{ R_{t}^{inv} +  x_t,  \hat{D}_{t+1}\}
+$$
+$$
+F^\pi (S_0) = \mathbb{E} \left\{ \sum_{t=0}^T C(S_t, X^\pi (S_t), \hat{D}_{t+1} ) | S_0 \right\}
+$$
+
+## 4. Uncertainty model {.smaller}
+
+1. **Historical data** if we were able to capture this **lost demand**.
+
+2. **Build a mathematical** model to create sets of demands ($\hat{D}_1^n, \dots, \hat{D}_T^n$) that we can repeat $N$ times.
+
+$$
+\hat{D}_{t+1} \sim N(\bar{D}, (\bar{\sigma}^D)^2)
+$$
+
+## 5. Designing policies {.smaller}
+
+![](images/01_chapter/17-inventary-policy.jpg)
+
+
+## 6. Evaluating policies {.smaller}
+
+1. Generate $K$ possible values $\theta_1, \dots, \theta_K$
+2. Simulate each one to find $\bar{F}^\pi(\theta_k|S_0)$ for each $k$
+3. Pick the value of $\theta_k$ that works the best.
+
+![](images/01_chapter/18-inventary-evaluation.jpg)
