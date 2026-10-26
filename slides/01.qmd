@@ -7,7 +7,7 @@ title: "Modeling sequential decision problems"
 - Explain why classical modeling (linear programming, supervised ML) is insufficient for sequential decision problems.
 - Define what a decision is and identify the three framing questions.
 - Describe the five elements of the Universal Modeling Framework.
-- Recognize the four classes of policies and give an example of each. *(pending)*
+- Recognize the four classes of policies and give an example of each.
 
 ## Solving real-life problems {.smaller}
 
@@ -100,7 +100,7 @@ We cannot model all of this. We need to **prioritize**.
 ![](images/01_chapter/04-UMF.jpg){width="75%"}
 :::
 
-More info: [video](https://www.youtube.com/watch?v=Vl5hipcYtyo), [article](https://warrenpowell.org/modeling-uncertainty/#categories)
+More info: [video](https://www.youtube.com/watch?v=Vl5hipcYtyo), [article](https://warrenpowell.com/modeling-uncertainty/#categories)
 
 ## Using Continuous Time {.smaller}
 
@@ -114,35 +114,88 @@ More info: [video](https://www.youtube.com/watch?v=Vl5hipcYtyo), [article](https
 ![](images/01_chapter/05-UMF-Modeling-Time.jpg){width="75%"}
 :::
 
-## State Variables {.smaller}
+## 1. State Variables {.smaller}
 
-::: {layout-align="center"}
-![](images/01_chapter/06-UMF-State-Variables.jpg){width="75%"}
-:::
+$$S_{t} = (R_{t},I_{t},B_{t}) = \text{System state, where:}$$
 
-## Decision $x_t$ {.smaller}
+- $R_{t} =$ **Resource/physical state** (quantities). Inventories; location/status of truck/train/plane; Energy in storage, water, money.
+- $I_{t} =$ **Information state** (parameters/values, functions). Prices/weather/tariffs; Policies/forecasting methods/transition functions.
+- $B_{t} =$ **Belief state** (frequentist or Bayesian). Estimates of traffic delays; Belief about the status of equipment.
 
-<br>
+## 2. Decision $x_t$ {.smaller}
 
-<br>
+**Constraints:** $x_t \in \mathcal{X}(S_t)$
 
-::: {layout-align="center"}
-![](images/01_chapter/07-UMF-Decision-Variable.jpg){width="75%"}
-:::
+We do not specify how to make a decision. Instead, we define the function (the "policy") $X^{\pi}(s)$, where $\pi = (f, \theta)$ carries information about the type of function $f$, and any tunable parameters $\theta \in \Theta^f$.
 
-## Decision $x_t$ (Types) {.smaller}
+## 2. Decision $x_t$ (Types) {.smaller}
 
-::: {layout-align="center"}
-![](images/01_chapter/08-UMF-Decision-Variable-Type.jpg){width="75%"}
-:::
+*   **Binary**: $x \in X = \{0,1\}$
+*   **Finite**: $x \in X = \{1, 2, \dots, M\}$
+*   **Continuous scalar**: $x \in X = [a, b]$
+*   **Continuous vector**: $x = (x_1, \dots, x_k), \quad x_k \in \mathbb{R}$
+*   **Discrete vector**: $x = (x_1, \dots, x_k), \quad x_k \in \mathbb{Z}$
+*   **Categorical**: $x = (a_1, \dots, a_l), \quad a_i \text{ is a category (e.g. red/green/blue)}$
 
-## Exogenous Information {.smaller}
+## 3. Exogenous Information {.smaller}
 
 - We use `hat` to identify variables.
 
-::: {layout-align="center"}
-![](images/01_chapter/09-UMF-Exogenous-Info.jpg){width="75%"}
-:::
+$$W_{t + 1} = \text{New information that first becomes known at time } t+1$$
+$$= (\hat{R}_{t + 1},\hat{D}_{t + 1},\hat{p}_{t + 1},\hat{E}_{t + 1})$$
+
+- $\hat{R}_{t + 1} =$ Equipment failures, theft, exogenous deliveries
+- $\hat{D}_{t + 1} =$ New customer demands
+- $\hat{p}_{t + 1} =$ Changes in prices
+- $\hat{E}_{t + 1} =$ Information about the environment (temperature, ...)
+
+**More general notation:**
+
+$$W_{t + 1,i}(S_t,x_t) \text{ information in class } i\in \mathcal{I}^{\inf} \text{ that may depend on state } S_{t} \text{ and/or decision } x_{t}$$
+
+## 4. Transition function {.smaller}
+
+It's the function or group of functions that capture any of the following types of updates:
+
+- Changes in **physical** resources such as adding inventory, moving people, or modifying equipment.
+- Updates to **information** such as changes in prices and weather.
+- Updates to our **beliefs** about uncertain quantities or parameters.
+
+$$
+S_{t+1} = S^M(S_t, x_t, W_{t+1})
+$$
+
+## 5. Objective functions {.smaller}
+
+Maximizes total expected contributions over some horizon $t = 0, \ldots, T$
+
+$$
+ \max_{\pi=(f,\theta)} F^\pi(S_0) = \mathbb{E} \left\{ \sum_{t=0}^T C_t(S_t, X_t^\pi(S_t|\theta))|S_0 \right\}, \quad (1.17) 
+$$
+
+where 
+
+$$
+ S_{t+1} = S^M(S_t, X_t^\pi(S_t), W_{t+1}). \quad (1.18) 
+$$
+
+Computing all possible outcomes of $W_1, \dots, W_T$ is **not possible**.
+
+Let $\omega$ represent a **single outcome of the sequence** $W_1(\omega), \dots, W_T(\omega)$ and we can have $N$ possible outcomes of each sequence $\omega^n$
+
+$$
+\omega^n = (W_1^n, \dots, W_t^n, \dots, W_T^n)
+$$
+
+$$
+\max_{\pi=(f,\theta)} \bar{F}^\pi(S_0) = \frac{1}{N} \sum_{n=1}^N \sum_{t=0}^T C_t(S_t(\omega^n), X^\pi_t(S_t(\omega^n)))
+$$
+
+Where:
+
+$$
+S_{t+1}(\omega) = S^M(S_t(\omega), X^\pi_t(S_t(\omega)), W_{t+1}(\omega))
+$$
 
 # Modeling process
 
@@ -159,7 +212,6 @@ flowchart LR
   
   class A,C nodeStyle;
   class B highlight;
-
 ```
 
 ::: {layout-align="center"}
@@ -187,7 +239,6 @@ flowchart TD
     class B warning;
     class D info;
     class E success;
-
 ```
 
 # Framing the Problem
@@ -266,7 +317,7 @@ Pick the tool by the question, not by habit; one problem may need only one of th
 **Question:** Which decisions have the most impact on my top metrics?
 
 1. **List decisions**, from general ("assign drivers to loads") to specific ("assign driver X to load Y").
-2. **Check the 10 decision types** to avoid blind spots (physical/financial, information acquisition, parameter setting, ...).
+2. **Check the 7 decision types** to avoid blind spots (physical/financial, information acquisition, parameter setting, ...).
 3. **Score impact** on each tiered metric: **H → M → L → N**.
 4. **Rank** rows by impact on the highest-tier metrics.
 
@@ -333,12 +384,449 @@ $$\text{Metrics} \times \text{Decisions} \times \text{Uncertainties}$$
 
 ![](images/01_chapter/14-what-is-data-and-information-availability.png)
 
-## Is the Problem Sufficiently Framed? {.smaller}
+Pizza Restaurant <br> *Inventory Problem*
 
-::: {.callout-note}
-### Final check
-Do we have clear metrics, the decisions that influence them, and the uncertainties that affect them, backed by data?
-:::
+## 1. Narrative {.smaller}
 
-* **If NO:** identify the missing evidence, collect more data, and **revisit 2A, 2B or 2C**.
-* **If YES, deliverables:** prioritized metrics + documented decision structure + characterized uncertainties + validated data and testable hypotheses.
+- How many **pounds of sausage** to order from its food distributor?
+- The decision **is taken** at the end of each day (time $t$) where
+   - Sausage's cost is **known**
+   - Pizza's price is **known**
+   - Demand is **unknown**
+- If there is sausage left over, it can be held to the following day
+- The order **arrives** the following morning
+
+## 2. Core elements of the problem {.smaller}
+
+- **Metrics**
+
+$$
+\max \text{profit} = \text{Sales of Sausage} - \text{Cost of Purchasing}
+$$
+
+- **Decisions**
+
+   - How much to order at the end of one day?
+
+- **Sources of uncertainty**
+
+    - The demand for sausage the next day.
+
+## 3. Universal Modeling Framework {.smaller}
+
+**1. State Variables:** $S_0 = (R_0^{inv}, (p, c), (\bar{D}, \bar{\sigma}^D))$
+
+**2. Decision $x_t$:** $x_t = X^\pi(S_t)$
+
+**3. Exogenous Information:** $W_{t+1} = \hat{D}_{t+1}$
+
+**4. Transition function:** $R_{t+1}^{inv} = \max\{0, R_{t}^{inv} + x_t - \hat{D}_{t+1} \}$
+
+**5. Objective functions:**
+
+$$
+C(S_t, x_t, \hat{D}_{t+1}) = -cx_t + p \min \{ R_{t}^{inv} +  x_t,  \hat{D}_{t+1}\}
+$$
+$$
+\max_{\pi = (f,\theta)}  F^\pi (S_0) = \mathbb{E} \left\{ \sum_{t=0}^T C(S_t, X^\pi (S_t), \hat{D}_{t+1} ) | S_0 \right\}
+$$
+
+## 4. Uncertainty model {.smaller}
+
+1. **Historical data** if we were able to capture this **lost demand**.
+
+2. **Build a mathematical** model to create sets of demands ($\hat{D}_1^n, \dots, \hat{D}_T^n$) that we can repeat $N$ times.
+
+$$
+\hat{D}_{t+1} \sim N(\bar{D}, (\bar{\sigma}^D)^2)
+$$
+
+## 5. Designing policies {.smaller}
+
+Order-up-to policy
+
+$$
+X^\pi(S_t|\theta) = \begin{cases} \theta^{\text{max}} - R_t^{inv} & \text{if } R_t^{inv} < \theta^{\text{min}}, \\ 0 & \text{otherwise}, \end{cases}
+$$
+
+Where $\theta = (\theta^{min}, \theta^{max})$ need to be tuned.
+
+
+## 6. Evaluating policies {.smaller}
+
+1. Generate $K$ possible values $\theta_1, \dots, \theta_K$
+2. Simulate each one to find $\bar{F}^\pi(\theta_k|S_0)$ for each $k$
+3. Pick the value of $\theta_k$ that works the best.
+
+$$
+\overline{F}^{\pi}(\theta |S_{0}) = \frac{1}{N}\sum_{n = 1}^{N}\sum_{t = 0}^{T}C(S_{t},X^{\pi}(S_{t}|\theta),\hat{D}_{t + 1}^{n}).
+$$
+
+
+# Pizza Resturant (part 2) <br> *Inventary Problem*
+
+## 1. Narrative {.smaller}
+
+**Original**
+
+- How many **pounds of sausage** to order from its food distributor?
+- The decision **is taken** at the end of each day (time $t$) where
+   - Sausage's cost is **known**
+   - Pizza's price is **known**
+   - Demand is **unknown**
+- If there is sausage left over, it can be held to the following day
+- The order **arrives** the following morning
+
+**Updates**
+
+- The price we pay for sausage to vary from day to day.
+- We have forecast for tomorrow's demand
+
+## 2. Core elements of the problem {.smaller}
+
+- **Metrics**
+
+$$
+\max \text{profit} = \text{Sales of Sausage} - \text{Cost of Purchasing}
+$$
+
+- **Decisions**
+
+   - How much to order at the end of one day?
+
+- **Sources of uncertainty**
+
+    - The difference between the actual demand and the forecast
+      - *The demand for sausage the next day*
+    - The evolution of the forecasts from one day to the next
+    - The price we pay for the sausage
+
+
+## 3. Universal Modeling Framework {.smaller}
+
+**1. State Variables:** 
+
+   - $S_0 = (R_0, c_0, p, f_{0, 1}^D, \bar{\sigma}^D_0 ,\bar{\sigma}^f_0)$ 
+   - $S_t = (R_t^{inv}, c_t, f_{t, t+1}^D, \bar{\sigma}^D_t ,\bar{\sigma}^f_t)$
+
+**2. Decision $x_t$:** 
+
+$$
+x_t = X^\pi(S_t)
+$$
+
+**3. Exogenous Information:** 
+
+$$
+W_{t+1} = (\hat{c}_{t+1}, \varepsilon^f_{t+1}, \varepsilon^D_{t+1})
+$$
+Where:
+
+- $\varepsilon^f_{t+1}$ is change in the forecast between time $t$ and $t+1$
+- $\varepsilon^D_{t+1}$ is the ramdom deviation from the forecast to actual demand
+
+
+## 3. Universal Modeling Framework {.smaller}
+
+**4. Transition function:**
+
+$$
+S_{t+1} = S^M(S_t, x_t, W_{t+1})
+$$
+
+$$
+R_{t+1}^{inv} = \max\{0, R_{t}^{inv} + x_t - \hat{D}_{t+1} \}
+$$
+
+$$
+\hat{D}_{t+1} = f^D_{t, t+1} + \varepsilon^D_{t+1}
+$$ 
+
+
+$$
+f_{t+1, t+2}^D = f_{t, t+1}^D +  \varepsilon^f_{t+1}
+$$
+
+
+$$
+\begin{aligned} (\bar{\sigma}_{t+1}^D)^2 &= (1 - \alpha)(\bar{\sigma}_t^D)^2 + \alpha(f_{t,t+1}^D - \hat{D}_{t+1})^2 \\ (\bar{\sigma}_{t+1}^f)^2 &= (1 - \alpha)(\bar{\sigma}_t^f)^2 + \alpha(f_{t,t+1}^D - f_{t+1,t+2}^D)^2 \end{aligned}
+$$
+
+$$
+c_{t+1} = \hat{c}_{t+1}
+$$
+
+**5. Objective functions:**
+
+$$
+C(S_t, x_t, \hat{D}_{t+1}) = -c_tx_t + p \min \{ R_{t}^{inv} +  x_t,  \hat{D}_{t+1}\}
+$$
+
+$$
+\max_{\pi = (f,\theta)} F^\pi (S_0) = \mathbb{E} \left\{ \sum_{t=0}^T C(S_t, X^\pi (S_t), \hat{D}_{t+1} ) | S_0 \right\}
+$$
+
+## 4. Uncertainty model {.smaller}
+
+$$
+\begin{aligned} \varepsilon_t^D &\sim N(0, (\bar{\sigma}_t^D)^2), \\ \varepsilon_t^f &\sim N(0, (\bar{\sigma}_t^f)^2) \end{aligned}
+$$
+
+## 5. Designing policies {.smaller}
+
+Let's try to order enough to meet the expected demand for tomorrow rather than using an order-up-to policy.
+
+$$
+X^\pi(S_t \vert{} \theta) = \max\{0, f_{t, t+1}^D - R_t\} + \theta
+$$
+
+
+## 6. Evaluating policies {.smaller}
+
+1. Generate $K$ possible values $\theta_1, \dots, \theta_K$
+2. Simulate each one to find $\bar{F}^\pi(\theta_k|S_0)$ for each $k$
+3. Pick the value of $\theta_k$ that works the best.
+
+$$
+\overline{F}^{\pi}(\theta |S_{0}) = \frac{1}{N}\sum_{n = 1}^{N}\sum_{t = 0}^{T}C(S_{t},X^{\pi}(S_{t}|\theta),\hat{D}_{t + 1}^{n}).
+$$
+
+# Policies
+
+## Definitions and Criteria {.smaller}
+
+**Definition**
+
+They are **functions** that use the information in the state variable to **make a decision**.
+
+**Selecting criteria**
+
+- **Solution quality:** Performance over some period of time.
+   - Average performance
+   - Worst case performance.
+
+- **Computational requirements**
+   - Average execution time
+   - Worst case execution times
+
+- **Transparency:** Capacity to trace a decision back to input data.
+
+- **Flexibility/adaptability:** We often need to adapt to complex situations.
+
+- **Methodological complexity**
+
+- **Data requirements**
+
+
+## Policy search {.smaller}
+
+Search across methods (functions), simulating their performance to find the method that works best on average over time.
+
+- **Policy function approximations (PFAs):** Functions that directly specify an action.
+
+$$
+X^\pi(S_t|\theta) = \begin{cases} \theta^{\text{max}} - R_t^{inv} & \text{if } R_t^{inv} < \theta^{\text{min}}, \\ 0 & \text{otherwise}, \end{cases}
+$$
+
+$$
+X^\pi(S_t \vert{} \theta) = \max\{0, f_{t, t+1}^D - R_t\} + \theta
+$$
+
+## Policy search {.smaller}
+
+- **Cost function approximations (CFAs):** Policies that involve solving an *optimization problem* with parameters introduced to help make the policy work better over time.
+   - Find the shortest path to a destination, but add a buffer $\theta$ (e.g., 15 minutes) to make sure you arrive on time.
+   - Schedule nurses for $\theta = 32$ hours per week, which allows for unforeseen emergencies.
+
+- Upper confidence bounding:
+
+$$
+X^{UCB}(S^n \mid \theta^{UCB}) = \arg\max_x \left( \bar{\mu}_x^n + \theta^{UCB} \sqrt{\frac{\log n}{N_x^n}} \right)
+$$
+
+- Interval estimation:
+
+$$
+X^{IE}(S^n \mid \theta^{IE}) = \arg\max_x \left( \bar{\mu}_x^n + \theta^{IE} \bar{\sigma}_x^n \right)
+$$
+
+## Policy search {.smaller}
+
+- Thompson sampling:
+
+$$
+X^{TS}(S^n \mid \theta^{TS}) = \arg\max_x \hat{\mu}_x^n, \quad \hat{\mu}_x^n \sim N(\bar{\mu}_x^n, \theta^{TS} \bar{\sigma}_x^{2,n})
+$$
+
+- Parametric:
+
+$$
+X_t^\pi(S_t \mid \theta) = \arg\max_{x_t \in X_t} \sum_{p \in P} c_p x_{tp}
+$$
+
+subject to
+
+$$\begin{aligned} \sum_{p \in P} x_{tp} &\ge \theta^{\text{reserve}} D_t && (\text{Reserve}) \\ x_{tp} &\le u_p \\ x_{tp} &\ge \theta^{\text{buffer}} && (\text{Buffer stock}) \end{aligned}$$
+
+## Lookahead policies {.smaller}
+
+Determines the best current action by evaluating ***immediate*** consequences and ***future impact***.
+
+![](images/01_chapter/15-lookahed-approximation.jpg)
+
+## Lookahead policies {.smaller}
+
+- **Value function approximations (VFAs):** Creates policies by optimizing the **first** period contribution (or cost) plus an **approximation** of the value of the state that a decision takes us to.
+
+![](images/01_chapter/16-lookahed-approximation-VFA.jpg)
+
+## Lookahead policies {.smaller}
+
+- **Value function approximations (VFAs):** Creates policies by optimizing the **first** period contribution (or cost) plus an **approximation** of the value of the state that a decision takes us to.
+
+
+![](images/01_chapter/17-lookahed-approximation-VFA-example.jpg)
+
+## Lookahead policies {.smaller}
+
+- **Direct lookaheads (DLAs):** It explicitly optimize over decisions we may make in the future.
+
+![](images/01_chapter/18-lookahed-approximation-DLA.jpg)
+
+# Exercises
+
+## 1.1 {.smaller}
+
+**1.1 What are the five elements of the mathematical model of a sequential decision problem?**
+
+The five elements of the universal modeling framework are:
+
+1. **State variables** $S_t$: all information needed at time $t$ to make a decision, compute performance, and simulate forward.
+2. **Decision variables** $x_t$: the controllable action, chosen by a policy $X^\pi(S_t)$.
+3. **Exogenous information** $W_{t+1}$: new information that arrives after decision $x_t$ and is outside our control.
+4. **Transition function** $S_{t+1}=S^M(S_t,x_t,W_{t+1})$: how the state evolves.
+5. **Objective function**: typically
+$$
+\max_{\pi=(f,\theta)} \mathbb{E}\left\{\sum_{t=0}^T C(S_t,X^\pi(S_t|\theta))\mid S_0\right\}.
+$$
+
+## 1.2 {.smaller}
+
+**1.2 What is the difference between the variables in the initial state $S_0$ and those in the dynamic state $S_t$ for $t>0$?**
+
+$S_0$ contains:
+
+- deterministic parameters that never change;
+- initial values of quantities or parameters that may change over time;
+- initial beliefs or probability distributions about uncertain quantities.
+
+$S_t$ for $t>0$ contains only the information that evolves over time and is needed from time $t$ onward. Static information remains in $S_0$ and is used as needed.
+
+## 1.2 (cont.) {.smaller}
+
+For the simple inventory problem:
+$$
+S_0=(R_0^{inv},(p,c),(\bar D,\bar\sigma^D)), \qquad S_t=R_t^{inv}.
+$$
+
+For the more complex inventory problem:
+$$
+S_0=(R_0,c_0,p,f_{0,1}^D,\bar\sigma_0^D,\bar\sigma_0^f),
+$$
+$$
+S_t=(R_t^{inv},c_t,f_{t,t+1}^D,\bar\sigma_t^D,\bar\sigma_t^f).
+$$
+
+## 1.3 {.smaller}
+
+**1.3 What is the difference between a decision and the exogenous information?**
+
+A **decision** is an endogenously controllable information class: something we choose through a policy $X^\pi(S_t)$ and that affects the system.
+
+**Exogenous information** $W_{t+1}$ is new information that first becomes known after decision $x_t$, between $t$ and $t+1$. It is outside our control and is uncertain when the decision is made. It may depend on the state and/or the decision, written as $W_{t+1}(S_t,x_t)$.
+
+## 1.4 {.smaller}
+
+**1.4 What are the two major categories of policies, and how are they different?**
+
+The two major categories are:
+
+1. **Policy search**: search over methods/functions and tunable parameters by simulating their performance; choose the method that works best on average over time. This includes **policy function approximations (PFAs)** and **cost function approximations (CFAs)**.
+2. **Lookahead policies**: choose the current decision by optimizing current contribution plus an approximation of future consequences. This includes **value function approximations (VFAs)** and **direct lookahead approximations (DLAs)**.
+
+The key difference: policy search searches over the policy function/parameters directly, while lookahead policies use a model or value approximation to evaluate the future impact of the current decision.
+
+## 1.5 {.smaller}
+
+**1.5 Compare the state variables for the simple inventory problem in §1.5.1 to the more complicated inventory problem in §1.5.2.**
+
+**Simple inventory problem:**
+$$
+S_0=(R_0^{inv},(p,c),(\bar D,\bar\sigma^D)), \qquad S_t=R_t^{inv}.
+$$
+
+- Only inventory is dynamic.
+- Price and cost are fixed.
+- Demand is modeled with known normal parameters.
+- There is no forecast updating and no belief updating.
+
+## 1.5 (cont.) {.smaller}
+
+**More complicated inventory problem:**
+$$
+S_0=(R_0,c_0,p,f_{0,1}^D,\bar\sigma_0^D,\bar\sigma_0^f),
+$$
+$$
+S_t=(R_t^{inv},c_t,f_{t,t+1}^D,\bar\sigma_t^D,\bar\sigma_t^f).
+$$
+
+It adds:
+
+- time-varying purchase cost $c_t$;
+- a demand forecast $f_{t,t+1}^D$;
+- belief-state estimates of demand and forecast uncertainty $\bar\sigma_t^D,\bar\sigma_t^f$;
+- transition equations that update forecasts and uncertainty estimates over time.
+
+So the complex version has physical state, information state, and belief state, while the simple version has essentially only the physical inventory state.
+
+## 1.6 {.smaller}
+
+**1.6 Compare the policies for the two inventory problems in §1.5.1 in terms of how they would handle time-dependent behavior. Comment on the value of making $\theta$ time-dependent.**
+
+Simple problem policy: order-up-to policy
+$$
+X^\pi(S_t|\theta)=
+\begin{cases}
+\theta^{\max}-R_t^{inv}, & R_t^{inv}<\theta^{\min},\\
+0, & \text{otherwise}.
+\end{cases}
+$$
+
+Complex problem policy: order enough to meet the forecast plus a buffer
+$$
+X^\pi(S_t|\theta)=\max\{0,f_{t,t+1}^D-R_t^{inv}\}+\theta.
+$$
+
+## 1.6 (cont.) {.smaller}
+
+If demand is much higher on weekends than on weekdays, a single $\theta$ (or a single $\theta^{\min},\theta^{\max}$ pair) forces the same policy across all days. That tends to overstock on low-demand days and understock on high-demand days.
+
+Making $\theta$ time-dependent—e.g. $\theta_d$ by day of week, or $\theta^{\min}_d,\theta^{\max}_d$—allows different order-up-to levels or buffers for different days. This can improve service levels and reduce holding/stockout costs. The cost is more parameters to tune and a greater data requirement; one should avoid overfitting and can share parameters across similar days, such as weekday vs. weekend.
+
+## 1.7 {.smaller}
+
+**1.7 Contrast how you might go about tuning the parameter $\theta$ for the inventory problems in §1.5.1: (a) in a simulator; (b) in the field.**
+
+**Simulator:**
+
+- **Pros:** fast, cheap, reproducible, can test many $\theta$ values, can generate many sample paths, statistically reliable estimates, low operational risk.
+- **Cons:** requires a correct uncertainty model and transition model; may miss real-world effects, correlations, implementation errors, and state/decision-dependent behavior; results are only as good as the simulator.
+
+## 1.7 (cont.) {.smaller}
+
+**Field:**
+
+- **Pros:** uses real data and real behavior; captures effects that are hard to model; no simulator-model misspecification.
+- **Cons:** slow—one day of real time produces one day of data; expensive and potentially risky; limited number of experiments; harder to isolate effects due to confounding; ethical or operational constraints may prevent testing many values.
+
+In practice, simulation is usually used first to screen many $\theta$ values, and field testing is used to validate and fine-tune the best candidates.
