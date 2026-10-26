@@ -384,7 +384,7 @@ $$\text{Metrics} \times \text{Decisions} \times \text{Uncertainties}$$
 
 ![](images/01_chapter/14-what-is-data-and-information-availability.png)
 
-# Pizza Resturant (Inventary Problem)
+# Pizza Resturant <br> *Inventary Problem*
 
 ## 1. Narrative {.smaller}
 
@@ -428,7 +428,7 @@ $$
 C(S_t, x_t, \hat{D}_{t+1}) = -cx_t + p \min \{ R_{t}^{inv} +  x_t,  \hat{D}_{t+1}\}
 $$
 $$
-F^\pi (S_0) = \mathbb{E} \left\{ \sum_{t=0}^T C(S_t, X^\pi (S_t), \hat{D}_{t+1} ) | S_0 \right\}
+\max_{\pi = (f,\theta)}  F^\pi (S_0) = \mathbb{E} \left\{ \sum_{t=0}^T C(S_t, X^\pi (S_t), \hat{D}_{t+1} ) | S_0 \right\}
 $$
 
 ## 4. Uncertainty model {.smaller}
@@ -443,9 +443,14 @@ $$
 
 ## 5. Designing policies {.smaller}
 
+Order-up-to policy
+
 $$
 X^\pi(S_t|\theta) = \begin{cases} \theta^{\text{max}} - R_t & \text{if } R_t < \theta^{\text{min}}, \\ 0 & \text{otherwise}, \end{cases}
 $$
+
+Where $\theta = (\theta^{min}, \theta^{max})$ need to be tuned.
+
 
 ## 6. Evaluating policies {.smaller}
 
@@ -456,3 +461,233 @@ $$
 $$
 \overline{F}^{\pi}(\theta |S_{0}) = \frac{1}{N}\sum_{n = 1}^{N}\sum_{t = 0}^{T}C(S_{t},X^{\pi}(S_{t}|\theta),\hat{D}_{t + 1}^{n}).
 $$
+
+
+# Pizza Resturant (part 2) <br> *Inventary Problem*
+
+## 1. Narrative {.smaller}
+
+**Original**
+
+- How many **pounds of sausage** to order from its food distributor?
+- The decision **is taken** at the end of each day (time $t$) where
+   - Sausage's cost is **known**
+   - Pizza's price is **known**
+   - Demand is **unknown**
+- If there is sausage left over, it can be held to the following day
+- The order **arrives** the following morning
+
+**Updates**
+
+- The price we pay for sausage to vary from day to day.
+- We have forecast for tomorrow's demand
+
+## 2. Core elements of the problem {.smaller}
+
+- **Metrics**
+
+$$
+\max \text{profit} = \text{Sales of Sausage} - \text{Cost of Purchasing}
+$$
+
+- **Decisions**
+
+   - How much to order at the end of one day?
+
+- **Sources of uncertainty**
+
+    - The difference between the actual demand and the forecast
+      - *The demand for sausage the next day*
+    - The evolution of the forecasts from one day to the next
+    - The price we pay for the sausage
+
+
+## 3. Universal Modeling Framework {.smaller}
+
+**1. State Variables:** 
+
+   - $S_0 = (R_0, c_0, p, f_{0, 1}^D, \bar{\sigma}^D_0 ,\bar{\sigma}^f_0)$ 
+   - $S_t = (R_t^{inv}, c_t, f_{t, t+1}^D, \bar{\sigma}^D_t ,\bar{\sigma}^f_t)$
+
+**2. Decision $x_t$:** 
+
+$$
+x_t = X^\pi(S_t)
+$$
+
+**3. Exogenous Information:** 
+
+$$
+W_{t+1} = (\hat{c}_{t+1}, \varepsilon^f_{t+1}, \varepsilon^D_{t+1})
+$$
+Where:
+
+- $\varepsilon^f_{t+1}$ is change in the forecast between time $t$ and $t+1$
+- $\varepsilon^D_{t+1}$ is the ramdom deviation from the forecast to actual demand
+
+
+## 3. Universal Modeling Framework {.smaller}
+
+**4. Transition function:**
+
+$$
+S_{t+1} = S^M(S_t, x_t, W_{t+1})
+$$
+
+$$
+R_{t+1}^{inv} = \max\{0, R_{t}^{inv} + x_t - \hat{D}_{t+1} \}
+$$
+
+$$
+\hat{D}_{t+1} = f^D_{t, t+1} + \varepsilon^D_{t+1}
+$$ 
+
+
+$$
+f_{t+1, t+2}^D = f_{t, t+1}^D +  \varepsilon^f_{t+1}
+$$
+
+
+$$
+\begin{aligned} (\bar{\sigma}_{t+1}^D)^2 &= (1 - \alpha)(\bar{\sigma}_t^D)^2 + \alpha(f_{t,t+1}^D - \hat{D}_{t+1})^2 \\ (\bar{\sigma}_{t+1}^f)^2 &= (1 - \alpha)(\bar{\sigma}_t^f)^2 + \alpha(f_{t,t+1}^D - f_{t+1,t+2}^D)^2 \end{aligned}
+$$
+
+$$
+c_{t+1} = \hat{c}_{t+1}
+$$
+
+**5. Objective functions:**
+
+$$
+C(S_t, x_t, \hat{D}_{t+1}) = -c_tx_t + p \min \{ R_{t}^{inv} +  x_t,  \hat{D}_{t+1}\}
+$$
+
+$$
+\max_{\pi = (f,\theta)} F^\pi (S_0) = \mathbb{E} \left\{ \sum_{t=0}^T C(S_t, X^\pi (S_t), \hat{D}_{t+1} ) | S_0 \right\}
+$$
+
+## 4. Uncertainty model {.smaller}
+
+$$
+\begin{aligned} \varepsilon_t^D &\sim N(0, (\bar{\sigma}_t^D)^2), \\ \varepsilon_t^f &\sim N(0, (\bar{\sigma}_t^f)^2) \end{aligned}
+$$
+
+## 5. Designing policies {.smaller}
+
+Let's try to order enough to meet the expected demand for tomorrow rather than using an order-up-to policy.
+
+$$
+X^\pi(S_t \vert{} \theta) = \max\{0, f_{t, t+1}^D - R_t\} + \theta
+$$
+
+
+## 6. Evaluating policies {.smaller}
+
+1. Generate $K$ possible values $\theta_1, \dots, \theta_K$
+2. Simulate each one to find $\bar{F}^\pi(\theta_k|S_0)$ for each $k$
+3. Pick the value of $\theta_k$ that works the best.
+
+$$
+\overline{F}^{\pi}(\theta |S_{0}) = \frac{1}{N}\sum_{n = 1}^{N}\sum_{t = 0}^{T}C(S_{t},X^{\pi}(S_{t}|\theta),\hat{D}_{t + 1}^{n}).
+$$
+
+# Policies
+
+## Definitions and Criterias {.smaller}
+
+**Definition**
+
+They are **functions** that use the information in the state variable to **make a decision**.
+
+**Selecting criteria**
+
+- **Solution quality:** Performance over some period of time.
+   - Average performance
+   - Worst case performance.
+
+- **Computational requirements**
+   - Average execution time
+   - Worst case execution times
+
+- **Transparency:** Capacity to trace a decision back to input data.
+
+- **Flexibility/adaptability:** We often need to adapt to complex situations.
+
+- **Data requirements**
+
+
+## Policy search {.smaller}
+
+Search across methods (functions), simulating their performance to find the method that works best on average over time.
+
+- **Policy function approximations (PFAs):** Functions that directly specify an action.
+
+$$
+X^\pi(S_t|\theta) = \begin{cases} \theta^{\text{max}} - R_t & \text{if } R_t < \theta^{\text{min}}, \\ 0 & \text{otherwise}, \end{cases}
+$$
+
+$$
+X^\pi(S_t \vert{} \theta) = \max\{0, f_{t, t+1}^D - R_t\} + \theta
+$$
+
+## Policy search {.smaller}
+
+- **Cost function approximations (CFAs):** Policies that involve solving an *optimization problem* with parameters introduced to help make the policy work better over time.
+   - Find the shortest path to a destination, but add a buffer $\theta$ (e.g., 15 minutes) to make sure you arrive on time.
+   - Schedule nurses for $\theta = 32$ hours per week, which allows for unforeseen emergencies.
+
+- Upper confidence bounding:
+
+$$
+X^{UCB}(S^n \mid \theta^{UCB}) = \arg\max_x \left( \bar{\mu}_x^n + \theta^{UCB} \sqrt{\frac{\log n}{N_x^n}} \right)
+$$
+
+- Interval estimation:
+
+$$
+X^{IE}(S^n \mid \theta^{IE}) = \arg\max_x \left( \bar{\mu}_x^n + \theta^{IE} \bar{\sigma}_x^n \right)
+$$
+
+## Policy search {.smaller}
+
+- Thompson sampling:
+
+$$
+X^{TS}(S^n \mid \theta^{TS}) = \arg\max_x \hat{\mu}_x^n, \quad \hat{\mu}_x^n \sim N(\bar{\mu}_x^n, \theta^{TS} \bar{\sigma}_x^{2,n})
+$$
+
+- Parametric:
+
+$$
+X_t^\pi(S_t \mid \theta) = \arg\max_{x_t \in X_t} \sum_{p \in P} c_p x_{tp}
+$$
+
+subject to
+
+$$\begin{aligned} \sum_{p \in P} x_{tp} &\ge \theta^{\text{reserve}} D_t && (\text{Reserve}) \\ x_{tp} &\le u_p \\ x_{tp} &\ge \theta^{\text{buffer}} && (\text{Buffer stock}) \end{aligned}$$
+
+## Lookahead policies {.smaller}
+
+Determines the best current action by evaluating ***immediate*** consequences and ***future impact***.
+
+![](images/01_chapter/15-lookahed-approximation.jpg)
+
+## Lookahead policies {.smaller}
+
+- **Value function approximations (VFAs):** Creates policies by optimizing the **first** period contribution (or cost) plus an **approximation** of the value of the state that a decision takes us to.
+
+![](images/01_chapter/16-lookahed-approximation-VFA.jpg)
+
+## Lookahead policies {.smaller}
+
+- **Value function approximations (VFAs):** Creates policies by optimizing the **first** period contribution (or cost) plus an **approximation** of the value of the state that a decision takes us to.
+
+
+![](images/01_chapter/17-lookahed-approximation-VFA-example.jpg)
+
+## Lookahead policies {.smaller}
+
+- **Direct lookaheads (DLAs):** It explicitly optimize over decisions we may make in the future.
+
+![](images/01_chapter/18-lookahed-approximation-DLA.jpg)
+
