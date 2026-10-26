@@ -14,7 +14,7 @@
     "href": "slides/01.html#learning-objectives",
     "title": "Modeling sequential decision problems",
     "section": "Learning objectives",
-    "text": "Learning objectives\n\nExplain why classical modeling (linear programming, supervised ML) is insufficient for sequential decision problems.\nDefine what a decision is and identify the three framing questions.\nDescribe the five elements of the Universal Modeling Framework.\nRecognize the four classes of policies and give an example of each. (pending)"
+    "text": "Learning objectives\n\nExplain why classical modeling (linear programming, supervised ML) is insufficient for sequential decision problems.\nDefine what a decision is and identify the three framing questions.\nDescribe the five elements of the Universal Modeling Framework.\nRecognize the four classes of policies and give an example of each."
   },
   {
     "objectID": "slides/01.html#solving-real-life-problems",
@@ -90,29 +90,43 @@
     "objectID": "slides/01.html#state-variables",
     "href": "slides/01.html#state-variables",
     "title": "Modeling sequential decision problems",
-    "section": "State Variables",
-    "text": "State Variables"
+    "section": "1. State Variables",
+    "text": "1. State Variables\n\\[S_{t} = (R_{t},I_{t},B_{t}) = \\text{System state, where:}\\]\n\n\\(R_{t} =\\) Resource/physical state (quantities). Inventories; location/status of truck/train/plane; Energy in storage, water, money.\n\\(I_{t} =\\) Information state (parameters/values, functions). Prices/weather/tariffs; Policies/forecasting methods/transition functions.\n\\(B_{t} =\\) Belief state (frequentist or Bayesian). Estimates of traffic delays; Belief about the status of equipment."
   },
   {
     "objectID": "slides/01.html#decision-x_t",
     "href": "slides/01.html#decision-x_t",
     "title": "Modeling sequential decision problems",
-    "section": "Decision \\(x_t\\)",
-    "text": "Decision \\(x_t\\)"
+    "section": "2. Decision \\(x_t\\)",
+    "text": "2. Decision \\(x_t\\)\nConstraints: \\(x_t \\in \\mathcal{X}(S_t)\\)\nWe do not specify how to make a decision. Instead, we define the function (the “policy”) \\(X^{\\pi}(s)\\), where \\(\\pi = (f, \\theta)\\) carries information about the type of function \\(f\\), and any tunable parameters \\(\\theta \\in \\Theta^f\\)."
   },
   {
     "objectID": "slides/01.html#decision-x_t-types",
     "href": "slides/01.html#decision-x_t-types",
     "title": "Modeling sequential decision problems",
-    "section": "Decision \\(x_t\\) (Types)",
-    "text": "Decision \\(x_t\\) (Types)"
+    "section": "2. Decision \\(x_t\\) (Types)",
+    "text": "2. Decision \\(x_t\\) (Types)\n\nBinary: \\(x \\in X = \\{0,1\\}\\)\nFinite: \\(x \\in X = \\{1, 2, \\dots, M\\}\\)\nContinuous scalar: \\(x \\in X = [a, b]\\)\nContinuous vector: \\(x = (x_1, \\dots, x_k), \\quad x_k \\in \\mathbb{R}\\)\nDiscrete vector: \\(x = (x_1, \\dots, x_k), \\quad x_k \\in \\mathbb{Z}\\)\nCategorical: \\(x = (a_1, \\dots, a_l), \\quad a_i \\text{ is a category (e.g. red/green/blue)}\\)"
   },
   {
     "objectID": "slides/01.html#exogenous-information",
     "href": "slides/01.html#exogenous-information",
     "title": "Modeling sequential decision problems",
-    "section": "Exogenous Information",
-    "text": "Exogenous Information\n\nWe use hat to identify variables."
+    "section": "3. Exogenous Information",
+    "text": "3. Exogenous Information\n\nWe use hat to identify variables.\n\n\\[W_{t + 1} = \\text{New information that first becomes known at time } t+1\\] \\[= (\\hat{R}_{t + 1},\\hat{D}_{t + 1},\\hat{p}_{t + 1},\\hat{E}_{t + 1})\\]\n\n\\(\\hat{R}_{t + 1} =\\) Equipment failures, theft, exogenous deliveries\n\\(\\hat{D}_{t + 1} =\\) New customer demands\n\\(\\hat{p}_{t + 1} =\\) Changes in prices\n\\(\\hat{E}_{t + 1} =\\) Information about the environment (temperature, …)\n\nMore general notation:\n\\[W_{t + 1,i}(S_t,x_t) \\text{ information in class } i\\in \\mathcal{I}^{\\inf} \\text{ that may depend on state } S_{t} \\text{ and/or decision } x_{t}\\]"
+  },
+  {
+    "objectID": "slides/01.html#transition-function",
+    "href": "slides/01.html#transition-function",
+    "title": "Modeling sequential decision problems",
+    "section": "4. Transition function",
+    "text": "4. Transition function\nIt’s the function or group of functions that capture any of the following types of updates:\n\nChanges in physical resources such as adding inventory, moving people, or modifying equipment.\nUpdates to information such as changes in prices and weather.\nUpdates to our beliefs about uncertain quantities or parameters.\n\n\\[\nS_{t+1} = S^M(S_t, x_t, W_{t+1})\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#objective-functions",
+    "href": "slides/01.html#objective-functions",
+    "title": "Modeling sequential decision problems",
+    "section": "5. Objective functions",
+    "text": "5. Objective functions\nMaximizes total expected contributions over some horizon \\(t = 0, \\ldots, T\\)\n\\[\n\\max_{\\pi=(f,\\theta)} F^\\pi(S_0) = \\mathbb{E} \\left\\{ \\sum_{t=0}^T C_t(S_t, X_t^\\pi(S_t|\\theta))|S_0 \\right\\}, \\quad (1.17)\n\\]\nwhere\n\\[\nS_{t+1} = S^M(S_t, X_t^\\pi(S_t), W_{t+1}). \\quad (1.18)\n\\]\nComputing all possible outcomes of \\(W_1, \\dots, W_T\\) is not possible.\nLet \\(\\omega\\) represent a single outcome of the sequence \\(W_1(\\omega), \\dots, W_T(\\omega)\\) and we can have \\(N\\) possible outcomes of each sequence \\(\\omega^n\\)\n\\[\n\\omega^n = (W_1^n, \\dots, W_t^n, \\dots, W_T^n)\n\\]\n\\[\n\\max_{\\pi=(f,\\theta)} \\bar{F}^\\pi(S_0) = \\frac{1}{N} \\sum_{n=1}^N \\sum_{t=0}^T C_t(S_t(\\omega^n), X^\\pi_t(S_t(\\omega^n)))\n\\]\nWhere:\n\\[\nS_{t+1}(\\omega) = S^M(S_t(\\omega), X^\\pi_t(S_t(\\omega)), W_{t+1}(\\omega))\n\\]"
   },
   {
     "objectID": "slides/01.html#process-overview",
@@ -168,7 +182,7 @@
     "href": "slides/01.html#which-decisions-really-matter-step-2b",
     "title": "Modeling sequential decision problems",
     "section": "Which Decisions Really Matter? (step 2B)",
-    "text": "Which Decisions Really Matter? (step 2B)\nQuestion: Which decisions have the most impact on my top metrics?\n\nList decisions, from general (“assign drivers to loads”) to specific (“assign driver X to load Y”).\nCheck the 10 decision types to avoid blind spots (physical/financial, information acquisition, parameter setting, …).\nScore impact on each tiered metric: H → M → L → N.\nRank rows by impact on the highest-tier metrics.\n\n\n\n\n\n\n\nTool: Decision impact matrix\n\n\nDecisions × Metrics. Sub-decisions can be nested as the analysis gets deeper."
+    "text": "Which Decisions Really Matter? (step 2B)\nQuestion: Which decisions have the most impact on my top metrics?\n\nList decisions, from general (“assign drivers to loads”) to specific (“assign driver X to load Y”).\nCheck the 7 decision types to avoid blind spots (physical/financial, information acquisition, parameter setting, …).\nScore impact on each tiered metric: H → M → L → N.\nRank rows by impact on the highest-tier metrics.\n\n\n\n\n\n\n\nTool: Decision impact matrix\n\n\nDecisions × Metrics. Sub-decisions can be nested as the analysis gets deeper."
   },
   {
     "objectID": "slides/01.html#what-can-we-not-control-step-2c",
@@ -203,14 +217,231 @@
     "href": "slides/01.html#do-we-have-the-evidence-data-validation",
     "title": "Modeling sequential decision problems",
     "section": "Do We Have the Evidence? Data Validation",
-    "text": "Do We Have the Evidence? Data Validation\nQuestion: Can we connect data to each element of the model?\n\nValidate availability, quality, granularity and accuracy for metrics, decisions and uncertainties.\nCombine the two impact matrices into a single view:\n\n\\[\\text{Metrics} \\times \\text{Decisions} \\times \\text{Uncertainties}\\]\n\nDocument data gaps and missing variables, and write testable hypotheses."
+    "text": "Do We Have the Evidence? Data Validation\nQuestion: Can we connect data to each element of the model?\n\nValidate availability, quality, granularity and accuracy for metrics, decisions and uncertainties.\nCombine the two impact matrices into a single view:\n\n\\[\\text{Metrics} \\times \\text{Decisions} \\times \\text{Uncertainties}\\]\n\nDocument data gaps and missing variables, and write testable hypotheses.\n\n\nPizza Restaurant  Inventory Problem"
   },
   {
-    "objectID": "slides/01.html#is-the-problem-sufficiently-framed",
-    "href": "slides/01.html#is-the-problem-sufficiently-framed",
+    "objectID": "slides/01.html#narrative",
+    "href": "slides/01.html#narrative",
     "title": "Modeling sequential decision problems",
-    "section": "Is the Problem Sufficiently Framed?",
-    "text": "Is the Problem Sufficiently Framed?\n\n\n\n\n\n\nFinal check\n\n\nDo we have clear metrics, the decisions that influence them, and the uncertainties that affect them, backed by data?\n\n\n\n\nIf NO: identify the missing evidence, collect more data, and revisit 2A, 2B or 2C.\nIf YES, deliverables: prioritized metrics + documented decision structure + characterized uncertainties + validated data and testable hypotheses."
+    "section": "1. Narrative",
+    "text": "1. Narrative\n\nHow many pounds of sausage to order from its food distributor?\nThe decision is taken at the end of each day (time \\(t\\)) where\n\nSausage’s cost is known\nPizza’s price is known\nDemand is unknown\n\nIf there is sausage left over, it can be held to the following day\nThe order arrives the following morning"
+  },
+  {
+    "objectID": "slides/01.html#core-elements-of-the-problem",
+    "href": "slides/01.html#core-elements-of-the-problem",
+    "title": "Modeling sequential decision problems",
+    "section": "2. Core elements of the problem",
+    "text": "2. Core elements of the problem\n\nMetrics\n\n\\[\n\\max \\text{profit} = \\text{Sales of Sausage} - \\text{Cost of Purchasing}\n\\]\n\nDecisions\n\nHow much to order at the end of one day?\n\nSources of uncertainty\n\nThe demand for sausage the next day."
+  },
+  {
+    "objectID": "slides/01.html#universal-modeling-framework-1",
+    "href": "slides/01.html#universal-modeling-framework-1",
+    "title": "Modeling sequential decision problems",
+    "section": "3. Universal Modeling Framework",
+    "text": "3. Universal Modeling Framework\n1. State Variables: \\(S_0 = (R_0^{inv}, (p, c), (\\bar{D}, \\bar{\\sigma}^D))\\)\n2. Decision \\(x_t\\): \\(x_t = X^\\pi(S_t)\\)\n3. Exogenous Information: \\(W_{t+1} = \\hat{D}_{t+1}\\)\n4. Transition function: \\(R_{t+1}^{inv} = \\max\\{0, R_{t}^{inv} + x_t - \\hat{D}_{t+1} \\}\\)\n5. Objective functions:\n\\[\nC(S_t, x_t, \\hat{D}_{t+1}) = -cx_t + p \\min \\{ R_{t}^{inv} +  x_t,  \\hat{D}_{t+1}\\}\n\\] \\[\n\\max_{\\pi = (f,\\theta)}  F^\\pi (S_0) = \\mathbb{E} \\left\\{ \\sum_{t=0}^T C(S_t, X^\\pi (S_t), \\hat{D}_{t+1} ) | S_0 \\right\\}\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#uncertainty-model",
+    "href": "slides/01.html#uncertainty-model",
+    "title": "Modeling sequential decision problems",
+    "section": "4. Uncertainty model",
+    "text": "4. Uncertainty model\n\nHistorical data if we were able to capture this lost demand.\nBuild a mathematical model to create sets of demands (\\(\\hat{D}_1^n, \\dots, \\hat{D}_T^n\\)) that we can repeat \\(N\\) times.\n\n\\[\n\\hat{D}_{t+1} \\sim N(\\bar{D}, (\\bar{\\sigma}^D)^2)\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#designing-policies",
+    "href": "slides/01.html#designing-policies",
+    "title": "Modeling sequential decision problems",
+    "section": "5. Designing policies",
+    "text": "5. Designing policies\nOrder-up-to policy\n\\[\nX^\\pi(S_t|\\theta) = \\begin{cases} \\theta^{\\text{max}} - R_t^{inv} & \\text{if } R_t^{inv} &lt; \\theta^{\\text{min}}, \\\\ 0 & \\text{otherwise}, \\end{cases}\n\\]\nWhere \\(\\theta = (\\theta^{min}, \\theta^{max})\\) need to be tuned."
+  },
+  {
+    "objectID": "slides/01.html#evaluating-policies",
+    "href": "slides/01.html#evaluating-policies",
+    "title": "Modeling sequential decision problems",
+    "section": "6. Evaluating policies",
+    "text": "6. Evaluating policies\n\nGenerate \\(K\\) possible values \\(\\theta_1, \\dots, \\theta_K\\)\nSimulate each one to find \\(\\bar{F}^\\pi(\\theta_k|S_0)\\) for each \\(k\\)\nPick the value of \\(\\theta_k\\) that works the best.\n\n\\[\n\\overline{F}^{\\pi}(\\theta |S_{0}) = \\frac{1}{N}\\sum_{n = 1}^{N}\\sum_{t = 0}^{T}C(S_{t},X^{\\pi}(S_{t}|\\theta),\\hat{D}_{t + 1}^{n}).\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#narrative-1",
+    "href": "slides/01.html#narrative-1",
+    "title": "Modeling sequential decision problems",
+    "section": "1. Narrative",
+    "text": "1. Narrative\nOriginal\n\nHow many pounds of sausage to order from its food distributor?\nThe decision is taken at the end of each day (time \\(t\\)) where\n\nSausage’s cost is known\nPizza’s price is known\nDemand is unknown\n\nIf there is sausage left over, it can be held to the following day\nThe order arrives the following morning\n\nUpdates\n\nThe price we pay for sausage to vary from day to day.\nWe have forecast for tomorrow’s demand"
+  },
+  {
+    "objectID": "slides/01.html#core-elements-of-the-problem-1",
+    "href": "slides/01.html#core-elements-of-the-problem-1",
+    "title": "Modeling sequential decision problems",
+    "section": "2. Core elements of the problem",
+    "text": "2. Core elements of the problem\n\nMetrics\n\n\\[\n\\max \\text{profit} = \\text{Sales of Sausage} - \\text{Cost of Purchasing}\n\\]\n\nDecisions\n\nHow much to order at the end of one day?\n\nSources of uncertainty\n\nThe difference between the actual demand and the forecast\n\nThe demand for sausage the next day\n\nThe evolution of the forecasts from one day to the next\nThe price we pay for the sausage"
+  },
+  {
+    "objectID": "slides/01.html#universal-modeling-framework-2",
+    "href": "slides/01.html#universal-modeling-framework-2",
+    "title": "Modeling sequential decision problems",
+    "section": "3. Universal Modeling Framework",
+    "text": "3. Universal Modeling Framework\n1. State Variables:\n\n\\(S_0 = (R_0, c_0, p, f_{0, 1}^D, \\bar{\\sigma}^D_0 ,\\bar{\\sigma}^f_0)\\)\n\\(S_t = (R_t^{inv}, c_t, f_{t, t+1}^D, \\bar{\\sigma}^D_t ,\\bar{\\sigma}^f_t)\\)\n\n2. Decision \\(x_t\\):\n\\[\nx_t = X^\\pi(S_t)\n\\]\n3. Exogenous Information:\n\\[\nW_{t+1} = (\\hat{c}_{t+1}, \\varepsilon^f_{t+1}, \\varepsilon^D_{t+1})\n\\] Where:\n\n\\(\\varepsilon^f_{t+1}\\) is change in the forecast between time \\(t\\) and \\(t+1\\)\n\\(\\varepsilon^D_{t+1}\\) is the ramdom deviation from the forecast to actual demand"
+  },
+  {
+    "objectID": "slides/01.html#universal-modeling-framework-3",
+    "href": "slides/01.html#universal-modeling-framework-3",
+    "title": "Modeling sequential decision problems",
+    "section": "3. Universal Modeling Framework",
+    "text": "3. Universal Modeling Framework\n4. Transition function:\n\\[\nS_{t+1} = S^M(S_t, x_t, W_{t+1})\n\\]\n\\[\nR_{t+1}^{inv} = \\max\\{0, R_{t}^{inv} + x_t - \\hat{D}_{t+1} \\}\n\\]\n\\[\n\\hat{D}_{t+1} = f^D_{t, t+1} + \\varepsilon^D_{t+1}\n\\]\n\\[\nf_{t+1, t+2}^D = f_{t, t+1}^D +  \\varepsilon^f_{t+1}\n\\]\n\\[\n\\begin{aligned} (\\bar{\\sigma}_{t+1}^D)^2 &= (1 - \\alpha)(\\bar{\\sigma}_t^D)^2 + \\alpha(f_{t,t+1}^D - \\hat{D}_{t+1})^2 \\\\ (\\bar{\\sigma}_{t+1}^f)^2 &= (1 - \\alpha)(\\bar{\\sigma}_t^f)^2 + \\alpha(f_{t,t+1}^D - f_{t+1,t+2}^D)^2 \\end{aligned}\n\\]\n\\[\nc_{t+1} = \\hat{c}_{t+1}\n\\]\n5. Objective functions:\n\\[\nC(S_t, x_t, \\hat{D}_{t+1}) = -c_tx_t + p \\min \\{ R_{t}^{inv} +  x_t,  \\hat{D}_{t+1}\\}\n\\]\n\\[\n\\max_{\\pi = (f,\\theta)} F^\\pi (S_0) = \\mathbb{E} \\left\\{ \\sum_{t=0}^T C(S_t, X^\\pi (S_t), \\hat{D}_{t+1} ) | S_0 \\right\\}\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#uncertainty-model-1",
+    "href": "slides/01.html#uncertainty-model-1",
+    "title": "Modeling sequential decision problems",
+    "section": "4. Uncertainty model",
+    "text": "4. Uncertainty model\n\\[\n\\begin{aligned} \\varepsilon_t^D &\\sim N(0, (\\bar{\\sigma}_t^D)^2), \\\\ \\varepsilon_t^f &\\sim N(0, (\\bar{\\sigma}_t^f)^2) \\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#designing-policies-1",
+    "href": "slides/01.html#designing-policies-1",
+    "title": "Modeling sequential decision problems",
+    "section": "5. Designing policies",
+    "text": "5. Designing policies\nLet’s try to order enough to meet the expected demand for tomorrow rather than using an order-up-to policy.\n\\[\nX^\\pi(S_t \\vert{} \\theta) = \\max\\{0, f_{t, t+1}^D - R_t\\} + \\theta\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#evaluating-policies-1",
+    "href": "slides/01.html#evaluating-policies-1",
+    "title": "Modeling sequential decision problems",
+    "section": "6. Evaluating policies",
+    "text": "6. Evaluating policies\n\nGenerate \\(K\\) possible values \\(\\theta_1, \\dots, \\theta_K\\)\nSimulate each one to find \\(\\bar{F}^\\pi(\\theta_k|S_0)\\) for each \\(k\\)\nPick the value of \\(\\theta_k\\) that works the best.\n\n\\[\n\\overline{F}^{\\pi}(\\theta |S_{0}) = \\frac{1}{N}\\sum_{n = 1}^{N}\\sum_{t = 0}^{T}C(S_{t},X^{\\pi}(S_{t}|\\theta),\\hat{D}_{t + 1}^{n}).\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#definitions-and-criteria",
+    "href": "slides/01.html#definitions-and-criteria",
+    "title": "Modeling sequential decision problems",
+    "section": "Definitions and Criteria",
+    "text": "Definitions and Criteria\nDefinition\nThey are functions that use the information in the state variable to make a decision.\nSelecting criteria\n\nSolution quality: Performance over some period of time.\n\nAverage performance\nWorst case performance.\n\nComputational requirements\n\nAverage execution time\nWorst case execution times\n\nTransparency: Capacity to trace a decision back to input data.\nFlexibility/adaptability: We often need to adapt to complex situations.\nMethodological complexity\nData requirements"
+  },
+  {
+    "objectID": "slides/01.html#policy-search",
+    "href": "slides/01.html#policy-search",
+    "title": "Modeling sequential decision problems",
+    "section": "Policy search",
+    "text": "Policy search\nSearch across methods (functions), simulating their performance to find the method that works best on average over time.\n\nPolicy function approximations (PFAs): Functions that directly specify an action.\n\n\\[\nX^\\pi(S_t|\\theta) = \\begin{cases} \\theta^{\\text{max}} - R_t^{inv} & \\text{if } R_t^{inv} &lt; \\theta^{\\text{min}}, \\\\ 0 & \\text{otherwise}, \\end{cases}\n\\]\n\\[\nX^\\pi(S_t \\vert{} \\theta) = \\max\\{0, f_{t, t+1}^D - R_t\\} + \\theta\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#policy-search-1",
+    "href": "slides/01.html#policy-search-1",
+    "title": "Modeling sequential decision problems",
+    "section": "Policy search",
+    "text": "Policy search\n\nCost function approximations (CFAs): Policies that involve solving an optimization problem with parameters introduced to help make the policy work better over time.\n\nFind the shortest path to a destination, but add a buffer \\(\\theta\\) (e.g., 15 minutes) to make sure you arrive on time.\nSchedule nurses for \\(\\theta = 32\\) hours per week, which allows for unforeseen emergencies.\n\nUpper confidence bounding:\n\n\\[\nX^{UCB}(S^n \\mid \\theta^{UCB}) = \\arg\\max_x \\left( \\bar{\\mu}_x^n + \\theta^{UCB} \\sqrt{\\frac{\\log n}{N_x^n}} \\right)\n\\]\n\nInterval estimation:\n\n\\[\nX^{IE}(S^n \\mid \\theta^{IE}) = \\arg\\max_x \\left( \\bar{\\mu}_x^n + \\theta^{IE} \\bar{\\sigma}_x^n \\right)\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#policy-search-2",
+    "href": "slides/01.html#policy-search-2",
+    "title": "Modeling sequential decision problems",
+    "section": "Policy search",
+    "text": "Policy search\n\nThompson sampling:\n\n\\[\nX^{TS}(S^n \\mid \\theta^{TS}) = \\arg\\max_x \\hat{\\mu}_x^n, \\quad \\hat{\\mu}_x^n \\sim N(\\bar{\\mu}_x^n, \\theta^{TS} \\bar{\\sigma}_x^{2,n})\n\\]\n\nParametric:\n\n\\[\nX_t^\\pi(S_t \\mid \\theta) = \\arg\\max_{x_t \\in X_t} \\sum_{p \\in P} c_p x_{tp}\n\\]\nsubject to\n\\[\\begin{aligned} \\sum_{p \\in P} x_{tp} &\\ge \\theta^{\\text{reserve}} D_t && (\\text{Reserve}) \\\\ x_{tp} &\\le u_p \\\\ x_{tp} &\\ge \\theta^{\\text{buffer}} && (\\text{Buffer stock}) \\end{aligned}\\]"
+  },
+  {
+    "objectID": "slides/01.html#lookahead-policies",
+    "href": "slides/01.html#lookahead-policies",
+    "title": "Modeling sequential decision problems",
+    "section": "Lookahead policies",
+    "text": "Lookahead policies\nDetermines the best current action by evaluating immediate consequences and future impact."
+  },
+  {
+    "objectID": "slides/01.html#lookahead-policies-1",
+    "href": "slides/01.html#lookahead-policies-1",
+    "title": "Modeling sequential decision problems",
+    "section": "Lookahead policies",
+    "text": "Lookahead policies\n\nValue function approximations (VFAs): Creates policies by optimizing the first period contribution (or cost) plus an approximation of the value of the state that a decision takes us to."
+  },
+  {
+    "objectID": "slides/01.html#lookahead-policies-2",
+    "href": "slides/01.html#lookahead-policies-2",
+    "title": "Modeling sequential decision problems",
+    "section": "Lookahead policies",
+    "text": "Lookahead policies\n\nValue function approximations (VFAs): Creates policies by optimizing the first period contribution (or cost) plus an approximation of the value of the state that a decision takes us to."
+  },
+  {
+    "objectID": "slides/01.html#lookahead-policies-3",
+    "href": "slides/01.html#lookahead-policies-3",
+    "title": "Modeling sequential decision problems",
+    "section": "Lookahead policies",
+    "text": "Lookahead policies\n\nDirect lookaheads (DLAs): It explicitly optimize over decisions we may make in the future."
+  },
+  {
+    "objectID": "slides/01.html#section",
+    "href": "slides/01.html#section",
+    "title": "Modeling sequential decision problems",
+    "section": "1.1",
+    "text": "1.1\n1.1 What are the five elements of the mathematical model of a sequential decision problem?\nThe five elements of the universal modeling framework are:\n\nState variables \\(S_t\\): all information needed at time \\(t\\) to make a decision, compute performance, and simulate forward.\nDecision variables \\(x_t\\): the controllable action, chosen by a policy \\(X^\\pi(S_t)\\).\nExogenous information \\(W_{t+1}\\): new information that arrives after decision \\(x_t\\) and is outside our control.\nTransition function \\(S_{t+1}=S^M(S_t,x_t,W_{t+1})\\): how the state evolves.\nObjective function: typically \\[\n\\max_{\\pi=(f,\\theta)} \\mathbb{E}\\left\\{\\sum_{t=0}^T C(S_t,X^\\pi(S_t|\\theta))\\mid S_0\\right\\}.\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#section-1",
+    "href": "slides/01.html#section-1",
+    "title": "Modeling sequential decision problems",
+    "section": "1.2",
+    "text": "1.2\n1.2 What is the difference between the variables in the initial state \\(S_0\\) and those in the dynamic state \\(S_t\\) for \\(t&gt;0\\)?\n\\(S_0\\) contains:\n\ndeterministic parameters that never change;\ninitial values of quantities or parameters that may change over time;\ninitial beliefs or probability distributions about uncertain quantities.\n\n\\(S_t\\) for \\(t&gt;0\\) contains only the information that evolves over time and is needed from time \\(t\\) onward. Static information remains in \\(S_0\\) and is used as needed."
+  },
+  {
+    "objectID": "slides/01.html#cont.",
+    "href": "slides/01.html#cont.",
+    "title": "Modeling sequential decision problems",
+    "section": "1.2 (cont.)",
+    "text": "1.2 (cont.)\nFor the simple inventory problem: \\[\nS_0=(R_0^{inv},(p,c),(\\bar D,\\bar\\sigma^D)), \\qquad S_t=R_t^{inv}.\n\\]\nFor the more complex inventory problem: \\[\nS_0=(R_0,c_0,p,f_{0,1}^D,\\bar\\sigma_0^D,\\bar\\sigma_0^f),\n\\] \\[\nS_t=(R_t^{inv},c_t,f_{t,t+1}^D,\\bar\\sigma_t^D,\\bar\\sigma_t^f).\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#section-2",
+    "href": "slides/01.html#section-2",
+    "title": "Modeling sequential decision problems",
+    "section": "1.3",
+    "text": "1.3\n1.3 What is the difference between a decision and the exogenous information?\nA decision is an endogenously controllable information class: something we choose through a policy \\(X^\\pi(S_t)\\) and that affects the system.\nExogenous information \\(W_{t+1}\\) is new information that first becomes known after decision \\(x_t\\), between \\(t\\) and \\(t+1\\). It is outside our control and is uncertain when the decision is made. It may depend on the state and/or the decision, written as \\(W_{t+1}(S_t,x_t)\\)."
+  },
+  {
+    "objectID": "slides/01.html#section-3",
+    "href": "slides/01.html#section-3",
+    "title": "Modeling sequential decision problems",
+    "section": "1.4",
+    "text": "1.4\n1.4 What are the two major categories of policies, and how are they different?\nThe two major categories are:\n\nPolicy search: search over methods/functions and tunable parameters by simulating their performance; choose the method that works best on average over time. This includes policy function approximations (PFAs) and cost function approximations (CFAs).\nLookahead policies: choose the current decision by optimizing current contribution plus an approximation of future consequences. This includes value function approximations (VFAs) and direct lookahead approximations (DLAs).\n\nThe key difference: policy search searches over the policy function/parameters directly, while lookahead policies use a model or value approximation to evaluate the future impact of the current decision."
+  },
+  {
+    "objectID": "slides/01.html#section-4",
+    "href": "slides/01.html#section-4",
+    "title": "Modeling sequential decision problems",
+    "section": "1.5",
+    "text": "1.5\n1.5 Compare the state variables for the simple inventory problem in §1.5.1 to the more complicated inventory problem in §1.5.2.\nSimple inventory problem: \\[\nS_0=(R_0^{inv},(p,c),(\\bar D,\\bar\\sigma^D)), \\qquad S_t=R_t^{inv}.\n\\]\n\nOnly inventory is dynamic.\nPrice and cost are fixed.\nDemand is modeled with known normal parameters.\nThere is no forecast updating and no belief updating."
+  },
+  {
+    "objectID": "slides/01.html#cont.-1",
+    "href": "slides/01.html#cont.-1",
+    "title": "Modeling sequential decision problems",
+    "section": "1.5 (cont.)",
+    "text": "1.5 (cont.)\nMore complicated inventory problem: \\[\nS_0=(R_0,c_0,p,f_{0,1}^D,\\bar\\sigma_0^D,\\bar\\sigma_0^f),\n\\] \\[\nS_t=(R_t^{inv},c_t,f_{t,t+1}^D,\\bar\\sigma_t^D,\\bar\\sigma_t^f).\n\\]\nIt adds:\n\ntime-varying purchase cost \\(c_t\\);\na demand forecast \\(f_{t,t+1}^D\\);\nbelief-state estimates of demand and forecast uncertainty \\(\\bar\\sigma_t^D,\\bar\\sigma_t^f\\);\ntransition equations that update forecasts and uncertainty estimates over time.\n\nSo the complex version has physical state, information state, and belief state, while the simple version has essentially only the physical inventory state."
+  },
+  {
+    "objectID": "slides/01.html#section-5",
+    "href": "slides/01.html#section-5",
+    "title": "Modeling sequential decision problems",
+    "section": "1.6",
+    "text": "1.6\n1.6 Compare the policies for the two inventory problems in §1.5.1 in terms of how they would handle time-dependent behavior. Comment on the value of making \\(\\theta\\) time-dependent.\nSimple problem policy: order-up-to policy \\[\nX^\\pi(S_t|\\theta)=\n\\begin{cases}\n\\theta^{\\max}-R_t^{inv}, & R_t^{inv}&lt;\\theta^{\\min},\\\\\n0, & \\text{otherwise}.\n\\end{cases}\n\\]\nComplex problem policy: order enough to meet the forecast plus a buffer \\[\nX^\\pi(S_t|\\theta)=\\max\\{0,f_{t,t+1}^D-R_t^{inv}\\}+\\theta.\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#cont.-2",
+    "href": "slides/01.html#cont.-2",
+    "title": "Modeling sequential decision problems",
+    "section": "1.6 (cont.)",
+    "text": "1.6 (cont.)\nIf demand is much higher on weekends than on weekdays, a single \\(\\theta\\) (or a single \\(\\theta^{\\min},\\theta^{\\max}\\) pair) forces the same policy across all days. That tends to overstock on low-demand days and understock on high-demand days.\nMaking \\(\\theta\\) time-dependent—e.g. \\(\\theta_d\\) by day of week, or \\(\\theta^{\\min}_d,\\theta^{\\max}_d\\)—allows different order-up-to levels or buffers for different days. This can improve service levels and reduce holding/stockout costs. The cost is more parameters to tune and a greater data requirement; one should avoid overfitting and can share parameters across similar days, such as weekday vs. weekend."
+  },
+  {
+    "objectID": "slides/01.html#section-6",
+    "href": "slides/01.html#section-6",
+    "title": "Modeling sequential decision problems",
+    "section": "1.7",
+    "text": "1.7\n1.7 Contrast how you might go about tuning the parameter \\(\\theta\\) for the inventory problems in §1.5.1: (a) in a simulator; (b) in the field.\nSimulator:\n\nPros: fast, cheap, reproducible, can test many \\(\\theta\\) values, can generate many sample paths, statistically reliable estimates, low operational risk.\nCons: requires a correct uncertainty model and transition model; may miss real-world effects, correlations, implementation errors, and state/decision-dependent behavior; results are only as good as the simulator."
+  },
+  {
+    "objectID": "slides/01.html#cont.-3",
+    "href": "slides/01.html#cont.-3",
+    "title": "Modeling sequential decision problems",
+    "section": "1.7 (cont.)",
+    "text": "1.7 (cont.)\nField:\n\nPros: uses real data and real behavior; captures effects that are hard to model; no simulator-model misspecification.\nCons: slow—one day of real time produces one day of data; expensive and potentially risky; limited number of experiments; harder to isolate effects due to confounding; ethical or operational constraints may prevent testing many values.\n\nIn practice, simulation is usually used first to screen many \\(\\theta\\) values, and field testing is used to validate and fine-tune the best candidates."
   },
   {
     "objectID": "slides/00.html#welcome",
