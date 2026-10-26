@@ -126,7 +126,14 @@
     "href": "slides/01.html#objective-functions",
     "title": "Modeling sequential decision problems",
     "section": "5. Objective functions",
-    "text": "5. Objective functions\nMaximizes total expected contributions over some horizon \\(t = 0, \\ldots, T\\)\n\\[\n\\max_{\\pi=(f,\\theta)} F^\\pi(S_0) = \\mathbb{E} \\left\\{ \\sum_{t=0}^T C_t(S_t, X_t^\\pi(S_t|\\theta))|S_0 \\right\\}, \\quad (1.17)\n\\]\nwhere\n\\[\nS_{t+1} = S^M(S_t, X_t^\\pi(S_t), W_{t+1}). \\quad (1.18)\n\\]\nComputing all possible outcomes of \\(W_1, \\dots, W_T\\) is not possible.\nLet \\(\\omega\\) represent a single outcome of the sequence \\(W_1(\\omega), \\dots, W_T(\\omega)\\) and we can have \\(N\\) possible outcomes of each sequence \\(\\omega^n\\)\n\\[\n\\omega^n = (W_1^n, \\dots, W_t^n, \\dots, W_T^n)\n\\]\n\\[\n\\max_{\\pi=(f,\\theta)} \\bar{F}^\\pi(S_0) = \\frac{1}{N} \\sum_{n=1}^N \\sum_{t=0}^T C_t(S_t(\\omega^n), X^\\pi_t(S_t(\\omega^n)))\n\\]\nWhere:\n\\[\nS_{t+1}(\\omega) = S^M(S_t(\\omega), X^\\pi_t(S_t(\\omega)), W_{t+1}(\\omega))\n\\]"
+    "text": "5. Objective functions\nMaximizes total expected contributions over some horizon \\(t = 0, \\ldots, T\\)\n\\[\n\\max_{\\pi=(f,\\theta)} F^\\pi(S_0) = \\mathbb{E} \\left\\{ \\sum_{t=0}^T C_t(S_t, X_t^\\pi(S_t|\\theta))|S_0 \\right\\}, \\quad (1.17)\n\\]\nwhere\n\\[\nS_{t+1} = S^M(S_t, X_t^\\pi(S_t), W_{t+1}). \\quad (1.18)\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#objective-functions-1",
+    "href": "slides/01.html#objective-functions-1",
+    "title": "Modeling sequential decision problems",
+    "section": "5. Objective functions",
+    "text": "5. Objective functions\nComputing all possible outcomes of \\(W_1, \\dots, W_T\\) is not possible.\nLet \\(\\omega\\) represent a single outcome of the sequence \\(W_1(\\omega), \\dots, W_T(\\omega)\\) and we can have \\(N\\) possible outcomes of each sequence \\(\\omega^n\\)\n\\[\n\\omega^n = (W_1^n, \\dots, W_t^n, \\dots, W_T^n)\n\\]\n\\[\n\\max_{\\pi=(f,\\theta)} \\bar{F}^\\pi(S_0) = \\frac{1}{N} \\sum_{n=1}^N \\sum_{t=0}^T C_t(S_t(\\omega^n), X^\\pi_t(S_t(\\omega^n)))\n\\]\nWhere:\n\\[\nS_{t+1}(\\omega) = S^M(S_t(\\omega), X^\\pi_t(S_t(\\omega)), W_{t+1}(\\omega))\n\\]"
   },
   {
     "objectID": "slides/01.html#process-overview",
@@ -217,7 +224,7 @@
     "href": "slides/01.html#do-we-have-the-evidence-data-validation",
     "title": "Modeling sequential decision problems",
     "section": "Do We Have the Evidence? Data Validation",
-    "text": "Do We Have the Evidence? Data Validation\nQuestion: Can we connect data to each element of the model?\n\nValidate availability, quality, granularity and accuracy for metrics, decisions and uncertainties.\nCombine the two impact matrices into a single view:\n\n\\[\\text{Metrics} \\times \\text{Decisions} \\times \\text{Uncertainties}\\]\n\nDocument data gaps and missing variables, and write testable hypotheses.\n\n\nPizza Restaurant  Inventory Problem"
+    "text": "Do We Have the Evidence? Data Validation\nQuestion: Can we connect data to each element of the model?\n\nValidate availability, quality, granularity and accuracy for metrics, decisions and uncertainties.\nCombine the two impact matrices into a single view:\n\n\\[\\text{Metrics} \\times \\text{Decisions} \\times \\text{Uncertainties}\\]\n\nDocument data gaps and missing variables, and write testable hypotheses."
   },
   {
     "objectID": "slides/01.html#narrative",
@@ -287,7 +294,14 @@
     "href": "slides/01.html#universal-modeling-framework-3",
     "title": "Modeling sequential decision problems",
     "section": "3. Universal Modeling Framework",
-    "text": "3. Universal Modeling Framework\n4. Transition function:\n\\[\nS_{t+1} = S^M(S_t, x_t, W_{t+1})\n\\]\n\\[\nR_{t+1}^{inv} = \\max\\{0, R_{t}^{inv} + x_t - \\hat{D}_{t+1} \\}\n\\]\n\\[\n\\hat{D}_{t+1} = f^D_{t, t+1} + \\varepsilon^D_{t+1}\n\\]\n\\[\nf_{t+1, t+2}^D = f_{t, t+1}^D +  \\varepsilon^f_{t+1}\n\\]\n\\[\n\\begin{aligned} (\\bar{\\sigma}_{t+1}^D)^2 &= (1 - \\alpha)(\\bar{\\sigma}_t^D)^2 + \\alpha(f_{t,t+1}^D - \\hat{D}_{t+1})^2 \\\\ (\\bar{\\sigma}_{t+1}^f)^2 &= (1 - \\alpha)(\\bar{\\sigma}_t^f)^2 + \\alpha(f_{t,t+1}^D - f_{t+1,t+2}^D)^2 \\end{aligned}\n\\]\n\\[\nc_{t+1} = \\hat{c}_{t+1}\n\\]\n5. Objective functions:\n\\[\nC(S_t, x_t, \\hat{D}_{t+1}) = -c_tx_t + p \\min \\{ R_{t}^{inv} +  x_t,  \\hat{D}_{t+1}\\}\n\\]\n\\[\n\\max_{\\pi = (f,\\theta)} F^\\pi (S_0) = \\mathbb{E} \\left\\{ \\sum_{t=0}^T C(S_t, X^\\pi (S_t), \\hat{D}_{t+1} ) | S_0 \\right\\}\n\\]"
+    "text": "3. Universal Modeling Framework\n4. Transition function:\n\\[\nS_{t+1} = S^M(S_t, x_t, W_{t+1})\n\\]\n\\[\nR_{t+1}^{inv} = \\max\\{0, R_{t}^{inv} + x_t - \\hat{D}_{t+1} \\}\n\\]\n\\[\n\\hat{D}_{t+1} = f^D_{t, t+1} + \\varepsilon^D_{t+1}\n\\]\n\\[\nf_{t+1, t+2}^D = f_{t, t+1}^D +  \\varepsilon^f_{t+1}\n\\]\n\\[\n\\begin{aligned} (\\bar{\\sigma}_{t+1}^D)^2 &= (1 - \\alpha)(\\bar{\\sigma}_t^D)^2 + \\alpha(f_{t,t+1}^D - \\hat{D}_{t+1})^2 \\\\ (\\bar{\\sigma}_{t+1}^f)^2 &= (1 - \\alpha)(\\bar{\\sigma}_t^f)^2 + \\alpha(f_{t,t+1}^D - f_{t+1,t+2}^D)^2 \\end{aligned}\n\\]\n\\[\nc_{t+1} = \\hat{c}_{t+1}\n\\]"
+  },
+  {
+    "objectID": "slides/01.html#universal-modeling-framework-4",
+    "href": "slides/01.html#universal-modeling-framework-4",
+    "title": "Modeling sequential decision problems",
+    "section": "3. Universal Modeling Framework",
+    "text": "3. Universal Modeling Framework\n5. Objective functions:\n\\[\nC(S_t, x_t, \\hat{D}_{t+1}) = -c_tx_t + p \\min \\{ R_{t}^{inv} +  x_t,  \\hat{D}_{t+1}\\}\n\\]\n\\[\n\\max_{\\pi = (f,\\theta)} F^\\pi (S_0) = \\mathbb{E} \\left\\{ \\sum_{t=0}^T C(S_t, X^\\pi (S_t), \\hat{D}_{t+1} ) | S_0 \\right\\}\n\\]"
   },
   {
     "objectID": "slides/01.html#uncertainty-model-1",
