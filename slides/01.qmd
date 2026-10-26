@@ -179,6 +179,8 @@ $$
  S_{t+1} = S^M(S_t, X_t^\pi(S_t), W_{t+1}). \quad (1.18) 
 $$
 
+## 5. Objective functions {.smaller}
+
 Computing all possible outcomes of $W_1, \dots, W_T$ is **not possible**.
 
 Let $\omega$ represent a **single outcome of the sequence** $W_1(\omega), \dots, W_T(\omega)$ and we can have $N$ possible outcomes of each sequence $\omega^n$
@@ -384,7 +386,7 @@ $$\text{Metrics} \times \text{Decisions} \times \text{Uncertainties}$$
 
 ![](images/01_chapter/14-what-is-data-and-information-availability.png)
 
-Pizza Restaurant <br> *Inventory Problem*
+# Pizza Restaurant <br> *Inventory Problem*
 
 ## 1. Narrative {.smaller}
 
@@ -555,6 +557,8 @@ $$
 $$
 c_{t+1} = \hat{c}_{t+1}
 $$
+
+## 3. Universal Modeling Framework {.smaller}
 
 **5. Objective functions:**
 
