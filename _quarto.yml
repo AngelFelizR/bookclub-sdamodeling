@@ -34,3 +34,4 @@ website:
     - file: slides/00.qmd
       target: sdamodeling_club-slides
     - 01.qmd
+    - 02.qmd
