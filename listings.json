@@ -4,5 +4,11 @@
     "items": [
       "/slides/01.html"
     ]
+  },
+  {
+    "listing": "/02.html",
+    "items": [
+      "/slides/02.html"
+    ]
   }
 ]

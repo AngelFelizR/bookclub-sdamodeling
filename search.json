@@ -10,6 +10,16 @@
     ]
   },
   {
+    "objectID": "01.html",
+    "href": "01.html",
+    "title": "1. Modeling sequential decision problems",
+    "section": "",
+    "text": "Modeling sequential decision problems\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "1. Modeling sequential decision problems"
+    ]
+  },
+  {
     "objectID": "slides/01.html#learning-objectives",
     "href": "slides/01.html#learning-objectives",
     "title": "Modeling sequential decision problems",
@@ -140,14 +150,14 @@
     "href": "slides/01.html#process-overview",
     "title": "Modeling sequential decision problems",
     "section": "Process Overview",
-    "text": "Process Overview\n\n\n\n\n\nflowchart LR\n  A[Ambiguous Problem] --&gt; B(\"Precise Definition &lt;br&gt; (Broken Down into Pieces)\")\n  B --&gt; C[Computer Software]\n\n  classDef nodeStyle fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;\n  classDef highlight fill:#0f172a,stroke:#60a5fa,stroke-width:2.5px,color:#ffffff;\n  \n  class A,C nodeStyle;\n  class B highlight;"
+    "text": "Process Overview\n\n\n\n\n\n\nflowchart LR\n  A[Ambiguous Problem] --&gt; B(\"Precise Definition &lt;br&gt; (Broken Down into Pieces)\")\n  B --&gt; C[Computer Software]\n\n  classDef nodeStyle fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;\n  classDef highlight fill:#0f172a,stroke:#60a5fa,stroke-width:2.5px,color:#ffffff;\n  \n  class A,C nodeStyle;\n  class B highlight;"
   },
   {
     "objectID": "slides/01.html#the-narrative-step-1",
     "href": "slides/01.html#the-narrative-step-1",
     "title": "Modeling sequential decision problems",
     "section": "The Narrative (step 1)",
-    "text": "The Narrative (step 1)\n\n\n\n\n\nflowchart TD\n    A[\"⚠️ Problem Definition&lt;br/&gt;Describe the problem in plain English\"]\n    B[\"📉 Consequences of Inaction&lt;br/&gt;What happens if the problem remains unsolved?\"]\n    D[\"🔍 Project Scope&lt;br/&gt;What will the solution address, and what is explicitly excluded?\"]\n    E[\"💡 Solution Overview&lt;br/&gt;Describe the solution to be developed and its main deliverables\"]\n\n    A --&gt; B --&gt; D --&gt; E\n\n    classDef danger fill:#2c0f14,stroke:#f87171,stroke-width:2px,color:#fef2f2,width:260px,white-space:normal,text-align:center;\n    classDef warning fill:#2a1b0c,stroke:#fbbf24,stroke-width:2px,color:#fffbeb,width:260px,white-space:normal,text-align:center;\n    classDef info fill:#0c2136,stroke:#38bdf8,stroke-width:2px,color:#f0f9ff,width:260px,white-space:normal,text-align:center;\n    classDef success fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5,width:260px,white-space:normal,text-align:center;\n\n    class A danger;\n    class B warning;\n    class D info;\n    class E success;"
+    "text": "The Narrative (step 1)\n\n\n\n\n\n\nflowchart TD\n    A[\"⚠️ Problem Definition&lt;br/&gt;Describe the problem in plain English\"]\n    B[\"📉 Consequences of Inaction&lt;br/&gt;What happens if the problem remains unsolved?\"]\n    D[\"🔍 Project Scope&lt;br/&gt;What will the solution address, and what is explicitly excluded?\"]\n    E[\"💡 Solution Overview&lt;br/&gt;Describe the solution to be developed and its main deliverables\"]\n\n    A --&gt; B --&gt; D --&gt; E\n\n    classDef danger fill:#2c0f14,stroke:#f87171,stroke-width:2px,color:#fef2f2,width:260px,white-space:normal,text-align:center;\n    classDef warning fill:#2a1b0c,stroke:#fbbf24,stroke-width:2px,color:#fffbeb,width:260px,white-space:normal,text-align:center;\n    classDef info fill:#0c2136,stroke:#38bdf8,stroke-width:2px,color:#f0f9ff,width:260px,white-space:normal,text-align:center;\n    classDef success fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5,width:260px,white-space:normal,text-align:center;\n\n    class A danger;\n    class B warning;\n    class D info;\n    class E success;"
   },
   {
     "objectID": "slides/01.html#roadmap-four-questions-four-tools",
@@ -522,7 +532,7 @@
     "href": "slides/00.html#the-book-at-a-glance",
     "title": "Club meetings",
     "section": "The book at a glance",
-    "text": "The book at a glance\n\nSequential Decision Analytics and Modeling (2e): Modeling with Python\nSequential decision problems always look like this:\n\n\n\n\n\n\nflowchart LR\n  A{Decision} --&gt; B(Information)\n  B --&gt; C{Decision}\n  C --&gt; D[Information]\n  D --&gt; E{Decision}\n\n\n\n\n\n\n\nEach decision brings a cost or reward\nDecisions are made with a method called a policy\nCentral goal: design policies that work well:\n\nOver time\nUnder uncertainty about information that has not arrived yet\n\nGoal: learn how to think about these problems, even if you never write a line of code",
+    "text": "The book at a glance\n\nSequential Decision Analytics and Modeling (2e): Modeling with Python\nSequential decision problems always look like this:\n\n\n\n\n\n\n\nflowchart LR\n  A{Decision} --&gt; B(Information)\n  B --&gt; C{Decision}\n  C --&gt; D[Information]\n  D --&gt; E{Decision}\n\n\n\n\n\n\n\nEach decision brings a cost or reward\nDecisions are made with a method called a policy\nCentral goal: design policies that work well:\n\nOver time\nUnder uncertainty about information that has not arrived yet\n\nGoal: learn how to think about these problems, even if you never write a line of code",
     "crumbs": [
       "Club meetings"
     ]
@@ -668,13 +678,118 @@
     ]
   },
   {
-    "objectID": "01.html",
-    "href": "01.html",
-    "title": "1. Modeling sequential decision problems",
+    "objectID": "slides/02.html#learning-objectives",
+    "href": "slides/02.html#learning-objectives",
+    "title": "An asset selling problem",
+    "section": "Learning objectives",
+    "text": "Learning objectives\n\nFrame the asset selling problem as an optimal stopping problem.\nModel it with the five elements of the UMF.\nDesign and tune three PFA policies: sell-low, high-low, track.\nEvaluate policies by simulation: mean, variance, confidence intervals.\nWalk through the Python code (AssetSelling module)."
+  },
+  {
+    "objectID": "slides/02.html#narrative",
+    "href": "slides/02.html#narrative",
+    "title": "An asset selling problem",
+    "section": "1. Narrative",
+    "text": "1. Narrative\n\nHow long should we hold a block of shares of stock before selling?\nWe are a small player, so it does not matter how many shares we sell. We can sell all at once.\nThe price varies over time \\(t\\) according to some random process.\nOnce we sell the stock, the process stops."
+  },
+  {
+    "objectID": "slides/02.html#core-elements-of-the-problem",
+    "href": "slides/02.html#core-elements-of-the-problem",
+    "title": "An asset selling problem",
+    "section": "2. Core elements of the problem",
+    "text": "2. Core elements of the problem\n\nMetrics\n\nMaximizing the expected price that we receive when we sell the asset.\n\nDecisions\n\nWhether to hold or sell the asset.\n\nSources of uncertainty\n\nThe selling price in future time periods."
+  },
+  {
+    "objectID": "slides/02.html#umf-state-variables",
+    "href": "slides/02.html#umf-state-variables",
+    "title": "An asset selling problem",
+    "section": "3. UMF: State Variables",
+    "text": "3. UMF: State Variables\n\\[\nS_t = (R_t^{asset}, p_t)\n\\]\nWhere:\n\\[\nR_t^{asset} = \\begin{cases}\n1 & \\text{if we are holding the stock at time } t, \\\\\n0 & \\text{if we are no longer holding the stock at time } t.\n\\end{cases}\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#umf-decision-x_t",
+    "href": "slides/02.html#umf-decision-x_t",
+    "title": "An asset selling problem",
+    "section": "3. UMF: Decision \\(x_t\\)",
+    "text": "3. UMF: Decision \\(x_t\\)\n\\[\nx_t = X^\\pi(S_t)\n\\]\n\\[\nx_t = \\begin{cases}\n1 & \\text{if we sell the stock at time } t, \\\\\n0 & \\text{if we do not sell the stock at time } t.\n\\end{cases}\n\\]\nConstraint: \\(x_t \\leq R_t^{asset}\\)"
+  },
+  {
+    "objectID": "slides/02.html#umf-exogenous-information",
+    "href": "slides/02.html#umf-exogenous-information",
+    "title": "An asset selling problem",
+    "section": "3. UMF: Exogenous Information",
+    "text": "3. UMF: Exogenous Information\nExogenous information is the change in price:\n\\[\nW_{t+1} = \\hat{p}_{t+1}\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#umf-transition-function",
+    "href": "slides/02.html#umf-transition-function",
+    "title": "An asset selling problem",
+    "section": "3. UMF: Transition function",
+    "text": "3. UMF: Transition function\n\\[\nS_{t+1} = S^M(S_t, x_t, W_{t+1})\n\\]\n\\[\nR_{t+1}^{asset} = R_{t}^{asset} - x_t\n\\] Constraint: \\(x_t \\leq R_t^{asset}\\) (we cannot sell what we no longer own)\n\\[\np_{t+1} = p_t + \\hat{p}_{t+1}\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#umf-objective-functions",
+    "href": "slides/02.html#umf-objective-functions",
+    "title": "An asset selling problem",
+    "section": "3. UMF: Objective functions",
+    "text": "3. UMF: Objective functions\nGeneric contribution function:\n\\[\nC(S_t, x_t) = p_t x_t\n\\] \\[\n\\max_{\\pi = (f,\\theta)} F^\\pi (S_0) = \\max_{\\pi = (f,\\theta)} \\mathbb{E} \\left\\{ \\sum_{t=0}^{T - 1} C(S_t, X^\\pi (S_t) ) \\mid S_0 \\right\\}\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#uncertainty-model",
+    "href": "slides/02.html#uncertainty-model",
+    "title": "An asset selling problem",
+    "section": "4. Uncertainty model",
+    "text": "4. Uncertainty model\nThe changes in price follow a normal distribution with mean 0 and variance 1.\n\\[\n\\hat{p}_{t+1} \\sim N(0, 1)\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#designing-policies",
+    "href": "slides/02.html#designing-policies",
+    "title": "An asset selling problem",
+    "section": "5. Designing policies",
+    "text": "5. Designing policies\n\nSell if the price drops below some limit point.\n\n\\[\nX^{sell-low}(S_t | \\theta^{low}) = \\begin{cases}\n1 & \\text{if } p_t &lt; \\theta^{low}, \\\\\n1 & \\text{if } t = T, \\\\\n0 & \\text{otherwise}.\n\\end{cases}\n\\]\n\nSell if the price jumps too high or too low.\n\n\\[\nX^{high-low}(S_t | \\theta^{high-low}) = \\begin{cases}\n1 & \\text{if } p_t &lt; \\theta^{low} \\text{ or } p_t &gt; \\theta^{high}, \\\\\n1 & \\text{if } t = T, \\\\\n0 & \\text{otherwise}.\n\\end{cases}\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#designing-policies-1",
+    "href": "slides/02.html#designing-policies-1",
+    "title": "An asset selling problem",
+    "section": "5. Designing policies",
+    "text": "5. Designing policies\n\nSell when the stock rises above a tracking signal.\n\n\\[\nX^{track}(S_t | \\theta^{track}) = \\begin{cases}\n1 & \\text{if } p_t \\geq \\bar{p}_t + \\theta^{track}, \\\\\n1 & \\text{if } t = T, \\\\\n0 & \\text{otherwise}.\n\\end{cases}\n\\] Update the state variable and the transition function:\n\n\\(S_t = (R_t^{asset}, p_t, \\bar{p}_t)\\)\n\\(\\bar{p}_t = (1 - \\alpha)\\bar{p}_{t-1} + \\alpha\\hat{p}_t\\)"
+  },
+  {
+    "objectID": "slides/02.html#designing-policies-2",
+    "href": "slides/02.html#designing-policies-2",
+    "title": "An asset selling problem",
+    "section": "5. Designing policies",
+    "text": "5. Designing policies\n\nPolicy Classes Set: Defined as \\(\\mathcal{F} = \\{\\text{sell-low},\\ \\text{high-low},\\ \\text{track}\\}\\)\nPolicy Parameters: Each policy class \\(f \\in \\mathcal{F}\\) has a parameter vector \\(\\theta^f\\)\nPractical Policy Search: Searching over policies \\(\\pi\\) simplifies to a two-step optimization:\n\n\nSelect a function class \\(f \\in \\mathcal{F}\\)\nSearch over parameters \\(\\theta^f \\in \\Theta^f\\)\n\n\\[\\pi = (f, \\theta^f), \\qquad f \\in \\mathcal{F}, \\quad \\theta^f \\in \\Theta^f\\]\n\nParameter Range & Dimension: \\(\\Theta^f\\) defines both the valid domain and the dimensionality of \\(\\theta^f\\)"
+  },
+  {
+    "objectID": "slides/02.html#evaluating-policies",
+    "href": "slides/02.html#evaluating-policies",
+    "title": "An asset selling problem",
+    "section": "6. Evaluating policies",
+    "text": "6. Evaluating policies\n\nSimulate several sample paths \\(\\omega\\), each one a sequence of realizations of the exogenous random variables:\n\n\\[\n\\hat{F}^{\\pi}(\\omega) = \\sum_{t=0}^{T-1} p_t(\\omega) X^{\\pi}(S_t(\\omega))\n\\]\n\nEstimate the mean for each combination of class of policy \\(f \\in \\mathcal{F}\\) and parameters for that class \\(\\theta^f \\in \\Theta^f\\):\n\n\\[\n\\overline{F}^{\\pi} = \\frac{1}{N} \\sum_{n=1}^{N} \\hat{F}^{\\pi}(\\omega^n)\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#evaluating-policies-1",
+    "href": "slides/02.html#evaluating-policies-1",
+    "title": "An asset selling problem",
+    "section": "6. Evaluating policies",
+    "text": "6. Evaluating policies\n\nEstimate the variance of that average.\n\n\\[\n(\\overline{\\sigma}^{\\pi})^2 = \\frac{1}{N} \\left( \\frac{1}{N - 1} \\sum_{n=1}^{N} (\\hat{F}^{\\pi}(\\omega^n) - \\overline{F}^{\\pi})^2 \\right)\n\\]\n\nExpress a confidence interval for each combination.\n\n\\[\n\\overline{F}^{\\pi} \\pm z_{\\alpha} \\sqrt{(\\overline{\\sigma}^{\\pi})^2}\n\\]\nWhere:\n\n\\(z_\\alpha\\) is the value of \\(z\\) such that a normally distributed random variable \\(Z\\) exceeds \\(z\\) with a probability of \\(\\alpha\\).\nIf we use \\(\\alpha = 0.05\\) then \\(z_{.05} = 1.645\\), which corresponds to \\(\\text{Prob}[Z \\ge 1.645] = .05\\)."
+  },
+  {
+    "objectID": "slides/02.html#pending-work",
+    "href": "slides/02.html#pending-work",
+    "title": "An asset selling problem",
+    "section": "Pending work",
+    "text": "Pending work\n\nBest policy search: run the different combinations of policy classes \\(f \\in \\mathcal{F}\\) and parameters \\(\\theta^f \\in \\Theta^f\\) with the Python module AssetSelling, and pick the combination with the highest \\(\\overline{F}^{\\pi}\\).\nTime series extension (§2.8.1): replace the price process with\n\n\\[\np_{t+1} = \\eta_0 p_t + \\eta_1 p_{t-1} + \\eta_2 p_{t-2} + \\varepsilon_{t+1}\n\\]\nwhich requires enlarging the state variable to \\(S_t = (R_t, p_t, p_{t-1}, p_{t-2})\\)."
+  },
+  {
+    "objectID": "02.html",
+    "href": "02.html",
+    "title": "2. An asset selling problem",
     "section": "",
-    "text": "Modeling sequential decision problems\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items",
+    "text": "An asset selling problem\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
-      "1. Modeling sequential decision problems"
+      "2. An asset selling problem"
     ]
   }
 ]
