@@ -4,21 +4,25 @@ title: "An asset selling problem"
 
 ## Learning objectives
 
-- Explore how to use a policy function approximations (PFAs) solve an **optimal stopping problem**.linked to an **stochastic process**.
+- Frame the asset selling problem as an **optimal stopping problem**.
+- Model it with the **five elements of the UMF**.
+- Design and tune three **PFA policies**: sell-low, high-low, track.
+- **Evaluate policies by simulation**: mean, variance, confidence intervals.
+- Walk through the **Python code** (*AssetSelling* module).
 
-## 1. Narrative {.smaller}
+## 1. Narrative
 
-- How much time should be hold a **block of shares of stock** until selling?
+- How long should we hold a **block of shares of stock** before selling?
 - We are a small player, so it does not matter how many shares we sell. We can sell all at once.
-- The price changes from time to time $t$ accoding to some **random process**.
+- The price varies over time $t$ according to some **random process**.
 - Once we sell the stock, the process stops.
 
 
-## 2. Core elements of the problem {.smaller}
+## 2. Core elements of the problem
 
 - **Metrics**
 
-  - Maximizing the expected price when selling.
+  - Maximizing the expected price that we receive when we sell the asset.
 
 - **Decisions**
 
@@ -28,7 +32,7 @@ title: "An asset selling problem"
 
    - The selling price in future time periods.
 
-## 3. UMF: State Variables {.smaller}
+## 3. UMF: State Variables
 
 $$
 S_t = (R_t^{asset}, p_t)
@@ -46,7 +50,7 @@ $$
 
 
 
-## 3. UMF: Decision $x_t$ {.smaller}
+## 3. UMF: Decision $x_t$
 
 $$
 x_t = X^\pi(S_t)
@@ -54,22 +58,24 @@ $$
 
 $$
 x_t = \begin{cases} 
-1 & \text{we sell the stock at time } t, \\ 
-0 & \text{if do not sell the stock at time } t. 
+1 & \text{if we sell the stock at time } t, \\ 
+0 & \text{if we do not sell the stock at time } t. 
 \end{cases}
 $$
 
+Constraint: $x_t \leq R_t^{asset}$
 
 
-## 3. UMF: Exogenous Information {.smaller}
 
-Exogenous information as the change in price:
+## 3. UMF: Exogenous Information
+
+Exogenous information is the change in price:
 
 $$
 W_{t+1} = \hat{p}_{t+1}
 $$
 
-## 3. UMF: Transition function {.smaller}
+## 3. UMF: Transition function
 
 $$
 S_{t+1} = S^M(S_t, x_t, W_{t+1})
@@ -78,13 +84,13 @@ $$
 $$
 R_{t+1}^{asset} = R_{t}^{asset} - x_t
 $$
-constraint: $x_t \leq R_t^{asset}$
+Constraint: $x_t \leq R_t^{asset}$ (we cannot sell what we no longer own)
 
 $$
 p_{t+1} = p_t + \hat{p}_{t+1}
 $$
 
-## 3. UMF: Objective functions  {.smaller}
+## 3. UMF: Objective functions
 
 Generic contribution function:
 
@@ -92,14 +98,13 @@ $$
 C(S_t, x_t) = p_t x_t
 $$
 $$
-\max_{\pi = (f,\theta)}  F^\pi (S_0) = \ 
-\max_{\pi = (f,\theta)} \mathbb{E} \left\{ \sum_{t=0}^{T - 1} C(S_t, X^\pi (S_t) ) | S_0 \right\}
+\max_{\pi = (f,\theta)} F^\pi (S_0) = \max_{\pi = (f,\theta)} \mathbb{E} \left\{ \sum_{t=0}^{T - 1} C(S_t, X^\pi (S_t) ) \mid S_0 \right\}
 $$
 
 
-## 4. Uncertainty model {.smaller}
+## 4. Uncertainty model
 
-The changes in price follow a normal distrition with 0 of mean and 1 of variance.
+The changes in price follow a normal distribution with mean 0 and variance 1.
 
 $$
 \hat{p}_{t+1} \sim N(0, 1)
@@ -108,7 +113,7 @@ $$
 
 ## 5. Designing policies {.smaller}
 
-1. Selling if the price drops below some limit point.
+1. Sell if the price drops below some limit point.
 
 $$
 X^{sell-low}(S_t | \theta^{low}) = \begin{cases} 
@@ -118,7 +123,7 @@ X^{sell-low}(S_t | \theta^{low}) = \begin{cases}
 \end{cases}
 $$
 
-2. Selling if the price jumps too high or too low.
+2. Sell if the price jumps too high or too low.
 
 $$
 X^{high-low}(S_t | \theta^{high-low}) = \begin{cases} 
@@ -139,7 +144,7 @@ X^{track}(S_t | \theta^{track}) = \begin{cases}
 0 & \text{otherwise}. 
 \end{cases}
 $$
-Updating state variables and transition function:
+Update the state variable and the transition function:
 
 - $S_t = (R_t^{asset}, p_t, \bar{p}_t)$
 - $\bar{p}_t = (1 - \alpha)\bar{p}_{t-1} + \alpha\hat{p}_t$
@@ -147,7 +152,7 @@ Updating state variables and transition function:
 
 ## 5. Designing policies {.smaller}
 
-* **Policy Classes Set:** Defined as $\mathcal{F} = \{\text{''sell-low''}, \text{''high-low''}, \text{''track''}\}$
+* **Policy Classes Set:** Defined as $\mathcal{F} = \{\text{sell-low},\ \text{high-low},\ \text{track}\}$
 * **Policy Parameters:** Each policy class $f \in \mathcal{F}$ has a parameter vector $\theta^f$
 
 
@@ -156,14 +161,14 @@ Updating state variables and transition function:
 1. Select a function class $f \in \mathcal{F}$
 2. Search over parameters $\theta^f \in \Theta^f$
 
-$$\pi \in \bigcup_{f \in \mathcal{F}} \{\theta^f \in \Theta^f\}$$
+$$\pi = (f, \theta^f), \qquad f \in \mathcal{F}, \quad \theta^f \in \Theta^f$$
 
 * **Parameter Range & Dimension:** $\Theta^f$ defines both the valid domain and the dimensionality of $\theta^f$
 
 
 ## 6. Evaluating policies {.smaller}
 
-1. Simulate several sample paths of realizations of whatever **exogenous random variables**, represented by $\omega$:
+1. Simulate several sample paths $\omega$, each one a sequence of realizations of the **exogenous random variables**:
 
 $$
 \hat{F}^{\pi}(\omega) = \sum_{t=0}^{T-1} p_t(\omega) X^{\pi}(S_t(\omega))
@@ -177,7 +182,7 @@ $$
 
 ## 6. Evaluating policies {.smaller}
 
-3. Estimate of the **variance** of our average.
+3. Estimate the **variance** of that average.
 
 $$
 (\overline{\sigma}^{\pi})^2 = \frac{1}{N} \left( \frac{1}{N - 1} \sum_{n=1}^{N} (\hat{F}^{\pi}(\omega^n) - \overline{F}^{\pi})^2 \right)
@@ -191,6 +196,17 @@ $$
 
 Where:
 
-* **$z_\alpha$**: Represents the value of $z$ such that a normally distributed random variable $Z$ exceeds $z$ with a probability of $\alpha$.
+* **$z_\alpha$** is the value of $z$ such that a normally distributed random variable $Z$ exceeds $z$ with a probability of $\alpha$.
 * If we use $\alpha = 0.05$ then **$z_{.05} = 1.645$**, which corresponds to $\text{Prob}[Z \ge 1.645] = .05$.
+
+## Pending work {.smaller}
+
+- **Best policy search:** run the different combinations of policy classes $f \in \mathcal{F}$ and parameters $\theta^f \in \Theta^f$ with the Python module *AssetSelling*, and pick the combination with the highest $\overline{F}^{\pi}$.
+- **Time series extension (§2.8.1):** replace the price process with
+
+$$
+p_{t+1} = \eta_0 p_t + \eta_1 p_{t-1} + \eta_2 p_{t-2} + \varepsilon_{t+1}
+$$
+
+  which requires enlarging the state variable to $S_t = (R_t, p_t, p_{t-1}, p_{t-2})$.
 
