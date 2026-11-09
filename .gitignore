@@ -15,6 +15,8 @@ figure-revealjs
 /[0-9][0-9]*.qmd
 
 **/*.quarto_ipynb
+__pycache__/
+*.pyc
 
 # Private development container (Ángel's local environment -- not part of
 # the book club repository; see dev-container.md in the same private dir).
@@ -28,4 +30,11 @@ figure-revealjs
 /setup.sh
 /build-image.sh
 /patch-reh.sh
+/prod.Dockerfile
+/prod.sh
+/prod-compose.yml
+/.dockerignore.prod
+/check
+/Rprofile.site
+/.github/workflows/check.yml
 /dev-container.md
