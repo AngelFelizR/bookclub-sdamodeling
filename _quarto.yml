@@ -2,7 +2,8 @@ project:
   type: website
   pre-render: generate_chapters.R
   render:
-  - slides/*
+  - slides/*.qmd
+  - slides/*.Rmd
   - videos/*
   - '*.qmd'
 format:
@@ -15,6 +16,7 @@ format:
     link-external-newwindow: true
 execute:
   freeze: auto
+  echo: true
 website:
   title: Sequential Decision Analytics and Modeling (2e) Book Club
   sidebar:

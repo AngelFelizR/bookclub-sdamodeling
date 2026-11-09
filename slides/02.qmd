@@ -208,5 +208,419 @@ $$
 p_{t+1} = \eta_0 p_t + \eta_1 p_{t-1} + \eta_2 p_{t-2} + \varepsilon_{t+1}
 $$
 
-  which requires enlarging the state variable to $S_t = (R_t, p_t, p_{t-1}, p_{t-2})$.
+which requires enlarging the state variable to $S_t = (R_t, p_t, p_{t-1}, p_{t-2})$.
 
+
+
+# Exercises
+
+## 2.1
+
+We write the transition function as
+
+$$
+S_{t+1} = S^M(S_t, x_t, W_{t+1}). \quad (2.24) 
+$$
+
+a) Why do we write the exogenous information as $W_{t+1}$ rather than $W_t$?
+
+> Because it is information that arrives *after* the decision $x_t$ is made, between time $t$ and $t+1$. Writing $W_t$ would imply that it is already known at time $t$, when the decision is taken.
+
+## 2.1  (Cont.)
+
+b) At what point in time would we be computing $S_{t+1}$ using equation (2.24)?
+
+> After taking the decision $x_t$ at time $t$ and observing the exogenous information $W_{t+1}$, that is, at time $t+1$.
+
+## 2.2
+
+What is the difference between $p_t$ and $p_t(\omega)$?
+
+> $p_t$ is the price at time $t$ seen as a **random variable** (before we know its value). $p_t(\omega)$ is the **specific realization** of that price along one particular sample path $\omega$ (for example, one row of the simulated price table).
+
+## 2.3
+
+As you test out different policies, does the structure of the transition function change?
+
+> No. The transition function describes how the system evolves and does not depend on the policy. Some policies require carrying extra state variables (e.g. $\bar p_t$ for the track policy), which adds an equation to the transition function, but its basic structure stays the same.
+
+## 2.4
+
+The objective function in equation (2.4) is written for a deterministic version of the problem. If we solve this optimization problem, does the decision $x_t$ at time $t$ depend on the prices $p_{t'}$ for $t'$ > $t$?
+
+> **Yes.** In the deterministic model all future prices are assumed known, so $x_t$ depends on $p_{t'}$ for $t' > t$. That is not implementable in practice, since at time $t$ we cannot know future prices. This is the reason for using policies $X^\pi(S_t)$ that only use information available at time $t$.
+
+## 2.5
+
+Using the prices in table 2.2, use the policy that you will sell when the price falls below $\$44.00$. Compute the objective function $\hat{F}(\omega^n)$ for $n = 1, \dots , 10$. Compute the average selling price and its variance.
+
+```{python}
+import numpy as np
+import pandas as pd
+
+# 1. Create the wide-format DataFrame with 'omega' as a column
+PricesTableDict = {
+    'omega': [f'ω^{i}' for i in range(1, 11)],
+    'p1': [42.67, 46.35, 43.17, 45.24, 47.68, 47.83, 45.11, 46.78, 43.16, 46.57],
+    'p2': [45.53, 43.15, 45.16, 45.67, 46.32, 44.70, 43.67, 44.98, 44.57, 45.01],
+    'p3': [47.07, 42.51, 45.37, 46.18, 46.14, 43.05, 43.14, 44.53, 45.99, 46.73],
+    'p4': [47.56, 40.51, 44.30, 46.22, 41.53, 43.77, 44.78, 45.42, 47.38, 42.08],
+    'p5': [47.80, 41.50, 45.35, 45.69, 44.84, 42.61, 43.12, 46.43, 45.51, 47.40],
+    'p6': [48.43, 41.00, 47.23, 44.24, 45.17, 44.32, 42.36, 47.67, 46.27, 49.14],
+    'p7': [46.93, 39.16, 47.35, 43.77, 44.92, 44.16, 41.60, 43.68, 46.02, 49.03],
+    'p8': [46.57, 41.11, 46.30, 43.57, 46.09, 45.29, 40.83, 49.03, 45.09, 48.74]
+}
+
+PricesTableWide = pd.DataFrame(PricesTableDict)
+```
+
+## 2.5 (Cont.)
+
+```{python}
+# 2. Apply pivot longer using pd.melt to place all numbers into a single column
+PricesTableLong = (
+    PricesTableWide
+    .melt(
+      id_vars=['omega'], 
+      var_name='time', 
+      value_name='price'
+    ).assign(
+      omega_num=lambda d: d["omega"].str.extract(r"(\d+)", expand=False).astype(int),
+      t_num=lambda d: d["time"].str.extract(r"(\d+)", expand=False).astype(int),
+    )
+    .sort_values(["omega_num", "t_num"])
+    .drop(columns=["omega_num", "t_num"])
+)
+```
+
+## 2.5 (Cont.)
+
+```{python}
+# 3. Apply policy described
+BottomValue = 44
+
+PolicyResults = (
+    PricesTableLong
+    .assign(
+        is_low=lambda d: d["price"] < BottomValue,
+        cum_low=lambda d: d.groupby("omega")["is_low"].cumsum(),
+    )
+    .query("(is_low and cum_low == 1) or (time == 'p8' and cum_low == 0)")
+    .drop(columns=["is_low", "cum_low"])
+    .reset_index(drop=True)
+)
+```
+
+## 2.5 (Cont.)
+
+```{python}
+# 4. Describing results
+print("\nMean price:", float(PolicyResults.price.mean()))
+print("Variance price:", float(PolicyResults.price.var()), end = "\n\n")
+print(PolicyResults)
+```
+
+> Mean selling price $\approx 42.993$; sample variance $\approx 0.522$ (variance of the average $\approx 0.052$).
+
+## 2.6 A
+
+The questions below walk you through the steps of modeling the selling of an asset (say, a single share of a stock).
+
+a) Assume that you are simulating your prices using data from a mathematical model given by
+
+$$
+p_{t+1} = \eta_0 p_t + \eta_1 p_{t-1} + \varepsilon_{t+1}
+$$
+
+where $\varepsilon \sim N(0, 6^2)$.
+
+## 2.6 A (Cont.)
+
+We do not know the value of $\eta = (\eta_0, \eta_1)$, but our belief about the true value of $\eta$ is that it is multivariate normal, with $\eta \sim MVN(\bar{\eta}, \Sigma)$ where
+
+$$
+\bar{\eta}_t = \begin{bmatrix} .7 \\ .3 \end{bmatrix}.
+$$
+
+Assume that the covariance matrix $\Sigma_t$ is given by
+
+$$
+\Sigma_t = \begin{bmatrix} (.2)^2 & (.05)^2 \\ (.05)^2 & (.1)^2 \end{bmatrix}.
+$$
+
+where $\Sigma_{tij} = Cov(\eta_i, \eta_j)$ for $i, j \in (0, 1)$.
+
+## 2.6 A (Cont.)
+
+Assume that at time $t$, $p_t = 20$, $p_{t-1} = 24$ and we observe $p_{t+1} = 18.2$.
+
+Using the equations in section **2.8.2**, what is the updated estimates of $\bar{\eta}_{t+1}$ and $\Sigma_{t+1}$? Give the updating equation and compute $\bar{\eta}_{t+1}$ and $\Sigma_{t+1}$ numerically.
+
+$$ \bar{\eta}_t = \begin{pmatrix} \bar{\eta}_{t,0}\\ \bar{\eta}_{t,1} \end{pmatrix} $$
+
+$$ M_t=\Sigma_t $$
+
+$$ \phi_t = \begin{pmatrix} p_t\\ p_{t-1} \end{pmatrix} $$
+
+## 2.6 A (Cont.)
+
+```{python}
+import numpy as np
+
+# Let's keep all rows in 1 column
+eta = np.array([0.7, 0.3]).reshape(-1, 1)
+
+Sigma = np.array([
+    [0.20**2, 0.05**2],
+    [0.05**2, 0.10**2]
+])
+
+phi = np.array([20, 24]).reshape(-1, 1)
+
+M = Sigma.copy()
+```
+
+## 2.6 A (Cont.)
+
+```{python}
+print("Initial parameter estimates:")
+print(eta)
+
+print("\nInitial covariance matrix:")
+print(M)
+
+print("\nObserved prices:")
+print(phi)
+```
+
+## 2.6 A (Cont.)
+
+$$ \bar{p}_{t+1}=\bar{\eta}_t^T\phi_t $$
+
+$$ \hat{\varepsilon}_{t+1} = \bar{p}_{t+1}-p_{t+1} $$
+
+```{python}
+p_hat = (eta.T @ phi).item()
+
+p_t_plus_1 = 18.2
+epsilon_hat = p_hat - p_t_plus_1
+
+print("Estimated price:", p_hat)
+print("Prediction error:", epsilon_hat)
+```
+
+## 2.6 A (Cont.)
+
+$$ \gamma_t=1+\phi_t^T M_t\phi_t $$
+
+```{python}
+gamma = (1 + phi.T @ M @ phi).item()
+
+print("Gamma:", gamma)
+```
+
+## 2.6 A (Cont.)
+
+First the parameter estimates, using $M_t=\Sigma_t$ (the matrix **before** the update):
+
+$$
+ \bar{\eta}_{t+1} = \bar{\eta}_t- \frac{1}{\gamma_t} M_t\phi_t\hat{\varepsilon}_{t+1}
+$$
+
+```{python}
+eta_new = eta - (M @ phi) * epsilon_hat / gamma
+
+print("Updated parameter estimates:")
+print(eta_new)
+```
+
+## 2.6 A (Cont.)
+
+Then the covariance matrix:
+
+$$
+\Sigma_{t+1} = M_{t+1} = M_t - \frac{ M_t\phi_t\phi_t^T M_t }{ \gamma_t }
+$$
+
+```{python}
+M_new = M - (
+    M @ phi @ phi.T @ M
+) / gamma
+
+print("Updated covariance matrix:")
+print(M_new)
+```
+
+## 2.6 B
+
+b) What is the state variable for this problem? Give the list of variables. Note that you may have to add variables as you progress through the exercise (you do not have all the information at this point). Make sure you include all the information you need to update $\bar\eta_{t+1}$ from $\bar\eta_t$. How many dimensions does your state variable have (this is the same as asking how many variables are in $S_t$).
+
+$$
+S_{t} = (R_t, p_t, p_{t-1}, p_{t-2}, p_{t-3}, p_{t-4}, p_{t-5}, p_{t-6}, \bar{\eta}_{t,0}, \bar{\eta}_{t,1}, M_t)
+$$
+
+
+## 2.6 B (Cont.)
+
+- $R_t$: whether we still hold the asset (1 variable).
+- $p_t, \dots, p_{t-6}$: the 7 prices needed for the 7-day moving average (and for $\phi_t$) (7 variables).
+- $\bar\eta_t$: current estimate of the price model coefficients (2 variables).
+- $M_t=\Sigma_t$: covariance matrix of the beliefs, needed to update $\bar\eta$ (4 entries, or 3 using symmetry).
+- $\bar p_t$ is **not** needed: it is a function of $p_t,\dots,p_{t-6}$. $\theta^{sell}$ is a fixed parameter, so it belongs to $S_0$, not to $S_t$.
+
+**Dimension:** $1 + 7 + 2 + 4 = 14$ variables (13 using the symmetry of $M$).
+
+## 2.6 C
+
+c) Our trader makes trading decisions based on a 7-day moving average of prices. Assume we are on day $t$, and the 7-day moving average is computed using
+
+$$
+\bar{p}_t = \frac{1}{7} \sum_{t'=t-7+1}^{t} p_{t'}. \tag{2.26}
+$$
+
+The trader will sell an asset if $p_t < \bar{p}_t - \theta^{sell}$. Write out the decision rule as a policy $X^{\pi}(S_t | \theta^{sell})$ that returns 1 if we sell the asset and 0 otherwise.
+
+## 2.6 C (Cont.)
+
+$$
+X^{\pi}(S_t | \theta^{sell}) = \begin{cases} 
+1 & \text{if } R_t = 1 \text{ and } p_t < \bar{p}_t - \theta^{sell}, \\ 
+1 & \text{if } R_t = 1 \text{ and } t = T, \\ 
+0 & \text{otherwise}. 
+\end{cases}
+$$
+
+## 2.6 D
+
+d) What is the exogenous information?
+
+> The newly observed price. The prediction error $\hat\varepsilon_{t+1}$ is **not** exogenous, because it is computed from $\bar\eta_t$, which is part of the state.
+
+$$
+W_{t+1} = p_{t+1}
+$$
+
+(equivalently, the noise $\varepsilon_{t+1}\sim N(0,6^2)$ that generates the price). The prediction error is a derived quantity:
+
+$$
+\hat{\varepsilon}_{t+1} = \bar\eta_t^T\phi_t - W_{t+1}
+$$
+
+## 2.6 E
+
+e) Write out the transition equations. You need an equation for each element of $S_t$.
+
+$$
+S_{t+1} = S^M(S_t, x_t, W_{t+1})
+$$
+
+$$
+R_{t+1} = R_{t} - x_t
+$$
+> Constraint: $x_t \leq R_t$ (we cannot sell what we no longer own)
+
+## 2.6 E (Cont.)
+
+Prices (new price is exogenous; the rest of the window shifts by one day, and $p_{t-6}$ drops out):
+
+$$
+W_{t+1} = p_{t+1}
+$$
+
+$$
+p_{(t+1)-k} = p_{t-(k-1)}, \quad k = 1, \dots, 6
+$$
+
+that is, $p_t$ becomes the lag-1 entry, $p_{t-1}$ becomes the lag-2 entry, and so on up to $p_{t-5}$ becoming the lag-6 entry.
+
+## 2.6 E (Cont.)
+
+Learning equations (computed in this order, with $M_t=\Sigma_t$):
+
+$$
+\hat{\varepsilon}_{t+1} = \bar\eta_t^T\phi_t - p_{t+1}, \qquad \gamma_t = 1 + \phi_t^T M_t\phi_t
+$$
+
+$$
+\bar{\eta}_{t+1} = \bar{\eta}_t - \frac{1}{\gamma_t} M_t\phi_t\hat{\varepsilon}_{t+1}
+$$
+
+$$
+M_{t+1} = M_t - \frac{ M_t\phi_t\phi_t^T M_t }{ \gamma_t } \quad (\text{so } \Sigma_{t+1} = M_{t+1})
+$$
+
+where $\phi_t = (p_t, p_{t-1})^T$.
+
+## 2.6 F
+
+f) Write out the objective function (and remember to use an expectation operator for each random variable as described in the instructions). Be sure to specify what you are optimizing over given the class of policy specified in part (c). Assume that you are training your policy on historical data in an offline setting.
+
+We optimize only over $\theta^{sell}$, since the policy class is fixed (moving-average rule), so $\pi = (f, \theta^{sell})$. The 7-day moving average needs 7 prices, so the first day on which the policy can decide is $t_0 = 7$ (the initial state $S_{t_0}$ already contains $p_7,\dots,p_1$):
+
+$$
+\max_{\theta^{sell}} F^{\pi}(\theta^{sell}) =
+\max_{\theta^{sell}} \mathbb{E}_{S_{t_0}}\, \mathbb{E}_{W_{t_0+1},\dots,W_T \mid S_{t_0}}
+\left\{ \sum_{t=t_0}^{T} p_t \, X^{\pi}(S_t \mid \theta^{sell}) \;\Big|\; S_{t_0} \right\}
+$$
+
+subject to $x_t = X^{\pi}(S_t|\theta^{sell}) \le R_t$ and the transition equations of part (e), with $W_{t+1} = p_{t+1}$.
+
+## 2.6 F (Cont.)
+
+> **Offline training on historical data.** The table gives a single historical path $\omega^1$ (one price per day, $T=10$), not several sample paths. The expectations are replaced by the observed history ($N=1$):
+
+$$
+\bar F(\theta^{sell}) = \sum_{t=7}^{10} p_t(\omega^1)\,
+X^{\pi}\big(S_t(\omega^1)\mid\theta^{sell}\big),
+\qquad
+\theta^{sell,*} = \arg\max_{\theta^{sell}} \bar F(\theta^{sell})
+$$
+
+## 2.6 F (Cont.) 
+
+> Since the policy sells only once, $\bar F(\theta^{sell}) = p_{\tau}$, where $\tau$ is the first $t \ge 7$ with $p_t < \bar p_t - \theta^{sell}$ (or $\tau = T = 10$ if that never happens).
+
+> Decisions can only be evaluated on $t = 7, 8, 9, 10$ (4 days), because $\bar p_t$ in (2.26) includes $p_t$ and needs 7 prices.
+
+## 2.6 F (Cont.)
+
+```{python}
+import numpy as np
+import pandas as pd
+
+p = np.array([20, 32, 26, 180, 30, 45, 18, 120, 57, 15], dtype=float)
+T = 10
+
+# moving average (2.26) for t = 7,...,10
+rows = [(t, p[t-1], p[t-7:t].mean(), p[t-7:t].mean() - p[t-1]) for t in range(7, T + 1)]
+table = pd.DataFrame(rows, columns=["t", "p_t", "pbar_t", "pbar_t - p_t"])
+print(table)
+```
+
+## 2.6 F (Cont.)
+
+```{python}
+def F(theta):
+    for t in range(7, T + 1):
+        if p[t-1] < p[t-7:t].mean() - theta or t == T:
+            return t, p[t-1]
+
+for theta in [0, 10, 32, 33, 60]:
+    print(theta, F(theta))
+```
+
+## 2.6 F (Cont.)
+
+$$
+\bar F(\theta^{sell}) =
+\begin{cases}
+18 & \text{if } \theta^{sell} < 32.14 \quad (\text{sell at } t=7),\\
+15 & \text{if } \theta^{sell} \ge 32.14 \quad (\text{forced sale at } t=10).
+\end{cases}
+$$
+
+$$
+\theta^{sell,*} \in [0,\ 32.14), \qquad \bar F(\theta^{sell,*}) = 18
+$$
+
+> The optimum is not unique, and it comes from a single path of 4 decision days, so it is very likely overfitted. With more historical paths (or simulated ones) we would average $\hat F^{\pi}(\omega^n)$ over $n=1,\dots,N$.
