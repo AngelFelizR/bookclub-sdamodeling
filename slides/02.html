@@ -33,6 +33,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-3ebf7ffff70af4adc410fa959b05f607.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -336,9 +402,473 @@ X^{track}(S_t | \theta^{track}) = \begin{cases}
 p_{t+1} = \eta_0 p_t + \eta_1 p_{t-1} + \eta_2 p_{t-2} + \varepsilon_{t+1}
 \]</span></p>
 <p>which requires enlarging the state variable to <span class="math inline">\(S_t = (R_t, p_t, p_{t-1}, p_{t-2})\)</span>.</p>
-
+</section>
+<section>
+<section id="exercises" class="title-slide slide level1 center">
+<h1>Exercises</h1>
 
 </section>
+<section id="section" class="slide level2">
+<h2>2.1</h2>
+<p>We write the transition function as</p>
+<p><span class="math display">\[
+S_{t+1} = S^M(S_t, x_t, W_{t+1}). \quad (2.24)
+\]</span></p>
+<ol type="a">
+<li>Why do we write the exogenous information as <span class="math inline">\(W_{t+1}\)</span> rather than <span class="math inline">\(W_t\)</span>?</li>
+</ol>
+<blockquote>
+<p>Because it is information that arrives <em>after</em> the decision <span class="math inline">\(x_t\)</span> is made, between time <span class="math inline">\(t\)</span> and <span class="math inline">\(t+1\)</span>. Writing <span class="math inline">\(W_t\)</span> would imply that it is already known at time <span class="math inline">\(t\)</span>, when the decision is taken.</p>
+</blockquote>
+</section>
+<section id="cont." class="slide level2">
+<h2>2.1 (Cont.)</h2>
+<ol start="2" type="a">
+<li>At what point in time would we be computing <span class="math inline">\(S_{t+1}\)</span> using equation (2.24)?</li>
+</ol>
+<blockquote>
+<p>After taking the decision <span class="math inline">\(x_t\)</span> at time <span class="math inline">\(t\)</span> and observing the exogenous information <span class="math inline">\(W_{t+1}\)</span>, that is, at time <span class="math inline">\(t+1\)</span>.</p>
+</blockquote>
+</section>
+<section id="section-1" class="slide level2">
+<h2>2.2</h2>
+<p>What is the difference between <span class="math inline">\(p_t\)</span> and <span class="math inline">\(p_t(\omega)\)</span>?</p>
+<blockquote>
+<p><span class="math inline">\(p_t\)</span> is the price at time <span class="math inline">\(t\)</span> seen as a <strong>random variable</strong> (before we know its value). <span class="math inline">\(p_t(\omega)\)</span> is the <strong>specific realization</strong> of that price along one particular sample path <span class="math inline">\(\omega\)</span> (for example, one row of the simulated price table).</p>
+</blockquote>
+</section>
+<section id="section-2" class="slide level2">
+<h2>2.3</h2>
+<p>As you test out different policies, does the structure of the transition function change?</p>
+<blockquote>
+<p>No.&nbsp;The transition function describes how the system evolves and does not depend on the policy. Some policies require carrying extra state variables (e.g.&nbsp;<span class="math inline">\(\bar p_t\)</span> for the track policy), which adds an equation to the transition function, but its basic structure stays the same.</p>
+</blockquote>
+</section>
+<section id="section-3" class="slide level2">
+<h2>2.4</h2>
+<p>The objective function in equation (2.4) is written for a deterministic version of the problem. If we solve this optimization problem, does the decision <span class="math inline">\(x_t\)</span> at time <span class="math inline">\(t\)</span> depend on the prices <span class="math inline">\(p_{t'}\)</span> for <span class="math inline">\(t'\)</span> &gt; <span class="math inline">\(t\)</span>?</p>
+<blockquote>
+<p><strong>Yes.</strong> In the deterministic model all future prices are assumed known, so <span class="math inline">\(x_t\)</span> depends on <span class="math inline">\(p_{t'}\)</span> for <span class="math inline">\(t' &gt; t\)</span>. That is not implementable in practice, since at time <span class="math inline">\(t\)</span> we cannot know future prices. This is the reason for using policies <span class="math inline">\(X^\pi(S_t)\)</span> that only use information available at time <span class="math inline">\(t\)</span>.</p>
+</blockquote>
+</section>
+<section id="section-4" class="slide level2">
+<h2>2.5</h2>
+<p>Using the prices in table 2.2, use the policy that you will sell when the price falls below <span class="math inline">\(\$44.00\)</span>. Compute the objective function <span class="math inline">\(\hat{F}(\omega^n)\)</span> for <span class="math inline">\(n = 1, \dots , 10\)</span>. Compute the average selling price and its variance.</p>
+<div id="d303d14a" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a aria-label="3"></a></span>
+<span id="cb1-4"><a aria-label="4"></a><span class="co"># 1. Create the wide-format DataFrame with 'omega' as a column</span></span>
+<span id="cb1-5"><a aria-label="5"></a>PricesTableDict <span class="op">=</span> {</span>
+<span id="cb1-6"><a aria-label="6"></a>    <span class="st">'omega'</span>: [<span class="ss">f'ω^</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)],</span>
+<span id="cb1-7"><a aria-label="7"></a>    <span class="st">'p1'</span>: [<span class="fl">42.67</span>, <span class="fl">46.35</span>, <span class="fl">43.17</span>, <span class="fl">45.24</span>, <span class="fl">47.68</span>, <span class="fl">47.83</span>, <span class="fl">45.11</span>, <span class="fl">46.78</span>, <span class="fl">43.16</span>, <span class="fl">46.57</span>],</span>
+<span id="cb1-8"><a aria-label="8"></a>    <span class="st">'p2'</span>: [<span class="fl">45.53</span>, <span class="fl">43.15</span>, <span class="fl">45.16</span>, <span class="fl">45.67</span>, <span class="fl">46.32</span>, <span class="fl">44.70</span>, <span class="fl">43.67</span>, <span class="fl">44.98</span>, <span class="fl">44.57</span>, <span class="fl">45.01</span>],</span>
+<span id="cb1-9"><a aria-label="9"></a>    <span class="st">'p3'</span>: [<span class="fl">47.07</span>, <span class="fl">42.51</span>, <span class="fl">45.37</span>, <span class="fl">46.18</span>, <span class="fl">46.14</span>, <span class="fl">43.05</span>, <span class="fl">43.14</span>, <span class="fl">44.53</span>, <span class="fl">45.99</span>, <span class="fl">46.73</span>],</span>
+<span id="cb1-10"><a aria-label="10"></a>    <span class="st">'p4'</span>: [<span class="fl">47.56</span>, <span class="fl">40.51</span>, <span class="fl">44.30</span>, <span class="fl">46.22</span>, <span class="fl">41.53</span>, <span class="fl">43.77</span>, <span class="fl">44.78</span>, <span class="fl">45.42</span>, <span class="fl">47.38</span>, <span class="fl">42.08</span>],</span>
+<span id="cb1-11"><a aria-label="11"></a>    <span class="st">'p5'</span>: [<span class="fl">47.80</span>, <span class="fl">41.50</span>, <span class="fl">45.35</span>, <span class="fl">45.69</span>, <span class="fl">44.84</span>, <span class="fl">42.61</span>, <span class="fl">43.12</span>, <span class="fl">46.43</span>, <span class="fl">45.51</span>, <span class="fl">47.40</span>],</span>
+<span id="cb1-12"><a aria-label="12"></a>    <span class="st">'p6'</span>: [<span class="fl">48.43</span>, <span class="fl">41.00</span>, <span class="fl">47.23</span>, <span class="fl">44.24</span>, <span class="fl">45.17</span>, <span class="fl">44.32</span>, <span class="fl">42.36</span>, <span class="fl">47.67</span>, <span class="fl">46.27</span>, <span class="fl">49.14</span>],</span>
+<span id="cb1-13"><a aria-label="13"></a>    <span class="st">'p7'</span>: [<span class="fl">46.93</span>, <span class="fl">39.16</span>, <span class="fl">47.35</span>, <span class="fl">43.77</span>, <span class="fl">44.92</span>, <span class="fl">44.16</span>, <span class="fl">41.60</span>, <span class="fl">43.68</span>, <span class="fl">46.02</span>, <span class="fl">49.03</span>],</span>
+<span id="cb1-14"><a aria-label="14"></a>    <span class="st">'p8'</span>: [<span class="fl">46.57</span>, <span class="fl">41.11</span>, <span class="fl">46.30</span>, <span class="fl">43.57</span>, <span class="fl">46.09</span>, <span class="fl">45.29</span>, <span class="fl">40.83</span>, <span class="fl">49.03</span>, <span class="fl">45.09</span>, <span class="fl">48.74</span>]</span>
+<span id="cb1-15"><a aria-label="15"></a>}</span>
+<span id="cb1-16"><a aria-label="16"></a></span>
+<span id="cb1-17"><a aria-label="17"></a>PricesTableWide <span class="op">=</span> pd.DataFrame(PricesTableDict)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="cont.-1" class="slide level2">
+<h2>2.5 (Cont.)</h2>
+<div id="247423f0" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># 2. Apply pivot longer using pd.melt to place all numbers into a single column</span></span>
+<span id="cb2-2"><a aria-label="2"></a>PricesTableLong <span class="op">=</span> (</span>
+<span id="cb2-3"><a aria-label="3"></a>    PricesTableWide</span>
+<span id="cb2-4"><a aria-label="4"></a>    .melt(</span>
+<span id="cb2-5"><a aria-label="5"></a>      id_vars<span class="op">=</span>[<span class="st">'omega'</span>], </span>
+<span id="cb2-6"><a aria-label="6"></a>      var_name<span class="op">=</span><span class="st">'time'</span>, </span>
+<span id="cb2-7"><a aria-label="7"></a>      value_name<span class="op">=</span><span class="st">'price'</span></span>
+<span id="cb2-8"><a aria-label="8"></a>    ).assign(</span>
+<span id="cb2-9"><a aria-label="9"></a>      omega_num<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"omega"</span>].<span class="bu">str</span>.extract(<span class="vs">r"</span><span class="kw">(</span><span class="dv">\d</span><span class="op">+</span><span class="kw">)</span><span class="vs">"</span>, expand<span class="op">=</span><span class="va">False</span>).astype(<span class="bu">int</span>),</span>
+<span id="cb2-10"><a aria-label="10"></a>      t_num<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"time"</span>].<span class="bu">str</span>.extract(<span class="vs">r"</span><span class="kw">(</span><span class="dv">\d</span><span class="op">+</span><span class="kw">)</span><span class="vs">"</span>, expand<span class="op">=</span><span class="va">False</span>).astype(<span class="bu">int</span>),</span>
+<span id="cb2-11"><a aria-label="11"></a>    )</span>
+<span id="cb2-12"><a aria-label="12"></a>    .sort_values([<span class="st">"omega_num"</span>, <span class="st">"t_num"</span>])</span>
+<span id="cb2-13"><a aria-label="13"></a>    .drop(columns<span class="op">=</span>[<span class="st">"omega_num"</span>, <span class="st">"t_num"</span>])</span>
+<span id="cb2-14"><a aria-label="14"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="cont.-2" class="slide level2">
+<h2>2.5 (Cont.)</h2>
+<div id="48e3c4c7" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># 3. Apply policy described</span></span>
+<span id="cb3-2"><a aria-label="2"></a>BottomValue <span class="op">=</span> <span class="dv">44</span></span>
+<span id="cb3-3"><a aria-label="3"></a></span>
+<span id="cb3-4"><a aria-label="4"></a>PolicyResults <span class="op">=</span> (</span>
+<span id="cb3-5"><a aria-label="5"></a>    PricesTableLong</span>
+<span id="cb3-6"><a aria-label="6"></a>    .assign(</span>
+<span id="cb3-7"><a aria-label="7"></a>        is_low<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"price"</span>] <span class="op">&lt;</span> BottomValue,</span>
+<span id="cb3-8"><a aria-label="8"></a>        cum_low<span class="op">=</span><span class="kw">lambda</span> d: d.groupby(<span class="st">"omega"</span>)[<span class="st">"is_low"</span>].cumsum(),</span>
+<span id="cb3-9"><a aria-label="9"></a>    )</span>
+<span id="cb3-10"><a aria-label="10"></a>    .query(<span class="st">"(is_low and cum_low == 1) or (time == 'p8' and cum_low == 0)"</span>)</span>
+<span id="cb3-11"><a aria-label="11"></a>    .drop(columns<span class="op">=</span>[<span class="st">"is_low"</span>, <span class="st">"cum_low"</span>])</span>
+<span id="cb3-12"><a aria-label="12"></a>    .reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-13"><a aria-label="13"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="cont.-3" class="slide level2">
+<h2>2.5 (Cont.)</h2>
+<div id="331b7d10" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># 4. Describing results</span></span>
+<span id="cb4-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Mean price:"</span>, <span class="bu">float</span>(PolicyResults.price.mean()))</span>
+<span id="cb4-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="st">"Variance price:"</span>, <span class="bu">float</span>(PolicyResults.price.var()), end <span class="op">=</span> <span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)</span>
+<span id="cb4-4"><a aria-label="4"></a><span class="bu">print</span>(PolicyResults)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Mean price: 42.993
+Variance price: 0.522156666666667
+
+  omega time  price
+0   ω^1   p1  42.67
+1   ω^2   p2  43.15
+2   ω^3   p1  43.17
+3   ω^4   p7  43.77
+4   ω^5   p4  41.53
+5   ω^6   p3  43.05
+6   ω^7   p2  43.67
+7   ω^8   p7  43.68
+8   ω^9   p1  43.16
+9  ω^10   p4  42.08</code></pre>
+</div>
+</div>
+<blockquote>
+<p>Mean selling price <span class="math inline">\(\approx 42.993\)</span>; sample variance <span class="math inline">\(\approx 0.522\)</span> (variance of the average <span class="math inline">\(\approx 0.052\)</span>).</p>
+</blockquote>
+</section>
+<section id="a" class="slide level2">
+<h2>2.6 A</h2>
+<p>The questions below walk you through the steps of modeling the selling of an asset (say, a single share of a stock).</p>
+<ol type="a">
+<li>Assume that you are simulating your prices using data from a mathematical model given by</li>
+</ol>
+<p><span class="math display">\[
+p_{t+1} = \eta_0 p_t + \eta_1 p_{t-1} + \varepsilon_{t+1}
+\]</span></p>
+<p>where <span class="math inline">\(\varepsilon \sim N(0, 6^2)\)</span>.</p>
+</section>
+<section id="a-cont." class="slide level2">
+<h2>2.6 A (Cont.)</h2>
+<p>We do not know the value of <span class="math inline">\(\eta = (\eta_0, \eta_1)\)</span>, but our belief about the true value of <span class="math inline">\(\eta\)</span> is that it is multivariate normal, with <span class="math inline">\(\eta \sim MVN(\bar{\eta}, \Sigma)\)</span> where</p>
+<p><span class="math display">\[
+\bar{\eta}_t = \begin{bmatrix} .7 \\ .3 \end{bmatrix}.
+\]</span></p>
+<p>Assume that the covariance matrix <span class="math inline">\(\Sigma_t\)</span> is given by</p>
+<p><span class="math display">\[
+\Sigma_t = \begin{bmatrix} (.2)^2 &amp; (.05)^2 \\ (.05)^2 &amp; (.1)^2 \end{bmatrix}.
+\]</span></p>
+<p>where <span class="math inline">\(\Sigma_{tij} = Cov(\eta_i, \eta_j)\)</span> for <span class="math inline">\(i, j \in (0, 1)\)</span>.</p>
+</section>
+<section id="a-cont.-1" class="slide level2">
+<h2>2.6 A (Cont.)</h2>
+<p>Assume that at time <span class="math inline">\(t\)</span>, <span class="math inline">\(p_t = 20\)</span>, <span class="math inline">\(p_{t-1} = 24\)</span> and we observe <span class="math inline">\(p_{t+1} = 18.2\)</span>.</p>
+<p>Using the equations in section <strong>2.8.2</strong>, what is the updated estimates of <span class="math inline">\(\bar{\eta}_{t+1}\)</span> and <span class="math inline">\(\Sigma_{t+1}\)</span>? Give the updating equation and compute <span class="math inline">\(\bar{\eta}_{t+1}\)</span> and <span class="math inline">\(\Sigma_{t+1}\)</span> numerically.</p>
+<p><span class="math display">\[ \bar{\eta}_t = \begin{pmatrix} \bar{\eta}_{t,0}\\ \bar{\eta}_{t,1} \end{pmatrix} \]</span></p>
+<p><span class="math display">\[ M_t=\Sigma_t \]</span></p>
+<p><span class="math display">\[ \phi_t = \begin{pmatrix} p_t\\ p_{t-1} \end{pmatrix} \]</span></p>
+</section>
+<section id="a-cont.-2" class="slide level2">
+<h2>2.6 A (Cont.)</h2>
+<div id="e38a6edc" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-2"><a aria-label="2"></a></span>
+<span id="cb6-3"><a aria-label="3"></a><span class="co"># Let's keep all rows in 1 column</span></span>
+<span id="cb6-4"><a aria-label="4"></a>eta <span class="op">=</span> np.array([<span class="fl">0.7</span>, <span class="fl">0.3</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb6-5"><a aria-label="5"></a></span>
+<span id="cb6-6"><a aria-label="6"></a>Sigma <span class="op">=</span> np.array([</span>
+<span id="cb6-7"><a aria-label="7"></a>    [<span class="fl">0.20</span><span class="op">**</span><span class="dv">2</span>, <span class="fl">0.05</span><span class="op">**</span><span class="dv">2</span>],</span>
+<span id="cb6-8"><a aria-label="8"></a>    [<span class="fl">0.05</span><span class="op">**</span><span class="dv">2</span>, <span class="fl">0.10</span><span class="op">**</span><span class="dv">2</span>]</span>
+<span id="cb6-9"><a aria-label="9"></a>])</span>
+<span id="cb6-10"><a aria-label="10"></a></span>
+<span id="cb6-11"><a aria-label="11"></a>phi <span class="op">=</span> np.array([<span class="dv">20</span>, <span class="dv">24</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb6-12"><a aria-label="12"></a></span>
+<span id="cb6-13"><a aria-label="13"></a>M <span class="op">=</span> Sigma.copy()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="a-cont.-3" class="slide level2">
+<h2>2.6 A (Cont.)</h2>
+<div id="c68c68e1" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="st">"Initial parameter estimates:"</span>)</span>
+<span id="cb7-2"><a aria-label="2"></a><span class="bu">print</span>(eta)</span>
+<span id="cb7-3"><a aria-label="3"></a></span>
+<span id="cb7-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Initial covariance matrix:"</span>)</span>
+<span id="cb7-5"><a aria-label="5"></a><span class="bu">print</span>(M)</span>
+<span id="cb7-6"><a aria-label="6"></a></span>
+<span id="cb7-7"><a aria-label="7"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Observed prices:"</span>)</span>
+<span id="cb7-8"><a aria-label="8"></a><span class="bu">print</span>(phi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Initial parameter estimates:
+[[0.7]
+ [0.3]]
+
+Initial covariance matrix:
+[[0.04   0.0025]
+ [0.0025 0.01  ]]
+
+Observed prices:
+[[20]
+ [24]]</code></pre>
+</div>
+</div>
+</section>
+<section id="a-cont.-4" class="slide level2">
+<h2>2.6 A (Cont.)</h2>
+<p><span class="math display">\[ \bar{p}_{t+1}=\bar{\eta}_t^T\phi_t \]</span></p>
+<p><span class="math display">\[ \hat{\varepsilon}_{t+1} = \bar{p}_{t+1}-p_{t+1} \]</span></p>
+<div id="4f8e3157" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>p_hat <span class="op">=</span> (eta.T <span class="op">@</span> phi).item()</span>
+<span id="cb9-2"><a aria-label="2"></a></span>
+<span id="cb9-3"><a aria-label="3"></a>p_t_plus_1 <span class="op">=</span> <span class="fl">18.2</span></span>
+<span id="cb9-4"><a aria-label="4"></a>epsilon_hat <span class="op">=</span> p_hat <span class="op">-</span> p_t_plus_1</span>
+<span id="cb9-5"><a aria-label="5"></a></span>
+<span id="cb9-6"><a aria-label="6"></a><span class="bu">print</span>(<span class="st">"Estimated price:"</span>, p_hat)</span>
+<span id="cb9-7"><a aria-label="7"></a><span class="bu">print</span>(<span class="st">"Prediction error:"</span>, epsilon_hat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated price: 21.2
+Prediction error: 3.0</code></pre>
+</div>
+</div>
+</section>
+<section id="a-cont.-5" class="slide level2">
+<h2>2.6 A (Cont.)</h2>
+<p><span class="math display">\[ \gamma_t=1+\phi_t^T M_t\phi_t \]</span></p>
+<div id="621772d9" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a>gamma <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> phi.T <span class="op">@</span> M <span class="op">@</span> phi).item()</span>
+<span id="cb11-2"><a aria-label="2"></a></span>
+<span id="cb11-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="st">"Gamma:"</span>, gamma)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Gamma: 25.160000000000004</code></pre>
+</div>
+</div>
+</section>
+<section id="a-cont.-6" class="slide level2">
+<h2>2.6 A (Cont.)</h2>
+<p>First the parameter estimates, using <span class="math inline">\(M_t=\Sigma_t\)</span> (the matrix <strong>before</strong> the update):</p>
+<p><span class="math display">\[
+\bar{\eta}_{t+1} = \bar{\eta}_t- \frac{1}{\gamma_t} M_t\phi_t\hat{\varepsilon}_{t+1}
+\]</span></p>
+<div id="aa6d4d51" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>eta_new <span class="op">=</span> eta <span class="op">-</span> (M <span class="op">@</span> phi) <span class="op">*</span> epsilon_hat <span class="op">/</span> gamma</span>
+<span id="cb13-2"><a aria-label="2"></a></span>
+<span id="cb13-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="st">"Updated parameter estimates:"</span>)</span>
+<span id="cb13-4"><a aria-label="4"></a><span class="bu">print</span>(eta_new)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Updated parameter estimates:
+[[0.59745628]
+ [0.2654213 ]]</code></pre>
+</div>
+</div>
+</section>
+<section id="a-cont.-7" class="slide level2">
+<h2>2.6 A (Cont.)</h2>
+<p>Then the covariance matrix:</p>
+<p><span class="math display">\[
+\Sigma_{t+1} = M_{t+1} = M_t - \frac{ M_t\phi_t\phi_t^T M_t }{ \gamma_t }
+\]</span></p>
+<div id="b347e5a8" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a>M_new <span class="op">=</span> M <span class="op">-</span> (</span>
+<span id="cb15-2"><a aria-label="2"></a>    M <span class="op">@</span> phi <span class="op">@</span> phi.T <span class="op">@</span> M</span>
+<span id="cb15-3"><a aria-label="3"></a>) <span class="op">/</span> gamma</span>
+<span id="cb15-4"><a aria-label="4"></a></span>
+<span id="cb15-5"><a aria-label="5"></a><span class="bu">print</span>(<span class="st">"Updated covariance matrix:"</span>)</span>
+<span id="cb15-6"><a aria-label="6"></a><span class="bu">print</span>(M_new)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Updated covariance matrix:
+[[ 0.01060413 -0.00741256]
+ [-0.00741256  0.00665739]]</code></pre>
+</div>
+</div>
+</section>
+<section id="b" class="slide level2">
+<h2>2.6 B</h2>
+<ol start="2" type="a">
+<li>What is the state variable for this problem? Give the list of variables. Note that you may have to add variables as you progress through the exercise (you do not have all the information at this point). Make sure you include all the information you need to update <span class="math inline">\(\bar\eta_{t+1}\)</span> from <span class="math inline">\(\bar\eta_t\)</span>. How many dimensions does your state variable have (this is the same as asking how many variables are in <span class="math inline">\(S_t\)</span>).</li>
+</ol>
+<p><span class="math display">\[
+S_{t} = (R_t, p_t, p_{t-1}, p_{t-2}, p_{t-3}, p_{t-4}, p_{t-5}, p_{t-6}, \bar{\eta}_{t,0}, \bar{\eta}_{t,1}, M_t)
+\]</span></p>
+</section>
+<section id="b-cont." class="slide level2">
+<h2>2.6 B (Cont.)</h2>
+<ul>
+<li><span class="math inline">\(R_t\)</span>: whether we still hold the asset (1 variable).</li>
+<li><span class="math inline">\(p_t, \dots, p_{t-6}\)</span>: the 7 prices needed for the 7-day moving average (and for <span class="math inline">\(\phi_t\)</span>) (7 variables).</li>
+<li><span class="math inline">\(\bar\eta_t\)</span>: current estimate of the price model coefficients (2 variables).</li>
+<li><span class="math inline">\(M_t=\Sigma_t\)</span>: covariance matrix of the beliefs, needed to update <span class="math inline">\(\bar\eta\)</span> (4 entries, or 3 using symmetry).</li>
+<li><span class="math inline">\(\bar p_t\)</span> is <strong>not</strong> needed: it is a function of <span class="math inline">\(p_t,\dots,p_{t-6}\)</span>. <span class="math inline">\(\theta^{sell}\)</span> is a fixed parameter, so it belongs to <span class="math inline">\(S_0\)</span>, not to <span class="math inline">\(S_t\)</span>.</li>
+</ul>
+<p><strong>Dimension:</strong> <span class="math inline">\(1 + 7 + 2 + 4 = 14\)</span> variables (13 using the symmetry of <span class="math inline">\(M\)</span>).</p>
+</section>
+<section id="c" class="slide level2">
+<h2>2.6 C</h2>
+<ol start="3" type="a">
+<li>Our trader makes trading decisions based on a 7-day moving average of prices. Assume we are on day <span class="math inline">\(t\)</span>, and the 7-day moving average is computed using</li>
+</ol>
+<p><span class="math display">\[
+\bar{p}_t = \frac{1}{7} \sum_{t'=t-7+1}^{t} p_{t'}. \tag{2.26}
+\]</span></p>
+<p>The trader will sell an asset if <span class="math inline">\(p_t &lt; \bar{p}_t - \theta^{sell}\)</span>. Write out the decision rule as a policy <span class="math inline">\(X^{\pi}(S_t | \theta^{sell})\)</span> that returns 1 if we sell the asset and 0 otherwise.</p>
+</section>
+<section id="c-cont." class="slide level2">
+<h2>2.6 C (Cont.)</h2>
+<p><span class="math display">\[
+X^{\pi}(S_t | \theta^{sell}) = \begin{cases}
+1 &amp; \text{if } R_t = 1 \text{ and } p_t &lt; \bar{p}_t - \theta^{sell}, \\
+1 &amp; \text{if } R_t = 1 \text{ and } t = T, \\
+0 &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+</section>
+<section id="d" class="slide level2">
+<h2>2.6 D</h2>
+<ol start="4" type="a">
+<li>What is the exogenous information?</li>
+</ol>
+<blockquote>
+<p>The newly observed price. The prediction error <span class="math inline">\(\hat\varepsilon_{t+1}\)</span> is <strong>not</strong> exogenous, because it is computed from <span class="math inline">\(\bar\eta_t\)</span>, which is part of the state.</p>
+</blockquote>
+<p><span class="math display">\[
+W_{t+1} = p_{t+1}
+\]</span></p>
+<p>(equivalently, the noise <span class="math inline">\(\varepsilon_{t+1}\sim N(0,6^2)\)</span> that generates the price). The prediction error is a derived quantity:</p>
+<p><span class="math display">\[
+\hat{\varepsilon}_{t+1} = \bar\eta_t^T\phi_t - W_{t+1}
+\]</span></p>
+</section>
+<section id="e" class="slide level2">
+<h2>2.6 E</h2>
+<ol start="5" type="a">
+<li>Write out the transition equations. You need an equation for each element of <span class="math inline">\(S_t\)</span>.</li>
+</ol>
+<p><span class="math display">\[
+S_{t+1} = S^M(S_t, x_t, W_{t+1})
+\]</span></p>
+<p><span class="math display">\[
+R_{t+1} = R_{t} - x_t
+\]</span> &gt; Constraint: <span class="math inline">\(x_t \leq R_t\)</span> (we cannot sell what we no longer own)</p>
+</section>
+<section id="e-cont." class="slide level2">
+<h2>2.6 E (Cont.)</h2>
+<p>Prices (new price is exogenous; the rest of the window shifts by one day, and <span class="math inline">\(p_{t-6}\)</span> drops out):</p>
+<p><span class="math display">\[
+W_{t+1} = p_{t+1}
+\]</span></p>
+<p><span class="math display">\[
+p_{(t+1)-k} = p_{t-(k-1)}, \quad k = 1, \dots, 6
+\]</span></p>
+<p>that is, <span class="math inline">\(p_t\)</span> becomes the lag-1 entry, <span class="math inline">\(p_{t-1}\)</span> becomes the lag-2 entry, and so on up to <span class="math inline">\(p_{t-5}\)</span> becoming the lag-6 entry.</p>
+</section>
+<section id="e-cont.-1" class="slide level2">
+<h2>2.6 E (Cont.)</h2>
+<p>Learning equations (computed in this order, with <span class="math inline">\(M_t=\Sigma_t\)</span>):</p>
+<p><span class="math display">\[
+\hat{\varepsilon}_{t+1} = \bar\eta_t^T\phi_t - p_{t+1}, \qquad \gamma_t = 1 + \phi_t^T M_t\phi_t
+\]</span></p>
+<p><span class="math display">\[
+\bar{\eta}_{t+1} = \bar{\eta}_t - \frac{1}{\gamma_t} M_t\phi_t\hat{\varepsilon}_{t+1}
+\]</span></p>
+<p><span class="math display">\[
+M_{t+1} = M_t - \frac{ M_t\phi_t\phi_t^T M_t }{ \gamma_t } \quad (\text{so } \Sigma_{t+1} = M_{t+1})
+\]</span></p>
+<p>where <span class="math inline">\(\phi_t = (p_t, p_{t-1})^T\)</span>.</p>
+</section>
+<section id="f" class="slide level2">
+<h2>2.6 F</h2>
+<ol start="6" type="a">
+<li>Write out the objective function (and remember to use an expectation operator for each random variable as described in the instructions). Be sure to specify what you are optimizing over given the class of policy specified in part (c). Assume that you are training your policy on historical data in an offline setting.</li>
+</ol>
+<p>We optimize only over <span class="math inline">\(\theta^{sell}\)</span>, since the policy class is fixed (moving-average rule), so <span class="math inline">\(\pi = (f, \theta^{sell})\)</span>. The 7-day moving average needs 7 prices, so the first day on which the policy can decide is <span class="math inline">\(t_0 = 7\)</span> (the initial state <span class="math inline">\(S_{t_0}\)</span> already contains <span class="math inline">\(p_7,\dots,p_1\)</span>):</p>
+<p><span class="math display">\[
+\max_{\theta^{sell}} F^{\pi}(\theta^{sell}) =
+\max_{\theta^{sell}} \mathbb{E}_{S_{t_0}}\, \mathbb{E}_{W_{t_0+1},\dots,W_T \mid S_{t_0}}
+\left\{ \sum_{t=t_0}^{T} p_t \, X^{\pi}(S_t \mid \theta^{sell}) \;\Big|\; S_{t_0} \right\}
+\]</span></p>
+<p>subject to <span class="math inline">\(x_t = X^{\pi}(S_t|\theta^{sell}) \le R_t\)</span> and the transition equations of part (e), with <span class="math inline">\(W_{t+1} = p_{t+1}\)</span>.</p>
+</section>
+<section id="f-cont." class="slide level2">
+<h2>2.6 F (Cont.)</h2>
+<blockquote>
+<p><strong>Offline training on historical data.</strong> The table gives a single historical path <span class="math inline">\(\omega^1\)</span> (one price per day, <span class="math inline">\(T=10\)</span>), not several sample paths. The expectations are replaced by the observed history (<span class="math inline">\(N=1\)</span>):</p>
+</blockquote>
+<p><span class="math display">\[
+\bar F(\theta^{sell}) = \sum_{t=7}^{10} p_t(\omega^1)\,
+X^{\pi}\big(S_t(\omega^1)\mid\theta^{sell}\big),
+\qquad
+\theta^{sell,*} = \arg\max_{\theta^{sell}} \bar F(\theta^{sell})
+\]</span></p>
+</section>
+<section id="f-cont.-1" class="slide level2">
+<h2>2.6 F (Cont.)</h2>
+<blockquote>
+<p>Since the policy sells only once, <span class="math inline">\(\bar F(\theta^{sell}) = p_{\tau}\)</span>, where <span class="math inline">\(\tau\)</span> is the first <span class="math inline">\(t \ge 7\)</span> with <span class="math inline">\(p_t &lt; \bar p_t - \theta^{sell}\)</span> (or <span class="math inline">\(\tau = T = 10\)</span> if that never happens).</p>
+</blockquote>
+<blockquote>
+<p>Decisions can only be evaluated on <span class="math inline">\(t = 7, 8, 9, 10\)</span> (4 days), because <span class="math inline">\(\bar p_t\)</span> in (2.26) includes <span class="math inline">\(p_t\)</span> and needs 7 prices.</p>
+</blockquote>
+</section>
+<section id="f-cont.-2" class="slide level2">
+<h2>2.6 F (Cont.)</h2>
+<div id="e73f248f" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-2"><a aria-label="2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-3"><a aria-label="3"></a></span>
+<span id="cb17-4"><a aria-label="4"></a>p <span class="op">=</span> np.array([<span class="dv">20</span>, <span class="dv">32</span>, <span class="dv">26</span>, <span class="dv">180</span>, <span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">18</span>, <span class="dv">120</span>, <span class="dv">57</span>, <span class="dv">15</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb17-5"><a aria-label="5"></a>T <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb17-6"><a aria-label="6"></a></span>
+<span id="cb17-7"><a aria-label="7"></a><span class="co"># moving average (2.26) for t = 7,...,10</span></span>
+<span id="cb17-8"><a aria-label="8"></a>rows <span class="op">=</span> [(t, p[t<span class="op">-</span><span class="dv">1</span>], p[t<span class="op">-</span><span class="dv">7</span>:t].mean(), p[t<span class="op">-</span><span class="dv">7</span>:t].mean() <span class="op">-</span> p[t<span class="op">-</span><span class="dv">1</span>]) <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>, T <span class="op">+</span> <span class="dv">1</span>)]</span>
+<span id="cb17-9"><a aria-label="9"></a>table <span class="op">=</span> pd.DataFrame(rows, columns<span class="op">=</span>[<span class="st">"t"</span>, <span class="st">"p_t"</span>, <span class="st">"pbar_t"</span>, <span class="st">"pbar_t - p_t"</span>])</span>
+<span id="cb17-10"><a aria-label="10"></a><span class="bu">print</span>(table)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    t    p_t     pbar_t  pbar_t - p_t
+0   7   18.0  50.142857     32.142857
+1   8  120.0  64.428571    -55.571429
+2   9   57.0  68.000000     11.000000
+3  10   15.0  66.428571     51.428571</code></pre>
+</div>
+</div>
+</section>
+<section id="f-cont.-3" class="slide level2">
+<h2>2.6 F (Cont.)</h2>
+<div id="b4f43aca" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="kw">def</span> F(theta):</span>
+<span id="cb19-2"><a aria-label="2"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>, T <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb19-3"><a aria-label="3"></a>        <span class="cf">if</span> p[t<span class="op">-</span><span class="dv">1</span>] <span class="op">&lt;</span> p[t<span class="op">-</span><span class="dv">7</span>:t].mean() <span class="op">-</span> theta <span class="kw">or</span> t <span class="op">==</span> T:</span>
+<span id="cb19-4"><a aria-label="4"></a>            <span class="cf">return</span> t, p[t<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb19-5"><a aria-label="5"></a></span>
+<span id="cb19-6"><a aria-label="6"></a><span class="cf">for</span> theta <span class="kw">in</span> [<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">32</span>, <span class="dv">33</span>, <span class="dv">60</span>]:</span>
+<span id="cb19-7"><a aria-label="7"></a>    <span class="bu">print</span>(theta, F(theta))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0 (7, np.float64(18.0))
+10 (7, np.float64(18.0))
+32 (7, np.float64(18.0))
+33 (10, np.float64(15.0))
+60 (10, np.float64(15.0))</code></pre>
+</div>
+</div>
+</section>
+<section id="f-cont.-4" class="slide level2">
+<h2>2.6 F (Cont.)</h2>
+<p><span class="math display">\[
+\bar F(\theta^{sell}) =
+\begin{cases}
+18 &amp; \text{if } \theta^{sell} &lt; 32.14 \quad (\text{sell at } t=7),\\
+15 &amp; \text{if } \theta^{sell} \ge 32.14 \quad (\text{forced sale at } t=10).
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+\theta^{sell,*} \in [0,\ 32.14), \qquad \bar F(\theta^{sell,*}) = 18
+\]</span></p>
+<blockquote>
+<p>The optimum is not unique, and it comes from a single path of 4 decision days, so it is very likely overfitted. With more historical paths (or simulated ones) we would average <span class="math inline">\(\hat F^{\pi}(\omega^n)\)</span> over <span class="math inline">\(n=1,\dots,N\)</span>.</p>
+</blockquote>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

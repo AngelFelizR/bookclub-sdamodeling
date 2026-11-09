@@ -150,14 +150,14 @@
     "href": "slides/01.html#process-overview",
     "title": "Modeling sequential decision problems",
     "section": "Process Overview",
-    "text": "Process Overview\n\n\n\n\n\n\nflowchart LR\n  A[Ambiguous Problem] --&gt; B(\"Precise Definition &lt;br&gt; (Broken Down into Pieces)\")\n  B --&gt; C[Computer Software]\n\n  classDef nodeStyle fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;\n  classDef highlight fill:#0f172a,stroke:#60a5fa,stroke-width:2.5px,color:#ffffff;\n  \n  class A,C nodeStyle;\n  class B highlight;"
+    "text": "Process Overview\n\nflowchart LR\n  A[Ambiguous Problem] --&gt; B(\"Precise Definition &lt;br&gt; (Broken Down into Pieces)\")\n  B --&gt; C[Computer Software]\n\n  classDef nodeStyle fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;\n  classDef highlight fill:#0f172a,stroke:#60a5fa,stroke-width:2.5px,color:#ffffff;\n  \n  class A,C nodeStyle;\n  class B highlight;\n\n\n\n\n\nflowchart LR\n  A[Ambiguous Problem] --&gt; B(\"Precise Definition &lt;br&gt; (Broken Down into Pieces)\")\n  B --&gt; C[Computer Software]\n\n  classDef nodeStyle fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;\n  classDef highlight fill:#0f172a,stroke:#60a5fa,stroke-width:2.5px,color:#ffffff;\n  \n  class A,C nodeStyle;\n  class B highlight;"
   },
   {
     "objectID": "slides/01.html#the-narrative-step-1",
     "href": "slides/01.html#the-narrative-step-1",
     "title": "Modeling sequential decision problems",
     "section": "The Narrative (step 1)",
-    "text": "The Narrative (step 1)\n\n\n\n\n\n\nflowchart TD\n    A[\"⚠️ Problem Definition&lt;br/&gt;Describe the problem in plain English\"]\n    B[\"📉 Consequences of Inaction&lt;br/&gt;What happens if the problem remains unsolved?\"]\n    D[\"🔍 Project Scope&lt;br/&gt;What will the solution address, and what is explicitly excluded?\"]\n    E[\"💡 Solution Overview&lt;br/&gt;Describe the solution to be developed and its main deliverables\"]\n\n    A --&gt; B --&gt; D --&gt; E\n\n    classDef danger fill:#2c0f14,stroke:#f87171,stroke-width:2px,color:#fef2f2,width:260px,white-space:normal,text-align:center;\n    classDef warning fill:#2a1b0c,stroke:#fbbf24,stroke-width:2px,color:#fffbeb,width:260px,white-space:normal,text-align:center;\n    classDef info fill:#0c2136,stroke:#38bdf8,stroke-width:2px,color:#f0f9ff,width:260px,white-space:normal,text-align:center;\n    classDef success fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5,width:260px,white-space:normal,text-align:center;\n\n    class A danger;\n    class B warning;\n    class D info;\n    class E success;"
+    "text": "The Narrative (step 1)\n\nflowchart TD\n    A[\"⚠️ Problem Definition&lt;br/&gt;Describe the problem in plain English\"]\n    B[\"📉 Consequences of Inaction&lt;br/&gt;What happens if the problem remains unsolved?\"]\n    D[\"🔍 Project Scope&lt;br/&gt;What will the solution address, and what is explicitly excluded?\"]\n    E[\"💡 Solution Overview&lt;br/&gt;Describe the solution to be developed and its main deliverables\"]\n\n    A --&gt; B --&gt; D --&gt; E\n\n    classDef danger fill:#2c0f14,stroke:#f87171,stroke-width:2px,color:#fef2f2,width:260px,white-space:normal,text-align:center;\n    classDef warning fill:#2a1b0c,stroke:#fbbf24,stroke-width:2px,color:#fffbeb,width:260px,white-space:normal,text-align:center;\n    classDef info fill:#0c2136,stroke:#38bdf8,stroke-width:2px,color:#f0f9ff,width:260px,white-space:normal,text-align:center;\n    classDef success fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5,width:260px,white-space:normal,text-align:center;\n\n    class A danger;\n    class B warning;\n    class D info;\n    class E success;\n\n\n\n\n\nflowchart TD\n    A[\"⚠️ Problem Definition&lt;br/&gt;Describe the problem in plain English\"]\n    B[\"📉 Consequences of Inaction&lt;br/&gt;What happens if the problem remains unsolved?\"]\n    D[\"🔍 Project Scope&lt;br/&gt;What will the solution address, and what is explicitly excluded?\"]\n    E[\"💡 Solution Overview&lt;br/&gt;Describe the solution to be developed and its main deliverables\"]\n\n    A --&gt; B --&gt; D --&gt; E\n\n    classDef danger fill:#2c0f14,stroke:#f87171,stroke-width:2px,color:#fef2f2,width:260px,white-space:normal,text-align:center;\n    classDef warning fill:#2a1b0c,stroke:#fbbf24,stroke-width:2px,color:#fffbeb,width:260px,white-space:normal,text-align:center;\n    classDef info fill:#0c2136,stroke:#38bdf8,stroke-width:2px,color:#f0f9ff,width:260px,white-space:normal,text-align:center;\n    classDef success fill:#062319,stroke:#34d399,stroke-width:2px,color:#ecfdf5,width:260px,white-space:normal,text-align:center;\n\n    class A danger;\n    class B warning;\n    class D info;\n    class E success;"
   },
   {
     "objectID": "slides/01.html#roadmap-four-questions-four-tools",
@@ -532,7 +532,7 @@
     "href": "slides/00.html#the-book-at-a-glance",
     "title": "Club meetings",
     "section": "The book at a glance",
-    "text": "The book at a glance\n\nSequential Decision Analytics and Modeling (2e): Modeling with Python\nSequential decision problems always look like this:\n\n\n\n\n\n\n\nflowchart LR\n  A{Decision} --&gt; B(Information)\n  B --&gt; C{Decision}\n  C --&gt; D[Information]\n  D --&gt; E{Decision}\n\n\n\n\n\n\n\nEach decision brings a cost or reward\nDecisions are made with a method called a policy\nCentral goal: design policies that work well:\n\nOver time\nUnder uncertainty about information that has not arrived yet\n\nGoal: learn how to think about these problems, even if you never write a line of code",
+    "text": "The book at a glance\n\nSequential Decision Analytics and Modeling (2e): Modeling with Python\nSequential decision problems always look like this:\n\n\nflowchart LR\n  A{Decision} --&gt; B(Information)\n  B --&gt; C{Decision}\n  C --&gt; D[Information]\n  D --&gt; E{Decision}\n\n\n\n\n\nflowchart LR\n  A{Decision} --&gt; B(Information)\n  B --&gt; C{Decision}\n  C --&gt; D[Information]\n  D --&gt; E{Decision}\n\n\n\n\n\n\n\nEach decision brings a cost or reward\nDecisions are made with a method called a policy\nCentral goal: design policies that work well:\n\nOver time\nUnder uncertainty about information that has not arrived yet\n\nGoal: learn how to think about these problems, even if you never write a line of code",
     "crumbs": [
       "Club meetings"
     ]
@@ -781,6 +781,230 @@
     "title": "An asset selling problem",
     "section": "Pending work",
     "text": "Pending work\n\nBest policy search: run the different combinations of policy classes \\(f \\in \\mathcal{F}\\) and parameters \\(\\theta^f \\in \\Theta^f\\) with the Python module AssetSelling, and pick the combination with the highest \\(\\overline{F}^{\\pi}\\).\nTime series extension (§2.8.1): replace the price process with\n\n\\[\np_{t+1} = \\eta_0 p_t + \\eta_1 p_{t-1} + \\eta_2 p_{t-2} + \\varepsilon_{t+1}\n\\]\nwhich requires enlarging the state variable to \\(S_t = (R_t, p_t, p_{t-1}, p_{t-2})\\)."
+  },
+  {
+    "objectID": "slides/02.html#section",
+    "href": "slides/02.html#section",
+    "title": "An asset selling problem",
+    "section": "2.1",
+    "text": "2.1\nWe write the transition function as\n\\[\nS_{t+1} = S^M(S_t, x_t, W_{t+1}). \\quad (2.24)\n\\]\n\nWhy do we write the exogenous information as \\(W_{t+1}\\) rather than \\(W_t\\)?\n\n\nBecause it is information that arrives after the decision \\(x_t\\) is made, between time \\(t\\) and \\(t+1\\). Writing \\(W_t\\) would imply that it is already known at time \\(t\\), when the decision is taken."
+  },
+  {
+    "objectID": "slides/02.html#cont.",
+    "href": "slides/02.html#cont.",
+    "title": "An asset selling problem",
+    "section": "2.1 (Cont.)",
+    "text": "2.1 (Cont.)\n\nAt what point in time would we be computing \\(S_{t+1}\\) using equation (2.24)?\n\n\nAfter taking the decision \\(x_t\\) at time \\(t\\) and observing the exogenous information \\(W_{t+1}\\), that is, at time \\(t+1\\)."
+  },
+  {
+    "objectID": "slides/02.html#section-1",
+    "href": "slides/02.html#section-1",
+    "title": "An asset selling problem",
+    "section": "2.2",
+    "text": "2.2\nWhat is the difference between \\(p_t\\) and \\(p_t(\\omega)\\)?\n\n\\(p_t\\) is the price at time \\(t\\) seen as a random variable (before we know its value). \\(p_t(\\omega)\\) is the specific realization of that price along one particular sample path \\(\\omega\\) (for example, one row of the simulated price table)."
+  },
+  {
+    "objectID": "slides/02.html#section-2",
+    "href": "slides/02.html#section-2",
+    "title": "An asset selling problem",
+    "section": "2.3",
+    "text": "2.3\nAs you test out different policies, does the structure of the transition function change?\n\nNo. The transition function describes how the system evolves and does not depend on the policy. Some policies require carrying extra state variables (e.g. \\(\\bar p_t\\) for the track policy), which adds an equation to the transition function, but its basic structure stays the same."
+  },
+  {
+    "objectID": "slides/02.html#section-3",
+    "href": "slides/02.html#section-3",
+    "title": "An asset selling problem",
+    "section": "2.4",
+    "text": "2.4\nThe objective function in equation (2.4) is written for a deterministic version of the problem. If we solve this optimization problem, does the decision \\(x_t\\) at time \\(t\\) depend on the prices \\(p_{t'}\\) for \\(t'\\) &gt; \\(t\\)?\n\nYes. In the deterministic model all future prices are assumed known, so \\(x_t\\) depends on \\(p_{t'}\\) for \\(t' &gt; t\\). That is not implementable in practice, since at time \\(t\\) we cannot know future prices. This is the reason for using policies \\(X^\\pi(S_t)\\) that only use information available at time \\(t\\)."
+  },
+  {
+    "objectID": "slides/02.html#section-4",
+    "href": "slides/02.html#section-4",
+    "title": "An asset selling problem",
+    "section": "2.5",
+    "text": "2.5\nUsing the prices in table 2.2, use the policy that you will sell when the price falls below \\(\\$44.00\\). Compute the objective function \\(\\hat{F}(\\omega^n)\\) for \\(n = 1, \\dots , 10\\). Compute the average selling price and its variance.\n\nimport numpy as np\nimport pandas as pd\n\n# 1. Create the wide-format DataFrame with 'omega' as a column\nPricesTableDict = {\n    'omega': [f'ω^{i}' for i in range(1, 11)],\n    'p1': [42.67, 46.35, 43.17, 45.24, 47.68, 47.83, 45.11, 46.78, 43.16, 46.57],\n    'p2': [45.53, 43.15, 45.16, 45.67, 46.32, 44.70, 43.67, 44.98, 44.57, 45.01],\n    'p3': [47.07, 42.51, 45.37, 46.18, 46.14, 43.05, 43.14, 44.53, 45.99, 46.73],\n    'p4': [47.56, 40.51, 44.30, 46.22, 41.53, 43.77, 44.78, 45.42, 47.38, 42.08],\n    'p5': [47.80, 41.50, 45.35, 45.69, 44.84, 42.61, 43.12, 46.43, 45.51, 47.40],\n    'p6': [48.43, 41.00, 47.23, 44.24, 45.17, 44.32, 42.36, 47.67, 46.27, 49.14],\n    'p7': [46.93, 39.16, 47.35, 43.77, 44.92, 44.16, 41.60, 43.68, 46.02, 49.03],\n    'p8': [46.57, 41.11, 46.30, 43.57, 46.09, 45.29, 40.83, 49.03, 45.09, 48.74]\n}\n\nPricesTableWide = pd.DataFrame(PricesTableDict)"
+  },
+  {
+    "objectID": "slides/02.html#cont.-1",
+    "href": "slides/02.html#cont.-1",
+    "title": "An asset selling problem",
+    "section": "2.5 (Cont.)",
+    "text": "2.5 (Cont.)\n\n# 2. Apply pivot longer using pd.melt to place all numbers into a single column\nPricesTableLong = (\n    PricesTableWide\n    .melt(\n      id_vars=['omega'], \n      var_name='time', \n      value_name='price'\n    ).assign(\n      omega_num=lambda d: d[\"omega\"].str.extract(r\"(\\d+)\", expand=False).astype(int),\n      t_num=lambda d: d[\"time\"].str.extract(r\"(\\d+)\", expand=False).astype(int),\n    )\n    .sort_values([\"omega_num\", \"t_num\"])\n    .drop(columns=[\"omega_num\", \"t_num\"])\n)"
+  },
+  {
+    "objectID": "slides/02.html#cont.-2",
+    "href": "slides/02.html#cont.-2",
+    "title": "An asset selling problem",
+    "section": "2.5 (Cont.)",
+    "text": "2.5 (Cont.)\n\n# 3. Apply policy described\nBottomValue = 44\n\nPolicyResults = (\n    PricesTableLong\n    .assign(\n        is_low=lambda d: d[\"price\"] &lt; BottomValue,\n        cum_low=lambda d: d.groupby(\"omega\")[\"is_low\"].cumsum(),\n    )\n    .query(\"(is_low and cum_low == 1) or (time == 'p8' and cum_low == 0)\")\n    .drop(columns=[\"is_low\", \"cum_low\"])\n    .reset_index(drop=True)\n)"
+  },
+  {
+    "objectID": "slides/02.html#cont.-3",
+    "href": "slides/02.html#cont.-3",
+    "title": "An asset selling problem",
+    "section": "2.5 (Cont.)",
+    "text": "2.5 (Cont.)\n\n# 4. Describing results\nprint(\"\\nMean price:\", float(PolicyResults.price.mean()))\nprint(\"Variance price:\", float(PolicyResults.price.var()), end = \"\\n\\n\")\nprint(PolicyResults)\n\n\nMean price: 42.993\nVariance price: 0.522156666666667\n\n  omega time  price\n0   ω^1   p1  42.67\n1   ω^2   p2  43.15\n2   ω^3   p1  43.17\n3   ω^4   p7  43.77\n4   ω^5   p4  41.53\n5   ω^6   p3  43.05\n6   ω^7   p2  43.67\n7   ω^8   p7  43.68\n8   ω^9   p1  43.16\n9  ω^10   p4  42.08\n\n\n\nMean selling price \\(\\approx 42.993\\); sample variance \\(\\approx 0.522\\) (variance of the average \\(\\approx 0.052\\))."
+  },
+  {
+    "objectID": "slides/02.html#a",
+    "href": "slides/02.html#a",
+    "title": "An asset selling problem",
+    "section": "2.6 A",
+    "text": "2.6 A\nThe questions below walk you through the steps of modeling the selling of an asset (say, a single share of a stock).\n\nAssume that you are simulating your prices using data from a mathematical model given by\n\n\\[\np_{t+1} = \\eta_0 p_t + \\eta_1 p_{t-1} + \\varepsilon_{t+1}\n\\]\nwhere \\(\\varepsilon \\sim N(0, 6^2)\\)."
+  },
+  {
+    "objectID": "slides/02.html#a-cont.",
+    "href": "slides/02.html#a-cont.",
+    "title": "An asset selling problem",
+    "section": "2.6 A (Cont.)",
+    "text": "2.6 A (Cont.)\nWe do not know the value of \\(\\eta = (\\eta_0, \\eta_1)\\), but our belief about the true value of \\(\\eta\\) is that it is multivariate normal, with \\(\\eta \\sim MVN(\\bar{\\eta}, \\Sigma)\\) where\n\\[\n\\bar{\\eta}_t = \\begin{bmatrix} .7 \\\\ .3 \\end{bmatrix}.\n\\]\nAssume that the covariance matrix \\(\\Sigma_t\\) is given by\n\\[\n\\Sigma_t = \\begin{bmatrix} (.2)^2 & (.05)^2 \\\\ (.05)^2 & (.1)^2 \\end{bmatrix}.\n\\]\nwhere \\(\\Sigma_{tij} = Cov(\\eta_i, \\eta_j)\\) for \\(i, j \\in (0, 1)\\)."
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-1",
+    "href": "slides/02.html#a-cont.-1",
+    "title": "An asset selling problem",
+    "section": "2.6 A (Cont.)",
+    "text": "2.6 A (Cont.)\nAssume that at time \\(t\\), \\(p_t = 20\\), \\(p_{t-1} = 24\\) and we observe \\(p_{t+1} = 18.2\\).\nUsing the equations in section 2.8.2, what is the updated estimates of \\(\\bar{\\eta}_{t+1}\\) and \\(\\Sigma_{t+1}\\)? Give the updating equation and compute \\(\\bar{\\eta}_{t+1}\\) and \\(\\Sigma_{t+1}\\) numerically.\n\\[ \\bar{\\eta}_t = \\begin{pmatrix} \\bar{\\eta}_{t,0}\\\\ \\bar{\\eta}_{t,1} \\end{pmatrix} \\]\n\\[ M_t=\\Sigma_t \\]\n\\[ \\phi_t = \\begin{pmatrix} p_t\\\\ p_{t-1} \\end{pmatrix} \\]"
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-2",
+    "href": "slides/02.html#a-cont.-2",
+    "title": "An asset selling problem",
+    "section": "2.6 A (Cont.)",
+    "text": "2.6 A (Cont.)\n\nimport numpy as np\n\n# Let's keep all rows in 1 column\neta = np.array([0.7, 0.3]).reshape(-1, 1)\n\nSigma = np.array([\n    [0.20**2, 0.05**2],\n    [0.05**2, 0.10**2]\n])\n\nphi = np.array([20, 24]).reshape(-1, 1)\n\nM = Sigma.copy()"
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-3",
+    "href": "slides/02.html#a-cont.-3",
+    "title": "An asset selling problem",
+    "section": "2.6 A (Cont.)",
+    "text": "2.6 A (Cont.)\n\nprint(\"Initial parameter estimates:\")\nprint(eta)\n\nprint(\"\\nInitial covariance matrix:\")\nprint(M)\n\nprint(\"\\nObserved prices:\")\nprint(phi)\n\nInitial parameter estimates:\n[[0.7]\n [0.3]]\n\nInitial covariance matrix:\n[[0.04   0.0025]\n [0.0025 0.01  ]]\n\nObserved prices:\n[[20]\n [24]]"
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-4",
+    "href": "slides/02.html#a-cont.-4",
+    "title": "An asset selling problem",
+    "section": "2.6 A (Cont.)",
+    "text": "2.6 A (Cont.)\n\\[ \\bar{p}_{t+1}=\\bar{\\eta}_t^T\\phi_t \\]\n\\[ \\hat{\\varepsilon}_{t+1} = \\bar{p}_{t+1}-p_{t+1} \\]\n\np_hat = (eta.T @ phi).item()\n\np_t_plus_1 = 18.2\nepsilon_hat = p_hat - p_t_plus_1\n\nprint(\"Estimated price:\", p_hat)\nprint(\"Prediction error:\", epsilon_hat)\n\nEstimated price: 21.2\nPrediction error: 3.0"
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-5",
+    "href": "slides/02.html#a-cont.-5",
+    "title": "An asset selling problem",
+    "section": "2.6 A (Cont.)",
+    "text": "2.6 A (Cont.)\n\\[ \\gamma_t=1+\\phi_t^T M_t\\phi_t \\]\n\ngamma = (1 + phi.T @ M @ phi).item()\n\nprint(\"Gamma:\", gamma)\n\nGamma: 25.160000000000004"
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-6",
+    "href": "slides/02.html#a-cont.-6",
+    "title": "An asset selling problem",
+    "section": "2.6 A (Cont.)",
+    "text": "2.6 A (Cont.)\nFirst the parameter estimates, using \\(M_t=\\Sigma_t\\) (the matrix before the update):\n\\[\n\\bar{\\eta}_{t+1} = \\bar{\\eta}_t- \\frac{1}{\\gamma_t} M_t\\phi_t\\hat{\\varepsilon}_{t+1}\n\\]\n\neta_new = eta - (M @ phi) * epsilon_hat / gamma\n\nprint(\"Updated parameter estimates:\")\nprint(eta_new)\n\nUpdated parameter estimates:\n[[0.59745628]\n [0.2654213 ]]"
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-7",
+    "href": "slides/02.html#a-cont.-7",
+    "title": "An asset selling problem",
+    "section": "2.6 A (Cont.)",
+    "text": "2.6 A (Cont.)\nThen the covariance matrix:\n\\[\n\\Sigma_{t+1} = M_{t+1} = M_t - \\frac{ M_t\\phi_t\\phi_t^T M_t }{ \\gamma_t }\n\\]\n\nM_new = M - (\n    M @ phi @ phi.T @ M\n) / gamma\n\nprint(\"Updated covariance matrix:\")\nprint(M_new)\n\nUpdated covariance matrix:\n[[ 0.01060413 -0.00741256]\n [-0.00741256  0.00665739]]"
+  },
+  {
+    "objectID": "slides/02.html#b",
+    "href": "slides/02.html#b",
+    "title": "An asset selling problem",
+    "section": "2.6 B",
+    "text": "2.6 B\n\nWhat is the state variable for this problem? Give the list of variables. Note that you may have to add variables as you progress through the exercise (you do not have all the information at this point). Make sure you include all the information you need to update \\(\\bar\\eta_{t+1}\\) from \\(\\bar\\eta_t\\). How many dimensions does your state variable have (this is the same as asking how many variables are in \\(S_t\\)).\n\n\\[\nS_{t} = (R_t, p_t, p_{t-1}, p_{t-2}, p_{t-3}, p_{t-4}, p_{t-5}, p_{t-6}, \\bar{\\eta}_{t,0}, \\bar{\\eta}_{t,1}, M_t)\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#b-cont.",
+    "href": "slides/02.html#b-cont.",
+    "title": "An asset selling problem",
+    "section": "2.6 B (Cont.)",
+    "text": "2.6 B (Cont.)\n\n\\(R_t\\): whether we still hold the asset (1 variable).\n\\(p_t, \\dots, p_{t-6}\\): the 7 prices needed for the 7-day moving average (and for \\(\\phi_t\\)) (7 variables).\n\\(\\bar\\eta_t\\): current estimate of the price model coefficients (2 variables).\n\\(M_t=\\Sigma_t\\): covariance matrix of the beliefs, needed to update \\(\\bar\\eta\\) (4 entries, or 3 using symmetry).\n\\(\\bar p_t\\) is not needed: it is a function of \\(p_t,\\dots,p_{t-6}\\). \\(\\theta^{sell}\\) is a fixed parameter, so it belongs to \\(S_0\\), not to \\(S_t\\).\n\nDimension: \\(1 + 7 + 2 + 4 = 14\\) variables (13 using the symmetry of \\(M\\))."
+  },
+  {
+    "objectID": "slides/02.html#c",
+    "href": "slides/02.html#c",
+    "title": "An asset selling problem",
+    "section": "2.6 C",
+    "text": "2.6 C\n\nOur trader makes trading decisions based on a 7-day moving average of prices. Assume we are on day \\(t\\), and the 7-day moving average is computed using\n\n\\[\n\\bar{p}_t = \\frac{1}{7} \\sum_{t'=t-7+1}^{t} p_{t'}. \\tag{2.26}\n\\]\nThe trader will sell an asset if \\(p_t &lt; \\bar{p}_t - \\theta^{sell}\\). Write out the decision rule as a policy \\(X^{\\pi}(S_t | \\theta^{sell})\\) that returns 1 if we sell the asset and 0 otherwise."
+  },
+  {
+    "objectID": "slides/02.html#c-cont.",
+    "href": "slides/02.html#c-cont.",
+    "title": "An asset selling problem",
+    "section": "2.6 C (Cont.)",
+    "text": "2.6 C (Cont.)\n\\[\nX^{\\pi}(S_t | \\theta^{sell}) = \\begin{cases}\n1 & \\text{if } R_t = 1 \\text{ and } p_t &lt; \\bar{p}_t - \\theta^{sell}, \\\\\n1 & \\text{if } R_t = 1 \\text{ and } t = T, \\\\\n0 & \\text{otherwise}.\n\\end{cases}\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#d",
+    "href": "slides/02.html#d",
+    "title": "An asset selling problem",
+    "section": "2.6 D",
+    "text": "2.6 D\n\nWhat is the exogenous information?\n\n\nThe newly observed price. The prediction error \\(\\hat\\varepsilon_{t+1}\\) is not exogenous, because it is computed from \\(\\bar\\eta_t\\), which is part of the state.\n\n\\[\nW_{t+1} = p_{t+1}\n\\]\n(equivalently, the noise \\(\\varepsilon_{t+1}\\sim N(0,6^2)\\) that generates the price). The prediction error is a derived quantity:\n\\[\n\\hat{\\varepsilon}_{t+1} = \\bar\\eta_t^T\\phi_t - W_{t+1}\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#e",
+    "href": "slides/02.html#e",
+    "title": "An asset selling problem",
+    "section": "2.6 E",
+    "text": "2.6 E\n\nWrite out the transition equations. You need an equation for each element of \\(S_t\\).\n\n\\[\nS_{t+1} = S^M(S_t, x_t, W_{t+1})\n\\]\n\\[\nR_{t+1} = R_{t} - x_t\n\\] &gt; Constraint: \\(x_t \\leq R_t\\) (we cannot sell what we no longer own)"
+  },
+  {
+    "objectID": "slides/02.html#e-cont.",
+    "href": "slides/02.html#e-cont.",
+    "title": "An asset selling problem",
+    "section": "2.6 E (Cont.)",
+    "text": "2.6 E (Cont.)\nPrices (new price is exogenous; the rest of the window shifts by one day, and \\(p_{t-6}\\) drops out):\n\\[\nW_{t+1} = p_{t+1}\n\\]\n\\[\np_{(t+1)-k} = p_{t-(k-1)}, \\quad k = 1, \\dots, 6\n\\]\nthat is, \\(p_t\\) becomes the lag-1 entry, \\(p_{t-1}\\) becomes the lag-2 entry, and so on up to \\(p_{t-5}\\) becoming the lag-6 entry."
+  },
+  {
+    "objectID": "slides/02.html#e-cont.-1",
+    "href": "slides/02.html#e-cont.-1",
+    "title": "An asset selling problem",
+    "section": "2.6 E (Cont.)",
+    "text": "2.6 E (Cont.)\nLearning equations (computed in this order, with \\(M_t=\\Sigma_t\\)):\n\\[\n\\hat{\\varepsilon}_{t+1} = \\bar\\eta_t^T\\phi_t - p_{t+1}, \\qquad \\gamma_t = 1 + \\phi_t^T M_t\\phi_t\n\\]\n\\[\n\\bar{\\eta}_{t+1} = \\bar{\\eta}_t - \\frac{1}{\\gamma_t} M_t\\phi_t\\hat{\\varepsilon}_{t+1}\n\\]\n\\[\nM_{t+1} = M_t - \\frac{ M_t\\phi_t\\phi_t^T M_t }{ \\gamma_t } \\quad (\\text{so } \\Sigma_{t+1} = M_{t+1})\n\\]\nwhere \\(\\phi_t = (p_t, p_{t-1})^T\\)."
+  },
+  {
+    "objectID": "slides/02.html#f",
+    "href": "slides/02.html#f",
+    "title": "An asset selling problem",
+    "section": "2.6 F",
+    "text": "2.6 F\n\nWrite out the objective function (and remember to use an expectation operator for each random variable as described in the instructions). Be sure to specify what you are optimizing over given the class of policy specified in part (c). Assume that you are training your policy on historical data in an offline setting.\n\nWe optimize only over \\(\\theta^{sell}\\), since the policy class is fixed (moving-average rule), so \\(\\pi = (f, \\theta^{sell})\\). The 7-day moving average needs 7 prices, so the first day on which the policy can decide is \\(t_0 = 7\\) (the initial state \\(S_{t_0}\\) already contains \\(p_7,\\dots,p_1\\)):\n\\[\n\\max_{\\theta^{sell}} F^{\\pi}(\\theta^{sell}) =\n\\max_{\\theta^{sell}} \\mathbb{E}_{S_{t_0}}\\, \\mathbb{E}_{W_{t_0+1},\\dots,W_T \\mid S_{t_0}}\n\\left\\{ \\sum_{t=t_0}^{T} p_t \\, X^{\\pi}(S_t \\mid \\theta^{sell}) \\;\\Big|\\; S_{t_0} \\right\\}\n\\]\nsubject to \\(x_t = X^{\\pi}(S_t|\\theta^{sell}) \\le R_t\\) and the transition equations of part (e), with \\(W_{t+1} = p_{t+1}\\)."
+  },
+  {
+    "objectID": "slides/02.html#f-cont.",
+    "href": "slides/02.html#f-cont.",
+    "title": "An asset selling problem",
+    "section": "2.6 F (Cont.)",
+    "text": "2.6 F (Cont.)\n\nOffline training on historical data. The table gives a single historical path \\(\\omega^1\\) (one price per day, \\(T=10\\)), not several sample paths. The expectations are replaced by the observed history (\\(N=1\\)):\n\n\\[\n\\bar F(\\theta^{sell}) = \\sum_{t=7}^{10} p_t(\\omega^1)\\,\nX^{\\pi}\\big(S_t(\\omega^1)\\mid\\theta^{sell}\\big),\n\\qquad\n\\theta^{sell,*} = \\arg\\max_{\\theta^{sell}} \\bar F(\\theta^{sell})\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#f-cont.-1",
+    "href": "slides/02.html#f-cont.-1",
+    "title": "An asset selling problem",
+    "section": "2.6 F (Cont.)",
+    "text": "2.6 F (Cont.)\n\nSince the policy sells only once, \\(\\bar F(\\theta^{sell}) = p_{\\tau}\\), where \\(\\tau\\) is the first \\(t \\ge 7\\) with \\(p_t &lt; \\bar p_t - \\theta^{sell}\\) (or \\(\\tau = T = 10\\) if that never happens).\n\n\nDecisions can only be evaluated on \\(t = 7, 8, 9, 10\\) (4 days), because \\(\\bar p_t\\) in (2.26) includes \\(p_t\\) and needs 7 prices."
+  },
+  {
+    "objectID": "slides/02.html#f-cont.-2",
+    "href": "slides/02.html#f-cont.-2",
+    "title": "An asset selling problem",
+    "section": "2.6 F (Cont.)",
+    "text": "2.6 F (Cont.)\n\nimport numpy as np\nimport pandas as pd\n\np = np.array([20, 32, 26, 180, 30, 45, 18, 120, 57, 15], dtype=float)\nT = 10\n\n# moving average (2.26) for t = 7,...,10\nrows = [(t, p[t-1], p[t-7:t].mean(), p[t-7:t].mean() - p[t-1]) for t in range(7, T + 1)]\ntable = pd.DataFrame(rows, columns=[\"t\", \"p_t\", \"pbar_t\", \"pbar_t - p_t\"])\nprint(table)\n\n    t    p_t     pbar_t  pbar_t - p_t\n0   7   18.0  50.142857     32.142857\n1   8  120.0  64.428571    -55.571429\n2   9   57.0  68.000000     11.000000\n3  10   15.0  66.428571     51.428571"
+  },
+  {
+    "objectID": "slides/02.html#f-cont.-3",
+    "href": "slides/02.html#f-cont.-3",
+    "title": "An asset selling problem",
+    "section": "2.6 F (Cont.)",
+    "text": "2.6 F (Cont.)\n\ndef F(theta):\n    for t in range(7, T + 1):\n        if p[t-1] &lt; p[t-7:t].mean() - theta or t == T:\n            return t, p[t-1]\n\nfor theta in [0, 10, 32, 33, 60]:\n    print(theta, F(theta))\n\n0 (7, np.float64(18.0))\n10 (7, np.float64(18.0))\n32 (7, np.float64(18.0))\n33 (10, np.float64(15.0))\n60 (10, np.float64(15.0))"
+  },
+  {
+    "objectID": "slides/02.html#f-cont.-4",
+    "href": "slides/02.html#f-cont.-4",
+    "title": "An asset selling problem",
+    "section": "2.6 F (Cont.)",
+    "text": "2.6 F (Cont.)\n\\[\n\\bar F(\\theta^{sell}) =\n\\begin{cases}\n18 & \\text{if } \\theta^{sell} &lt; 32.14 \\quad (\\text{sell at } t=7),\\\\\n15 & \\text{if } \\theta^{sell} \\ge 32.14 \\quad (\\text{forced sale at } t=10).\n\\end{cases}\n\\]\n\\[\n\\theta^{sell,*} \\in [0,\\ 32.14), \\qquad \\bar F(\\theta^{sell,*}) = 18\n\\]\n\nThe optimum is not unique, and it comes from a single path of 4 decision days, so it is very likely overfitted. With more historical paths (or simulated ones) we would average \\(\\hat F^{\\pi}(\\omega^n)\\) over \\(n=1,\\dots,N\\)."
   },
   {
     "objectID": "02.html",
