@@ -990,14 +990,14 @@
     "href": "slides/02.html#f-cont.-2",
     "title": "An asset selling problem",
     "section": "2.6 F (Cont.)",
-    "text": "2.6 F (Cont.)\n\nimport numpy as np\nimport pandas as pd\n\np = np.array([20, 32, 26, 180, 30, 45, 18, 120, 57, 15], dtype=float)\nT = 10\n\n# moving average (2.26) for t = 7,...,10\nrows = [(t, p[t-1], p[t-7:t].mean(), p[t-7:t].mean() - p[t-1]) for t in range(7, T + 1)]\ntable = pd.DataFrame(rows, columns=[\"t\", \"p_t\", \"pbar_t\", \"pbar_t - p_t\"])\nprint(table)\n\n    t    p_t     pbar_t  pbar_t - p_t\n0   7   18.0  50.142857     32.142857\n1   8  120.0  64.428571    -55.571429\n2   9   57.0  68.000000     11.000000\n3  10   15.0  66.428571     51.428571"
+    "text": "2.6 F (Cont.)\n\nimport pandas as pd\n\nprices = pd.DataFrame(\n    {\"p_t\": [20, 32, 26, 180, 30, 45, 18, 120, 57, 15]},\n    dtype=float,\n    index=pd.RangeIndex(1, 11, name=\"t\"),\n)\n\ntable = prices.assign(\n    pbar_t=lambda d: d[\"p_t\"].rolling(7).mean(),\n    diff  =lambda d: d[\"pbar_t\"] - d[\"p_t\"],\n).loc[7:]                                   # index stays 7..10\n\nprint(table)\n\n      p_t     pbar_t       diff\nt                              \n7    18.0  50.142857  32.142857\n8   120.0  64.428571 -55.571429\n9    57.0  68.000000  11.000000\n10   15.0  66.428571  51.428571"
   },
   {
     "objectID": "slides/02.html#f-cont.-3",
     "href": "slides/02.html#f-cont.-3",
     "title": "An asset selling problem",
     "section": "2.6 F (Cont.)",
-    "text": "2.6 F (Cont.)\n\ndef F(theta):\n    for t in range(7, T + 1):\n        if p[t-1] &lt; p[t-7:t].mean() - theta or t == T:\n            return t, p[t-1]\n\nfor theta in [0, 10, 32, 33, 60]:\n    print(theta, F(theta))\n\n0 (7, np.float64(18.0))\n10 (7, np.float64(18.0))\n32 (7, np.float64(18.0))\n33 (10, np.float64(15.0))\n60 (10, np.float64(15.0))"
+    "text": "2.6 F (Cont.)\n\ndef simulate(theta, df):\n    \"\"\"First t with diff_t &gt; theta sells; else sell on the last day.\"\"\"\n    hits = df.index[df[\"diff\"] &gt; theta]\n    tau  = int(hits[0]) if len(hits) else int(df.index.max())\n\n    return {\n        \"theta_sell\": float(theta),\n        \"tau\":        tau,\n        \"F_bar\":      float(df.at[tau, \"p_t\"]),\n        \"forced\":     len(hits) == 0,\n    }\n\nresults = pd.DataFrame([simulate(theta, table) for theta in [0, 10, 32, 33, 60]])\n\nprint(results)\n\n   theta_sell  tau  F_bar  forced\n0         0.0    7   18.0   False\n1        10.0    7   18.0   False\n2        32.0    7   18.0   False\n3        33.0   10   15.0   False\n4        60.0   10   15.0    True"
   },
   {
     "objectID": "slides/02.html#f-cont.-4",
@@ -1005,6 +1005,216 @@
     "title": "An asset selling problem",
     "section": "2.6 F (Cont.)",
     "text": "2.6 F (Cont.)\n\\[\n\\bar F(\\theta^{sell}) =\n\\begin{cases}\n18 & \\text{if } \\theta^{sell} &lt; 32.14 \\quad (\\text{sell at } t=7),\\\\\n15 & \\text{if } \\theta^{sell} \\ge 32.14 \\quad (\\text{forced sale at } t=10).\n\\end{cases}\n\\]\n\\[\n\\theta^{sell,*} \\in [0,\\ 32.14), \\qquad \\bar F(\\theta^{sell,*}) = 18\n\\]\n\nThe optimum is not unique, and it comes from a single path of 4 decision days, so it is very likely overfitted. With more historical paths (or simulated ones) we would average \\(\\hat F^{\\pi}(\\omega^n)\\) over \\(n=1,\\dots,N\\)."
+  },
+  {
+    "objectID": "slides/02.html#a-1",
+    "href": "slides/02.html#a-1",
+    "title": "An asset selling problem",
+    "section": "2.7 A",
+    "text": "2.7 A\nThe questions below walk you through the steps of modeling the selling of an asset (say, a single share of a stock).\n\nUse the data in the table to produce a cumulative distribution function. You will need to plot the cdf, which looks like a step function with five steps."
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-8",
+    "href": "slides/02.html#a-cont.-8",
+    "title": "An asset selling problem",
+    "section": "2.7 A (Cont.)",
+    "text": "2.7 A (Cont.)\n\n# 1) Defining bins to apply\nmin_price = prices.p_t.min()\nbin_step = (prices.p_t.max() - min_price) / 5\nbins_to_apply = [min_price-1] + [min_price + (1+x) * bin_step for x in range(5)]\n\n# 2) Contar observaciones por bin\ncounts = pd.cut(prices.p_t, bins=bins_to_apply).value_counts(sort=False)\n\n# 3) Probabilidad (PMF) y CDF\ntable = pd.DataFrame({\n    \"count\": counts,\n    \"pmf\": counts / counts.sum(),\n})\ntable[\"cdf\"] = table[\"pmf\"].cumsum()\nprint(table)\n\n                count  pmf  cdf\np_t                            \n(14.0, 48.0]        7  0.7  0.7\n(48.0, 81.0]        1  0.1  0.8\n(81.0, 114.0]       0  0.0  0.8\n(114.0, 147.0]      1  0.1  0.9\n(147.0, 180.0]      1  0.1  1.0"
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-9",
+    "href": "slides/02.html#a-cont.-9",
+    "title": "An asset selling problem",
+    "section": "2.7 A (Cont.)",
+    "text": "2.7 A (Cont.)"
+  },
+  {
+    "objectID": "slides/02.html#b-1",
+    "href": "slides/02.html#b-1",
+    "title": "An asset selling problem",
+    "section": "2.7 B",
+    "text": "2.7 B\n\nYou now observe three realizations of prices: 25, 18, 160. Use the cumulative distribution function from (a) to create three realizations of a random variable that is uniformly distributed between 0 and 1 (call this random variable U)."
+  },
+  {
+    "objectID": "slides/02.html#b-cont.-1",
+    "href": "slides/02.html#b-cont.-1",
+    "title": "An asset selling problem",
+    "section": "2.7 B (Cont.)",
+    "text": "2.7 B (Cont.)\n\nimport numpy as np\n\nobserved_prices = np.array([25, 18, 160])\n\n# table.index.categories.right are the right endpoints of the bins\nright_edges = table.index.categories.right.to_numpy()\ncdf_vals = table[\"cdf\"].to_numpy()\n\n# Intervals from pd.cut are (left, right], so use side=\"left\"\nidx = np.searchsorted(right_edges, observed_prices, side=\"left\")\nU = cdf_vals[idx]\n\nresult = pd.DataFrame({\n    \"price\": observed_prices,\n    \"U = F(price)\": U\n})\n\nprint(result)\n\n   price  U = F(price)\n0     25           0.7\n1     18           0.7\n2    160           1.0"
+  },
+  {
+    "objectID": "slides/02.html#c-1",
+    "href": "slides/02.html#c-1",
+    "title": "An asset selling problem",
+    "section": "2.7 C",
+    "text": "2.7 C\n\nNow use these observations of U to create three observations of a random variable Z that is normally distributed with mean 0, variance 1. Be sure that your method for generating these random variables is clear. [Hint: use the cumulative distribution for a normal (0,1) random variable just as you used the cdf you created in part (a) to create uniform random variables in part (b).]"
+  },
+  {
+    "objectID": "slides/02.html#c-cont.-1",
+    "href": "slides/02.html#c-cont.-1",
+    "title": "An asset selling problem",
+    "section": "2.7 C (Cont.)",
+    "text": "2.7 C (Cont.)\n\nfrom statistics import NormalDist\n\nrng = np.random.default_rng(seed=42)\n\n# Guard against U = 0 or U = 1, where the normal quantile is infinite\neps = 1e-12\nU_clipped = np.clip(U, eps, 1 - eps)\n\n# Standard normal N(0, 1) via inverse CDF: Z = Phi^{-1}(U)\nnd = NormalDist(mu=0, sigma=1)\nZ = np.array([nd.inv_cdf(float(u)) for u in U_clipped])\n\nresult = pd.DataFrame({\n    \"price\": observed_prices,\n    \"U = F(price)\": U,\n    \"Z = Phi^{-1}(U)\": Z,\n})\n\nprint(result)\n\n   price  U = F(price)  Z = Phi^{-1}(U)\n0     25           0.7         0.524401\n1     18           0.7         0.524401\n2    160           1.0         7.034487"
+  },
+  {
+    "objectID": "slides/02.html#d-1",
+    "href": "slides/02.html#d-1",
+    "title": "An asset selling problem",
+    "section": "2.7 D",
+    "text": "2.7 D\n\nAssume that you used this method for creating a sequence of normal (0,1) random variables to fit a linear model of the form\n\n\\[\nZ_{t+1}= .7Z_t+.3Z_{t-1} + \\varepsilon_{t+1}\n\\]\nwhere \\(\\varepsilon_{t+1}\\) is normally distributed with mean 0 and variance 1 (we know this because we are simulating normal (0,1) random variables). Starting with \\(t = 1\\) and \\(Z_0 = 0.5\\) and \\(Z_1 = −0.3\\), generate Z2, Z3, Z4 assuming that \\(\\varepsilon_{2} = −.6\\), \\(\\varepsilon_{3} = 2.2\\), \\(\\varepsilon_{4} = 1.4\\). Then, use your cumulative distribution from part (a) to generate observations of P2, P3 and P4."
+  },
+  {
+    "objectID": "slides/02.html#d-cont.",
+    "href": "slides/02.html#d-cont.",
+    "title": "An asset selling problem",
+    "section": "2.7 D (Cont.)",
+    "text": "2.7 D (Cont.)\n\nimport numpy as np\nimport pandas as pd\nfrom statistics import NormalDist\n\n# Standard normal distribution N(0,1)\nnd = NormalDist(mu=0, sigma=1)\n\n# ---- Generate Z_t from the AR(2) model ----\nZ = {0: 0.5, 1: -0.3}\neps = {2: -0.6, 3: 2.2, 4: 1.4}\n\nfor t in range(2, 5):\n    Z[t] = 0.7 * Z[t-1] + 0.3 * Z[t-2] + eps[t]\n\nZ2, Z3, Z4 = Z[2], Z[3], Z[4]\n\n# ---- Convert Z_t to Uniform(0,1) via U_t = Phi(Z_t) ----\nU2 = nd.cdf(Z2)\nU3 = nd.cdf(Z3)\nU4 = nd.cdf(Z4)\n\ndef inverse_empirical_cdf(df, u):\n    \"\"\"Return the first price-bin right edge where F(p) &gt;= u.\"\"\"\n    # ---- Invert the empirical CDF from part (a) ----\n    # right_edges are the right endpoints of the five price bins\n    right_edges = df.index.categories.right.to_numpy()\n    cdf_vals = df[\"cdf\"].to_numpy()\n\n    idx = np.searchsorted(cdf_vals, u, side=\"left\")\n    idx = min(idx, len(right_edges) - 1)  # guard if u == 1\n    return right_edges[idx]\n\nP2 = inverse_empirical_cdf(table, U2)\nP3 = inverse_empirical_cdf(table, U3)\nP4 = inverse_empirical_cdf(table, U4)\n\nresult = pd.DataFrame({\n    \"t\": [2, 3, 4],\n    \"Z_t\": [Z2, Z3, Z4],\n    \"U_t = Phi(Z_t)\": [U2, U3, U4],\n    \"P_t = F^{-1}(U_t)\": [P2, P3, P4]\n})\n\nprint(result)\n\n   t     Z_t  U_t = Phi(Z_t)  P_t = F^{-1}(U_t)\n0  2 -0.6600        0.254627               48.0\n1  3  1.6480        0.950324              180.0\n2  4  2.3556        0.990754              180.0"
+  },
+  {
+    "objectID": "slides/02.html#section-5",
+    "href": "slides/02.html#section-5",
+    "title": "An asset selling problem",
+    "section": "2.8",
+    "text": "2.8\nOur basic “high-low” selling policy was given by\n\\[\n\\begin{equation}\nX^{high-low}(S_t \\mid \\theta^{high-low}) =\n\\begin{cases}\n1 & \\text{if } p_t &lt; \\theta^{low} \\text{ or } p_t &gt; \\theta^{high}, \\\\\n1 & \\text{if } t = T, \\\\\n0 & \\text{otherwise.}\n\\end{cases}\n\\tag{2.28}\n\\end{equation}\n\\]\nIn addition to the module AssetSelling, you will also need to download the spreadsheet “Chapter2 asset selling policy” from https://tinyurl.com/sdamodelingsupplements which provides parameters to be used by the python module.\n\nSimulate the policy for 200 time periods using the parameters:\n\n\\[\n\\begin{align*}\n\\theta^{min} &= 6, &\n\\theta^{max} &= 13, &\nT &= 20.\n\\end{align*}\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-10",
+    "href": "slides/02.html#a-cont.-10",
+    "title": "An asset selling problem",
+    "section": "2.8 A (Cont.)",
+    "text": "2.8 A (Cont.)\n\nimport os\nimport sys\n\ndoc_dir = os.environ.get(\"QUARTO_DOCUMENT_PATH\", os.getcwd())\nsys.path.insert(0, doc_dir)\nsys.path.insert(0, os.path.join(doc_dir, \"AssetSelling\"))\n\nimport pandas as pd\nimport AssetSellingModel as asm\nimport AssetSellingPolicies as asp\n\nmodel = asm.AssetSellingModel(S0={\"price\": 10}, T=20, seed=42)\npolicy = asp.HighLowPolicy(model=model, theta_low=6, theta_high=13)\n\nmean_price = policy.run_policy(n_iterations=200)\nprices = policy.performance[\"C_t sum\"]        # selling price of each path\nsd = float(prices.std())                       # sample std dev\nvar_avg = float(prices.var()) / len(prices)    # variance of the average\nz = 1.645                                      # 90% CI: Prob[Z &gt;= 1.645] = .05\n\nprint(f\"Mean selling price  : {mean_price:.4f}\")\nprint(f\"Std dev of prices   : {sd:.4f}\")\nprint(f\"Variance of average : {var_avg:.4f}\")\nprint(f\"90% CI              : [{mean_price - z * var_avg**0.5:.4f}, \"\n      f\"{mean_price + z * var_avg**0.5:.4f}]\")\n\nMean selling price  : 9.7314\nStd dev of prices   : 4.9655\nVariance of average : 0.1233\n90% CI              : [9.1538, 10.3090]"
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-11",
+    "href": "slides/02.html#a-cont.-11",
+    "title": "An asset selling problem",
+    "section": "2.8 A (Cont.)",
+    "text": "2.8 A (Cont.)\n\nMean selling price \\(\\approx 9.73\\), a little below the initial price of \\(10\\), so this particular high-low setting performs slightly worse than selling immediately."
+  },
+  {
+    "objectID": "slides/02.html#b-2",
+    "href": "slides/02.html#b-2",
+    "title": "An asset selling problem",
+    "section": "2.8 B",
+    "text": "2.8 B\n\nPerform a search for the best value of \\(\\theta^{min}\\) and \\(\\theta^{max}\\) by fixing \\(\\theta^{max} = 13\\), and then searching in increments of 1 for the best \\(\\theta^{min}\\). Then fix at that value of \\(\\theta^{min}\\) and perform a similar search for \\(\\theta^{max}\\) (enforce the constraint that \\(\\theta^{max} = \\theta^{min} + 2\\))."
+  },
+  {
+    "objectID": "slides/02.html#b-cont.-2",
+    "href": "slides/02.html#b-cont.-2",
+    "title": "An asset selling problem",
+    "section": "2.8 B (Cont.)",
+    "text": "2.8 B (Cont.)\n\ndef evaluate(theta_low, theta_high, n=200, seed=42):\n    m = asm.AssetSellingModel(S0={\"price\": 10}, T=20, seed=seed)\n    p = asp.HighLowPolicy(model=m, theta_low=theta_low, theta_high=theta_high)\n    return p.run_policy(n_iterations=n)\n\n# Step 1: fix theta_max = 13, sweep theta_min in increments of 1.\n# The constraint theta_max &gt;= theta_min + 2 limits theta_min to 11.\nstep1 = pd.DataFrame(\n    [{\"theta_min\": tl, \"theta_max\": 13, \"mean\": evaluate(tl, 13)}\n     for tl in range(0, 12)]\n)\nbest_tl = int(step1.loc[step1[\"mean\"].idxmax(), \"theta_min\"])\nprint(f\"Best theta_min (theta_max = 13): {best_tl}, mean {step1['mean'].max():.4f}\")\n\nBest theta_min (theta_max = 13): 0, mean 10.4232"
+  },
+  {
+    "objectID": "slides/02.html#b-cont.-3",
+    "href": "slides/02.html#b-cont.-3",
+    "title": "An asset selling problem",
+    "section": "2.8 B (Cont.)",
+    "text": "2.8 B (Cont.)\n\n# Step 2: fix theta_min, sweep theta_max with theta_max &gt;= theta_min + 2.\nstep2 = pd.DataFrame(\n    [{\"theta_min\": best_tl, \"theta_max\": th, \"mean\": evaluate(best_tl, th)}\n     for th in range(best_tl + 2, 21)]\n)\nbest_th = int(step2.loc[step2[\"mean\"].idxmax(), \"theta_max\"])\nprint(f\"Best combination: theta_min = {best_tl}, theta_max = {best_th}, \"\n      f\"mean {step2['mean'].max():.4f}\")\n\nBest combination: theta_min = 0, theta_max = 19, mean 11.2862"
+  },
+  {
+    "objectID": "slides/02.html#b-cont.-4",
+    "href": "slides/02.html#b-cont.-4",
+    "title": "An asset selling problem",
+    "section": "2.8 B (Cont.)",
+    "text": "2.8 B (Cont.)\n\nThe two-step search lands on \\(\\theta^{min} = 0\\), \\(\\theta^{max} = 19\\) with a mean \\(\\approx 11.29\\). Note that \\(\\theta^{min} = 0\\) is a corner case (the sell-low rule never triggers), and the 200-path estimates are noisy, so a full grid over both parameters would be more robust. Here the constraint is read as \\(\\theta^{max} \\ge \\theta^{min} + 2\\) (a minimum gap of 2); reading it literally as \\(\\theta^{max} = \\theta^{min} + 2\\) would collapse the second step to a single value."
+  },
+  {
+    "objectID": "slides/02.html#section-6",
+    "href": "slides/02.html#section-6",
+    "title": "An asset selling problem",
+    "section": "2.9",
+    "text": "2.9\nConsider a policy that understands that the price of the asset might be rising. Forecast the price for time \\(t+1\\) with the fitted time-series model\n\\[\n\\bar p_t = 0.7 p_t + 0.2 p_{t-1} + 0.1 p_{t-2},\n\\]\nused as a forecast of \\(p_{t+1}\\) given what we know at time \\(t\\)."
+  },
+  {
+    "objectID": "slides/02.html#a-2",
+    "href": "slides/02.html#a-2",
+    "title": "An asset selling problem",
+    "section": "2.9 A",
+    "text": "2.9 A\nWhat is the state variable for this problem? If prices are discretized to the nearest 0.1 and range between 0 and 100, what is the size of the state space?\n\nTo evaluate the forecast we need the current price and the two previous prices, plus the physical state of whether we still hold the asset:\n\n\\[\nS_t = (R_t,\\ p_t,\\ p_{t-1},\\ p_{t-2}).\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-12",
+    "href": "slides/02.html#a-cont.-12",
+    "title": "An asset selling problem",
+    "section": "2.9 A (Cont.)",
+    "text": "2.9 A (Cont.)\n\nEach price is discretized to the nearest 0.1 over \\([0, 100]\\), giving \\(1001\\) values (\\(0.0, 0.1, \\dots, 100.0\\)), and \\(R_t \\in \\{0, 1\\}\\). Hence\n\n\\[\n|S| = 2 \\times 1001^3 = 2{,}006{,}006{,}002 \\approx 2.0 \\times 10^{9}.\n\\]"
+  },
+  {
+    "objectID": "slides/02.html#b-3",
+    "href": "slides/02.html#b-3",
+    "title": "An asset selling problem",
+    "section": "2.9 B",
+    "text": "2.9 B\nPolicy: sell if \\(p_t &lt; \\bar p_t - \\theta\\) or \\(p_t &gt; \\bar p_t + \\theta\\) (i.e. a sudden deviation from the forecast), else sell at \\(t = T\\). We replicate the AssetSelling price process (bias Markov chain + Normal noise, initial price 10), which means enlarging the state to \\((R_t, p_t, p_{t-1}, p_{t-2})\\), then sweep \\(\\theta\\):"
+  },
+  {
+    "objectID": "slides/02.html#b-cont.-5",
+    "href": "slides/02.html#b-cont.-5",
+    "title": "An asset selling problem",
+    "section": "2.9 B (Cont.)",
+    "text": "2.9 B (Cont.)\n\nimport time\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Same price process as AssetSellingModel: bias (Up/Neutral/Down) Markov chain\n# plus Normal(scale=2) increments, price floored at 0, initial price 10.\ntrans = {\"Up\": [0.9, 0.1, 0.0], \"Neutral\": [0.2, 0.6, 0.2], \"Down\": [0.0, 0.1, 0.9]}\nbstep = {\"Up\": 1.0, \"Neutral\": 0.0, \"Down\": -1.0}\n\ndef generate_paths(N, T, p0=10.0, seed=42):\n    rng = np.random.RandomState(seed)\n    paths = np.empty((N, T + 1))\n    paths[:, 0] = p0\n    for n in range(N):\n        bias = \"Neutral\"\n        for t in range(T):\n            u = rng.uniform()\n            if u &lt; trans[bias][0]:\n                bias = \"Up\"\n            elif u &lt; trans[bias][0] + trans[bias][1]:\n                bias = \"Neutral\"\n            else:\n                bias = \"Down\"\n            paths[n, t + 1] = max(0.0, paths[n, t] + rng.normal(bstep[bias], 2.0))\n    return paths"
+  },
+  {
+    "objectID": "slides/02.html#b-cont.-6",
+    "href": "slides/02.html#b-cont.-6",
+    "title": "An asset selling problem",
+    "section": "2.9 B (Cont.)",
+    "text": "2.9 B (Cont.)\n\ndef payoff(theta, path, T):\n    # Pad with two copies of p0 for the missing lags p_{-1}, p_{-2}.\n    ext = np.concatenate([[path[0], path[0]], path])\n    for t in range(T):\n        pt = ext[t + 2]\n        pbar = 0.7 * ext[t + 2] + 0.2 * ext[t + 1] + 0.1 * ext[t]\n        if pt &lt; pbar - theta or pt &gt; pbar + theta or t == T - 1:\n            return pt\n\nN, T = 200, 20\npaths = generate_paths(N, T)\nthetas = np.arange(0.0, 10.5, 0.5)\n\nstart = time.time()\nmeans = [np.mean([payoff(th, p, T) for p in paths]) for th in thetas]\nelapsed = time.time() - start\n\nprint(f\"Best theta: {thetas[int(np.argmax(means))]}, mean contribution {max(means):.4f}\")\nprint(f\"Elapsed (21 thetas x {N} paths): {elapsed:.3f}s\")\n\nBest theta: 2.5, mean contribution 13.7363\nElapsed (21 thetas x 200 paths): 0.035s"
+  },
+  {
+    "objectID": "slides/02.html#b-cont.-7",
+    "href": "slides/02.html#b-cont.-7",
+    "title": "An asset selling problem",
+    "section": "2.9 B (Cont.)",
+    "text": "2.9 B (Cont.)"
+  },
+  {
+    "objectID": "slides/02.html#b-cont.-8",
+    "href": "slides/02.html#b-cont.-8",
+    "title": "An asset selling problem",
+    "section": "2.9 B (Cont.)",
+    "text": "2.9 B (Cont.)\n\nThe contribution is \\(\\approx 10\\) (the initial price) at \\(\\theta = 0\\), because the policy sells almost immediately on any deviation from the forecast. It then rises with \\(\\theta\\) and flattens out around \\(\\theta \\approx 2.5\\) at \\(\\approx 13.74\\): beyond that point the bands are so wide that the rule never triggers, so the asset is simply held to the horizon \\(T\\). In this sample the “sell on deviation” rule never beats holding (the best \\(\\theta\\) is the largest one), a reminder that a policy class can be dominated even though tuning it is cheap. Even with the large state space of 2.9a, the parameter search is still just a one-dimensional sweep (200 paths, seed 42, \\(\\approx 0.1\\)s)."
+  },
+  {
+    "objectID": "slides/02.html#section-7",
+    "href": "slides/02.html#section-7",
+    "title": "An asset selling problem",
+    "section": "2.10",
+    "text": "2.10\n(Continuing from 2.9) If the stock follows a seasonal pattern, replace \\(\\theta\\) with \\(\\theta_t\\). How would this complicate the policy search?\n\nA scalar parameter becomes a \\(T\\)-dimensional vector \\(\\theta = (\\theta_0, \\dots,\n\\theta_{T-1})\\). A grid search now has \\(K^T\\) combinations if each \\(\\theta_t\\) takes \\(K\\) values, so it grows exponentially (\\(K^{20}\\) is already hopeless even for tiny \\(K\\)). Estimating \\(T\\) parameters also needs far more sample paths to be reliable, so the estimates become noisier and prone to overfitting. The fix is the same trade-off as always: either give \\(\\theta_t\\) a low-dimensional parametric form (a polynomial or Fourier basis, a few seasonal coefficients), or use a coordinate/gradient search instead of a full grid."
+  },
+  {
+    "objectID": "slides/02.html#section-8",
+    "href": "slides/02.html#section-8",
+    "title": "An asset selling problem",
+    "section": "2.11",
+    "text": "2.11\n(Continuing from 2.9) Now let the buy-sell signal depend on price, \\(\\theta(\\bar p_t)\\), with a larger deviation required when prices are higher."
+  },
+  {
+    "objectID": "slides/02.html#a-3",
+    "href": "slides/02.html#a-3",
+    "title": "An asset selling problem",
+    "section": "2.11 A",
+    "text": "2.11 A\nDescribe a lookup-table representation of \\(\\theta(\\bar p_t)\\); discretize \\(\\bar p_t\\) into 10 ranges. How does this complicate the search?\n\nSplit \\(\\bar p_t\\) into 10 bins and store one value per bin, so \\(\\theta = (\\theta_1, \\dots, \\theta_{10})\\) becomes a 10-element vector (a step function of \\(\\bar p_t\\)):"
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-13",
+    "href": "slides/02.html#a-cont.-13",
+    "title": "An asset selling problem",
+    "section": "2.11 A (Cont.)",
+    "text": "2.11 A (Cont.)"
+  },
+  {
+    "objectID": "slides/02.html#a-cont.-14",
+    "href": "slides/02.html#a-cont.-14",
+    "title": "An asset selling problem",
+    "section": "2.11 A (Cont.)",
+    "text": "2.11 A (Cont.)\n\nThe number of tunable parameters jumps from 1 to 10, so a grid search becomes a \\(K^{10}\\) search over the table, plus we now have to choose the bin boundaries (a modeling decision on top of the tuning)."
+  },
+  {
+    "objectID": "slides/02.html#b-4",
+    "href": "slides/02.html#b-4",
+    "title": "An asset selling problem",
+    "section": "2.11 B",
+    "text": "2.11 B\nSuggest a parametric form for \\(\\theta(\\bar p_t)\\) capturing “larger \\(\\theta\\) for larger \\(\\bar p_t\\)”. What parameters do you now search over?\n\nA simple choice is a linear threshold in the price level:\n\n\\[\n\\theta(\\bar p_t) = \\theta_0 + \\theta_1 \\bar p_t, \\qquad \\theta_1 &gt; 0,\n\\]\n\nor a proportional form \\(\\theta(\\bar p_t) = \\theta_0 \\bar p_t\\). This collapses the 10-table entries into just two parameters, \\((\\theta_0, \\theta_1)\\), keeping the search low-dimensional (a small 2-D grid or a coordinate search) while still capturing the intuition that deviations must be larger at higher price levels."
   },
   {
     "objectID": "02.html",

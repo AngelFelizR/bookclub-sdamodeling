@@ -454,7 +454,7 @@ S_{t+1} = S^M(S_t, x_t, W_{t+1}). \quad (2.24)
 <section id="section-4" class="slide level2">
 <h2>2.5</h2>
 <p>Using the prices in table 2.2, use the policy that you will sell when the price falls below <span class="math inline">\(\$44.00\)</span>. Compute the objective function <span class="math inline">\(\hat{F}(\omega^n)\)</span> for <span class="math inline">\(n = 1, \dots , 10\)</span>. Compute the average selling price and its variance.</p>
-<div id="d303d14a" class="cell" data-execution_count="1">
+<div id="80a649fb" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a aria-label="2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a aria-label="3"></a></span>
@@ -476,7 +476,7 @@ S_{t+1} = S^M(S_t, x_t, W_{t+1}). \quad (2.24)
 </section>
 <section id="cont.-1" class="slide level2">
 <h2>2.5 (Cont.)</h2>
-<div id="247423f0" class="cell" data-execution_count="2">
+<div id="dd8138eb" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># 2. Apply pivot longer using pd.melt to place all numbers into a single column</span></span>
 <span id="cb2-2"><a aria-label="2"></a>PricesTableLong <span class="op">=</span> (</span>
 <span id="cb2-3"><a aria-label="3"></a>    PricesTableWide</span>
@@ -495,7 +495,7 @@ S_{t+1} = S^M(S_t, x_t, W_{t+1}). \quad (2.24)
 </section>
 <section id="cont.-2" class="slide level2">
 <h2>2.5 (Cont.)</h2>
-<div id="48e3c4c7" class="cell" data-execution_count="3">
+<div id="cd54d31e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># 3. Apply policy described</span></span>
 <span id="cb3-2"><a aria-label="2"></a>BottomValue <span class="op">=</span> <span class="dv">44</span></span>
 <span id="cb3-3"><a aria-label="3"></a></span>
@@ -513,7 +513,7 @@ S_{t+1} = S^M(S_t, x_t, W_{t+1}). \quad (2.24)
 </section>
 <section id="cont.-3" class="slide level2">
 <h2>2.5 (Cont.)</h2>
-<div id="331b7d10" class="cell" data-execution_count="4">
+<div id="095c6638" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># 4. Describing results</span></span>
 <span id="cb4-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Mean price:"</span>, <span class="bu">float</span>(PolicyResults.price.mean()))</span>
 <span id="cb4-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="st">"Variance price:"</span>, <span class="bu">float</span>(PolicyResults.price.var()), end <span class="op">=</span> <span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)</span>
@@ -573,7 +573,7 @@ p_{t+1} = \eta_0 p_t + \eta_1 p_{t-1} + \varepsilon_{t+1}
 </section>
 <section id="a-cont.-2" class="slide level2">
 <h2>2.6 A (Cont.)</h2>
-<div id="e38a6edc" class="cell" data-execution_count="5">
+<div id="761dc4c7" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-2"><a aria-label="2"></a></span>
 <span id="cb6-3"><a aria-label="3"></a><span class="co"># Let's keep all rows in 1 column</span></span>
@@ -591,7 +591,7 @@ p_{t+1} = \eta_0 p_t + \eta_1 p_{t-1} + \varepsilon_{t+1}
 </section>
 <section id="a-cont.-3" class="slide level2">
 <h2>2.6 A (Cont.)</h2>
-<div id="c68c68e1" class="cell" data-execution_count="6">
+<div id="e20c04c1" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="st">"Initial parameter estimates:"</span>)</span>
 <span id="cb7-2"><a aria-label="2"></a><span class="bu">print</span>(eta)</span>
 <span id="cb7-3"><a aria-label="3"></a></span>
@@ -619,7 +619,7 @@ Observed prices:
 <h2>2.6 A (Cont.)</h2>
 <p><span class="math display">\[ \bar{p}_{t+1}=\bar{\eta}_t^T\phi_t \]</span></p>
 <p><span class="math display">\[ \hat{\varepsilon}_{t+1} = \bar{p}_{t+1}-p_{t+1} \]</span></p>
-<div id="4f8e3157" class="cell" data-execution_count="7">
+<div id="c2ef3f24" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>p_hat <span class="op">=</span> (eta.T <span class="op">@</span> phi).item()</span>
 <span id="cb9-2"><a aria-label="2"></a></span>
 <span id="cb9-3"><a aria-label="3"></a>p_t_plus_1 <span class="op">=</span> <span class="fl">18.2</span></span>
@@ -636,7 +636,7 @@ Prediction error: 3.0</code></pre>
 <section id="a-cont.-5" class="slide level2">
 <h2>2.6 A (Cont.)</h2>
 <p><span class="math display">\[ \gamma_t=1+\phi_t^T M_t\phi_t \]</span></p>
-<div id="621772d9" class="cell" data-execution_count="8">
+<div id="00885d59" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a>gamma <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> phi.T <span class="op">@</span> M <span class="op">@</span> phi).item()</span>
 <span id="cb11-2"><a aria-label="2"></a></span>
 <span id="cb11-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="st">"Gamma:"</span>, gamma)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -651,7 +651,7 @@ Prediction error: 3.0</code></pre>
 <p><span class="math display">\[
 \bar{\eta}_{t+1} = \bar{\eta}_t- \frac{1}{\gamma_t} M_t\phi_t\hat{\varepsilon}_{t+1}
 \]</span></p>
-<div id="aa6d4d51" class="cell" data-execution_count="9">
+<div id="aa47d63f" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>eta_new <span class="op">=</span> eta <span class="op">-</span> (M <span class="op">@</span> phi) <span class="op">*</span> epsilon_hat <span class="op">/</span> gamma</span>
 <span id="cb13-2"><a aria-label="2"></a></span>
 <span id="cb13-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="st">"Updated parameter estimates:"</span>)</span>
@@ -669,7 +669,7 @@ Prediction error: 3.0</code></pre>
 <p><span class="math display">\[
 \Sigma_{t+1} = M_{t+1} = M_t - \frac{ M_t\phi_t\phi_t^T M_t }{ \gamma_t }
 \]</span></p>
-<div id="b347e5a8" class="cell" data-execution_count="10">
+<div id="2218e7d5" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a>M_new <span class="op">=</span> M <span class="op">-</span> (</span>
 <span id="cb15-2"><a aria-label="2"></a>    M <span class="op">@</span> phi <span class="op">@</span> phi.T <span class="op">@</span> M</span>
 <span id="cb15-3"><a aria-label="3"></a>) <span class="op">/</span> gamma</span>
@@ -812,42 +812,56 @@ X^{\pi}\big(S_t(\omega^1)\mid\theta^{sell}\big),
 </section>
 <section id="f-cont.-2" class="slide level2">
 <h2>2.6 F (Cont.)</h2>
-<div id="e73f248f" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb17-2"><a aria-label="2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb17-3"><a aria-label="3"></a></span>
-<span id="cb17-4"><a aria-label="4"></a>p <span class="op">=</span> np.array([<span class="dv">20</span>, <span class="dv">32</span>, <span class="dv">26</span>, <span class="dv">180</span>, <span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">18</span>, <span class="dv">120</span>, <span class="dv">57</span>, <span class="dv">15</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
-<span id="cb17-5"><a aria-label="5"></a>T <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb17-6"><a aria-label="6"></a></span>
-<span id="cb17-7"><a aria-label="7"></a><span class="co"># moving average (2.26) for t = 7,...,10</span></span>
-<span id="cb17-8"><a aria-label="8"></a>rows <span class="op">=</span> [(t, p[t<span class="op">-</span><span class="dv">1</span>], p[t<span class="op">-</span><span class="dv">7</span>:t].mean(), p[t<span class="op">-</span><span class="dv">7</span>:t].mean() <span class="op">-</span> p[t<span class="op">-</span><span class="dv">1</span>]) <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>, T <span class="op">+</span> <span class="dv">1</span>)]</span>
-<span id="cb17-9"><a aria-label="9"></a>table <span class="op">=</span> pd.DataFrame(rows, columns<span class="op">=</span>[<span class="st">"t"</span>, <span class="st">"p_t"</span>, <span class="st">"pbar_t"</span>, <span class="st">"pbar_t - p_t"</span>])</span>
-<span id="cb17-10"><a aria-label="10"></a><span class="bu">print</span>(table)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="bebaa6cb" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a aria-label="2"></a></span>
+<span id="cb17-3"><a aria-label="3"></a>prices <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb17-4"><a aria-label="4"></a>    {<span class="st">"p_t"</span>: [<span class="dv">20</span>, <span class="dv">32</span>, <span class="dv">26</span>, <span class="dv">180</span>, <span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">18</span>, <span class="dv">120</span>, <span class="dv">57</span>, <span class="dv">15</span>]},</span>
+<span id="cb17-5"><a aria-label="5"></a>    dtype<span class="op">=</span><span class="bu">float</span>,</span>
+<span id="cb17-6"><a aria-label="6"></a>    index<span class="op">=</span>pd.RangeIndex(<span class="dv">1</span>, <span class="dv">11</span>, name<span class="op">=</span><span class="st">"t"</span>),</span>
+<span id="cb17-7"><a aria-label="7"></a>)</span>
+<span id="cb17-8"><a aria-label="8"></a></span>
+<span id="cb17-9"><a aria-label="9"></a>table <span class="op">=</span> prices.assign(</span>
+<span id="cb17-10"><a aria-label="10"></a>    pbar_t<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"p_t"</span>].rolling(<span class="dv">7</span>).mean(),</span>
+<span id="cb17-11"><a aria-label="11"></a>    diff  <span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"pbar_t"</span>] <span class="op">-</span> d[<span class="st">"p_t"</span>],</span>
+<span id="cb17-12"><a aria-label="12"></a>).loc[<span class="dv">7</span>:]                                   <span class="co"># index stays 7..10</span></span>
+<span id="cb17-13"><a aria-label="13"></a></span>
+<span id="cb17-14"><a aria-label="14"></a><span class="bu">print</span>(table)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    t    p_t     pbar_t  pbar_t - p_t
-0   7   18.0  50.142857     32.142857
-1   8  120.0  64.428571    -55.571429
-2   9   57.0  68.000000     11.000000
-3  10   15.0  66.428571     51.428571</code></pre>
+<pre><code>      p_t     pbar_t       diff
+t                              
+7    18.0  50.142857  32.142857
+8   120.0  64.428571 -55.571429
+9    57.0  68.000000  11.000000
+10   15.0  66.428571  51.428571</code></pre>
 </div>
 </div>
 </section>
 <section id="f-cont.-3" class="slide level2">
 <h2>2.6 F (Cont.)</h2>
-<div id="b4f43aca" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="kw">def</span> F(theta):</span>
-<span id="cb19-2"><a aria-label="2"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>, T <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="cb19-3"><a aria-label="3"></a>        <span class="cf">if</span> p[t<span class="op">-</span><span class="dv">1</span>] <span class="op">&lt;</span> p[t<span class="op">-</span><span class="dv">7</span>:t].mean() <span class="op">-</span> theta <span class="kw">or</span> t <span class="op">==</span> T:</span>
-<span id="cb19-4"><a aria-label="4"></a>            <span class="cf">return</span> t, p[t<span class="op">-</span><span class="dv">1</span>]</span>
+<div id="98961351" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="kw">def</span> simulate(theta, df):</span>
+<span id="cb19-2"><a aria-label="2"></a>    <span class="co">"""First t with diff_t &gt; theta sells; else sell on the last day."""</span></span>
+<span id="cb19-3"><a aria-label="3"></a>    hits <span class="op">=</span> df.index[df[<span class="st">"diff"</span>] <span class="op">&gt;</span> theta]</span>
+<span id="cb19-4"><a aria-label="4"></a>    tau  <span class="op">=</span> <span class="bu">int</span>(hits[<span class="dv">0</span>]) <span class="cf">if</span> <span class="bu">len</span>(hits) <span class="cf">else</span> <span class="bu">int</span>(df.index.<span class="bu">max</span>())</span>
 <span id="cb19-5"><a aria-label="5"></a></span>
-<span id="cb19-6"><a aria-label="6"></a><span class="cf">for</span> theta <span class="kw">in</span> [<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">32</span>, <span class="dv">33</span>, <span class="dv">60</span>]:</span>
-<span id="cb19-7"><a aria-label="7"></a>    <span class="bu">print</span>(theta, F(theta))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-6"><a aria-label="6"></a>    <span class="cf">return</span> {</span>
+<span id="cb19-7"><a aria-label="7"></a>        <span class="st">"theta_sell"</span>: <span class="bu">float</span>(theta),</span>
+<span id="cb19-8"><a aria-label="8"></a>        <span class="st">"tau"</span>:        tau,</span>
+<span id="cb19-9"><a aria-label="9"></a>        <span class="st">"F_bar"</span>:      <span class="bu">float</span>(df.at[tau, <span class="st">"p_t"</span>]),</span>
+<span id="cb19-10"><a aria-label="10"></a>        <span class="st">"forced"</span>:     <span class="bu">len</span>(hits) <span class="op">==</span> <span class="dv">0</span>,</span>
+<span id="cb19-11"><a aria-label="11"></a>    }</span>
+<span id="cb19-12"><a aria-label="12"></a></span>
+<span id="cb19-13"><a aria-label="13"></a>results <span class="op">=</span> pd.DataFrame([simulate(theta, table) <span class="cf">for</span> theta <span class="kw">in</span> [<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">32</span>, <span class="dv">33</span>, <span class="dv">60</span>]])</span>
+<span id="cb19-14"><a aria-label="14"></a></span>
+<span id="cb19-15"><a aria-label="15"></a><span class="bu">print</span>(results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0 (7, np.float64(18.0))
-10 (7, np.float64(18.0))
-32 (7, np.float64(18.0))
-33 (10, np.float64(15.0))
-60 (10, np.float64(15.0))</code></pre>
+<pre><code>   theta_sell  tau  F_bar  forced
+0         0.0    7   18.0   False
+1        10.0    7   18.0   False
+2        32.0    7   18.0   False
+3        33.0   10   15.0   False
+4        60.0   10   15.0    True</code></pre>
 </div>
 </div>
 </section>
@@ -865,6 +879,464 @@ X^{\pi}\big(S_t(\omega^1)\mid\theta^{sell}\big),
 \]</span></p>
 <blockquote>
 <p>The optimum is not unique, and it comes from a single path of 4 decision days, so it is very likely overfitted. With more historical paths (or simulated ones) we would average <span class="math inline">\(\hat F^{\pi}(\omega^n)\)</span> over <span class="math inline">\(n=1,\dots,N\)</span>.</p>
+</blockquote>
+</section>
+<section id="a-1" class="slide level2">
+<h2>2.7 A</h2>
+<p>The questions below walk you through the steps of modeling the selling of an asset (say, a single share of a stock).</p>
+<ol type="a">
+<li>Use the data in the table to produce a cumulative distribution function. You will need to plot the cdf, which looks like a step function with five steps.</li>
+</ol>
+</section>
+<section id="a-cont.-8" class="slide level2">
+<h2>2.7 A (Cont.)</h2>
+<div id="a1b1abd9" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a><span class="co"># 1) Defining bins to apply</span></span>
+<span id="cb21-2"><a aria-label="2"></a>min_price <span class="op">=</span> prices.p_t.<span class="bu">min</span>()</span>
+<span id="cb21-3"><a aria-label="3"></a>bin_step <span class="op">=</span> (prices.p_t.<span class="bu">max</span>() <span class="op">-</span> min_price) <span class="op">/</span> <span class="dv">5</span></span>
+<span id="cb21-4"><a aria-label="4"></a>bins_to_apply <span class="op">=</span> [min_price<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> [min_price <span class="op">+</span> (<span class="dv">1</span><span class="op">+</span>x) <span class="op">*</span> bin_step <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span>
+<span id="cb21-5"><a aria-label="5"></a></span>
+<span id="cb21-6"><a aria-label="6"></a><span class="co"># 2) Contar observaciones por bin</span></span>
+<span id="cb21-7"><a aria-label="7"></a>counts <span class="op">=</span> pd.cut(prices.p_t, bins<span class="op">=</span>bins_to_apply).value_counts(sort<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb21-8"><a aria-label="8"></a></span>
+<span id="cb21-9"><a aria-label="9"></a><span class="co"># 3) Probabilidad (PMF) y CDF</span></span>
+<span id="cb21-10"><a aria-label="10"></a>table <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb21-11"><a aria-label="11"></a>    <span class="st">"count"</span>: counts,</span>
+<span id="cb21-12"><a aria-label="12"></a>    <span class="st">"pmf"</span>: counts <span class="op">/</span> counts.<span class="bu">sum</span>(),</span>
+<span id="cb21-13"><a aria-label="13"></a>})</span>
+<span id="cb21-14"><a aria-label="14"></a>table[<span class="st">"cdf"</span>] <span class="op">=</span> table[<span class="st">"pmf"</span>].cumsum()</span>
+<span id="cb21-15"><a aria-label="15"></a><span class="bu">print</span>(table)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                count  pmf  cdf
+p_t                            
+(14.0, 48.0]        7  0.7  0.7
+(48.0, 81.0]        1  0.1  0.8
+(81.0, 114.0]       0  0.0  0.8
+(114.0, 147.0]      1  0.1  0.9
+(147.0, 180.0]      1  0.1  1.0</code></pre>
+</div>
+</div>
+</section>
+<section id="a-cont.-9" class="slide level2">
+<h2>2.7 A (Cont.)</h2>
+<div id="2dbd2592" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="02_files/figure-revealjs/cell-15-output-1.png" width="664" height="451"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="b-1" class="slide level2">
+<h2>2.7 B</h2>
+<ol start="2" type="a">
+<li>You now observe three realizations of prices: 25, 18, 160. Use the cumulative distribution function from (a) to create three realizations of a random variable that is uniformly distributed between 0 and 1 (call this random variable U).</li>
+</ol>
+</section>
+<section id="b-cont.-1" class="slide level2">
+<h2>2.7 B (Cont.)</h2>
+<div id="33581323" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb23-2"><a aria-label="2"></a></span>
+<span id="cb23-3"><a aria-label="3"></a>observed_prices <span class="op">=</span> np.array([<span class="dv">25</span>, <span class="dv">18</span>, <span class="dv">160</span>])</span>
+<span id="cb23-4"><a aria-label="4"></a></span>
+<span id="cb23-5"><a aria-label="5"></a><span class="co"># table.index.categories.right are the right endpoints of the bins</span></span>
+<span id="cb23-6"><a aria-label="6"></a>right_edges <span class="op">=</span> table.index.categories.right.to_numpy()</span>
+<span id="cb23-7"><a aria-label="7"></a>cdf_vals <span class="op">=</span> table[<span class="st">"cdf"</span>].to_numpy()</span>
+<span id="cb23-8"><a aria-label="8"></a></span>
+<span id="cb23-9"><a aria-label="9"></a><span class="co"># Intervals from pd.cut are (left, right], so use side="left"</span></span>
+<span id="cb23-10"><a aria-label="10"></a>idx <span class="op">=</span> np.searchsorted(right_edges, observed_prices, side<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb23-11"><a aria-label="11"></a>U <span class="op">=</span> cdf_vals[idx]</span>
+<span id="cb23-12"><a aria-label="12"></a></span>
+<span id="cb23-13"><a aria-label="13"></a>result <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb23-14"><a aria-label="14"></a>    <span class="st">"price"</span>: observed_prices,</span>
+<span id="cb23-15"><a aria-label="15"></a>    <span class="st">"U = F(price)"</span>: U</span>
+<span id="cb23-16"><a aria-label="16"></a>})</span>
+<span id="cb23-17"><a aria-label="17"></a></span>
+<span id="cb23-18"><a aria-label="18"></a><span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   price  U = F(price)
+0     25           0.7
+1     18           0.7
+2    160           1.0</code></pre>
+</div>
+</div>
+</section>
+<section id="c-1" class="slide level2">
+<h2>2.7 C</h2>
+<ol start="3" type="a">
+<li>Now use these observations of U to create three observations of a random variable Z that is normally distributed with mean 0, variance 1. Be sure that your method for generating these random variables is clear. [Hint: use the cumulative distribution for a normal (0,1) random variable just as you used the cdf you created in part (a) to create uniform random variables in part (b).]</li>
+</ol>
+</section>
+<section id="c-cont.-1" class="slide level2">
+<h2>2.7 C (Cont.)</h2>
+<div id="edcb3cd9" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-label="1"></a><span class="im">from</span> statistics <span class="im">import</span> NormalDist</span>
+<span id="cb25-2"><a aria-label="2"></a></span>
+<span id="cb25-3"><a aria-label="3"></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb25-4"><a aria-label="4"></a></span>
+<span id="cb25-5"><a aria-label="5"></a><span class="co"># Guard against U = 0 or U = 1, where the normal quantile is infinite</span></span>
+<span id="cb25-6"><a aria-label="6"></a>eps <span class="op">=</span> <span class="fl">1e-12</span></span>
+<span id="cb25-7"><a aria-label="7"></a>U_clipped <span class="op">=</span> np.clip(U, eps, <span class="dv">1</span> <span class="op">-</span> eps)</span>
+<span id="cb25-8"><a aria-label="8"></a></span>
+<span id="cb25-9"><a aria-label="9"></a><span class="co"># Standard normal N(0, 1) via inverse CDF: Z = Phi^{-1}(U)</span></span>
+<span id="cb25-10"><a aria-label="10"></a>nd <span class="op">=</span> NormalDist(mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb25-11"><a aria-label="11"></a>Z <span class="op">=</span> np.array([nd.inv_cdf(<span class="bu">float</span>(u)) <span class="cf">for</span> u <span class="kw">in</span> U_clipped])</span>
+<span id="cb25-12"><a aria-label="12"></a></span>
+<span id="cb25-13"><a aria-label="13"></a>result <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb25-14"><a aria-label="14"></a>    <span class="st">"price"</span>: observed_prices,</span>
+<span id="cb25-15"><a aria-label="15"></a>    <span class="st">"U = F(price)"</span>: U,</span>
+<span id="cb25-16"><a aria-label="16"></a>    <span class="st">"Z = Phi^{-1}(U)"</span>: Z,</span>
+<span id="cb25-17"><a aria-label="17"></a>})</span>
+<span id="cb25-18"><a aria-label="18"></a></span>
+<span id="cb25-19"><a aria-label="19"></a><span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   price  U = F(price)  Z = Phi^{-1}(U)
+0     25           0.7         0.524401
+1     18           0.7         0.524401
+2    160           1.0         7.034487</code></pre>
+</div>
+</div>
+</section>
+<section id="d-1" class="slide level2">
+<h2>2.7 D</h2>
+<ol start="4" type="a">
+<li>Assume that you used this method for creating a sequence of normal (0,1) random variables to fit a linear model of the form</li>
+</ol>
+<p><span class="math display">\[
+Z_{t+1}= .7Z_t+.3Z_{t-1} + \varepsilon_{t+1}
+\]</span></p>
+<p>where <span class="math inline">\(\varepsilon_{t+1}\)</span> is normally distributed with mean 0 and variance 1 (we know this because we are simulating normal (0,1) random variables). Starting with <span class="math inline">\(t = 1\)</span> and <span class="math inline">\(Z_0 = 0.5\)</span> and <span class="math inline">\(Z_1 = −0.3\)</span>, generate Z2, Z3, Z4 assuming that <span class="math inline">\(\varepsilon_{2} = −.6\)</span>, <span class="math inline">\(\varepsilon_{3} = 2.2\)</span>, <span class="math inline">\(\varepsilon_{4} = 1.4\)</span>. Then, use your cumulative distribution from part (a) to generate observations of P2, P3 and P4.</p>
+</section>
+<section id="d-cont." class="slide level2">
+<h2>2.7 D (Cont.)</h2>
+<div id="b04ca8b2" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb27-2"><a aria-label="2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb27-3"><a aria-label="3"></a><span class="im">from</span> statistics <span class="im">import</span> NormalDist</span>
+<span id="cb27-4"><a aria-label="4"></a></span>
+<span id="cb27-5"><a aria-label="5"></a><span class="co"># Standard normal distribution N(0,1)</span></span>
+<span id="cb27-6"><a aria-label="6"></a>nd <span class="op">=</span> NormalDist(mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb27-7"><a aria-label="7"></a></span>
+<span id="cb27-8"><a aria-label="8"></a><span class="co"># ---- Generate Z_t from the AR(2) model ----</span></span>
+<span id="cb27-9"><a aria-label="9"></a>Z <span class="op">=</span> {<span class="dv">0</span>: <span class="fl">0.5</span>, <span class="dv">1</span>: <span class="op">-</span><span class="fl">0.3</span>}</span>
+<span id="cb27-10"><a aria-label="10"></a>eps <span class="op">=</span> {<span class="dv">2</span>: <span class="op">-</span><span class="fl">0.6</span>, <span class="dv">3</span>: <span class="fl">2.2</span>, <span class="dv">4</span>: <span class="fl">1.4</span>}</span>
+<span id="cb27-11"><a aria-label="11"></a></span>
+<span id="cb27-12"><a aria-label="12"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">5</span>):</span>
+<span id="cb27-13"><a aria-label="13"></a>    Z[t] <span class="op">=</span> <span class="fl">0.7</span> <span class="op">*</span> Z[t<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> Z[t<span class="op">-</span><span class="dv">2</span>] <span class="op">+</span> eps[t]</span>
+<span id="cb27-14"><a aria-label="14"></a></span>
+<span id="cb27-15"><a aria-label="15"></a>Z2, Z3, Z4 <span class="op">=</span> Z[<span class="dv">2</span>], Z[<span class="dv">3</span>], Z[<span class="dv">4</span>]</span>
+<span id="cb27-16"><a aria-label="16"></a></span>
+<span id="cb27-17"><a aria-label="17"></a><span class="co"># ---- Convert Z_t to Uniform(0,1) via U_t = Phi(Z_t) ----</span></span>
+<span id="cb27-18"><a aria-label="18"></a>U2 <span class="op">=</span> nd.cdf(Z2)</span>
+<span id="cb27-19"><a aria-label="19"></a>U3 <span class="op">=</span> nd.cdf(Z3)</span>
+<span id="cb27-20"><a aria-label="20"></a>U4 <span class="op">=</span> nd.cdf(Z4)</span>
+<span id="cb27-21"><a aria-label="21"></a></span>
+<span id="cb27-22"><a aria-label="22"></a><span class="kw">def</span> inverse_empirical_cdf(df, u):</span>
+<span id="cb27-23"><a aria-label="23"></a>    <span class="co">"""Return the first price-bin right edge where F(p) &gt;= u."""</span></span>
+<span id="cb27-24"><a aria-label="24"></a>    <span class="co"># ---- Invert the empirical CDF from part (a) ----</span></span>
+<span id="cb27-25"><a aria-label="25"></a>    <span class="co"># right_edges are the right endpoints of the five price bins</span></span>
+<span id="cb27-26"><a aria-label="26"></a>    right_edges <span class="op">=</span> df.index.categories.right.to_numpy()</span>
+<span id="cb27-27"><a aria-label="27"></a>    cdf_vals <span class="op">=</span> df[<span class="st">"cdf"</span>].to_numpy()</span>
+<span id="cb27-28"><a aria-label="28"></a></span>
+<span id="cb27-29"><a aria-label="29"></a>    idx <span class="op">=</span> np.searchsorted(cdf_vals, u, side<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb27-30"><a aria-label="30"></a>    idx <span class="op">=</span> <span class="bu">min</span>(idx, <span class="bu">len</span>(right_edges) <span class="op">-</span> <span class="dv">1</span>)  <span class="co"># guard if u == 1</span></span>
+<span id="cb27-31"><a aria-label="31"></a>    <span class="cf">return</span> right_edges[idx]</span>
+<span id="cb27-32"><a aria-label="32"></a></span>
+<span id="cb27-33"><a aria-label="33"></a>P2 <span class="op">=</span> inverse_empirical_cdf(table, U2)</span>
+<span id="cb27-34"><a aria-label="34"></a>P3 <span class="op">=</span> inverse_empirical_cdf(table, U3)</span>
+<span id="cb27-35"><a aria-label="35"></a>P4 <span class="op">=</span> inverse_empirical_cdf(table, U4)</span>
+<span id="cb27-36"><a aria-label="36"></a></span>
+<span id="cb27-37"><a aria-label="37"></a>result <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb27-38"><a aria-label="38"></a>    <span class="st">"t"</span>: [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>],</span>
+<span id="cb27-39"><a aria-label="39"></a>    <span class="st">"Z_t"</span>: [Z2, Z3, Z4],</span>
+<span id="cb27-40"><a aria-label="40"></a>    <span class="st">"U_t = Phi(Z_t)"</span>: [U2, U3, U4],</span>
+<span id="cb27-41"><a aria-label="41"></a>    <span class="st">"P_t = F^{-1}(U_t)"</span>: [P2, P3, P4]</span>
+<span id="cb27-42"><a aria-label="42"></a>})</span>
+<span id="cb27-43"><a aria-label="43"></a></span>
+<span id="cb27-44"><a aria-label="44"></a><span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   t     Z_t  U_t = Phi(Z_t)  P_t = F^{-1}(U_t)
+0  2 -0.6600        0.254627               48.0
+1  3  1.6480        0.950324              180.0
+2  4  2.3556        0.990754              180.0</code></pre>
+</div>
+</div>
+</section>
+<section id="section-5" class="slide level2">
+<h2>2.8</h2>
+<p>Our basic “high-low” selling policy was given by</p>
+<p><span class="math display">\[
+\begin{equation}
+X^{high-low}(S_t \mid \theta^{high-low}) =
+\begin{cases}
+1 &amp; \text{if } p_t &lt; \theta^{low} \text{ or } p_t &gt; \theta^{high}, \\
+1 &amp; \text{if } t = T, \\
+0 &amp; \text{otherwise.}
+\end{cases}
+\tag{2.28}
+\end{equation}
+\]</span></p>
+<p>In addition to the module AssetSelling, you will also need to download the spreadsheet “Chapter2 asset selling policy” from https://tinyurl.com/sdamodelingsupplements which provides parameters to be used by the python module.</p>
+<ol type="a">
+<li>Simulate the policy for 200 time periods using the parameters:</li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+\theta^{min} &amp;= 6, &amp;
+\theta^{max} &amp;= 13, &amp;
+T &amp;= 20.
+\end{align*}
+\]</span></p>
+</section>
+<section id="a-cont.-10" class="slide level2">
+<h2>2.8 A (Cont.)</h2>
+<div id="9e9b3cf0" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a><span class="im">import</span> os</span>
+<span id="cb29-2"><a aria-label="2"></a><span class="im">import</span> sys</span>
+<span id="cb29-3"><a aria-label="3"></a></span>
+<span id="cb29-4"><a aria-label="4"></a>doc_dir <span class="op">=</span> os.environ.get(<span class="st">"QUARTO_DOCUMENT_PATH"</span>, os.getcwd())</span>
+<span id="cb29-5"><a aria-label="5"></a>sys.path.insert(<span class="dv">0</span>, doc_dir)</span>
+<span id="cb29-6"><a aria-label="6"></a>sys.path.insert(<span class="dv">0</span>, os.path.join(doc_dir, <span class="st">"AssetSelling"</span>))</span>
+<span id="cb29-7"><a aria-label="7"></a></span>
+<span id="cb29-8"><a aria-label="8"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb29-9"><a aria-label="9"></a><span class="im">import</span> AssetSellingModel <span class="im">as</span> asm</span>
+<span id="cb29-10"><a aria-label="10"></a><span class="im">import</span> AssetSellingPolicies <span class="im">as</span> asp</span>
+<span id="cb29-11"><a aria-label="11"></a></span>
+<span id="cb29-12"><a aria-label="12"></a>model <span class="op">=</span> asm.AssetSellingModel(S0<span class="op">=</span>{<span class="st">"price"</span>: <span class="dv">10</span>}, T<span class="op">=</span><span class="dv">20</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb29-13"><a aria-label="13"></a>policy <span class="op">=</span> asp.HighLowPolicy(model<span class="op">=</span>model, theta_low<span class="op">=</span><span class="dv">6</span>, theta_high<span class="op">=</span><span class="dv">13</span>)</span>
+<span id="cb29-14"><a aria-label="14"></a></span>
+<span id="cb29-15"><a aria-label="15"></a>mean_price <span class="op">=</span> policy.run_policy(n_iterations<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb29-16"><a aria-label="16"></a>prices <span class="op">=</span> policy.performance[<span class="st">"C_t sum"</span>]        <span class="co"># selling price of each path</span></span>
+<span id="cb29-17"><a aria-label="17"></a>sd <span class="op">=</span> <span class="bu">float</span>(prices.std())                       <span class="co"># sample std dev</span></span>
+<span id="cb29-18"><a aria-label="18"></a>var_avg <span class="op">=</span> <span class="bu">float</span>(prices.var()) <span class="op">/</span> <span class="bu">len</span>(prices)    <span class="co"># variance of the average</span></span>
+<span id="cb29-19"><a aria-label="19"></a>z <span class="op">=</span> <span class="fl">1.645</span>                                      <span class="co"># 90% CI: Prob[Z &gt;= 1.645] = .05</span></span>
+<span id="cb29-20"><a aria-label="20"></a></span>
+<span id="cb29-21"><a aria-label="21"></a><span class="bu">print</span>(<span class="ss">f"Mean selling price  : </span><span class="sc">{</span>mean_price<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb29-22"><a aria-label="22"></a><span class="bu">print</span>(<span class="ss">f"Std dev of prices   : </span><span class="sc">{</span>sd<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb29-23"><a aria-label="23"></a><span class="bu">print</span>(<span class="ss">f"Variance of average : </span><span class="sc">{</span>var_avg<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb29-24"><a aria-label="24"></a><span class="bu">print</span>(<span class="ss">f"90% CI              : [</span><span class="sc">{</span>mean_price <span class="op">-</span> z <span class="op">*</span> var_avg<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.4f}</span><span class="ss">, "</span></span>
+<span id="cb29-25"><a aria-label="25"></a>      <span class="ss">f"</span><span class="sc">{</span>mean_price <span class="op">+</span> z <span class="op">*</span> var_avg<span class="op">**</span><span class="fl">0.5</span><span class="sc">:.4f}</span><span class="ss">]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mean selling price  : 9.7314
+Std dev of prices   : 4.9655
+Variance of average : 0.1233
+90% CI              : [9.1538, 10.3090]</code></pre>
+</div>
+</div>
+</section>
+<section id="a-cont.-11" class="slide level2">
+<h2>2.8 A (Cont.)</h2>
+<blockquote>
+<p>Mean selling price <span class="math inline">\(\approx 9.73\)</span>, a little below the initial price of <span class="math inline">\(10\)</span>, so this particular high-low setting performs slightly worse than selling immediately.</p>
+</blockquote>
+</section>
+<section id="b-2" class="slide level2">
+<h2>2.8 B</h2>
+<ol start="2" type="a">
+<li>Perform a search for the best value of <span class="math inline">\(\theta^{min}\)</span> and <span class="math inline">\(\theta^{max}\)</span> by fixing <span class="math inline">\(\theta^{max} = 13\)</span>, and then searching in increments of 1 for the best <span class="math inline">\(\theta^{min}\)</span>. Then fix at that value of <span class="math inline">\(\theta^{min}\)</span> and perform a similar search for <span class="math inline">\(\theta^{max}\)</span> (enforce the constraint that <span class="math inline">\(\theta^{max} = \theta^{min} + 2\)</span>).</li>
+</ol>
+</section>
+<section id="b-cont.-2" class="slide level2">
+<h2>2.8 B (Cont.)</h2>
+<div id="fb8228a4" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a aria-label="1"></a><span class="kw">def</span> evaluate(theta_low, theta_high, n<span class="op">=</span><span class="dv">200</span>, seed<span class="op">=</span><span class="dv">42</span>):</span>
+<span id="cb31-2"><a aria-label="2"></a>    m <span class="op">=</span> asm.AssetSellingModel(S0<span class="op">=</span>{<span class="st">"price"</span>: <span class="dv">10</span>}, T<span class="op">=</span><span class="dv">20</span>, seed<span class="op">=</span>seed)</span>
+<span id="cb31-3"><a aria-label="3"></a>    p <span class="op">=</span> asp.HighLowPolicy(model<span class="op">=</span>m, theta_low<span class="op">=</span>theta_low, theta_high<span class="op">=</span>theta_high)</span>
+<span id="cb31-4"><a aria-label="4"></a>    <span class="cf">return</span> p.run_policy(n_iterations<span class="op">=</span>n)</span>
+<span id="cb31-5"><a aria-label="5"></a></span>
+<span id="cb31-6"><a aria-label="6"></a><span class="co"># Step 1: fix theta_max = 13, sweep theta_min in increments of 1.</span></span>
+<span id="cb31-7"><a aria-label="7"></a><span class="co"># The constraint theta_max &gt;= theta_min + 2 limits theta_min to 11.</span></span>
+<span id="cb31-8"><a aria-label="8"></a>step1 <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb31-9"><a aria-label="9"></a>    [{<span class="st">"theta_min"</span>: tl, <span class="st">"theta_max"</span>: <span class="dv">13</span>, <span class="st">"mean"</span>: evaluate(tl, <span class="dv">13</span>)}</span>
+<span id="cb31-10"><a aria-label="10"></a>     <span class="cf">for</span> tl <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">12</span>)]</span>
+<span id="cb31-11"><a aria-label="11"></a>)</span>
+<span id="cb31-12"><a aria-label="12"></a>best_tl <span class="op">=</span> <span class="bu">int</span>(step1.loc[step1[<span class="st">"mean"</span>].idxmax(), <span class="st">"theta_min"</span>])</span>
+<span id="cb31-13"><a aria-label="13"></a><span class="bu">print</span>(<span class="ss">f"Best theta_min (theta_max = 13): </span><span class="sc">{</span>best_tl<span class="sc">}</span><span class="ss">, mean </span><span class="sc">{</span>step1[<span class="st">'mean'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Best theta_min (theta_max = 13): 0, mean 10.4232</code></pre>
+</div>
+</div>
+</section>
+<section id="b-cont.-3" class="slide level2">
+<h2>2.8 B (Cont.)</h2>
+<div id="0f0cedf7" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a aria-label="1"></a><span class="co"># Step 2: fix theta_min, sweep theta_max with theta_max &gt;= theta_min + 2.</span></span>
+<span id="cb33-2"><a aria-label="2"></a>step2 <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb33-3"><a aria-label="3"></a>    [{<span class="st">"theta_min"</span>: best_tl, <span class="st">"theta_max"</span>: th, <span class="st">"mean"</span>: evaluate(best_tl, th)}</span>
+<span id="cb33-4"><a aria-label="4"></a>     <span class="cf">for</span> th <span class="kw">in</span> <span class="bu">range</span>(best_tl <span class="op">+</span> <span class="dv">2</span>, <span class="dv">21</span>)]</span>
+<span id="cb33-5"><a aria-label="5"></a>)</span>
+<span id="cb33-6"><a aria-label="6"></a>best_th <span class="op">=</span> <span class="bu">int</span>(step2.loc[step2[<span class="st">"mean"</span>].idxmax(), <span class="st">"theta_max"</span>])</span>
+<span id="cb33-7"><a aria-label="7"></a><span class="bu">print</span>(<span class="ss">f"Best combination: theta_min = </span><span class="sc">{</span>best_tl<span class="sc">}</span><span class="ss">, theta_max = </span><span class="sc">{</span>best_th<span class="sc">}</span><span class="ss">, "</span></span>
+<span id="cb33-8"><a aria-label="8"></a>      <span class="ss">f"mean </span><span class="sc">{</span>step2[<span class="st">'mean'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Best combination: theta_min = 0, theta_max = 19, mean 11.2862</code></pre>
+</div>
+</div>
+</section>
+<section id="b-cont.-4" class="slide level2">
+<h2>2.8 B (Cont.)</h2>
+<blockquote>
+<p>The two-step search lands on <span class="math inline">\(\theta^{min} = 0\)</span>, <span class="math inline">\(\theta^{max} = 19\)</span> with a mean <span class="math inline">\(\approx 11.29\)</span>. Note that <span class="math inline">\(\theta^{min} = 0\)</span> is a corner case (the sell-low rule never triggers), and the 200-path estimates are noisy, so a full grid over both parameters would be more robust. Here the constraint is read as <span class="math inline">\(\theta^{max} \ge \theta^{min} + 2\)</span> (a minimum gap of 2); reading it literally as <span class="math inline">\(\theta^{max} = \theta^{min} + 2\)</span> would collapse the second step to a single value.</p>
+</blockquote>
+</section>
+<section id="section-6" class="slide level2">
+<h2>2.9</h2>
+<p>Consider a policy that understands that the price of the asset might be rising. Forecast the price for time <span class="math inline">\(t+1\)</span> with the fitted time-series model</p>
+<p><span class="math display">\[
+\bar p_t = 0.7 p_t + 0.2 p_{t-1} + 0.1 p_{t-2},
+\]</span></p>
+<p>used as a forecast of <span class="math inline">\(p_{t+1}\)</span> given what we know at time <span class="math inline">\(t\)</span>.</p>
+</section>
+<section id="a-2" class="slide level2">
+<h2>2.9 A</h2>
+<p>What is the state variable for this problem? If prices are discretized to the nearest 0.1 and range between 0 and 100, what is the size of the state space?</p>
+<blockquote>
+<p>To evaluate the forecast we need the current price and the two previous prices, plus the physical state of whether we still hold the asset:</p>
+</blockquote>
+<p><span class="math display">\[
+S_t = (R_t,\ p_t,\ p_{t-1},\ p_{t-2}).
+\]</span></p>
+</section>
+<section id="a-cont.-12" class="slide level2">
+<h2>2.9 A (Cont.)</h2>
+<blockquote>
+<p>Each price is discretized to the nearest 0.1 over <span class="math inline">\([0, 100]\)</span>, giving <span class="math inline">\(1001\)</span> values (<span class="math inline">\(0.0, 0.1, \dots, 100.0\)</span>), and <span class="math inline">\(R_t \in \{0, 1\}\)</span>. Hence</p>
+</blockquote>
+<p><span class="math display">\[
+|S| = 2 \times 1001^3 = 2{,}006{,}006{,}002 \approx 2.0 \times 10^{9}.
+\]</span></p>
+</section>
+<section id="b-3" class="slide level2">
+<h2>2.9 B</h2>
+<p>Policy: sell if <span class="math inline">\(p_t &lt; \bar p_t - \theta\)</span> or <span class="math inline">\(p_t &gt; \bar p_t + \theta\)</span> (i.e.&nbsp;a sudden deviation from the forecast), else sell at <span class="math inline">\(t = T\)</span>. We replicate the AssetSelling price process (bias Markov chain + Normal noise, initial price 10), which means enlarging the state to <span class="math inline">\((R_t, p_t, p_{t-1}, p_{t-2})\)</span>, then sweep <span class="math inline">\(\theta\)</span>:</p>
+</section>
+<section id="b-cont.-5" class="slide level2">
+<h2>2.9 B (Cont.)</h2>
+<div id="7bd146c9" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a aria-label="1"></a><span class="im">import</span> time</span>
+<span id="cb35-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb35-3"><a aria-label="3"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb35-4"><a aria-label="4"></a></span>
+<span id="cb35-5"><a aria-label="5"></a><span class="co"># Same price process as AssetSellingModel: bias (Up/Neutral/Down) Markov chain</span></span>
+<span id="cb35-6"><a aria-label="6"></a><span class="co"># plus Normal(scale=2) increments, price floored at 0, initial price 10.</span></span>
+<span id="cb35-7"><a aria-label="7"></a>trans <span class="op">=</span> {<span class="st">"Up"</span>: [<span class="fl">0.9</span>, <span class="fl">0.1</span>, <span class="fl">0.0</span>], <span class="st">"Neutral"</span>: [<span class="fl">0.2</span>, <span class="fl">0.6</span>, <span class="fl">0.2</span>], <span class="st">"Down"</span>: [<span class="fl">0.0</span>, <span class="fl">0.1</span>, <span class="fl">0.9</span>]}</span>
+<span id="cb35-8"><a aria-label="8"></a>bstep <span class="op">=</span> {<span class="st">"Up"</span>: <span class="fl">1.0</span>, <span class="st">"Neutral"</span>: <span class="fl">0.0</span>, <span class="st">"Down"</span>: <span class="op">-</span><span class="fl">1.0</span>}</span>
+<span id="cb35-9"><a aria-label="9"></a></span>
+<span id="cb35-10"><a aria-label="10"></a><span class="kw">def</span> generate_paths(N, T, p0<span class="op">=</span><span class="fl">10.0</span>, seed<span class="op">=</span><span class="dv">42</span>):</span>
+<span id="cb35-11"><a aria-label="11"></a>    rng <span class="op">=</span> np.random.RandomState(seed)</span>
+<span id="cb35-12"><a aria-label="12"></a>    paths <span class="op">=</span> np.empty((N, T <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb35-13"><a aria-label="13"></a>    paths[:, <span class="dv">0</span>] <span class="op">=</span> p0</span>
+<span id="cb35-14"><a aria-label="14"></a>    <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb35-15"><a aria-label="15"></a>        bias <span class="op">=</span> <span class="st">"Neutral"</span></span>
+<span id="cb35-16"><a aria-label="16"></a>        <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(T):</span>
+<span id="cb35-17"><a aria-label="17"></a>            u <span class="op">=</span> rng.uniform()</span>
+<span id="cb35-18"><a aria-label="18"></a>            <span class="cf">if</span> u <span class="op">&lt;</span> trans[bias][<span class="dv">0</span>]:</span>
+<span id="cb35-19"><a aria-label="19"></a>                bias <span class="op">=</span> <span class="st">"Up"</span></span>
+<span id="cb35-20"><a aria-label="20"></a>            <span class="cf">elif</span> u <span class="op">&lt;</span> trans[bias][<span class="dv">0</span>] <span class="op">+</span> trans[bias][<span class="dv">1</span>]:</span>
+<span id="cb35-21"><a aria-label="21"></a>                bias <span class="op">=</span> <span class="st">"Neutral"</span></span>
+<span id="cb35-22"><a aria-label="22"></a>            <span class="cf">else</span>:</span>
+<span id="cb35-23"><a aria-label="23"></a>                bias <span class="op">=</span> <span class="st">"Down"</span></span>
+<span id="cb35-24"><a aria-label="24"></a>            paths[n, t <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> <span class="bu">max</span>(<span class="fl">0.0</span>, paths[n, t] <span class="op">+</span> rng.normal(bstep[bias], <span class="fl">2.0</span>))</span>
+<span id="cb35-25"><a aria-label="25"></a>    <span class="cf">return</span> paths</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="b-cont.-6" class="slide level2">
+<h2>2.9 B (Cont.)</h2>
+<div id="3c46048e" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a aria-label="1"></a><span class="kw">def</span> payoff(theta, path, T):</span>
+<span id="cb36-2"><a aria-label="2"></a>    <span class="co"># Pad with two copies of p0 for the missing lags p_{-1}, p_{-2}.</span></span>
+<span id="cb36-3"><a aria-label="3"></a>    ext <span class="op">=</span> np.concatenate([[path[<span class="dv">0</span>], path[<span class="dv">0</span>]], path])</span>
+<span id="cb36-4"><a aria-label="4"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(T):</span>
+<span id="cb36-5"><a aria-label="5"></a>        pt <span class="op">=</span> ext[t <span class="op">+</span> <span class="dv">2</span>]</span>
+<span id="cb36-6"><a aria-label="6"></a>        pbar <span class="op">=</span> <span class="fl">0.7</span> <span class="op">*</span> ext[t <span class="op">+</span> <span class="dv">2</span>] <span class="op">+</span> <span class="fl">0.2</span> <span class="op">*</span> ext[t <span class="op">+</span> <span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> ext[t]</span>
+<span id="cb36-7"><a aria-label="7"></a>        <span class="cf">if</span> pt <span class="op">&lt;</span> pbar <span class="op">-</span> theta <span class="kw">or</span> pt <span class="op">&gt;</span> pbar <span class="op">+</span> theta <span class="kw">or</span> t <span class="op">==</span> T <span class="op">-</span> <span class="dv">1</span>:</span>
+<span id="cb36-8"><a aria-label="8"></a>            <span class="cf">return</span> pt</span>
+<span id="cb36-9"><a aria-label="9"></a></span>
+<span id="cb36-10"><a aria-label="10"></a>N, T <span class="op">=</span> <span class="dv">200</span>, <span class="dv">20</span></span>
+<span id="cb36-11"><a aria-label="11"></a>paths <span class="op">=</span> generate_paths(N, T)</span>
+<span id="cb36-12"><a aria-label="12"></a>thetas <span class="op">=</span> np.arange(<span class="fl">0.0</span>, <span class="fl">10.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb36-13"><a aria-label="13"></a></span>
+<span id="cb36-14"><a aria-label="14"></a>start <span class="op">=</span> time.time()</span>
+<span id="cb36-15"><a aria-label="15"></a>means <span class="op">=</span> [np.mean([payoff(th, p, T) <span class="cf">for</span> p <span class="kw">in</span> paths]) <span class="cf">for</span> th <span class="kw">in</span> thetas]</span>
+<span id="cb36-16"><a aria-label="16"></a>elapsed <span class="op">=</span> time.time() <span class="op">-</span> start</span>
+<span id="cb36-17"><a aria-label="17"></a></span>
+<span id="cb36-18"><a aria-label="18"></a><span class="bu">print</span>(<span class="ss">f"Best theta: </span><span class="sc">{</span>thetas[<span class="bu">int</span>(np.argmax(means))]<span class="sc">}</span><span class="ss">, mean contribution </span><span class="sc">{</span><span class="bu">max</span>(means)<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb36-19"><a aria-label="19"></a><span class="bu">print</span>(<span class="ss">f"Elapsed (21 thetas x </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss"> paths): </span><span class="sc">{</span>elapsed<span class="sc">:.3f}</span><span class="ss">s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Best theta: 2.5, mean contribution 13.7363
+Elapsed (21 thetas x 200 paths): 0.035s</code></pre>
+</div>
+</div>
+</section>
+<section id="b-cont.-7" class="slide level2">
+<h2>2.9 B (Cont.)</h2>
+<div id="0f046859" class="cell" data-execution_count="23">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="02_files/figure-revealjs/cell-24-output-1.png" width="675" height="451"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="b-cont.-8" class="slide level2">
+<h2>2.9 B (Cont.)</h2>
+<blockquote>
+<p>The contribution is <span class="math inline">\(\approx 10\)</span> (the initial price) at <span class="math inline">\(\theta = 0\)</span>, because the policy sells almost immediately on any deviation from the forecast. It then rises with <span class="math inline">\(\theta\)</span> and flattens out around <span class="math inline">\(\theta \approx 2.5\)</span> at <span class="math inline">\(\approx 13.74\)</span>: beyond that point the bands are so wide that the rule never triggers, so the asset is simply held to the horizon <span class="math inline">\(T\)</span>. In this sample the “sell on deviation” rule never beats holding (the best <span class="math inline">\(\theta\)</span> is the largest one), a reminder that a policy class can be dominated even though tuning it is cheap. Even with the large state space of 2.9a, the parameter search is still just a one-dimensional sweep (200 paths, seed 42, <span class="math inline">\(\approx 0.1\)</span>s).</p>
+</blockquote>
+</section>
+<section id="section-7" class="slide level2">
+<h2>2.10</h2>
+<p>(Continuing from 2.9) If the stock follows a seasonal pattern, replace <span class="math inline">\(\theta\)</span> with <span class="math inline">\(\theta_t\)</span>. How would this complicate the policy search?</p>
+<blockquote>
+<p>A scalar parameter becomes a <span class="math inline">\(T\)</span>-dimensional vector <span class="math inline">\(\theta = (\theta_0, \dots,
+\theta_{T-1})\)</span>. A grid search now has <span class="math inline">\(K^T\)</span> combinations if each <span class="math inline">\(\theta_t\)</span> takes <span class="math inline">\(K\)</span> values, so it grows exponentially (<span class="math inline">\(K^{20}\)</span> is already hopeless even for tiny <span class="math inline">\(K\)</span>). Estimating <span class="math inline">\(T\)</span> parameters also needs far more sample paths to be reliable, so the estimates become noisier and prone to overfitting. The fix is the same trade-off as always: either give <span class="math inline">\(\theta_t\)</span> a low-dimensional parametric form (a polynomial or Fourier basis, a few seasonal coefficients), or use a coordinate/gradient search instead of a full grid.</p>
+</blockquote>
+</section>
+<section id="section-8" class="slide level2">
+<h2>2.11</h2>
+<p>(Continuing from 2.9) Now let the buy-sell signal depend on price, <span class="math inline">\(\theta(\bar p_t)\)</span>, with a larger deviation required when prices are higher.</p>
+</section>
+<section id="a-3" class="slide level2">
+<h2>2.11 A</h2>
+<p>Describe a lookup-table representation of <span class="math inline">\(\theta(\bar p_t)\)</span>; discretize <span class="math inline">\(\bar p_t\)</span> into 10 ranges. How does this complicate the search?</p>
+<blockquote>
+<p>Split <span class="math inline">\(\bar p_t\)</span> into 10 bins and store one value per bin, so <span class="math inline">\(\theta = (\theta_1, \dots, \theta_{10})\)</span> becomes a 10-element vector (a step function of <span class="math inline">\(\bar p_t\)</span>):</p>
+</blockquote>
+</section>
+<section id="a-cont.-13" class="slide level2">
+<h2>2.11 A (Cont.)</h2>
+<div id="eb217989" class="cell" data-execution_count="24">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="02_files/figure-revealjs/cell-25-output-1.png" width="586" height="303"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="a-cont.-14" class="slide level2">
+<h2>2.11 A (Cont.)</h2>
+<blockquote>
+<p>The number of tunable parameters jumps from 1 to 10, so a grid search becomes a <span class="math inline">\(K^{10}\)</span> search over the table, plus we now have to choose the bin boundaries (a modeling decision on top of the tuning).</p>
+</blockquote>
+</section>
+<section id="b-4" class="slide level2">
+<h2>2.11 B</h2>
+<p>Suggest a parametric form for <span class="math inline">\(\theta(\bar p_t)\)</span> capturing “larger <span class="math inline">\(\theta\)</span> for larger <span class="math inline">\(\bar p_t\)</span>”. What parameters do you now search over?</p>
+<blockquote>
+<p>A simple choice is a linear threshold in the price level:</p>
+</blockquote>
+<p><span class="math display">\[
+\theta(\bar p_t) = \theta_0 + \theta_1 \bar p_t, \qquad \theta_1 &gt; 0,
+\]</span></p>
+<blockquote>
+<p>or a proportional form <span class="math inline">\(\theta(\bar p_t) = \theta_0 \bar p_t\)</span>. This collapses the 10-table entries into just two parameters, <span class="math inline">\((\theta_0, \theta_1)\)</span>, keeping the search low-dimensional (a small 2-D grid or a coordinate search) while still capturing the intuition that deviations must be larger at higher price levels.</p>
 </blockquote>
 
 
