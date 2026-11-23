@@ -585,28 +585,40 @@ $$
 ## 2.6 F (Cont.)
 
 ```{python}
-import numpy as np
 import pandas as pd
 
-p = np.array([20, 32, 26, 180, 30, 45, 18, 120, 57, 15], dtype=float)
-T = 10
+prices = pd.DataFrame(
+    {"p_t": [20, 32, 26, 180, 30, 45, 18, 120, 57, 15]},
+    dtype=float,
+    index=pd.RangeIndex(1, 11, name="t"),
+)
 
-# moving average (2.26) for t = 7,...,10
-rows = [(t, p[t-1], p[t-7:t].mean(), p[t-7:t].mean() - p[t-1]) for t in range(7, T + 1)]
-table = pd.DataFrame(rows, columns=["t", "p_t", "pbar_t", "pbar_t - p_t"])
+table = prices.assign(
+    pbar_t=lambda d: d["p_t"].rolling(7).mean(),
+    diff  =lambda d: d["pbar_t"] - d["p_t"],
+).loc[7:]                                   # index stays 7..10
+
 print(table)
 ```
 
 ## 2.6 F (Cont.)
 
 ```{python}
-def F(theta):
-    for t in range(7, T + 1):
-        if p[t-1] < p[t-7:t].mean() - theta or t == T:
-            return t, p[t-1]
+def simulate(theta, df):
+    """First t with diff_t > theta sells; else sell on the last day."""
+    hits = df.index[df["diff"] > theta]
+    tau  = int(hits[0]) if len(hits) else int(df.index.max())
 
-for theta in [0, 10, 32, 33, 60]:
-    print(theta, F(theta))
+    return {
+        "theta_sell": float(theta),
+        "tau":        tau,
+        "F_bar":      float(df.at[tau, "p_t"]),
+        "forced":     len(hits) == 0,
+    }
+
+results = pd.DataFrame([simulate(theta, table) for theta in [0, 10, 32, 33, 60]])
+
+print(results)
 ```
 
 ## 2.6 F (Cont.)
@@ -624,3 +636,472 @@ $$
 $$
 
 > The optimum is not unique, and it comes from a single path of 4 decision days, so it is very likely overfitted. With more historical paths (or simulated ones) we would average $\hat F^{\pi}(\omega^n)$ over $n=1,\dots,N$.
+
+## 2.7 A
+
+The questions below walk you through the steps of modeling the selling of an asset (say, a single share of a stock).
+
+a) Use the data in the table to produce a cumulative distribution function. You will need to plot the cdf, which looks like a step function with five steps.
+
+## 2.7 A (Cont.)
+
+```{python}
+# 1) Defining bins to apply
+min_price = prices.p_t.min()
+bin_step = (prices.p_t.max() - min_price) / 5
+bins_to_apply = [min_price-1] + [min_price + (1+x) * bin_step for x in range(5)]
+
+# 2) Contar observaciones por bin
+counts = pd.cut(prices.p_t, bins=bins_to_apply).value_counts(sort=False)
+
+# 3) Probabilidad (PMF) y CDF
+table = pd.DataFrame({
+    "count": counts,
+    "pmf": counts / counts.sum(),
+})
+table["cdf"] = table["pmf"].cumsum()
+print(table)
+```
+
+## 2.7 A (Cont.)
+
+```{python}
+#| echo: false
+
+# Step plot
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(8, 5))
+
+x = table.index.categories.right.to_numpy()
+y = table["cdf"].to_numpy()
+
+ax.step(x, y, where="post", marker="o")
+
+ax.set(
+    xlabel="Price $p$",
+    ylabel=r"$F(p) = P(p_t \leq p)$",
+    title="Empirical CDF of prices",
+    ylim=(0, 1.05)
+)
+
+ax.grid(alpha=0.3)
+plt.show()
+```
+
+## 2.7 B
+
+b) You now observe three realizations of prices: 25, 18, 160. Use the cumulative distribution function from (a) to create three realizations of a random variable that is uniformly distributed between 0 and 1 (call this random variable U).
+
+## 2.7 B (Cont.)
+
+```{python}
+import numpy as np
+
+observed_prices = np.array([25, 18, 160])
+
+# table.index.categories.right are the right endpoints of the bins
+right_edges = table.index.categories.right.to_numpy()
+cdf_vals = table["cdf"].to_numpy()
+
+# Intervals from pd.cut are (left, right], so use side="left"
+idx = np.searchsorted(right_edges, observed_prices, side="left")
+U = cdf_vals[idx]
+
+result = pd.DataFrame({
+    "price": observed_prices,
+    "U = F(price)": U
+})
+
+print(result)
+```
+
+## 2.7 C
+
+c) Now use these observations of U to create three observations of a random variable Z that is normally distributed with mean 0, variance 1. Be sure that your method for generating these random variables is clear. [Hint: use the cumulative distribution for a normal (0,1) random variable just as you used the cdf you created in part (a) to create uniform random variables in part (b).]
+
+## 2.7 C (Cont.)
+
+```{python}
+from statistics import NormalDist
+
+rng = np.random.default_rng(seed=42)
+
+# Guard against U = 0 or U = 1, where the normal quantile is infinite
+eps = 1e-12
+U_clipped = np.clip(U, eps, 1 - eps)
+
+# Standard normal N(0, 1) via inverse CDF: Z = Phi^{-1}(U)
+nd = NormalDist(mu=0, sigma=1)
+Z = np.array([nd.inv_cdf(float(u)) for u in U_clipped])
+
+result = pd.DataFrame({
+    "price": observed_prices,
+    "U = F(price)": U,
+    "Z = Phi^{-1}(U)": Z,
+})
+
+print(result)
+```
+
+## 2.7 D
+
+d) Assume that you used this method for creating a sequence of normal (0,1) random variables to fit a linear model of the form
+
+$$
+Z_{t+1}= .7Z_t+.3Z_{t-1} + \varepsilon_{t+1}
+$$
+
+where $\varepsilon_{t+1}$ is normally distributed with mean 0 and variance 1 (we know this because we are simulating normal (0,1) random variables). Starting with $t = 1$ and $Z_0 = 0.5$ and $Z_1 = −0.3$, generate Z2, Z3, Z4 assuming that $\varepsilon_{2} = −.6$, $\varepsilon_{3} = 2.2$, $\varepsilon_{4} = 1.4$. Then, use your cumulative distribution from part (a) to generate observations of P2, P3 and P4.
+
+## 2.7 D (Cont.)
+
+```{python}
+import numpy as np
+import pandas as pd
+from statistics import NormalDist
+
+# Standard normal distribution N(0,1)
+nd = NormalDist(mu=0, sigma=1)
+
+# ---- Generate Z_t from the AR(2) model ----
+Z = {0: 0.5, 1: -0.3}
+eps = {2: -0.6, 3: 2.2, 4: 1.4}
+
+for t in range(2, 5):
+    Z[t] = 0.7 * Z[t-1] + 0.3 * Z[t-2] + eps[t]
+
+Z2, Z3, Z4 = Z[2], Z[3], Z[4]
+
+# ---- Convert Z_t to Uniform(0,1) via U_t = Phi(Z_t) ----
+U2 = nd.cdf(Z2)
+U3 = nd.cdf(Z3)
+U4 = nd.cdf(Z4)
+
+def inverse_empirical_cdf(df, u):
+    """Return the first price-bin right edge where F(p) >= u."""
+    # ---- Invert the empirical CDF from part (a) ----
+    # right_edges are the right endpoints of the five price bins
+    right_edges = df.index.categories.right.to_numpy()
+    cdf_vals = df["cdf"].to_numpy()
+
+    idx = np.searchsorted(cdf_vals, u, side="left")
+    idx = min(idx, len(right_edges) - 1)  # guard if u == 1
+    return right_edges[idx]
+
+P2 = inverse_empirical_cdf(table, U2)
+P3 = inverse_empirical_cdf(table, U3)
+P4 = inverse_empirical_cdf(table, U4)
+
+result = pd.DataFrame({
+    "t": [2, 3, 4],
+    "Z_t": [Z2, Z3, Z4],
+    "U_t = Phi(Z_t)": [U2, U3, U4],
+    "P_t = F^{-1}(U_t)": [P2, P3, P4]
+})
+
+print(result)
+```
+
+## 2.8
+
+Our basic “high-low” selling policy was given by
+
+$$
+\begin{equation}
+X^{high-low}(S_t \mid \theta^{high-low}) = 
+\begin{cases} 
+1 & \text{if } p_t < \theta^{low} \text{ or } p_t > \theta^{high}, \\ 
+1 & \text{if } t = T, \\ 
+0 & \text{otherwise.} 
+\end{cases}
+\tag{2.28}
+\end{equation}
+$$
+
+In addition to the module AssetSelling, you will also need to download the spreadsheet “Chapter2 asset selling policy” from https://tinyurl.com/sdamodelingsupplements which provides parameters to be used by the
+python module.
+
+a) Simulate the policy for 200 time periods using the parameters:
+
+$$
+\begin{align*}
+\theta^{min} &= 6, &
+\theta^{max} &= 13, &
+T &= 20.
+\end{align*}
+$$
+
+## 2.8 A (Cont.)
+
+```{python}
+import os
+import sys
+
+doc_dir = os.environ.get("QUARTO_DOCUMENT_PATH", os.getcwd())
+sys.path.insert(0, doc_dir)
+sys.path.insert(0, os.path.join(doc_dir, "AssetSelling"))
+
+import pandas as pd
+import AssetSellingModel as asm
+import AssetSellingPolicies as asp
+
+model = asm.AssetSellingModel(S0={"price": 10}, T=20, seed=42)
+policy = asp.HighLowPolicy(model=model, theta_low=6, theta_high=13)
+
+mean_price = policy.run_policy(n_iterations=200)
+prices = policy.performance["C_t sum"]        # selling price of each path
+sd = float(prices.std())                       # sample std dev
+var_avg = float(prices.var()) / len(prices)    # variance of the average
+z = 1.645                                      # 90% CI: Prob[Z >= 1.645] = .05
+
+print(f"Mean selling price  : {mean_price:.4f}")
+print(f"Std dev of prices   : {sd:.4f}")
+print(f"Variance of average : {var_avg:.4f}")
+print(f"90% CI              : [{mean_price - z * var_avg**0.5:.4f}, "
+      f"{mean_price + z * var_avg**0.5:.4f}]")
+```
+
+## 2.8 A (Cont.)
+
+> Mean selling price $\approx 9.73$, a little below the initial price of $10$, so
+> this particular high-low setting performs slightly worse than selling immediately.
+
+## 2.8 B
+
+b) Perform a search for the best value of $\theta^{min}$ and $\theta^{max}$ by fixing $\theta^{max} = 13$, and then searching in increments of 1 for the best $\theta^{min}$. Then fix at that value of $\theta^{min}$ and perform a similar search for $\theta^{max}$ (enforce the constraint that $\theta^{max} = \theta^{min} + 2$).
+
+
+## 2.8 B (Cont.)
+
+```{python}
+def evaluate(theta_low, theta_high, n=200, seed=42):
+    m = asm.AssetSellingModel(S0={"price": 10}, T=20, seed=seed)
+    p = asp.HighLowPolicy(model=m, theta_low=theta_low, theta_high=theta_high)
+    return p.run_policy(n_iterations=n)
+
+# Step 1: fix theta_max = 13, sweep theta_min in increments of 1.
+# The constraint theta_max >= theta_min + 2 limits theta_min to 11.
+step1 = pd.DataFrame(
+    [{"theta_min": tl, "theta_max": 13, "mean": evaluate(tl, 13)}
+     for tl in range(0, 12)]
+)
+best_tl = int(step1.loc[step1["mean"].idxmax(), "theta_min"])
+print(f"Best theta_min (theta_max = 13): {best_tl}, mean {step1['mean'].max():.4f}")
+```
+
+## 2.8 B (Cont.)
+
+```{python}
+# Step 2: fix theta_min, sweep theta_max with theta_max >= theta_min + 2.
+step2 = pd.DataFrame(
+    [{"theta_min": best_tl, "theta_max": th, "mean": evaluate(best_tl, th)}
+     for th in range(best_tl + 2, 21)]
+)
+best_th = int(step2.loc[step2["mean"].idxmax(), "theta_max"])
+print(f"Best combination: theta_min = {best_tl}, theta_max = {best_th}, "
+      f"mean {step2['mean'].max():.4f}")
+```
+
+## 2.8 B (Cont.)
+
+> The two-step search lands on $\theta^{min} = 0$, $\theta^{max} = 19$ with a mean
+> $\approx 11.29$. Note that $\theta^{min} = 0$ is a corner case (the sell-low
+> rule never triggers), and the 200-path estimates are noisy, so a full grid over
+> both parameters would be more robust. Here the constraint is read as
+> $\theta^{max} \ge \theta^{min} + 2$ (a minimum gap of 2); reading it literally
+> as $\theta^{max} = \theta^{min} + 2$ would collapse the second step to a single
+> value.
+
+## 2.9
+
+Consider a policy that understands that the price of the asset might be rising.
+Forecast the price for time $t+1$ with the fitted time-series model
+
+$$
+\bar p_t = 0.7 p_t + 0.2 p_{t-1} + 0.1 p_{t-2},
+$$
+
+used as a forecast of $p_{t+1}$ given what we know at time $t$.
+
+## 2.9 A
+
+What is the state variable for this problem? If prices are discretized to the
+nearest 0.1 and range between 0 and 100, what is the size of the state space?
+
+> To evaluate the forecast we need the current price and the two previous prices,
+> plus the physical state of whether we still hold the asset:
+
+$$
+S_t = (R_t,\ p_t,\ p_{t-1},\ p_{t-2}).
+$$
+
+## 2.9 A (Cont.)
+
+> Each price is discretized to the nearest 0.1 over $[0, 100]$, giving $1001$
+> values ($0.0, 0.1, \dots, 100.0$), and $R_t \in \{0, 1\}$. Hence
+
+$$
+|S| = 2 \times 1001^3 = 2{,}006{,}006{,}002 \approx 2.0 \times 10^{9}.
+$$
+
+## 2.9 B
+
+Policy: sell if $p_t < \bar p_t - \theta$ or $p_t > \bar p_t + \theta$ (i.e. a
+sudden deviation from the forecast), else sell at $t = T$. We replicate the
+AssetSelling price process (bias Markov chain + Normal noise, initial price 10),
+which means enlarging the state to $(R_t, p_t, p_{t-1}, p_{t-2})$, then sweep
+$\theta$:
+
+## 2.9 B (Cont.)
+
+```{python}
+import time
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Same price process as AssetSellingModel: bias (Up/Neutral/Down) Markov chain
+# plus Normal(scale=2) increments, price floored at 0, initial price 10.
+trans = {"Up": [0.9, 0.1, 0.0], "Neutral": [0.2, 0.6, 0.2], "Down": [0.0, 0.1, 0.9]}
+bstep = {"Up": 1.0, "Neutral": 0.0, "Down": -1.0}
+
+def generate_paths(N, T, p0=10.0, seed=42):
+    rng = np.random.RandomState(seed)
+    paths = np.empty((N, T + 1))
+    paths[:, 0] = p0
+    for n in range(N):
+        bias = "Neutral"
+        for t in range(T):
+            u = rng.uniform()
+            if u < trans[bias][0]:
+                bias = "Up"
+            elif u < trans[bias][0] + trans[bias][1]:
+                bias = "Neutral"
+            else:
+                bias = "Down"
+            paths[n, t + 1] = max(0.0, paths[n, t] + rng.normal(bstep[bias], 2.0))
+    return paths
+```
+
+## 2.9 B (Cont.)
+
+```{python}
+def payoff(theta, path, T):
+    # Pad with two copies of p0 for the missing lags p_{-1}, p_{-2}.
+    ext = np.concatenate([[path[0], path[0]], path])
+    for t in range(T):
+        pt = ext[t + 2]
+        pbar = 0.7 * ext[t + 2] + 0.2 * ext[t + 1] + 0.1 * ext[t]
+        if pt < pbar - theta or pt > pbar + theta or t == T - 1:
+            return pt
+
+N, T = 200, 20
+paths = generate_paths(N, T)
+thetas = np.arange(0.0, 10.5, 0.5)
+
+start = time.time()
+means = [np.mean([payoff(th, p, T) for p in paths]) for th in thetas]
+elapsed = time.time() - start
+
+print(f"Best theta: {thetas[int(np.argmax(means))]}, mean contribution {max(means):.4f}")
+print(f"Elapsed (21 thetas x {N} paths): {elapsed:.3f}s")
+```
+
+## 2.9 B (Cont.)
+
+```{python}
+#| echo: false
+
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.plot(thetas, means, marker="o")
+ax.set(xlabel=r"$\theta$", ylabel=r"mean contribution $\bar F(\theta)$",
+       title="Time-series policy: contribution vs. theta")
+ax.grid(alpha=0.3)
+plt.show()
+```
+
+## 2.9 B (Cont.)
+
+> The contribution is $\approx 10$ (the initial price) at $\theta = 0$, because the
+> policy sells almost immediately on any deviation from the forecast. It then
+> rises with $\theta$ and flattens out around $\theta \approx 2.5$ at
+> $\approx 13.74$: beyond that point the bands are so wide that the rule never
+> triggers, so the asset is simply held to the horizon $T$. In this sample the
+> "sell on deviation" rule never beats holding (the best $\theta$ is the largest
+> one), a reminder that a policy class can be dominated even though tuning it is
+> cheap. Even with the large state space of 2.9a, the parameter search is still
+> just a one-dimensional sweep (200 paths, seed 42, $\approx 0.1$s).
+
+## 2.10
+
+(Continuing from 2.9) If the stock follows a seasonal pattern, replace $\theta$
+with $\theta_t$. How would this complicate the policy search?
+
+> A scalar parameter becomes a $T$-dimensional vector $\theta = (\theta_0, \dots,
+> \theta_{T-1})$. A grid search now has $K^T$ combinations if each $\theta_t$
+> takes $K$ values, so it grows exponentially ($K^{20}$ is already hopeless even
+> for tiny $K$). Estimating $T$ parameters also needs far more sample paths to be
+> reliable, so the estimates become noisier and prone to overfitting. The fix is
+> the same trade-off as always: either give $\theta_t$ a low-dimensional parametric
+> form (a polynomial or Fourier basis, a few seasonal coefficients), or use a
+> coordinate/gradient search instead of a full grid.
+
+## 2.11
+
+(Continuing from 2.9) Now let the buy-sell signal depend on price,
+$\theta(\bar p_t)$, with a larger deviation required when prices are higher.
+
+## 2.11 A
+
+Describe a lookup-table representation of $\theta(\bar p_t)$; discretize
+$\bar p_t$ into 10 ranges. How does this complicate the search?
+
+> Split $\bar p_t$ into 10 bins and store one value per bin, so
+> $\theta = (\theta_1, \dots, \theta_{10})$ becomes a 10-element vector (a
+> step function of $\bar p_t$):
+
+## 2.11 A (Cont.)
+
+```{python}
+#| echo: false
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+edges = np.linspace(0, 100, 11)                        # 10 bins for pbar in [0,100]
+theta_vals = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])  # increasing with pbar
+
+x = np.linspace(0, 100, 1000)
+idx = np.clip(np.searchsorted(edges, x, side="right") - 1, 0, 9)
+y = theta_vals[idx]
+
+fig, ax = plt.subplots(figsize=(7, 3))
+ax.step(x, y, where="post")
+ax.set(xlabel=r"$\bar p_t$", ylabel=r"$\theta(\bar p_t)$",
+       title=r"Lookup-table $\theta(\bar p_t)$")
+ax.grid(alpha=0.3)
+plt.show()
+```
+
+## 2.11 A (Cont.)
+
+> The number of tunable parameters jumps from 1 to 10, so a grid search becomes a
+> $K^{10}$ search over the table, plus we now have to choose the bin boundaries
+> (a modeling decision on top of the tuning).
+
+## 2.11 B
+
+Suggest a parametric form for $\theta(\bar p_t)$ capturing "larger $\theta$ for
+larger $\bar p_t$". What parameters do you now search over?
+
+> A simple choice is a linear threshold in the price level:
+
+$$
+\theta(\bar p_t) = \theta_0 + \theta_1 \bar p_t, \qquad \theta_1 > 0,
+$$
+
+> or a proportional form $\theta(\bar p_t) = \theta_0 \bar p_t$. This collapses the
+> 10-table entries into just two parameters, $(\theta_0, \theta_1)$, keeping the
+> search low-dimensional (a small 2-D grid or a coordinate search) while still
+> capturing the intuition that deviations must be larger at higher price levels.
+
